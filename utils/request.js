@@ -1,0 +1,40 @@
+var app = getApp()
+//网上抄的
+function get(url, doSuccess) {
+  //var host = getApp().conf.host
+  var host = 'https://idionline.picp.io/api/'
+  wx.showLoading({
+    title: '加载中……'
+  })
+  wx.request({
+    url: host + url,
+    success: function(res) {
+      wx.hideLoading()
+      if (res.statusCode == 200 && typeof doSuccess == 'function') {
+        console.log(res.data)
+        doSuccess(res.data)
+      } else if (res.statusCode == 404) {
+        wx.showToast({
+          title: '很抱歉，未查询到数据！',
+          icon: 'none'
+        })
+      } else {
+        wx.showToast({
+          title: '错误：' + res.statusCode,
+          icon: 'none'
+        })
+      }
+    },
+    fail: function(err) {
+      wx.hideLoading()
+      wx.showToast({
+        title: '错误：' + err.errMsg,
+        icon: 'none'
+      })
+    },
+    complete: function() {
+      //wx.hideLoading()
+    }
+  })
+}
+module.exports.get = get

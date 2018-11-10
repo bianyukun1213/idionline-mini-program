@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/select/select",
+    "pages/idiom/idiom",
+    "pages/about/about"
+  ]
+}

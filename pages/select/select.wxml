@@ -1,0 +1,5 @@
+<view>
+  <van-cell-group wx:for="{{idioms}}">
+    <van-cell title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" link-type="redirectTo"/>
+  </van-cell-group>
+</view>

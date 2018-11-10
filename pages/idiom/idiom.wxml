@@ -1,0 +1,19 @@
+<!--这里根据showBtn值决定是否显示跳转按钮-->
+<van-panel title="{{name}}" desc="出自{{source}}，由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot="{{showBtn}}" wx:if="{{name!=null}}">
+  <view class="content">
+    <view class="defs" wx:for="{{defs['defs']}}">
+      <view class="inter">
+        <van-tag mark size="small" type="primary">释义{{index+1}}</van-tag>
+        <text>{{item['text']}}\n</text>
+      </view>
+      <view class="addtion" wx:if="{{item['addition']!=null}}">
+        <van-tag mark size="small" type="success">附加{{index+1}}</van-tag>
+        <text>{{item['addition']}}</text>
+      </view>
+    </view>
+  </view>
+  <view slot="footer" class="footer">
+    <!--列表渲染跳转按钮-->
+    <van-button id="{{defs['subid'][index]}}" bind:click="onClick" size="mini" plain round type="primary" wx:for="{{defs['subid']}}">{{defs['subtext'][index]}}</van-button>
+  </view>
+</van-panel>
