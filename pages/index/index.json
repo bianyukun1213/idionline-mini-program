@@ -4,6 +4,5 @@
     "van-notice-bar": "/miniprogram_npm/vant-weapp/notice-bar/index",
     "van-panel": "/miniprogram_npm/vant-weapp/panel/index",
     "van-tag": "/miniprogram_npm/vant-weapp/tag/index"
-  },
-  "navigationBarTitleText": "成语在线"
+  }
 }

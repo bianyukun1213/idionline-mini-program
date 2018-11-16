@@ -1,6 +1,11 @@
-page {
-  width: 100%;
-  height: 100%;
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  height: 150px;
+  align-self: center;
 }
 
 .content {
@@ -8,21 +13,19 @@ page {
   font-size: 16px;
 }
 
-.image {
+.defs {
   display: flex;
-  height: 200px;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
-.logo {
-  width: 150px;
-  height: 150px;
+.def {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.bottom {
+.addition {
   display: flex;
-  width: 100%;
-  height: 75%;
-  align-items: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
 }

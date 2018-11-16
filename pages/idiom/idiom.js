@@ -8,34 +8,26 @@ Page({
     defs: null,
     source: null,
     lastEditor: null,
-    updateTime: null,
-    showBtn: null
+    updateTime: null
   },
   onLoad: function(option) {
     call.get('idiom/'+option.id, this.fillData)
   },
   fillData: function(data) {
     wx.setNavigationBarTitle({
-      title: data['idiomName']
+      title: data['name']
     })
-    //解析释义JSON，赋一堆值。
-    var defsJSON = JSON.parse(data['definitions'])
+    //赋一堆值。
     this.setData({
       id: data['id'],
-      name: data['idiomName'],
+      name: data['name'],
       idx: data['index'],
-      defs: defsJSON,
+      defs: data['definitions'],
       source: data['source'],
       lastEditor: data['lastEditor'],
       updateTime: format.formatDate(data['updateTimeUT'])
     })
     console.log(this.data['defs'])
-    //控制跳转按钮是否显示。
-    if (defsJSON['subid'].length == defsJSON['subtext'].length && defsJSON['subid'].length > 0) {
-      this.setData({
-        showBtn: true
-      })
-    }
   },
   //跳转按钮点击事件。
   onClick(event) {
@@ -45,7 +37,7 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: this.data['name'] + '：' + this.data['defs']['defs'][0]['text'],
+      title: this.data['name'] + '：' + this.data['defs'][0]['text'],
       path: '/pages/idiom/idiom?id='+this.data['id']
     }
   }

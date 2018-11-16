@@ -27,7 +27,6 @@ Page({
     //https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames
     //这里，可以看出来[]这样的后面还有个length，{}这样的就没有……
     if (Object.getOwnPropertyNames(data).length > 2) {
-      call.get('idiom/' + data[1]['dailyIdiomId'], this.fillDataT)
       //判断当天信息中是否含有text，有则显示，没有则显示默认的。
       if (data[1]['text'] != null) {
         this.setData({
@@ -43,21 +42,28 @@ Page({
       this.setData({
         text: data[0]['text']
       })
+    call.get('idiom/' + data[1]['dailyIdiomId'], this.fillDataT)
   },
   fillDataT: function(data) {
-    var defsJSON = JSON.parse(data['definitions'])
     this.setData({
-      idiName: data['idiomName'],
-      defs: defsJSON
+      idiName: data['name'],
+      defs: data['definitions']
     })
   },
   //搜索事件
   onSearch(event) {
-    if (event.detail != null && event.detail != '') {
-      var str = event.detail.replace(/\s+/g, '')
-      if (str != '') {
-        call.get('idiom/search/' + str, this.nav)
-      }
+    //正则表达式匹配，判断是向index请求还是向search请求。
+    var reg = new RegExp('^[\u4e00-\u9fa5]+$', 'g')//汉字。
+    var reg2 = new RegExp('^[A-Za-z]$', 'g')
+    if (reg.exec(event.detail)) {
+      call.get('idiom/search/' + event.detail, this.nav)
+    } else if (reg2.exec(event.detail)) {
+      call.get('idiom/index/' + event.detail, this.nav)
+    } else {
+      wx.showToast({
+        title: '请您输入汉字或单个英文字母！',
+        icon: 'none'
+      })
     }
   },
   nav: function(data) {

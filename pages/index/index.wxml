@@ -1,23 +1,19 @@
-<view>
+<view class="root">
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
-  <van-search value="{{value}}" placeholder="{{placeHolder}}" bind:search="onSearch" />
-</view>
-<view class="image">
-  <image class="logo" src="../../pics/idionline.png" mode="aspectFit"></image>
-</view>
-<view class="bottom" wx:if="{{idiName!=null}}">
-  <van-panel title="每日成语-{{idiName}}">
-    <view class="content">
-      <view class="defs" wx:for="{{defs['defs']}}">
-        <view class="inter">
-          <van-tag mark size="small" type="primary">释义{{index+1}}</van-tag>
-          <text>{{item['text']}}\n</text>
-        </view>
-        <view class="addtion" wx:if="{{item['addition']!=null}}">
-          <van-tag mark size="small" type="success">附加{{index+1}}</van-tag>
-          <text>{{item['addition']}}</text>
+  <van-search value="{{value}}" maxlength="4" placeholder="{{placeHolder}}" bind:search="onSearch" />
+  <image class="logo" src="../../icons/idionline.png" mode="aspectFit"/>
+    <van-panel wx:if="{{idiName!=null}}" title="每日成语-{{idiName}}">
+      <view class="content">
+        <view class="defs" wx:for="{{defs}}">
+          <view class="def">
+            <van-tag class="tag" mark size="small" type="primary">释义</van-tag>
+            <text class="text">{{item['text']}}\n</text>
+          </view>
+          <view class="addition" wx:if="{{item['addition']!=null}}">
+            <van-tag mark size="small" type="success">附加</van-tag>
+            <text>{{item['addition']}}</text>
+          </view>
         </view>
       </view>
-    </view>
-  </van-panel>
+    </van-panel>
 </view>

@@ -4,5 +4,30 @@
     "pages/select/select",
     "pages/idiom/idiom",
     "pages/about/about"
-  ]
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icons/index_gray.png",
+        "selectedIconPath": "icons/index.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于",
+        "iconPath": "icons/about_gray.png",
+        "selectedIconPath": "icons/about.png"
+      }
+    ],
+    "backgroundColor": "#008080",
+    "color": "#CCCCCC",
+    "selectedColor": "#FFFFFF",
+    "borderStyle": "white"
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#008080",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "成语在线"
+  }
 }

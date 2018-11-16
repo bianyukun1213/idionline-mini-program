@@ -1,8 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
 .content {
   padding: 20px;
   font-size: 16px;
 }
 
-.footer {
-  text-align: right;
+.defs {
+  display: flex;
+  flex-direction: column;
+}
+
+.def {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.addition {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
