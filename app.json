@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/select/select",
     "pages/idiom/idiom",
+    "pages/marked/marked",
     "pages/about/about"
   ],
   "tabBar": {
@@ -12,6 +13,12 @@
         "text": "首页",
         "iconPath": "icons/index_gray.png",
         "selectedIconPath": "icons/index.png"
+      },
+      {
+        "pagePath": "pages/marked/marked",
+        "text": "收藏",
+        "iconPath": "icons/marked_gray.png",
+        "selectedIconPath": "icons/marked.png"
       },
       {
         "pagePath": "pages/about/about",

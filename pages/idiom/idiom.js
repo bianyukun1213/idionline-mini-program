@@ -1,5 +1,6 @@
 var call = require("../../utils/request.js")
-var format = require("../../utils/format.js");
+var format = require("../../utils/format.js")
+var color = require("../../utils/color.js")
 Page({
   data: {
     id: null,
@@ -10,10 +11,11 @@ Page({
     lastEditor: null,
     updateTime: null
   },
-  onLoad: function(option) {
-    call.get('idiom/'+option.id, this.fillData)
+  onLoad(option) {
+    color.applyMainColor()
+    call.get('idiom/' + option.id, this.fillData)
   },
-  fillData: function(data) {
+  fillData(data) {
     wx.setNavigationBarTitle({
       title: data['name']
     })
@@ -35,10 +37,17 @@ Page({
       url: '/pages/idiom/idiom?id=' + event.currentTarget.id
     })
   },
-  onShareAppMessage: function () {
+  onMarkClick() {
+    wx.setStorageSync(this.data['id'],this.data['name'])
+    wx.showToast({
+      title: '完成！',
+      icon: 'success'
+    })
+  },
+  onShareAppMessage() {
     return {
       title: this.data['name'] + '：' + this.data['defs'][0]['text'],
-      path: '/pages/idiom/idiom?id='+this.data['id']
+      path: '/pages/idiom/idiom?id=' + this.data['id']
     }
   }
 })
