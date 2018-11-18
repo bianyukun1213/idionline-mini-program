@@ -6,6 +6,8 @@ Page({
   },
   onLoad() {
     color.applyMainColor()
+  },
+  onShow() {
     this.loadData()
   },
   //加载缓存数据

@@ -7,5 +7,6 @@
   display: flex;
   color: gray;
   font-size: 16px;
+  align-self: center;
   text-align: center;
 }

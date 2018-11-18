@@ -2,5 +2,5 @@
   <van-cell-group wx:for="{{items}}" wx:key="{{index}}">
     <van-cell id="{{index}}" title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" link-type="navigateTo" bindlongpress="longPress"/>
   </van-cell-group>
-  <text class="text" wx:if="{{show}}">空空如也~四处看看吧！\n收藏数据存储在设备缓存中，大小被限制为10MB。\n存储空间不足、卸载微信或换机等均会导致数据丢失！</text>
+  <text class="text" wx:if="{{show}}">空空如也~\n四处看看吧！</text>
 </view>
