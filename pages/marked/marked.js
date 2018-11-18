@@ -51,7 +51,7 @@ Page({
     var index = e.currentTarget['id']
     wx.showModal({
       title: '移除',
-      content: '您确定移除这条成语？',
+      content: '您确定要移除这条成语？',
       confirmColor: '#FF0000',
       success: function(res) {
         //确认，移除成语，刷新页面。
