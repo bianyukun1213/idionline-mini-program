@@ -7,9 +7,9 @@
           <text class="text" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
           <text class="text" wx:else>{{item['text']}}\n</text>
         </view>
-        <view class="btn" wx:if="{{item['addition']!=null}}">
-          <!--条件渲染链接按钮-->
-          <van-button id="{{index}}" wx:if="{{index!=null}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="mini" plain round type="primary">{{item}}</van-button>
+        <!--条件渲染链接按钮-->
+        <view class="btn" wx:if="{{item['links']!=null}}">
+          <van-button id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="mini" plain round type="primary">{{item}}</van-button>
         </view>
         <view class="addition" wx:if="{{item['addition']!=null}}">
           <van-tag mark size="small" type="success">附加</van-tag>

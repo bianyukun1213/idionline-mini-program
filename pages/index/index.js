@@ -6,7 +6,7 @@ Page({
     idiName: null,
     defs: null,
     placeHolder: '请输入您要搜索的成语',
-    logoAddr: null
+    logoAddr: '../../icons/idionline.png'
   },
   //启动
   onLoad() {
@@ -57,18 +57,14 @@ Page({
         this.setData({
           logoAddr: data[1]['logoAddress']
         })
-      } else {
-        this.setData({
-          logoAddr: '../../icons/idionline.png'
-        })
       }
+      call.get('idiom/' + data[1]['dailyIdiomId'], this.fillDataT)
     } else {
       //没有当天数据的情况：
       this.setData({
         text: data[0]['text']
       })
     }
-    call.get('idiom/' + data[1]['dailyIdiomId'], this.fillDataT)
   },
   fillDataT(data) {
     this.setData({
