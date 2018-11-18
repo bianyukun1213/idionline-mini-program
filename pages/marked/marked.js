@@ -49,6 +49,7 @@ Page({
     var that = this;
     //获取控件的id，也就是被移除成语的index。
     var index = e.currentTarget['id']
+    wx.vibrateShort()
     wx.showModal({
       title: '移除',
       content: '您确定要移除这条成语？',
