@@ -1,6 +1,6 @@
 <view class="root">
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
-  <van-search value="{{value}}" maxlength="4" placeholder="{{placeHolder}}" bind:search="onSearch" />
+  <van-search value="{{value}}" maxlength="12" placeholder="{{placeHolder}}" bind:search="onSearch" />
   <image class="logo" src="{{logoAddr}}" mode="aspectFit" />
   <van-panel wx:if="{{idiName!=null}}" title="每日成语-{{idiName}}">
     <view class="content">
