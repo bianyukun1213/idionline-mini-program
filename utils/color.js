@@ -1,7 +1,11 @@
+var color = getApp().globalData['mainColor']
+
 function applyMainColor() {
-  wx.setNavigationBarColor({
-    frontColor: '#ffffff',
-    backgroundColor: getApp().globalData['mainColor']
-  })
+  if (color != null) {
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: color
+    })
+  }
 }
 module.exports.applyMainColor = applyMainColor
