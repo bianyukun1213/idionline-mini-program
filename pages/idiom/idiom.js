@@ -3,6 +3,7 @@ var format = require("../../utils/format.js")
 var color = require("../../utils/color.js")
 Page({
   data: {
+    id:null,
     name: null,
     defs: null,
     lastEditor: null,
@@ -18,6 +19,7 @@ Page({
     })
     //赋一堆值。
     this.setData({
+      id:data['id'],
       name: data['name'],
       defs: data['definitions'],
       lastEditor: data['lastEditor'],
