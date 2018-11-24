@@ -3,9 +3,7 @@ var format = require("../../utils/format.js")
 var color = require("../../utils/color.js")
 Page({
   data: {
-    id: null,
     name: null,
-    idx: null,
     defs: null,
     lastEditor: null,
     updateTime: null
@@ -20,9 +18,7 @@ Page({
     })
     //赋一堆值。
     this.setData({
-      id: data['id'],
       name: data['name'],
-      idx: data['index'],
       defs: data['definitions'],
       lastEditor: data['lastEditor'],
       updateTime: format.formatDate(data['updateTimeUT'])
