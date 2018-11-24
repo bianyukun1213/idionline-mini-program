@@ -1,19 +1,23 @@
 <view class="root">
-  <van-panel wx:if="{{name!=null}}" title="{{name}}" desc="出自{{source}}，由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot>
+  <van-panel wx:if="{{name!=null}}" title="{{name}}" desc="由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot>
     <view class="content">
       <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
+        <view class="source">
+          <van-tag class="tag" mark size="small" type="primary">来源</van-tag>
+          <text class="text">{{item['source']}}\n</text>
+        </view>
         <view class="def">
           <van-tag class="tag" mark size="small" type="primary">释义</van-tag>
           <text class="text" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
           <text class="text" wx:else>{{item['text']}}\n</text>
         </view>
+        <view class="addition" wx:if="{{item['addition']!=null}}">
+          <van-tag mark size="small" type="success">附加</van-tag>
+          <text style="font-size:12px;color:gray;">{{item['addition']}}</text>
+        </view>
         <!--条件渲染链接按钮-->
         <view class="btn" wx:if="{{item['links']!=null}}">
           <van-button id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round type="primary">{{item}}</van-button>
-        </view>
-        <view class="addition" wx:if="{{item['addition']!=null}}">
-          <van-tag mark size="small" type="success">附加</van-tag>
-          <text  style="font-size:12px;color:gray;">{{item['addition']}}</text>
         </view>
       </view>
     </view>

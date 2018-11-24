@@ -4,7 +4,7 @@ function get(url, doSuccess) {
   //var host = getApp().conf.host
   var host = 'https://idionline.picp.io/api/'
   wx.showLoading({
-    title: '正在加载'
+    title: '请稍候'
   })
   wx.request({
     url: host + url,

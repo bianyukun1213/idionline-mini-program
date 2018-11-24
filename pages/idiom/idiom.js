@@ -7,7 +7,6 @@ Page({
     name: null,
     idx: null,
     defs: null,
-    source: null,
     lastEditor: null,
     updateTime: null
   },
@@ -25,7 +24,6 @@ Page({
       name: data['name'],
       idx: data['index'],
       defs: data['definitions'],
-      source: data['source'],
       lastEditor: data['lastEditor'],
       updateTime: format.formatDate(data['updateTimeUT'])
     })

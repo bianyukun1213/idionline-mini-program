@@ -1,10 +1,14 @@
 <view class="root">
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
   <van-search value="{{value}}" maxlength="12" placeholder="{{placeHolder}}" bind:search="onSearch" />
-  <image class="logo" src="{{logoAddr}}" mode="aspectFit" />
-  <van-panel wx:if="{{idiName!=null}}" title="每日成语-{{idiName}}">
+  <image class="logo" src="{{logoUrl}}" mode="aspectFit" />
+  <van-panel class="panel" wx:if="{{idiName!=null}}" title="每日成语-{{idiName}}">
     <view class="content">
       <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
+        <view class="source">
+          <van-tag class="tag" mark size="small" type="primary">来源</van-tag>
+          <text class="text">{{item['source']}}\n</text>
+        </view>
         <view class="def">
           <van-tag class="tag" mark size="small" type="primary">释义</van-tag>
           <text class="text" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>

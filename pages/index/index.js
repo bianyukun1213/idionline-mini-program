@@ -6,7 +6,8 @@ Page({
     idiName: null,
     defs: null,
     placeHolder: '请输入您要搜索的成语',
-    logoAddr: '../../icons/idionline.png'
+    logoUrl: '../../icons/idionline.png',
+    disableAds: false
   },
   //启动
   onLoad() {
@@ -28,68 +29,82 @@ Page({
     //注意这里跟下面不一样，要用2，至于为什么我也不是很懂，反正在
     //https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames
     //这里，可以看出来[]这样的后面还有个length，{}这样的就没有……
-    var reg = new RegExp('^#[0-9a-fA-F]{6}$', 'g')
-    var reg2 = new RegExp('https?://.+\.(jpg|gif|png)', 'g')
     if (Object.getOwnPropertyNames(data).length > 2) {
-      //判断当天信息中是否含有text，有则显示，没有则显示默认的。
-      if (data[1]['text'] != null) {
-        this.setData({
-          text: data[1]['text'] //当天信息。
-        })
-      } else {
-        this.setData({
-          text: data[0]['text'] //当天信息。
-        })
-      }
-      //匹配颜色正则，设置当天主题色。若当天颜色无法解析，则尝试应用服务器默认颜色。
-      if (reg.exec(data[1]['mainColor'])) {
-        getApp().globalData['mainColor'] = data[1]['mainColor'] //应用主题色到全局变量。
-      } else if (reg.exec(data[0]['mainColor'])) {
-        getApp().globalData['mainColor'] = data[0]['mainColor'] //应用主题色到全局变量。
-      }
-      color.applyMainColor() //应用主题色，如果写在onLoad()里，虽然模拟器里会闪烁一次，但是安卓实机不会观察到绿色。
-      //如果主颜色为空，就跳过tabbar设置。
-      if (getApp().globalData['mainColor'] != null) {
-        //应用tabbar颜色，只需这里调用一次。
-        wx.setTabBarStyle({
-          color: '#CCCCCC',
-          selectedColor: '#FFFFFF',
-          backgroundColor: getApp().globalData['mainColor']
-        })
-      }
-      //匹配Logo地址正则，设置当天Logo。若当天logo无法解析，则尝试应用服务器默认logo。
-      if (reg2.exec(data[1]['logoAddress'])) {
-        this.setData({
-          logoAddr: data[1]['logoAddress']
-        })
-      } else if (reg2.exec(data[0]['logoAddress'])) {
-        this.setData({
-          logoAddr: data[0]['logoAddress']
-        })
-      }
-      call.get('idiom/' + data[1]['dailyIdiomId'], this.fillDataT)
+      this.setText(data[1]['text'], data[0]['text'])
+      this.setColor(data[1]['mainColor'], data[0]['mainColor'])
+      this.setLogo(data[1]['logoUrl'], data[0]['logoUrl'])
+      this.setAds(data[1]['disableAds'], data[0]['disableAds'])
+      this.setDailyIdiom(data[1]['dailyIdiomId'], data[0]['dailyIdiomId'])
     } else {
       //没有当天数据的情况：
       //同样，依次为设置文本、主颜色、logo地址。
+      this.setText(null, data[0]['text'])
+      this.setColor(null, data[0]['mainColor'])
+      this.setLogo(null, data[0]['logoUrl'])
+      this.setAds(null, data[0]['disableAds'])
+      this.setDailyIdiom(null, data[0]['dailyIdiomId'])
+    }
+  },
+  setText(current, deft) {
+    //判断当天信息中是否含有text，有则显示，没有则显示默认的。
+    if (current != null) {
       this.setData({
-        text: data[0]['text']
+        text: current //当天信息。
       })
-      if (reg.exec(data[0]['mainColor'])) {
-        getApp().globalData['mainColor'] = data[0]['mainColor']
-      }
-      color.applyMainColor()
-      if (getApp().globalData['mainColor'] != null) {
-        wx.setTabBarStyle({
-          color: '#CCCCCC',
-          selectedColor: '#FFFFFF',
-          backgroundColor: getApp().globalData['mainColor']
-        })
-      }
-      if (reg2.exec(data[0]['logoAddress'])) {
-        this.setData({
-          logoAddr: data[0]['logoAddress']
-        })
-      }
+    } else {
+      this.setData({
+        text: deft //默认信息。
+      })
+    }
+  },
+  setColor(current, deft) {
+    var reg = new RegExp('^#[0-9a-fA-F]{6}$', 'g')
+    if (reg.exec(current)) {
+      getApp().globalData['mainColor'] = current //应用主题色到全局变量。
+    } else if (reg.exec(deft)) {
+      getApp().globalData['mainColor'] = deft //应用主题色到全局变量。
+    }
+    color.applyMainColor() //应用主题色，如果写在onLoad()里，虽然模拟器里会闪烁一次，但是安卓实机不会观察到绿色。
+    //如果主颜色为空，就跳过tabbar设置。
+    if (getApp().globalData['mainColor'] != null) {
+      //应用tabbar颜色，只需这里调用一次。
+      wx.setTabBarStyle({
+        color: '#CCCCCC',
+        selectedColor: '#FFFFFF',
+        backgroundColor: getApp().globalData['mainColor']
+      })
+    }
+  },
+  setLogo(current, deft) {
+    var reg = new RegExp('https?://.+\.(jpg|gif|png)', 'g')
+    //匹配Logo地址正则，设置当天Logo。若当天logo无法解析，则尝试应用服务器默认logo。
+    if (reg.exec(current)) {
+      this.setData({
+        logoUrl: current
+      })
+    } else if (reg.exec(deft)) {
+      this.setData({
+        logoUrl: deft
+      })
+    }
+  },
+  setAds(current, deft) {
+    if (current == true) {
+      this.setData({
+        disableAds: current
+      })
+    } else {
+      this.setData({
+        disableAds: deft
+      })
+    }
+    console.log(this.data['disableAds'])
+  },
+  setDailyIdiom(current, deft) {
+    if (current != null) {
+      call.get('idiom/' + current, this.fillDataT)
+    } else if (deft != null) {
+      call.get('idiom/' + deft, this.fillDataT)
     }
   },
   fillDataT(data) {
