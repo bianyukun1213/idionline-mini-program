@@ -1,4 +1,4 @@
 <view class="root">
     <image class="img" src="../../icons/kun.png" mode="aspectFit" />
-  <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生利用周末时间开发，全套代码已开源在GitHub。\n感谢（排名不分先后）：\n微信、GitHub、.NET Core、MongoDB、Hangfire、\nVant Weapp——轻量、可靠的小程序UI组件库、\nIconfont——阿里巴巴矢量图标库、\n韩昊岑、高凯、张立飞、祃辰星、郭程韵同学\n以及我的语文老师。\n请不要攻击服务器！\n——仿生人会涮电子羊吗.com</text>
+  <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生利用周末时间开发，全套代码已开源在GitHub。\n感谢（排名不分先后）：\n《现代汉语词典》、\n微信、GitHub、.NET Core、MongoDB、Hangfire、\nVant Weapp——轻量、可靠的小程序UI组件库、\nIconfont——阿里巴巴矢量图标库、\n韩昊岑、高凯、张立飞、祃辰星、郭程韵同学\n以及我的语文老师。\n请不要攻击服务器！\n——仿生人会涮电子羊吗.com</text>
 </view>
