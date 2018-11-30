@@ -132,6 +132,7 @@ Page({
       console.log('已更新搜索栏输入值：' + this.data['searchBarValue'])
       call.get('idiom/index/' + e.detail, this.nav)
     } else {
+      wx.vibrateLong()
       wx.showToast({
         title: '请您输入汉字或单个英文字母！',
         icon: 'none'
@@ -192,7 +193,7 @@ Page({
         this.setData({
           showPopup: false
         })
-        wx.vibrateShort()
+        //wx.vibrateShort()
         console.log('下划操作，已关闭弹出层')
       }
     }
