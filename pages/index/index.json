@@ -3,6 +3,8 @@
     "van-search": "/miniprogram_npm/vant-weapp/search/index",
     "van-notice-bar": "/miniprogram_npm/vant-weapp/notice-bar/index",
     "van-panel": "/miniprogram_npm/vant-weapp/panel/index",
-    "van-tag": "/miniprogram_npm/vant-weapp/tag/index"
+    "van-tag": "/miniprogram_npm/vant-weapp/tag/index",
+    "van-popup": "/miniprogram_npm/vant-weapp/popup/index",
+    "van-button": "/miniprogram_npm/vant-weapp/button/index"
   }
 }

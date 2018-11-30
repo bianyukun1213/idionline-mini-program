@@ -1,0 +1,22 @@
+<view class="root">
+  <van-collapse value="{{activeName}}" accordion bind:change="onChange">
+    <van-collapse-item title="关于成语在线" name="1">
+      <view class="root">
+        <image class="img" src="../../icons/kun.png" mode="aspectFit" />
+        <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生利用周末时间开发，全套代码已开源在GitHub。\n数据来源：《现代汉语词典》\n使用的技术&资源：.NET Core、MongoDB、Hangfire、Vant Weapp、Iconfont\n感谢（排名不分先后）：韩昊岑、高凯、张立飞、祃辰星、郭程韵、丁子焦、陈剑涛、王泽潍同学以及我的语文老师李方超，他们给予了我莫大的支持与鼓励。\n请不要攻击服务器！\n——仿生人会涮电子羊吗.com</text>
+      </view>
+    </van-collapse-item>
+    <van-collapse-item title="如何搜索成语？" name="2">
+      在首页的搜索栏中直接输入您要搜索的成语即可。您可使用成语名称、成语名称的部分汉字或拼音首字母来搜索。输入“A”或“a”后，服务器将返回所有拼音首字母为“A”的成语。根据服务器返回的数据，您可能需要进一步选择具体的成语。
+    </van-collapse-item>
+    <van-collapse-item title="如何收藏成语？" name="3">
+      点击成语卡片右下角的“收藏”按钮，成语便会添加到您的收藏列表。您可在“收藏”页面中管理收藏列表。点击某一条目跳转到对应的释义页面，左滑移除这条成语。通常收藏页面在显示时和移除成语后会自动刷新，不过您也可以手动下拉刷新。需要注意的是，您的收藏数据保存在设备的本地缓存中，一旦发生设备丢失、缓存清空等情况，收藏数据都将丢失且无法恢复！请您谨慎使用该功能。
+    </van-collapse-item>
+    <van-collapse-item title="如何转发成语？" name="4">
+      点击成语释义页面右上角的“…”按钮，您就能看见转发按钮。
+    </van-collapse-item>
+    <van-collapse-item title="“每日成语”是什么？" name="5">
+      每日成语由服务器在每天零点在数据库中随机抽取，开发者也可手动添加或修改每日成语。您可在首页的底部上划来查看每日成语。
+    </van-collapse-item>
+  </van-collapse>
+</view>

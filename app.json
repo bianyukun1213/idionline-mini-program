@@ -4,7 +4,7 @@
     "pages/select/select",
     "pages/idiom/idiom",
     "pages/marked/marked",
-    "pages/about/about"
+    "pages/help/help"
   ],
   "tabBar": {
     "list": [
@@ -21,10 +21,10 @@
         "selectedIconPath": "icons/marked.png"
       },
       {
-        "pagePath": "pages/about/about",
-        "text": "关于",
-        "iconPath": "icons/about_gray.png",
-        "selectedIconPath": "icons/about.png"
+        "pagePath": "pages/help/help",
+        "text": "帮助",
+        "iconPath": "icons/help_gray.png",
+        "selectedIconPath": "icons/help.png"
       }
     ],
     "backgroundColor": "#008080",

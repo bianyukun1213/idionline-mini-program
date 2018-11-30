@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  display: flex;
+  color: dodgerblue;
+  font-size: 16px;
+  align-self: center;
+  text-align: center;
+}
+
+.img {
+  height: 150px;
+  align-self: center;
+}
+
+.van-collapse-item__content {
+  font-size: 12px;
+  line-height: 1.5;
+  color: gray;
+}

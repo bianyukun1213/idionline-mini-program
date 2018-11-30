@@ -2,23 +2,28 @@
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
   <van-search value="{{value}}" maxlength="12" placeholder="{{placeHolder}}" bind:search="onSearch" />
   <image class="logo" src="{{logoUrl}}" mode="aspectFit" />
-  <van-panel class="panel" wx:if="{{idiName!=null}}" title="每日成语-{{idiName}}">
-    <view class="content">
-      <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
-        <view class="source">
-          <van-tag class="tag" mark size="small" type="primary">来源</van-tag>
-          <text class="text">{{item['source']}}\n</text>
-        </view>
-        <view class="def">
-          <van-tag class="tag" mark size="small" type="primary">释义</van-tag>
-          <text class="text" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
-          <text class="text" wx:else>{{item['text']}}\n</text>
-        </view>
-        <view class="addition" wx:if="{{item['addition']!=null}}">
-          <van-tag mark size="small" type="success">附加</van-tag>
-          <text style="font-size:12px;color:gray;">{{item['addition']}}</text>
+  <van-popup show="{{showPopup}}" position="bottom" bind:close="onClose">
+    <van-panel class="panel" title="{{idiName}}">
+      <view class="content">
+        <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
+          <view class="source">
+            <van-tag class="tag" mark size="small" type="primary">来源</van-tag>
+            <text class="text">{{item['source']}}\n</text>
+          </view>
+          <view class="def">
+            <van-tag class="tag" mark size="small" type="primary">释义</van-tag>
+            <text class="text" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
+            <text class="text" wx:else>{{item['text']}}\n</text>
+          </view>
+          <view class="addition" wx:if="{{item['addition']!=null}}">
+            <van-tag mark size="small" type="success">附加</van-tag>
+            <text style="font-size:12px;color:gray;">{{item['addition']}}</text>
+          </view>
         </view>
       </view>
-    </view>
-  </van-panel>
+    </van-panel>
+  </van-popup>
+</view>
+<view class="slide" wx:if="{{idiName!=null}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
+  <view class="text_bottom">上划查看每日成语</view>
 </view>

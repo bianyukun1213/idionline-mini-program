@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "van-cell": "/miniprogram_npm/vant-weapp/cell/index"
+    "van-cell": "/miniprogram_npm/vant-weapp/cell/index",
+    "van-swipe-cell": "/miniprogram_npm/vant-weapp/swipe-cell/index"
   },
   "navigationBarTitleText": "收藏",
   "enablePullDownRefresh": true
