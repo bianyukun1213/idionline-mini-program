@@ -67,8 +67,9 @@ Page({
     //     }
     //   }
     // })
-    console.log('已移除索引为' + index + '的成语')
     wx.removeStorageSync(that.data['items'][index]['id'])
+    console.log('已移除索引为' + index + '的成语')
+    wx.vibrateShort()
     that.loadData()
   }
 })

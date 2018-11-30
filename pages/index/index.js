@@ -186,11 +186,13 @@ Page({
         this.setData({
           showPopup: true
         })
+        wx.vibrateShort()
         console.log('上划操作，已启用弹出层')
       } else if (currentY - startY >= 50 && showPopup) {
         this.setData({
           showPopup: false
         })
+        wx.vibrateShort()
         console.log('下划操作，已关闭弹出层')
       }
     }

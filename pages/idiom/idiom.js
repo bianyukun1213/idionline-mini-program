@@ -36,6 +36,7 @@ Page({
   onMarkClick() {
     wx.setStorageSync(this.data['id'], this.data['name'])
     console.log('已添加成语至收藏：' + this.data['name'])
+    wx.vibrateShort()
     wx.showToast({
       title: '完成！',
       icon: 'success'
