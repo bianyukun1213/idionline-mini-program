@@ -160,7 +160,7 @@ Page({
     this.setData({
       showPopup: false
     })
-    console.log('已关闭弹出层')
+    console.log('点击操作，已关闭弹出层')
   },
   //感应区触摸开始事件，记录开始时触摸点的纵坐标。
   onTouchStart(e) {
@@ -177,15 +177,21 @@ Page({
   onTouchEnd(e) {
     if (this.data['onTouch']) {
       this.data['onTouch'] = false
+      var showPopup = this.data['showPopup']
       var startY = this.data['startY']
       var currentY = this.data['currentY']
       console.log('结束点击纵坐标：' + currentY)
       console.log('坐标差：' + (currentY - startY))
-      if (currentY - startY < -50) {
+      if (currentY - startY <= -50 && !showPopup) {
         this.setData({
           showPopup: true
         })
-        console.log('已启用弹出层')
+        console.log('上划操作，已启用弹出层')
+      } else if (currentY - startY >= 50 && showPopup) {
+        this.setData({
+          showPopup: false
+        })
+        console.log('下划操作，已关闭弹出层')
       }
     }
   },

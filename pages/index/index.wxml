@@ -2,7 +2,7 @@
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
   <van-search value="{{value}}" maxlength="12" placeholder="{{placeHolder}}" bind:search="onSearch" />
   <image class="logo" src="{{logoUrl}}" mode="aspectFit" />
-  <van-popup show="{{showPopup}}" position="bottom" bind:close="onClose">
+  <van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onClose">
     <van-panel class="panel" title="{{idiName}}">
       <view class="content">
         <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
