@@ -15,8 +15,11 @@
     <van-collapse-item title="如何转发成语？" name="4">
       点击成语释义页面右上角的“…”按钮，您就能看见转发按钮。
     </van-collapse-item>
-    <van-collapse-item title="“每日成语”是什么？" name="5">
-      每日成语由服务器在每天零点在数据库中随机抽取，开发者也可手动添加或修改每日成语。您可在首页的底部上划来查看每日成语。
+    <van-collapse-item title="如何查看“每日成语”？" name="5">
+      您可在首页的底部上划来查看每日成语。
+    </van-collapse-item>
+        <van-collapse-item title="如何关闭广告？" name="6">
+      现在还没有广告。ヾ(•ω•`)o
     </van-collapse-item>
   </van-collapse>
 </view>
