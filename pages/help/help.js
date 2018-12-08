@@ -21,6 +21,7 @@ Page({
     }
   },
   onClick() {
+    wx.vibrateLong()
     wx.showModal({
       title: '警告',
       content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失！',
@@ -29,6 +30,7 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.clearStorageSync()
+          wx.vibrateShort()
           wx.showToast({
             title: '缓存已清除'
           })
