@@ -1,10 +1,14 @@
-var color = require("../../utils/color.js")
+const color = require("../../utils/color.js")
 Page({
   data: {
-    activeName: '1'
+    activeName: '1',
+    systemInfo: null
   },
   onLoad() {
     color.applyMainColor()
+    this.setData({
+      systemInfo: wx.getSystemInfoSync()
+    })
   },
   onChange(e) {
     this.setData({
@@ -15,5 +19,22 @@ Page({
     } else {
       console.log('已切换折叠面板到：' + e.detail)
     }
+  },
+  onClick() {
+    wx.showModal({
+      title: '警告',
+      content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失！',
+      confirmText: '确认清除',
+      confirmColor: '#FF0000',
+      success(res) {
+        if (res.confirm) {
+          wx.clearStorageSync()
+          wx.showToast({
+            title: '缓存已清除'
+          })
+          console.log('已清除缓存')
+        }
+      }
+    })
   }
 })

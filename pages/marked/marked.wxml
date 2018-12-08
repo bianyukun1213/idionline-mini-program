@@ -1,7 +1,7 @@
 <view class="root">
   <van-swipe-cell wx:for="{{items}}" wx:key="{{index}}" right-width="{{65}}">
     <van-cell-group>
-      <van-cell id="{{index}}" title="{{item['name']}}" is-link url="/pages/idiom/idiom?id={{item['id']}}" />
+      <van-cell title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" />
     </van-cell-group>
     <view id="{{index}}" slot="right" bind:tap="onDelete">移除</view>
   </van-swipe-cell>

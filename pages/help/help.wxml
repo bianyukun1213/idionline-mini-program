@@ -18,8 +18,15 @@
     <van-collapse-item title="如何查看“每日成语”？" name="5">
       您可在首页的底部上划来查看每日成语。
     </van-collapse-item>
-        <van-collapse-item title="如何关闭广告？" name="6">
+    <van-collapse-item title="如何关闭广告？" name="6">
       现在还没有广告。ヾ(•ω•`)o
+    </van-collapse-item>
+    <van-collapse-item title="设备信息与支持" name="7">
+      <text>手机品牌：{{systemInfo['brand']}}\n手机型号：{{systemInfo['model']}}\n设备像素比：{{systemInfo['pixelRatio']}}\n屏幕宽度：{{systemInfo['screenWidth']}}\n屏幕高度：{{systemInfo['screenHeight']}}\n可使用窗口宽度：{{systemInfo['windowWidth']}}\n可使用窗口高度：{{systemInfo['windowHeight']}}\n状态栏的高度：{{systemInfo['statusBarHeight']}}\n微信设置的语言：{{systemInfo['language']}}\n微信版本号：{{systemInfo['version']}}\n操作系统版本：{{systemInfo['system']}}\n客户端平台：{{systemInfo['platform']}}\n用户字体大小设置：{{systemInfo['fontSizeSetting']}}\n客户端基础库版本：{{systemInfo['SDKVersion']}}</text>
+      <view class="function">
+        <van-button type="primary" open-type="contact">联系开发者</van-button>
+        <van-button type="danger" bind:click="onClick">清除缓存</van-button>
+      </view>
     </van-collapse-item>
   </van-collapse>
 </view>

@@ -21,3 +21,9 @@
   line-height: 1.5;
   color: gray;
 }
+
+.function {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

@@ -1,6 +1,7 @@
-var call = require("../../utils/request.js")
-var format = require("../../utils/format.js")
-var color = require("../../utils/color.js")
+const call = require("../../utils/request.js")
+const format = require("../../utils/format.js")
+const color = require("../../utils/color.js")
+const inf = require("../../utils/inf.js")
 Page({
   data: {
     id: null,
@@ -10,8 +11,19 @@ Page({
     updateTime: null
   },
   onLoad(option) {
-    color.applyMainColor()
+    
     call.get('idiom/' + option.id, this.fillData)
+    inf.getLaunchInf(this.callback)
+    
+  },
+  //获取启动信息的回调函数。
+  callback() {
+    var launchInf = getApp().globalData['launchInf']
+    this.setData({
+      text: launchInf['text'],
+      //disableAds: launchInf['disableAds']
+    })
+    color.applyMainColor()
   },
   fillData(data) {
     wx.setNavigationBarTitle({
@@ -34,7 +46,9 @@ Page({
     })
   },
   onMarkClick() {
-    wx.setStorageSync(this.data['id'], this.data['name'])
+    var marked = wx.getStorageSync('markedIdioms') || {}
+    marked[this.data['id']] = this.data['name']
+    wx.setStorageSync('markedIdioms', marked)
     console.log('已添加成语至收藏：' + this.data['name'])
     wx.vibrateShort()
     wx.showToast({

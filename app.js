@@ -1,5 +1,5 @@
 App({
   globalData: {
-    mainColor: null
+    launchInf: null
   }
 })

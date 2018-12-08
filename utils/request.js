@@ -15,7 +15,7 @@ function get(url, doSuccess) {
         console.log('查询到数据：', res.data)
         doSuccess(res.data)
       } else if (res.statusCode == 404) {
-        console.log('未查询到数据：'+res.statusCode)
+        console.log('未查询到数据：' + res.statusCode)
         wx.showToast({
           title: '很抱歉，未查询到数据！',
           icon: 'none'
@@ -29,8 +29,8 @@ function get(url, doSuccess) {
       }
     },
     fail: function(err) {
-      console.log('错误：' + err.errMsg)
       wx.hideLoading()
+      console.log('错误：' + err.errMsg)
       wx.showToast({
         title: '错误：' + err.errMsg,
         icon: 'none'
