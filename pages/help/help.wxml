@@ -4,6 +4,7 @@
       <view class="root">
         <image class="img" src="../../icons/kun.png" mode="aspectFit" />
         <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生利用周末时间开发，全套代码已开源在GitHub。\n数据来源：《现代汉语词典》\n使用的技术&资源：.NET Core、MongoDB、Hangfire、Vant Weapp、Iconfont\n感谢（排名不分先后）：韩昊岑、高凯、张立飞、祃辰星、郭程韵、丁子焦、陈剑涛、王泽潍同学以及我的语文老师李方超，他们给予了我莫大的支持与鼓励。\n请不要攻击服务器！\n——仿生人会涮电子羊吗.com</text>
+        <van-button class="btn" type="primary" bind:click="onCopy">复制GitHub链接</van-button>
       </view>
     </van-collapse-item>
     <van-collapse-item title="如何搜索成语？" name="2">
@@ -24,8 +25,8 @@
     <van-collapse-item title="设备信息与支持" name="7">
       <text>手机品牌：{{systemInfo['brand']}}\n手机型号：{{systemInfo['model']}}\n设备像素比：{{systemInfo['pixelRatio']}}\n屏幕宽度：{{systemInfo['screenWidth']}}\n屏幕高度：{{systemInfo['screenHeight']}}\n可使用窗口宽度：{{systemInfo['windowWidth']}}\n可使用窗口高度：{{systemInfo['windowHeight']}}\n状态栏的高度：{{systemInfo['statusBarHeight']}}\n微信设置的语言：{{systemInfo['language']}}\n微信版本号：{{systemInfo['version']}}\n操作系统版本：{{systemInfo['system']}}\n客户端平台：{{systemInfo['platform']}}\n用户字体大小设置：{{systemInfo['fontSizeSetting']}}\n客户端基础库版本：{{systemInfo['SDKVersion']}}</text>
       <view class="function">
-        <van-button type="primary" open-type="contact">联系开发者</van-button>
-        <van-button type="danger" bind:click="onClick">清除缓存</van-button>
+        <van-button type="primary" open-type="contact" bind:click="onClick">联系开发者</van-button>
+        <van-button type="danger" bind:click="onClear">清除缓存</van-button>
       </view>
     </van-collapse-item>
   </van-collapse>

@@ -11,10 +11,8 @@ Page({
     updateTime: null
   },
   onLoad(option) {
-    
     call.get('idiom/' + option.id, this.fillData)
     inf.getLaunchInf(this.callback)
-    
   },
   //获取启动信息的回调函数。
   callback() {
@@ -49,12 +47,11 @@ Page({
     var marked = wx.getStorageSync('markedIdioms') || {}
     marked[this.data['id']] = this.data['name']
     wx.setStorageSync('markedIdioms', marked)
-    console.log('已添加成语至收藏：' + this.data['name'])
     wx.vibrateShort()
     wx.showToast({
-      title: '完成！',
-      icon: 'success'
+      title: '完成！'
     })
+    console.log('已添加成语至收藏：' + this.data['name'])
   },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])

@@ -56,11 +56,9 @@ Page({
     var reg2 = new RegExp('^[A-Za-z]$', 'g')
     if (reg.exec(e.detail)) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
-      console.log('已更新搜索栏输入值：' + this.data['searchBarValue'])
       call.get('idiom/search/' + e.detail, this.nav)
     } else if (reg2.exec(e.detail)) {
       this.data['searchBarValue'] = e.detail //同上。
-      console.log('已更新搜索栏输入值：' + this.data['searchBarValue'])
       call.get('idiom/index/' + e.detail, this.nav)
     } else {
       wx.vibrateLong()

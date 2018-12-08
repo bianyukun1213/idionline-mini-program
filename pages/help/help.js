@@ -21,6 +21,10 @@ Page({
     }
   },
   onClick() {
+    wx.vibrateShort()
+    console.log('用户发起客服会话')
+  },
+  onClear() {
     wx.vibrateLong()
     wx.showModal({
       title: '警告',
@@ -36,6 +40,18 @@ Page({
           })
           console.log('已清除缓存')
         }
+      }
+    })
+  },
+  onCopy() {
+    wx.setClipboardData({
+      data: 'https://github.com/bianyukun1213/idionline',
+      success: function(res) {
+        wx.vibrateShort()
+        wx.showToast({
+          title: '完成！'
+        })
+        console.log('已复制GitHub链接到剪贴板')
       }
     })
   }

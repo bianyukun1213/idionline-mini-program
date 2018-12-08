@@ -17,11 +17,11 @@ Page({
     this.setData({
       items: marked
     })
+    console.log('渲染收藏数据：', this.data['items'])
     if (Object.getOwnPropertyNames(marked).length > 0) {
       this.setData({
         showText: false
       })
-      //console.log('已构造收藏数据的数组：', tmp)
     } else {
       this.setData({
         showText: true
@@ -39,8 +39,8 @@ Page({
     var marked = wx.getStorageSync('markedIdioms') || {}
     delete marked[index]
     wx.setStorageSync('markedIdioms', marked)
-    console.log('已移除索引为' + index + '的成语')
     wx.vibrateShort()
+    console.log('已移除索引为' + index + '的成语')
     //设置Timeout来部分解决动画问题（两个都展开后再移除一个，会出现错误，不过我感觉是vant的锅。）。
     setTimeout(() => {
       this.loadData()
