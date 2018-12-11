@@ -28,8 +28,9 @@ Page({
       title: data['name']
     })
     //赋一堆值。
+    this.data['id'] = data['id']
     this.setData({
-      id: data['id'],
+      //id: data['id'],
       name: data['name'],
       defs: data['definitions'],
       lastEditor: data['lastEditor'],
@@ -52,6 +53,18 @@ Page({
       title: '完成！'
     })
     console.log('已添加成语至收藏：' + this.data['name'])
+  },
+  onLongPress(e) {
+    wx.setClipboardData({
+      data: this.data['id'],
+      success: function(res) {
+        wx.vibrateShort()
+        wx.showToast({
+          title: 'Id已复制'
+        })
+        console.log('已复制成语Id到剪贴板')
+      }
+    })
   },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])

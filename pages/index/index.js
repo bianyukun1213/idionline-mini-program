@@ -18,7 +18,6 @@ Page({
   },
   //启动
   onLoad() {
-    call.get('idiom/count/', this.fillCount)
     inf.getLaunchInf(this.callback)
   },
   //获取启动信息的回调函数。
@@ -26,8 +25,15 @@ Page({
     var launchInf = getApp().globalData['launchInf']
     this.setData({
       text: launchInf['text'],
+      placeHolder: '目前已收录' + launchInf['idiomsCount'] + '条成语'
       //disableAds: launchInf['disableAds']
     })
+    if (launchInf['dailyIdiom'] != null) {
+      this.setData({
+        idiName: launchInf['dailyIdiom']['name'],
+        defs: launchInf['dailyIdiom']['definitions']
+      })
+    }
     color.applyMainColor()
     var reg = new RegExp('https?://.+\.(jpg|gif|png)', 'g')
     //匹配Logo地址正则，设置Logo。
@@ -36,18 +42,6 @@ Page({
         logoUrl: launchInf['logoUrl']
       })
     }
-    call.get('idiom/' + launchInf['dailyIdiomId'], this.fillDIdi)
-  },
-  fillCount(data) {
-    this.setData({
-      placeHolder: '目前已收录' + data + '条成语'
-    })
-  },
-  fillDIdi(data) {
-    this.setData({
-      idiName: data['name'],
-      defs: data['definitions']
-    })
   },
   //搜索事件。
   onSearch(e) {

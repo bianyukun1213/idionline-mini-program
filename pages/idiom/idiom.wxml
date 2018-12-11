@@ -8,8 +8,8 @@
         </view>
         <view class="def">
           <van-tag class="tag" mark size="small" type="primary">释义</van-tag>
-          <text class="text" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
-          <text class="text" wx:else>{{item['text']}}\n</text>
+          <text class="text" selectable="true" wx:if="{{item['isEmphasis']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
+          <text class="text" selectable="true" wx:else>{{item['text']}}\n</text>
         </view>
         <view class="addition" wx:if="{{item['addition']!=null}}">
           <van-tag mark size="small" type="success">附加</van-tag>
@@ -22,7 +22,7 @@
       </view>
     </view>
     <view class="footer" slot="footer">
-      <van-button type="primary" size="small" bind:click="onMarkClick">加入收藏</van-button>
+      <van-button type="primary" size="small" bind:click="onMarkClick" bind:longpress="onLongPress">加入收藏</van-button>
     </view>
   </van-panel>
 </view>
