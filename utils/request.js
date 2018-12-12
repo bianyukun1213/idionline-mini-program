@@ -1,8 +1,8 @@
-var app = getApp()
+const host = 'https://idionline.picp.io/api/'
+//const host = getApp().conf.host
 //网上抄的
 function get(url, doSuccess) {
-  //var host = getApp().conf.host
-  var host = 'https://idionline.picp.io/api/'
+  console.log(getApp())
   wx.showLoading({
     title: '请稍候~'
   })

@@ -1,4 +1,4 @@
-var call = require("../utils/request.js")
+const call = require("../utils/request.js")
 var callb = null
 
 function getLaunchInf(callback) {

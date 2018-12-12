@@ -4,7 +4,7 @@ const color = require("../../utils/color.js")
 const inf = require("../../utils/inf.js")
 Page({
   data: {
-    id: null,
+    dt: null,
     name: null,
     defs: null,
     lastEditor: null,
@@ -28,9 +28,8 @@ Page({
       title: data['name']
     })
     //赋一堆值。
-    this.data['id'] = data['id']
+    this.data['dt'] = data
     this.setData({
-      //id: data['id'],
       name: data['name'],
       defs: data['definitions'],
       lastEditor: data['lastEditor'],
@@ -55,14 +54,15 @@ Page({
     console.log('已添加成语至收藏：' + this.data['name'])
   },
   onLongPress(e) {
+    var that = this
     wx.setClipboardData({
-      data: this.data['id'],
+      data: JSON.stringify(this.data['dt']),
       success: function(res) {
         wx.vibrateShort()
         wx.showToast({
-          title: 'Id已复制'
+          title: 'JSON已复制'
         })
-        console.log('已复制成语Id到剪贴板')
+        console.log('已复制成语JSON到剪贴板：' + JSON.stringify(that.data['dt']))
       }
     })
   },
@@ -70,7 +70,7 @@ Page({
     console.log('尝试转发：' + this.data['name'])
     return {
       title: '点击查看“' + this.data['name'] + '”的释义',
-      path: '/pages/idiom/idiom?id=' + this.data['id']
+      path: '/pages/idiom/idiom?id=' + this.data['dt']['id']
     }
   }
 })
