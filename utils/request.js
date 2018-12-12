@@ -1,5 +1,4 @@
 const host = 'https://idionline.picp.io/api/'
-//const host = getApp().conf.host
 //网上抄的
 function get(url, doSuccess) {
   console.log(getApp())
