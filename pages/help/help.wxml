@@ -3,7 +3,7 @@
     <van-collapse-item title="关于成语在线" name="1">
       <view class="root">
         <image class="img" src="../../icons/kun.png" mode="aspectFit" />
-        <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生利用周末时间开发，全套代码已开源在GitHub。\n数据来源：《现代汉语词典》\n使用的技术&资源：.NET Core、MongoDB、Hangfire、Vant Weapp、Iconfont\n感谢（排名不分先后）：韩昊岑、高凯、张立飞、祃辰星、郭程韵、丁子焦、陈剑涛、王泽潍同学以及我的语文老师李方超，他们给予了我莫大的支持与鼓励。\n请不要攻击服务器！\n——仿生人会涮电子羊吗.com</text>
+        <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生利用周末时间开发，全套代码已开源在GitHub。\n数据来源：《现代汉语词典》\n使用的技术&资源：.NET Core、MongoDB、Hangfire、Vant Weapp、Iconfont\n感谢（排名不分先后）：韩昊岑、高凯、张立飞、祃辰星、郭程韵、白生锴、丁子焦、陈剑涛、王泽潍、杨宇博同学以及我的语文老师李方超，他们给予了我莫大的支持与鼓励。\n请不要攻击服务器！\n——仿生人会涮电子羊吗.com</text>
         <van-button class="btn" type="primary" bind:click="onCopy">复制GitHub链接</van-button>
       </view>
     </van-collapse-item>
