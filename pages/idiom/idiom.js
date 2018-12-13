@@ -45,7 +45,7 @@ Page({
   },
   onMarkClick() {
     var marked = wx.getStorageSync('markedIdioms') || {}
-    marked[this.data['id']] = this.data['name']
+    marked[this.data['dt']['id']] = this.data['name']
     wx.setStorageSync('markedIdioms', marked)
     wx.vibrateShort()
     wx.showToast({
