@@ -8,7 +8,7 @@ Page({
     defs: null,
     launchInf: null,
     placeHolder: '请输入您要搜索的成语',
-    logoUrl: '../../icons/idionline.png',
+    logoUrl: '../../icons/idionline.svg',
     disableAds: false,
     searchBarValue: null,
     showPopup: false,
@@ -62,7 +62,7 @@ Page({
       })
     }
   },
-  nav: function(data) {
+  nav(data) {
     //获取key，其实就是第一个的key。
     var k
     for (var key in data) {

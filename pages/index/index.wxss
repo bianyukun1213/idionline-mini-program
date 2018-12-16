@@ -19,22 +19,22 @@
   flex-direction: column;
 }
 
-.source {
+.btn {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.def {
+.footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.addition {
+.text {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  text-align: right;
 }
 
 .slide {

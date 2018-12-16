@@ -13,24 +13,6 @@
   flex-direction: column;
 }
 
-.source {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.def {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.addition {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .btn {
   display: flex;
   flex-direction: row;
@@ -41,4 +23,9 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  text-align: right;
 }

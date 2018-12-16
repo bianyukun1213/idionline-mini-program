@@ -35,7 +35,7 @@ Page({
   },
   onDelete(e) {
     //获取控件的id，也就是被移除成语的index。
-    var index = e.currentTarget['id']
+    var index = e.currentTarget.id
     var marked = wx.getStorageSync('markedIdioms') || {}
     delete marked[index]
     wx.setStorageSync('markedIdioms', marked)

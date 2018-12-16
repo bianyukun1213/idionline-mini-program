@@ -1,16 +1,12 @@
 const call = require("../utils/request.js")
+const format = require("../utils/format.js")
 var callb = null
 
 function getLaunchInf(callback) {
   if (getApp().globalData['launchInf'] == null) {
     callb = callback
-    var date = new Date()
-    date.setMilliseconds(0)
-    date.setSeconds(0)
-    date.setMinutes(0)
-    date.setHours(0)
     console.log("开始请求启动信息")
-    call.get('launchinf/' + Date.parse(date) / 1000, applyData)
+    call.get('launchinf/' + format.getUnixTimestamp(true), applyData)
   } else {
     console.log("全局变量中存在启动信息，未发送请求")
     if (typeof callback == 'function') {

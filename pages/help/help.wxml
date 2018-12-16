@@ -2,7 +2,7 @@
   <van-collapse value="{{activeName}}" accordion bind:change="onChange">
     <van-collapse-item title="关于成语在线" name="1">
       <view class="root">
-        <image class="img" src="../../icons/idionline&kun.png" mode="aspectFit" />
+        <image class="img" src="../../icons/idionline&kun.svg" mode="aspectFit" />
         <text class="text">成语在线\n（微信小程序与Web API）\n由一个在校高中生开发\n数据来源：《现代汉语词典》\n更多信息见GitHub页面</text>
         <van-button class="btn" type="primary" size="small" bind:click="onCopy">复制GitHub链接</van-button>
       </view>
@@ -11,18 +11,21 @@
       在首页的搜索栏中直接输入您要搜索的成语即可。您可使用成语名称、成语名称连续的一部分（可包含一个逗号）或拼音首字母来搜索。输入“A”或“a”后，服务器将返回所有拼音首字母为“A”的成语。根据服务器返回的数据，您可能需要进一步选择具体的成语。
     </van-collapse-item>
     <van-collapse-item title="如何收藏成语？" name="3">
-      点击成语卡片右下角的“收藏”按钮，成语便会添加到您的收藏列表。您可在“收藏”页面中管理收藏列表。点击某一条目跳转到对应的释义页面，左滑移除这条成语。通常收藏页面在显示时和移除成语后会自动刷新，不过您也可以手动下拉刷新。需要注意的是，您的收藏数据保存在设备的本地缓存中，一旦发生设备丢失、缓存清空等情况，收藏数据都将丢失且无法恢复！请您谨慎使用该功能。
+      点击成语页面卡片右下角的“收藏”按钮，成语便会添加到您的收藏列表。您可在“收藏”页面中管理收藏列表。点击某一条目跳转到对应的释义页面，左滑移除这条成语。通常收藏页面在显示时和移除成语后会自动刷新，不过您也可以手动下拉刷新。需要注意的是，您的收藏数据保存在设备的本地缓存中，一旦发生设备丢失、缓存清空等情况，收藏数据都将丢失且无法恢复！请您谨慎使用该功能。
     </van-collapse-item>
     <van-collapse-item title="如何转发成语？" name="4">
-      点击成语释义页面右上角的“…”按钮，您就能看见转发按钮。
+      点击成语页面右上角的“…”按钮，您就能看见转发按钮。
     </van-collapse-item>
-    <van-collapse-item title="如何查看“每日成语”？" name="5">
+    <van-collapse-item title="如何让手机朗读成语？" name="5">
+      点击成语页面的释义标签，小程序将请求百度语音合成。
+    </van-collapse-item>
+    <van-collapse-item title="如何查看“每日成语”？" name="6">
       您可在首页的底部上划来查看每日成语。
     </van-collapse-item>
-    <van-collapse-item title="如何关闭广告？" name="6">
+    <van-collapse-item title="如何关闭广告？" name="7">
       现在还没有广告。ヾ(•ω•`)o
     </van-collapse-item>
-    <van-collapse-item title="设备信息与支持" name="7">
+    <van-collapse-item title="设备信息与支持" name="8">
       <text>手机品牌：{{systemInfo['brand']}}\n手机型号：{{systemInfo['model']}}\n设备像素比：{{systemInfo['pixelRatio']}}\n屏幕宽度：{{systemInfo['screenWidth']}}\n屏幕高度：{{systemInfo['screenHeight']}}\n可使用窗口宽度：{{systemInfo['windowWidth']}}\n可使用窗口高度：{{systemInfo['windowHeight']}}\n状态栏的高度：{{systemInfo['statusBarHeight']}}\n微信设置的语言：{{systemInfo['language']}}\n微信版本号：{{systemInfo['version']}}\n操作系统版本：{{systemInfo['system']}}\n客户端平台：{{systemInfo['platform']}}\n用户字体大小设置：{{systemInfo['fontSizeSetting']}}\n客户端基础库版本：{{systemInfo['SDKVersion']}}</text>
       <view class="function">
         <van-button type="primary" size="small" open-type="contact" bind:click="onClick">联系开发者</van-button>
