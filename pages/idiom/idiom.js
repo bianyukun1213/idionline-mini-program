@@ -11,8 +11,7 @@ Page({
     defs: null,
     lastEditor: null,
     updateTime: null,
-    tTSSource: null, //对应释义的文本。
-    audioAddress: null
+    tTSSource: null //对应释义的文本。
   },
   onLoad(option) {
     call.get('idiom/' + option.id, this.fillData)
@@ -94,30 +93,24 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      if (this.data['audioAddress'] == null) {
-        var tTSSource = this.data['defs'][e.currentTarget.id]['text'] //获取到对应的def。
-        var substr = tTSSource.match(/〈.〉/g) //匹配“〈口〉”这种东西。
-        for (var idx in substr) {
-          tTSSource = tTSSource.replace(substr[idx], '')
-        }
-        tTSSource = tTSSource.replace('~', this.data['name']) //将“~”替换为成语名称、
-        this.data['tTSSource'] = tTSSource
-        var token = wx.getStorageSync('token')
-        var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
-        var currentUT = format.getUnixTimestamp(false)
-        console.log('当前时间戳：' + currentUT)
-        console.log('Token时间戳：' + tokenUT)
-        if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
-          call.getTTSToken(this.tokenGot)
-          console.log('重获取Token')
-        } else {
-          call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
-          console.log('使用缓存Token')
-        }
+      var tTSSource = this.data['defs'][e.currentTarget.id]['text'] //获取到对应的def。
+      var substr = tTSSource.match(/〈.〉/g) //匹配“〈口〉”这种东西。
+      for (var idx in substr) {
+        tTSSource = tTSSource.replace(substr[idx], '')
+      }
+      tTSSource = tTSSource.replace('~', this.data['name']) //将“~”替换为成语名称、
+      this.data['tTSSource'] = tTSSource
+      var token = wx.getStorageSync('token')
+      var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
+      var currentUT = format.getUnixTimestamp(false)
+      console.log('当前时间戳：' + currentUT)
+      console.log('Token时间戳：' + tokenUT)
+      if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
+        call.getTTSToken(this.tokenGot)
+        console.log('重获取Token')
       } else {
-        wx.vibrateShort()
-        console.log('直接用变量内的地址播放')
-        innerAudioContext.play()
+        call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
+        console.log('使用缓存Token')
       }
     }
   },
@@ -126,7 +119,6 @@ Page({
     call.downloadTTSAudio(tok, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
   },
   onPlay(src) {
-    this.data['audioAddress'] = src
     innerAudioContext.src = src
     innerAudioContext.play()
   }
