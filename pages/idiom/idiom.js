@@ -6,7 +6,7 @@ const guid = require("../../tools/guid.js")
 var innerAudioContext
 Page({
   data: {
-    dt: null,
+    id: null,
     name: null,
     defs: null,
     lastEditor: null,
@@ -45,7 +45,7 @@ Page({
       title: data['name']
     })
     //赋一堆值。
-    this.data['dt'] = data
+    this.data['id'] = data['id']
     this.setData({
       name: data['name'],
       defs: data['definitions'],
@@ -64,7 +64,7 @@ Page({
   onMarkClick() {
     wx.vibrateShort()
     var marked = wx.getStorageSync('markedIdioms') || {}
-    marked[this.data['dt']['id']] = this.data['name']
+    marked[this.data['id']] = this.data['name']
     wx.setStorageSync('markedIdioms', marked)
     wx.showToast({
       title: '完成！'
@@ -74,13 +74,13 @@ Page({
   onLongPress() {
     var that = this
     wx.setClipboardData({
-      data: JSON.stringify(this.data['dt']),
+      data: this.data['id'],
       success: function(res) {
         wx.vibrateShort()
         wx.showToast({
-          title: 'JSON已复制'
+          title: 'Id已复制'
         })
-        console.log('已复制成语JSON到剪贴板：' + JSON.stringify(that.data['dt']))
+        console.log('已复制成语Id到剪贴板：' + that.data['id'])
       }
     })
   },
@@ -88,7 +88,7 @@ Page({
     console.log('尝试转发：' + this.data['name'])
     return {
       title: '点击查看“' + this.data['name'] + '”的释义',
-      path: '/pages/idiom/idiom?id=' + this.data['dt']['id']
+      path: '/pages/idiom/idiom?id=' + this.data['id']
     }
   },
   onTTSTap(e) {
