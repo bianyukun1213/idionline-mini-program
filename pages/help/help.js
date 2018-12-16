@@ -20,10 +20,6 @@ Page({
       console.log('已切换折叠面板到：' + e.detail)
     }
   },
-  onClick() {
-    wx.vibrateShort()
-    console.log('用户发起客服会话')
-  },
   onClear() {
     wx.vibrateLong()
     wx.showModal({
@@ -44,10 +40,10 @@ Page({
     })
   },
   onCopy() {
+    wx.vibrateShort()
     wx.setClipboardData({
       data: 'https://github.com/bianyukun1213/idionline',
       success: function(res) {
-        wx.vibrateShort()
         wx.showToast({
           title: '完成！'
         })
