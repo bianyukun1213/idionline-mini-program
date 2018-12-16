@@ -4,7 +4,7 @@ function get(url, doSuccess) {
     title: '请稍候~',
     mask: true
   })
-  console.log('发送请求：https://idionline.picp.io/api/ + url')
+  console.log('发送请求：https://idionline.picp.io/api/' + url)
   wx.request({
     url: 'https://idionline.picp.io/api/' + url,
     success: function(res) {
