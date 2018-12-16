@@ -93,6 +93,7 @@ Page({
   },
   onTTSTap(e) {
     if (innerAudioContext.paused) {
+      wx.vibrateShort()
       if (this.data['audioAddress'] == null) {
         var tTSSource = this.data['defs'][e.currentTarget.id]['text'] //获取到对应的def。
         var substr = tTSSource.match(/〈.〉/g) //匹配“〈口〉”这种东西。
@@ -106,7 +107,6 @@ Page({
         var currentUT = format.getUnixTimestamp(false)
         console.log('当前时间戳：' + currentUT)
         console.log('Token时间戳：' + tokenUT)
-        wx.vibrateShort()
         if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
           call.getTTSToken(this.tokenGot)
           console.log('重获取Token')
