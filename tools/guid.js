@@ -5,4 +5,15 @@ function S4() {
 function guid() {
   return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4())
 }
+
+function checkGuid() {
+  var g = wx.getStorageSync('guid')
+  if (g == '') {
+    g = guid.guid()
+    wx.setStorageSync('guid', g)
+    console.log('GUID已生成：' + g)
+  }
+  return g
+}
 module.exports.guid = guid
+module.exports.checkGuid = checkGuid

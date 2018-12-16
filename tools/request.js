@@ -50,27 +50,23 @@ function getTTSToken(doSuccess) {
   })
 }
 
-function getTTSAudio(tok, cuid, tex, doSuccess) {
+function downloadTTSAudio(tok, cuid, tex, doSuccess) {
   wx.showLoading({
     title: '请稍候~',
     mask: true
   })
   var url = 'https://tsn.baidu.com/text2audio?tok=' + tok + '&cuid=' + cuid + '&lan=zh&ctp=1&tex=' + tex
   console.log('请求百度语音合成数据：' + url)
-  wx.request({
+  wx.downloadFile({
     url: url,
-    success: function(res) {
+    success(res) {
       wx.hideLoading()
-      if (res.statusCode == 200 && typeof doSuccess == 'function') {
-        if (res['header']['Content-Type'] = 'audio/mp3') {
-          console.log('请求到语音合成数据')
-          doSuccess(url)
+      if (res.statusCode === 200 && typeof doSuccess == 'function') {
+        if (res.tempFilePath.slice(-3) == 'mp3') {
+          console.log('下载到合成音频：' + res.tempFilePath)
+          doSuccess(res.tempFilePath)
         } else {
-          console.log('语音合成服务返回错误：' + res.data['err_detail'])
-          wx.showToast({
-            title: '错误：' + res.data['err_detail'],
-            icon: 'none'
-          })
+          fail('文件格式错误')
         }
       } else if (res.statusCode == 404) {
         notFound()
@@ -100,5 +96,5 @@ function notFound() {
   })
 }
 module.exports.get = get
-module.exports.getTTSAudio = getTTSAudio
 module.exports.getTTSToken = getTTSToken
+module.exports.downloadTTSAudio = downloadTTSAudio

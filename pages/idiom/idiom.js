@@ -11,7 +11,7 @@ Page({
     defs: null,
     lastEditor: null,
     updateTime: null,
-    tTSSource: null, //对应释义的文本
+    tTSSource: null, //对应释义的文本。
     audioAddress: null
   },
   onLoad(option) {
@@ -19,14 +19,12 @@ Page({
     inf.getLaunchInf(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.mixWithOther = false
-    innerAudioContext.onWaiting(function callback() {
-      wx.showLoading({
-        title: '缓冲中~',
-        mask: true
+    innerAudioContext.onError(function callback(errCode) {
+      console.log('音频播放错误：' + errCode)
+      wx.showToast({
+        title: '音频播放出错！',
+        icon: 'none'
       })
-    })
-    innerAudioContext.onTimeUpdate(function callback() {
-      wx.hideLoading()
     })
   },
   onUnload(e) {
@@ -103,12 +101,6 @@ Page({
         }
         tTSSource = tTSSource.replace('~', this.data['name']) //将“~”替换为成语名称、
         this.data['tTSSource'] = tTSSource
-        var g = wx.getStorageSync('guid') //获取缓存中的guid来作为请求语音合成数据所需要的cuid。
-        if (g == '') {
-          g = guid.guid()
-          wx.setStorageSync('guid', g)
-          console.log('GUID已生成：' + g)
-        }
         var token = wx.getStorageSync('token')
         var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
         var currentUT = format.getUnixTimestamp(false)
@@ -119,7 +111,7 @@ Page({
           call.getTTSToken(this.tokenGot)
           console.log('重获取Token')
         } else {
-          call.getTTSAudio(token, g, this.data['tTSSource'], this.onPlay)
+          call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
           console.log('使用缓存Token')
         }
       } else {
@@ -131,13 +123,7 @@ Page({
   },
   tokenGot(tok) {
     wx.setStorageSync('token', tok)
-    var g = wx.getStorageSync('guid') //我怕有点击标签后没等获取到token，立刻跑出去清除缓存的神级操作（这样的话网也太慢了……loading的mask不能阻止导航栏的点击）。
-    if (g == '') {
-      g = guid.guid()
-      wx.setStorageSync('guid', g)
-      console.log('GUID已生成：' + g)
-    }
-    call.getTTSAudio(tok, g, this.data['tTSSource'], this.onPlay)
+    call.downloadTTSAudio(tok, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
   },
   onPlay(src) {
     this.data['audioAddress'] = src
