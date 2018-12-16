@@ -62,10 +62,10 @@ Page({
     })
   },
   onMarkClick() {
+    wx.vibrateShort()
     var marked = wx.getStorageSync('markedIdioms') || {}
     marked[this.data['dt']['id']] = this.data['name']
     wx.setStorageSync('markedIdioms', marked)
-    wx.vibrateShort()
     wx.showToast({
       title: '完成！'
     })

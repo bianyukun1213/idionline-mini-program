@@ -35,11 +35,11 @@ Page({
   },
   onDelete(e) {
     //获取控件的id，也就是被移除成语的index。
+    wx.vibrateShort()
     var index = e.currentTarget.id
     var marked = wx.getStorageSync('markedIdioms') || {}
     delete marked[index]
     wx.setStorageSync('markedIdioms', marked)
-    wx.vibrateShort()
     console.log('已移除索引为' + index + '的成语')
     //设置Timeout来部分解决动画问题（两个都展开后再移除一个，会出现错误，不过我感觉是vant的锅。）。
     setTimeout(() => {

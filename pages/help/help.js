@@ -33,8 +33,8 @@ Page({
       confirmColor: '#FF0000',
       success(res) {
         if (res.confirm) {
-          wx.clearStorageSync()
           wx.vibrateShort()
+          wx.clearStorageSync()
           wx.showToast({
             title: '缓存已清除'
           })

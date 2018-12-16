@@ -107,10 +107,10 @@ Page({
       console.log('结束点击纵坐标：' + currentY)
       console.log('坐标差：' + (currentY - startY))
       if (currentY - startY <= -50 && !showPopup) {
+        wx.vibrateShort()
         this.setData({
           showPopup: true
         })
-        wx.vibrateShort()
         console.log('上划操作，已启用弹出层')
       } else if (currentY - startY >= 50 && showPopup) {
         this.setData({
