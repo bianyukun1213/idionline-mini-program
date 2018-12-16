@@ -5,7 +5,7 @@ Page({
     systemInfo: null
   },
   onLoad() {
-    color.applyMainColor()
+    color.apl()
     this.setData({
       systemInfo: wx.getSystemInfoSync()
     })

@@ -5,7 +5,7 @@ Page({
     showText: null
   },
   onLoad() {
-    color.applyMainColor()
+    color.apl()
   },
   onShow() {
     this.loadData()

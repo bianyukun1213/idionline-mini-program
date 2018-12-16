@@ -40,7 +40,7 @@ Page({
       text: launchInf['text'],
       //disableAds: launchInf['disableAds']
     })
-    color.applyMainColor()
+    color.apl()
   },
   fillData(data) {
     wx.setNavigationBarTitle({

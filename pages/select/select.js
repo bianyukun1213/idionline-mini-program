@@ -4,7 +4,7 @@ Page({
     idioms: null
   },
   onLoad(option) {
-    color.applyMainColor()
+    color.apl()
     var json = JSON.parse(option.str)
     //更新页面。
     this.setData({

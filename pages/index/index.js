@@ -34,10 +34,10 @@ Page({
         defs: launchInf['dailyIdiom']['definitions']
       })
     }
-    color.applyMainColor()
-    var reg = new RegExp('https?://.+\.(jpg|gif|png)', 'g')
+    color.apl()
+    var reg = new RegExp('https?://.+\.(jpg|gif|png)')
     //匹配Logo地址正则，设置Logo。
-    if (reg.exec(launchInf['logoUrl'])) {
+    if (reg.test(launchInf['logoUrl'])) {
       this.setData({
         logoUrl: launchInf['logoUrl']
       })
@@ -46,12 +46,12 @@ Page({
   //搜索事件。
   onSearch(e) {
     //正则表达式匹配，判断是向index请求还是向search请求。
-    var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$', 'g') //汉字。
-    var reg2 = new RegExp('^[A-Za-z]$', 'g')
-    if (reg.exec(e.detail)) {
+    var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
+    var reg2 = new RegExp('^[A-Za-z]$')
+    if (reg.test(e.detail)) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get('idiom/search/' + e.detail, this.nav)
-    } else if (reg2.exec(e.detail)) {
+    } else if (reg2.test(e.detail)) {
       this.data['searchBarValue'] = e.detail //同上。
       call.get('idiom/index/' + e.detail, this.nav)
     } else {
