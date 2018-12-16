@@ -62,6 +62,7 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
     success(res) {
       wx.hideLoading()
       if (res.statusCode === 200 && typeof doSuccess == 'function') {
+        console.log(res.tempFilePath)
         if (res.tempFilePath.slice(-3) == 'mp3') {
           console.log('下载到合成音频：' + res.tempFilePath)
           doSuccess(res.tempFilePath)
