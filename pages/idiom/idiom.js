@@ -123,6 +123,7 @@ Page({
           console.log('使用缓存Token')
         }
       } else {
+        wx.vibrateShort()
         console.log('直接用变量内的地址播放')
         innerAudioContext.play()
       }
