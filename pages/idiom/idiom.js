@@ -1,8 +1,8 @@
-const call = require("../../utils/request.js")
-const format = require("../../utils/format.js")
-const color = require("../../utils/color.js")
-const inf = require("../../utils/inf.js")
-const guid = require("../../utils/guid.js")
+const call = require("../../tools/request.js")
+const format = require("../../tools/format.js")
+const color = require("../../tools/color.js")
+const inf = require("../../tools/inf.js")
+const guid = require("../../tools/guid.js")
 var innerAudioContext
 Page({
   data: {

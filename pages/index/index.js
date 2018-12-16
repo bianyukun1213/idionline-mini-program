@@ -1,6 +1,6 @@
-const call = require("../../utils/request.js")
-const color = require("../../utils/color.js")
-const inf = require("../../utils/inf.js")
+const call = require("../../tools/request.js")
+const color = require("../../tools/color.js")
+const inf = require("../../tools/inf.js")
 Page({
   data: {
     text: null,

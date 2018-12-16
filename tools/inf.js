@@ -1,5 +1,5 @@
-const call = require("../utils/request.js")
-const format = require("../utils/format.js")
+const call = require("../tools/request.js")
+const format = require("../tools/format.js")
 var callb = null
 
 function getLaunchInf(callback) {

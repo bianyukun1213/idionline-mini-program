@@ -1,4 +1,4 @@
-const color = require("../../utils/color.js")
+const color = require("../../tools/color.js")
 Page({
   data: {
     idioms: null
