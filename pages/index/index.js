@@ -47,19 +47,21 @@ Page({
   onSearch(e) {
     //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
-    var reg2 = new RegExp('^[A-Za-z]$')
+    //var reg2 = new RegExp('^[A-Za-z]$')
     if (reg.test(e.detail)) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get('idiom/search/' + e.detail, this.nav)
-    } else if (reg2.test(e.detail)) {
-      this.data['searchBarValue'] = e.detail //同上。
-      call.get('idiom/index/' + e.detail, this.nav)
-    } else {
-      wx.vibrateLong()
+    } 
+    // else if (reg2.test(e.detail)) {
+    //   this.data['searchBarValue'] = e.detail //同上。
+    //   call.get('idiom/index/' + e.detail, this.nav)
+    // } 
+    else {
       wx.showToast({
-        title: '请您输入汉字或单个英文字母！',
+        title: '请您输入汉字！',
         icon: 'none'
       })
+      wx.vibrateLong()
     }
   },
   nav(data) {

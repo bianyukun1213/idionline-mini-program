@@ -11,7 +11,9 @@ Page({
     defs: null,
     lastEditor: null,
     updateTime: null,
-    tTSSource: null //对应释义的文本。
+    tTSText: null, //对应释义的文本。
+    tTSCurrent: null,
+    tTSSrc: {}
   },
   onLoad(option) {
     call.get('idiom/' + option.id, this.fillData)
@@ -93,32 +95,50 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      var tTSSource = this.data['defs'][e.currentTarget.id]['text'] //获取到对应的def。
-      var substr = tTSSource.match(/〈.〉/g) //匹配“〈口〉”这种东西。
-      for (var idx in substr) {
-        tTSSource = tTSSource.replace(substr[idx], '')
+      if (getApp().globalData['platform'] == 'QQ浏览器') {
+        console.log('由于QQ浏览器上接口的差异，暂时还不能使用朗读功能')
+        wx.showModal({
+          title: '暂不支持朗读',
+          content: '在QQ浏览器上，由于文件下载接口的差异，暂时还不能使用朗读功能！'
+        })
+        return
       }
-      tTSSource = tTSSource.replace('~', this.data['name']) //将“~”替换为成语名称、
-      this.data['tTSSource'] = tTSSource
-      var token = wx.getStorageSync('token')
-      var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
-      var currentUT = format.getUnixTimestamp(false)
-      console.log('当前时间戳：' + currentUT)
-      console.log('Token时间戳：' + tokenUT)
-      if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
-        call.getTTSToken(this.tokenGot)
-        console.log('重获取Token')
+      this.data['tTSCurrent'] = e.currentTarget.id
+      console.log('变量中的音频地址：', this.data['tTSSrc'])
+      if (this.data['tTSSrc'][this.data['tTSCurrent']] == undefined) {
+        console.log('当前音频地址在变量中不存在')
+        var tTSText = this.data['defs'][this.data['tTSCurrent']]['text'] //获取到对应的def。
+        var substr = tTSText.match(/〈.〉/g) //匹配“〈口〉”这种东西。
+        for (var idx in substr) {
+          tTSText = tTSText.replace(substr[idx], '')
+        }
+        tTSText = tTSText.replace(/~/g, this.data['name']) //将“~”替换为成语名称、
+        this.data['tTSText'] = tTSText
+        var token = wx.getStorageSync('token')
+        var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
+        var currentUT = format.getUnixTimestamp(false)
+        console.log('当前时间戳：' + currentUT)
+        console.log('Token时间戳：' + tokenUT)
+        if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
+          call.getTTSToken(this.tokenGot)
+          console.log('重获取Token')
+        } else {
+          call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSText'], this.onPlay)
+          console.log('使用缓存Token')
+        }
       } else {
-        call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
-        console.log('使用缓存Token')
+        console.log('当前音频地址在变量中存在，将直接播放')
+        innerAudioContext.src = this.data['tTSSrc'][this.data['tTSCurrent']]
+        innerAudioContext.play()
       }
     }
   },
   tokenGot(tok) {
     wx.setStorageSync('token', tok)
-    call.downloadTTSAudio(tok, guid.checkGuid(), this.data['tTSSource'], this.onPlay)
+    call.downloadTTSAudio(tok, guid.checkGuid(), this.data['tTSText'], this.onPlay)
   },
   onPlay(src) {
+    this.data['tTSSrc'][this.data['tTSCurrent']] = src
     innerAudioContext.src = src
     innerAudioContext.play()
   }

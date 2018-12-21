@@ -29,3 +29,7 @@
   flex-direction: column;
   text-align: right;
 }
+
+.btn_link{
+  margin-left: 10px;
+}

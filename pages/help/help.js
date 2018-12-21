@@ -2,12 +2,14 @@ const color = require("../../tools/color.js")
 Page({
   data: {
     activeName: '1',
-    systemInfo: null
+    systemInfo: null,
+    platform: null
   },
   onLoad() {
     color.apl()
     this.setData({
-      systemInfo: wx.getSystemInfoSync()
+      systemInfo: wx.getSystemInfoSync(),
+      platform: getApp().globalData['platform']
     })
   },
   onChange(e) {
@@ -21,7 +23,6 @@ Page({
     }
   },
   onClear() {
-    wx.vibrateLong()
     wx.showModal({
       title: '警告',
       content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失！',
@@ -38,6 +39,7 @@ Page({
         }
       }
     })
+    wx.vibrateLong()
   },
   onCopy() {
     wx.vibrateShort()

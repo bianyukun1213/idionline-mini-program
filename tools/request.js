@@ -62,9 +62,8 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
     success(res) {
       wx.hideLoading()
       if (res.statusCode === 200 && typeof doSuccess == 'function') {
-        console.log(res.tempFilePath)
+        console.log('下载文件：' + res.tempFilePath)
         if (res.tempFilePath.slice(-3) == 'mp3') {
-          console.log('下载到合成音频：' + res.tempFilePath)
           doSuccess(res.tempFilePath)
         } else {
           fail('文件格式错误')
@@ -90,7 +89,7 @@ function fail(code) {
 }
 
 function notFound() {
-  console.log('未查询到数据：' + res.statusCode)
+  console.log('未查询到数据')
   wx.showToast({
     title: '很抱歉，未查询到数据！',
     icon: 'none'
