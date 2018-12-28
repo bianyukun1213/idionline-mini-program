@@ -6,31 +6,32 @@
     <van-panel class="panel" title="{{idiName}}">
       <view class="content">
         <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
-          <van-row>
+          <van-row style="margin-bottom:5px;">
             <van-col span="6">
-              <van-tag mark plain size="large" type="primary">来源</van-tag>
+              <van-tag mark size="large" color="{{tagColor}}">来源</van-tag>
             </van-col>
             <van-col span="18">
               <text class="text">{{item['source']}}\n</text>
             </van-col>
           </van-row>
-          <van-row>
+          <van-row style="margin-bottom:5px;">
             <van-col span="6">
-              <van-tag mark plain size="large" type="primary">释义</van-tag>
+              <van-tag mark size="large" color="{{tagColor}}">释义</van-tag>
             </van-col>
             <van-col span="18">
               <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
               <text class="text" selectable="true" wx:else>{{item['text']}}\n</text>
             </van-col>
           </van-row>
-          <van-row wx:if="{{item['addition']!=null}}">
+          <van-row wx:if="{{item['addition']!=null}}" style="margin-bottom:5px;">
             <van-col span="6">
-              <van-tag mark plain size="large" type="success">附加</van-tag>
+              <van-tag mark size="large" color="{{tagColor}}">附加</van-tag>
             </van-col>
             <van-col span="18">
               <text class="text" style="font-size:12px;color:gray;">{{item['addition']}}</text>
             </van-col>
           </van-row>
+          <view class="divLine" style="background:{{tagColor}};" />
         </view>
       </view>
     </van-panel>

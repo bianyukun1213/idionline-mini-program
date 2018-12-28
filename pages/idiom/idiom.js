@@ -6,6 +6,7 @@ const guid = require("../../tools/guid.js")
 var innerAudioContext
 Page({
   data: {
+    tagColor: null,
     id: null,
     name: null,
     defs: null,
@@ -37,6 +38,7 @@ Page({
     var launchInf = getApp().globalData['launchInf']
     this.setData({
       text: launchInf['text'],
+      tagColor: color.chk()
       //disableAds: launchInf['disableAds']
     })
     color.apl()

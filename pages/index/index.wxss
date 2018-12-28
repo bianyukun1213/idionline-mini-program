@@ -52,3 +52,9 @@
   text-align: center;
   color: gray;
 }
+
+.divLine {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 1px;
+}

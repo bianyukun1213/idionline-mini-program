@@ -3,6 +3,7 @@ const color = require("../../tools/color.js")
 const inf = require("../../tools/inf.js")
 Page({
   data: {
+    tagColor: null,
     text: null,
     idiName: null,
     defs: null,
@@ -24,6 +25,7 @@ Page({
   callback() {
     var launchInf = getApp().globalData['launchInf']
     this.setData({
+      tagColor: color.chk(),
       text: launchInf['text'],
       placeHolder: '目前已收录' + launchInf['idiomsCount'] + '条成语'
       //disableAds: launchInf['disableAds']
@@ -51,7 +53,7 @@ Page({
     if (reg.test(e.detail)) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get('idiom/search/' + e.detail, this.nav)
-    } 
+    }
     // else if (reg2.test(e.detail)) {
     //   this.data['searchBarValue'] = e.detail //同上。
     //   call.get('idiom/index/' + e.detail, this.nav)

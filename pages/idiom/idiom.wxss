@@ -24,12 +24,19 @@
   flex-direction: row;
   justify-content: flex-end;
 }
-.text{
+
+.text {
   display: flex;
   flex-direction: column;
   text-align: right;
 }
 
-.btn_link{
+.btn_link {
   margin-left: 10px;
+}
+
+.divLine {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 1px;
 }
