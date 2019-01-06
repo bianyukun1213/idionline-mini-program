@@ -56,7 +56,7 @@ Page({
     //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
     //var reg2 = new RegExp('^[A-Za-z]$')
-    if (reg.test(e.detail)) {
+    if (reg.test(e.detail) && e.detail.length > 1) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get('idiom/search/' + e.detail, this.nav)
     }
@@ -66,7 +66,7 @@ Page({
     // } 
     else {
       wx.showToast({
-        title: '请您输入汉字！',
+        title: '请您输入一个以上的汉字！',
         icon: 'none'
       })
       wx.vibrateLong()
@@ -78,7 +78,7 @@ Page({
     for (var key in data) {
       k = key
     }
-    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && data[k] == this.data['searchBarValue']) {
+    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['searchBarValue'] == '试试运气')) {
       wx.navigateTo({
         url: '/pages/idiom/idiom?id=' + k
       })
