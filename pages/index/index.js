@@ -6,6 +6,7 @@ Page({
     tagColor: null,
     text: null,
     idiName: null,
+    pinyin: '',
     defs: null,
     launchInf: null,
     placeHolder: '请输入您要搜索的成语',
@@ -35,6 +36,11 @@ Page({
         idiName: launchInf['dailyIdiom']['name'],
         defs: launchInf['dailyIdiom']['definitions']
       })
+      if (launchInf['dailyIdiom']['pinyin'] != null) {
+        this.setData({
+          pinyin: '[' + launchInf['dailyIdiom']['pinyin'] + ']'
+        })
+      }
     }
     color.apl()
     var reg = new RegExp('https?://.+\.(jpg|gif|png)')

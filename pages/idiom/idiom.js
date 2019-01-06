@@ -9,6 +9,7 @@ Page({
     tagColor: null,
     id: null,
     name: null,
+    pinyin: '',
     defs: null,
     lastEditor: null,
     updateTime: null,
@@ -55,6 +56,11 @@ Page({
       lastEditor: data['lastEditor'],
       updateTime: format.formatDate(data['updateTimeUT'])
     })
+    if (data['pinyin'] != null) {
+      this.setData({
+        pinyin: '[' + data['pinyin'] + ']'
+      })
+    }
     console.log('获取到成语释义：', this.data['defs'])
   },
   //跳转按钮点击事件。
@@ -110,11 +116,11 @@ Page({
       if (this.data['tTSSrc'][this.data['tTSCurrent']] == undefined) {
         console.log('当前音频地址在变量中不存在')
         var tTSText = this.data['defs'][this.data['tTSCurrent']]['text'] //获取到对应的def。
-        var substr = tTSText.match(/〈.〉/g) //匹配“〈口〉”这种东西。
+        var substr = tTSText.match(/(〈.+〉|（.+）)/) //匹配“〈口〉”这种东西和括号中的内容。不能写g。不然两对括号就不正常了。
         for (var idx in substr) {
           tTSText = tTSText.replace(substr[idx], '')
         }
-        tTSText = tTSText.replace(/~/g, this.data['name']) //将“~”替换为成语名称、
+        tTSText = tTSText.replace(/(~|～)/g, this.data['name']) //将“~”替换为成语名称、
         this.data['tTSText'] = tTSText
         var token = wx.getStorageSync('token')
         var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
