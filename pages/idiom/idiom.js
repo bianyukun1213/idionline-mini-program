@@ -116,7 +116,7 @@ Page({
       if (this.data['tTSSrc'][this.data['tTSCurrent']] == undefined) {
         console.log('当前音频地址在变量中不存在')
         var tTSText = this.data['defs'][this.data['tTSCurrent']]['text'] //获取到对应的def。
-        var substr = tTSText.match(/(〈.+〉|（.+）)/) //匹配“〈口〉”这种东西和括号中的内容。不能写g。不然两对括号就不正常了。
+        var substr = tTSText.match(/(〈.*?〉|（.*?）)/g) //匹配“〈口〉”这种东西和括号中的内容。
         for (var idx in substr) {
           tTSText = tTSText.replace(substr[idx], '')
         }
