@@ -25,8 +25,8 @@
               <text class="text" style="margin-top:5px;font-size:12px;color:blue;">{{item['addition']}}</text>
             </block>
             <block wx:if="{{item['links']!=null}}">
-              <view class="btn" style="margin-bottom:5px;">
-                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" style="margin-top:5px;" size="small" plain round type="primary">{{item}}</van-button>
+              <view class="btn" style="margin-top:5px;">
+                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round type="primary">{{item}}</van-button>
               </view>
             </block>
           </van-col>
