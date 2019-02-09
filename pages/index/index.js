@@ -22,7 +22,7 @@ Page({
   //启动
   onLoad(query) {
     this.data['scene'] = decodeURIComponent(query.scene)
-    console.log('场景值：' + this.data['scene'])
+    console.log('场景：' + this.data['scene'])
     inf.getLaunchInf(this.callback)
   },
   //获取启动信息的回调函数。
@@ -60,8 +60,6 @@ Page({
           content: launchInf['argsDic'][this.data['scene']]
         })
         wx.vibrateShort()
-      } else {
-        console.log('未找到对应的场景内容')
       }
     }
   },
