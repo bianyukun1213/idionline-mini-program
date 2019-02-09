@@ -5,6 +5,7 @@ Page({
   data: {
     tagColor: null,
     text: null,
+    scene: null,
     idiName: null,
     pinyin: '',
     defs: null,
@@ -19,7 +20,9 @@ Page({
     onTouch: false
   },
   //启动
-  onLoad() {
+  onLoad(query) {
+    this.data['scene'] = decodeURIComponent(query.scene)
+    console.log('场景值：' + this.data['scene'])
     inf.getLaunchInf(this.callback)
   },
   //获取启动信息的回调函数。
@@ -50,6 +53,17 @@ Page({
         logoUrl: launchInf['logoUrl']
       })
     }
+    for (var key in launchInf['argsDic']) {
+      if (key == this.data['scene']) {
+        console.log('查找到对应的场景内容：' + launchInf['argsDic'][this.data['scene']])
+        wx.showModal({
+          content: launchInf['argsDic'][this.data['scene']]
+        })
+        wx.vibrateShort()
+      } else {
+        console.log('未找到对应的场景内容')
+      }
+    }
   },
   //搜索事件。
   onSearch(e) {
@@ -78,7 +92,7 @@ Page({
     for (var key in data) {
       k = key
     }
-    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['searchBarValue'] == '试试运气')) {
+    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['searchBarValue'] == '试试手气')) {
       wx.navigateTo({
         url: '/pages/idiom/idiom?id=' + k
       })

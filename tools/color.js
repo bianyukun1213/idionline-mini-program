@@ -9,7 +9,7 @@ function setBar(color) {
     backgroundColor: color
   })
   wx.setTabBarStyle({
-    color: '#CCCCCC',
+    color: '#808080',
     selectedColor: '#FFFFFF',
     backgroundColor: color
   })
