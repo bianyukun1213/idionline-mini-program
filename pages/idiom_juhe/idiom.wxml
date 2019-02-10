@@ -1,0 +1,14 @@
+<view class="root">
+  <van-notice-bar text="以下内容来自“聚合数据”。" />
+  <van-cell-group>
+    <van-cell title="名称" value="{{name}}" />
+    <van-cell title="拼音" value="{{pinyin}}" />
+    <van-cell title="释义" value="{{chengyujs}}" />
+    <van-cell wx:if="{{from_!=null}}" title="起源" value="{{from_}}" />
+    <van-cell wx:if="{{example!=null}}" title="例句" value="{{example}}" />
+    <van-cell wx:if="{{yufa!=null}}" title="语法" value="{{yufa}}" />
+    <van-cell wx:if="{{yinzhengjs!=null}}" title="引证解释" value="{{yinzhengjs}}" />
+    <van-cell wx:if="{{tongyi!=null}}" wx:for="{{tongyi}}" wx:key="{{index}}" title="同义成语{{[index+1]}}" value="{{tongyi[index]}}" />
+    <van-cell wx:if="{{fanyi!=null}}" wx:for="{{fanyi}}" wx:key="{{index}}" title="反义成语{{[index+1]}}" value="{{fanyi[index]}}" />
+  </van-cell-group>
+</view>

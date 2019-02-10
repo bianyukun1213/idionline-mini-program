@@ -16,13 +16,17 @@ function setBar(color) {
 }
 
 function chk(callb) {
-  var color = getApp().globalData['launchInf']['themeColor'] //这句实际上必须写里面，不然获取到的会是设置color之前的null。
-  var reg = new RegExp('^#[0-9a-fA-F]{6}$')
-  if (reg.test(color)) {
-    if (typeof callb == 'function') {
-      callb(color)
+  if (getApp().globalData['launchInf'] != null) {
+    var color = getApp().globalData['launchInf']['themeColor'] //这句实际上必须写里面，不然获取到的会是设置color之前的null。
+    var reg = new RegExp('^#[0-9a-fA-F]{6}$')
+    if (reg.test(color)) {
+      if (typeof callb == 'function') {
+        callb(color)
+      } else {
+        return color
+      }
     } else {
-      return color
+      return '#008080'
     }
   } else {
     return '#008080'

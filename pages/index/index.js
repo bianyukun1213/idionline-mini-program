@@ -1,6 +1,6 @@
-const call = require("../../tools/request.js")
-const color = require("../../tools/color.js")
-const inf = require("../../tools/inf.js")
+const call = require('../../tools/request.js')
+const color = require('../../tools/color.js')
+const inf = require('../../tools/inf.js')
 Page({
   data: {
     tagColor: null,
@@ -72,7 +72,7 @@ Page({
     //var reg2 = new RegExp('^[A-Za-z]$')
     if (reg.test(e.detail) && e.detail.length > 1) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
-      call.get('idiom/search/' + e.detail, this.nav)
+      call.get('idiom/search/' + e.detail, this.nav, this.exHandler)
     }
     // else if (reg2.test(e.detail)) {
     //   this.data['searchBarValue'] = e.detail //同上。
@@ -85,6 +85,24 @@ Page({
       })
       wx.vibrateLong()
     }
+  },
+  //成语未收录时：
+  exHandler() {
+    var dt = this.data['searchBarValue']
+    console.log('查询无结果：' + dt)
+    wx.showModal({
+      title: '查询无结果',
+      content: '无法找到您要查询的成语“' + dt + '”，可能是因为该成语未被录入或服务器宕机。您要继续在“聚合数据”查询该成语吗？',
+      confirmText: '继续查询',
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/idiom_juhe/idiom?name=' + dt
+          })
+        }
+      }
+    })
+    wx.vibrateShort()
   },
   nav(data) {
     //获取key，其实就是第一个的key。

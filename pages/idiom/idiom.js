@@ -1,8 +1,8 @@
-const call = require("../../tools/request.js")
-const format = require("../../tools/format.js")
-const color = require("../../tools/color.js")
-const inf = require("../../tools/inf.js")
-const guid = require("../../tools/guid.js")
+const call = require('../../tools/request.js')
+const format = require('../../tools/format.js')
+const color = require('../../tools/color.js')
+const inf = require('../../tools/inf.js')
+const guid = require('../../tools/guid.js')
 var innerAudioContext
 Page({
   data: {
@@ -84,7 +84,7 @@ Page({
     var that = this
     wx.setClipboardData({
       data: this.data['id'],
-      success: function(res) {
+      success(res) {
         wx.vibrateShort()
         wx.showToast({
           title: 'Id已复制'

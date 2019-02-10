@@ -1,5 +1,5 @@
 //网上抄的
-function get(url, doSuccess) {
+function get(url, doSuccess, exHandler) {
   wx.showLoading({
     title: '请稍候~',
     mask: true
@@ -7,19 +7,46 @@ function get(url, doSuccess) {
   console.log('发送请求：https://idionline.picp.io/api/' + url)
   wx.request({
     url: 'https://idionline.picp.io/api/' + url,
-    success: function(res) {
+    success(res) {
       wx.hideLoading()
       if (res.statusCode == 200 && typeof doSuccess == 'function') {
         console.log('查询到数据：', res.data)
         doSuccess(res.data)
       } else if (res.statusCode == 404) {
-        notFound()
+        notFound(exHandler)
       } else {
-        fail(res.statusCode)
+        fail(res.statusCode, exHandler)
       }
     },
-    fail: function(err) {
-      fail(err.errMsg)
+    fail(err) {
+      wx.hideLoading()
+      fail(err.errMsg, exHandler)
+    }
+  })
+}
+
+function get_juhe(url, doSuccess, exHandler) {
+  wx.showLoading({
+    title: '请稍候~',
+    mask: true
+  })
+  console.log('发送请求：https://v.juhe.cn/chengyu/query?' + url)
+  wx.request({
+    url: 'https://v.juhe.cn/chengyu/query?' + url,
+    success(res) {
+      wx.hideLoading()
+      if (res.statusCode == 200 && typeof doSuccess == 'function') {
+        console.log('查询到数据：', res.data)
+        doSuccess(res.data)
+      } else if (res.statusCode == 404) {
+        notFound(exHandler)
+      } else {
+        fail(res.statusCode, exHandler)
+      }
+    },
+    fail(err) {
+      wx.hideLoading()
+      fail(err.errMsg, exHandler)
     }
   })
 }
@@ -33,7 +60,7 @@ function getTTSToken(doSuccess) {
   console.log('请求百度语音合成Token：' + url)
   wx.request({
     url: url,
-    success: function(res) {
+    success(res) {
       wx.hideLoading()
       if (res.statusCode == 200 && typeof doSuccess == 'function') {
         console.log('请求到Token：' + res.data['access_token'])
@@ -44,7 +71,8 @@ function getTTSToken(doSuccess) {
         fail(res.statusCode)
       }
     },
-    fail: function(err) {
+    fail(err) {
+      wx.hideLoading()
       fail(err.errMsg)
     }
   })
@@ -74,27 +102,39 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
         fail(res.statusCode)
       }
     },
-    fail: function(err) {
+    fail(err) {
+      wx.hideLoading()
       fail(err.errMsg)
     }
   })
 }
 
-function fail(code) {
+function fail(code, exHandler) {
   console.log('错误：' + code)
-  wx.showToast({
-    title: '错误：' + code,
-    icon: 'none'
-  })
+  if (typeof exHandler == 'function') {
+    console.log('将执行exHandler()')
+    exHandler()
+  } else {
+    wx.showToast({
+      title: '错误：' + code,
+      icon: 'none'
+    })
+  }
 }
 
-function notFound() {
+function notFound(exHandler) {
   console.log('未查询到数据')
-  wx.showToast({
-    title: '很抱歉，未查询到数据！',
-    icon: 'none'
-  })
+  if (typeof exHandler == 'function') {
+    console.log('将执行exHandler()')
+    exHandler()
+  } else {
+    wx.showToast({
+      title: '很抱歉，未查询到数据！',
+      icon: 'none'
+    })
+  }
 }
 module.exports.get = get
+module.exports.get_juhe = get_juhe
 module.exports.getTTSToken = getTTSToken
 module.exports.downloadTTSAudio = downloadTTSAudio

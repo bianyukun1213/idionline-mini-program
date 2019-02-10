@@ -1,4 +1,4 @@
-const color = require("../../tools/color.js")
+const color = require('../../tools/color.js')
 Page({
   data: {
     activeName: '1',
@@ -45,7 +45,7 @@ Page({
     wx.vibrateShort()
     wx.setClipboardData({
       data: 'https://github.com/bianyukun1213/idionline',
-      success: function(res) {
+      success(res) {
         wx.showToast({
           title: '完成！'
         })

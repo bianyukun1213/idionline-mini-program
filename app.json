@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/select/select",
     "pages/idiom/idiom",
+    "pages/idiom_juhe/idiom",
     "pages/marked/marked",
     "pages/help/help"
   ],
