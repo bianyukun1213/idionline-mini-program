@@ -107,7 +107,8 @@ Page({
         console.log('由于QQ浏览器上接口的差异，暂时还不能使用朗读功能')
         wx.showModal({
           title: '暂不支持朗读',
-          content: '在QQ浏览器上，由于文件下载接口的差异，暂时还不能使用朗读功能！'
+          content: '在QQ浏览器上，由于文件下载接口的差异，暂时还不能使用朗读功能！',
+          showCancel: false
         })
         return
       }

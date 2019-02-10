@@ -53,11 +53,13 @@ Page({
         logoUrl: launchInf['logoUrl']
       })
     }
+    //显示对应的场景内容。
     for (var key in launchInf['argsDic']) {
       if (key == this.data['scene']) {
         console.log('查找到对应的场景内容：' + launchInf['argsDic'][this.data['scene']])
         wx.showModal({
-          content: launchInf['argsDic'][this.data['scene']]
+          content: launchInf['argsDic'][this.data['scene']],
+          showCancel: false
         })
         wx.vibrateShort()
       }
