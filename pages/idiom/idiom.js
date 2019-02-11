@@ -10,6 +10,7 @@ Page({
     id: null,
     name: null,
     pinyin: '',
+    origin: '',
     defs: null,
     lastEditor: null,
     updateTime: null,
@@ -59,6 +60,11 @@ Page({
     if (data['pinyin'] != null) {
       this.setData({
         pinyin: '[' + data['pinyin'] + ']'
+      })
+    }
+    if (data['origin'] != null) {
+      this.setData({
+        origin: '出自' + data['origin'] + '，'
       })
     }
     console.log('获取到成语释义：', this.data['defs'])

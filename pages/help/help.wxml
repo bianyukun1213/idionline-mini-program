@@ -3,7 +3,7 @@
     <van-collapse-item title="关于成语在线" name="1">
       <view class="root">
         <image class="img" src="../../icons/idionline&kun.svg" mode="aspectFit" bind:tap="onCopy_blog" />
-        <text class="text">成语在线\n（小程序与Web API）\n由一个在校高中生开发\n数据来源：《现代汉语词典》\n更多信息见GitHub页面</text>
+        <text class="text">成语在线\n小程序与Web API\n由“仿生人会涮电子羊吗”开发</text>
         <van-button class="btn" type="primary" size="small" bind:click="onCopy">复制GitHub链接</van-button>
       </view>
     </van-collapse-item>

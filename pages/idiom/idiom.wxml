@@ -1,5 +1,5 @@
 <view class="root">
-  <van-panel wx:if="{{name!=null}}" title="{{name}}{{pinyin}}" desc="由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot>
+  <van-panel wx:if="{{name!=null}}" title="{{name}}{{pinyin}}" desc="{{origin}}由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot>
     <view class="content">
       <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
         <van-row style="margin-bottom:5px;">
