@@ -59,6 +59,7 @@ Page({
           }
         }
       })
+      wx.vibrateShort()
     }
   },
 })
