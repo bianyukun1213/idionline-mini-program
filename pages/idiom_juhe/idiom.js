@@ -9,7 +9,8 @@ Page({
     yufa: null,
     yinzhengjs: null,
     tongyi: null,
-    fanyi: null
+    fanyi: null,
+    shareFlag: false
   },
   onLoad(option) {
     console.log('搜索成语：' + option.name)
@@ -35,9 +36,24 @@ Page({
         tongyi: data['result']['tongyi'],
         fanyi: data['result']['fanyi']
       })
+      this.data['shareFlag'] = true
       wx.setNavigationBarTitle({
         title: this.data['name']
       })
     }
-  }
+  },
+  onShareAppMessage() {
+    console.log('尝试转发：' + this.data['name'])
+    if (this.data['shareFlag']) {
+      return {
+        title: '点击查看“' + this.data['name'] + '”的释义，内容来自聚合数据',
+        path: '/pages/idiom_juhe/idiom?name=' + this.data['name']
+      }
+    } else {
+      wx.showModal({
+        content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
+        showCancel: false
+      })
+    }
+  },
 })

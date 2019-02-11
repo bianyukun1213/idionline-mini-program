@@ -25,8 +25,8 @@ Page({
   onClear() {
     wx.showModal({
       title: '警告',
-      content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失！',
-      confirmText: '确认清除',
+      content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失，您确定要清除缓存吗？',
+      confirmText: '清除',
       confirmColor: '#FF0000',
       success(res) {
         if (res.confirm) {
@@ -46,10 +46,16 @@ Page({
     wx.setClipboardData({
       data: 'https://github.com/bianyukun1213/idionline',
       success(res) {
-        wx.showToast({
-          title: '完成！'
-        })
         console.log('已复制GitHub链接到剪贴板')
+      }
+    })
+  },
+  onCopy_blog() {
+    wx.vibrateShort()
+    wx.setClipboardData({
+      data: 'https://bianyukun1213.github.io',
+      success(res) {
+        console.log('已复制博客链接到剪贴板')
       }
     })
   }

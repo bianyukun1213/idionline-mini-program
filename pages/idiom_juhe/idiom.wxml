@@ -1,5 +1,5 @@
 <view class="root">
-  <van-notice-bar text="以下内容来自“聚合数据”。" />
+  <van-notice-bar text="以下内容来自聚合数据" />
   <van-cell-group>
     <van-cell title="名称" value="{{name}}" />
     <van-cell title="拼音" value="{{pinyin}}" />

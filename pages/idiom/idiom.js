@@ -81,14 +81,11 @@ Page({
     console.log('已添加成语至收藏：' + this.data['name'])
   },
   onLongPress() {
+    wx.vibrateShort()
     var that = this
     wx.setClipboardData({
       data: this.data['id'],
       success(res) {
-        wx.vibrateShort()
-        wx.showToast({
-          title: 'Id已复制'
-        })
         console.log('已复制成语Id到剪贴板：' + that.data['id'])
       }
     })

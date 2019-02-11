@@ -92,7 +92,7 @@ Page({
     console.log('查询无结果：' + dt)
     wx.showModal({
       title: '查询无结果',
-      content: '无法找到您要查询的成语“' + dt + '”，可能是因为该成语未被录入或服务器宕机。您要继续在“聚合数据”查询该成语吗？',
+      content: '无法找到您要查询的成语“' + dt + '”，可能是因为该成语未被录入或服务器宕机。您要使用“聚合数据”接口继续查询吗？',
       confirmText: '继续查询',
       success(res) {
         if (res.confirm) {
