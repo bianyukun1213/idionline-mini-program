@@ -52,7 +52,12 @@ Page({
     } else {
       wx.showModal({
         content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
-        showCancel: false
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            wx.vibrateShort()
+          }
+        }
       })
     }
   },
