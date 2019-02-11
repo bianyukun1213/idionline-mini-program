@@ -59,7 +59,12 @@ Page({
         console.log('查找到对应的场景内容：' + launchInf['argsDic'][this.data['scene']])
         wx.showModal({
           content: launchInf['argsDic'][this.data['scene']],
-          showCancel: false
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              wx.vibrateShort()
+            }
+          }
         })
         wx.vibrateShort()
       }
@@ -96,6 +101,7 @@ Page({
       confirmText: '继续查询',
       success(res) {
         if (res.confirm) {
+          wx.vibrateShort()
           wx.navigateTo({
             url: '/pages/idiom_juhe/idiom?name=' + dt
           })
