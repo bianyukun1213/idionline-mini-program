@@ -72,6 +72,7 @@ Page({
   },
   //搜索事件。
   onSearch(e) {
+    wx.vibrateShort()
     //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
     //var reg2 = new RegExp('^[A-Za-z]$')
