@@ -78,7 +78,11 @@ Page({
     //var reg2 = new RegExp('^[A-Za-z]$')
     if (reg.test(e.detail) && e.detail.length > 1) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
-      call.get('idiom/search/' + e.detail, this.nav, this.exHandler)
+      call.get({
+        url: 'idiom/search/' + e.detail,
+        doSuccess: this.nav,
+        exHandler: this.exHandler
+      })
     }
     // else if (reg2.test(e.detail)) {
     //   this.data['searchBarValue'] = e.detail //同上。
@@ -98,7 +102,7 @@ Page({
     console.log('查询无结果：' + dt)
     wx.showModal({
       title: '查询无结果',
-      content: '无法找到您要查询的成语“' + dt + '”，可能是因为该成语未被录入或服务器宕机。您要使用“聚合数据”接口继续查询吗？',
+      content: '无法找到您要查询的成语“' + dt + '”。您仍可使用“聚合数据”接口继续查询。但请注意，“聚合数据”接口每天只能调用100次，您应确保输入的信息真实有效以免浪费调用次数。是否继续查询？',
       confirmText: '继续查询',
       success(res) {
         if (res.confirm) {

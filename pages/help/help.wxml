@@ -4,7 +4,7 @@
       <view class="root">
         <image class="img" src="../../icons/idionline&kun.svg" mode="aspectFit" bind:tap="onCopy_blog" />
         <text class="text">成语在线\n小程序与Web API\n由“仿生人会涮电子羊吗”开发</text>
-        <van-button class="btn" type="primary" size="small" bind:click="onCopy">复制GitHub链接</van-button>
+        <van-button class="btn" type="primary" size="small" bind:tap="onCopy">复制GitHub链接</van-button>
       </view>
     </van-collapse-item>
     <van-collapse-item title="如何查询成语？" name="2">
@@ -30,7 +30,7 @@
       <text style="font-size:12px;color:green;">小程序平台：{{platform}}\n</text>
       <text>手机品牌：{{systemInfo['brand']}}\n手机型号：{{systemInfo['model']}}\n设备像素比：{{systemInfo['pixelRatio']}}\n屏幕宽度：{{systemInfo['screenWidth']}}\n屏幕高度：{{systemInfo['screenHeight']}}\n可使用窗口宽度：{{systemInfo['windowWidth']}}\n可使用窗口高度：{{systemInfo['windowHeight']}}\n状态栏高度：{{systemInfo['statusBarHeight']}}\n微信语言：{{systemInfo['language']}}\n微信版本号：{{systemInfo['version']}}\n操作系统版本：{{systemInfo['system']}}\n客户端平台：{{systemInfo['platform']}}\n用户字体大小：{{systemInfo['fontSizeSetting']}}\n客户端基础库版本：{{systemInfo['SDKVersion']}}\n您可在导航栏右上角按钮-关于成语在线OL-投诉与反馈中向我反馈意见。</text>
       <view class="function">
-        <van-button type="danger" bind:click="onClear">清除缓存</van-button>
+        <van-button type="danger" bind:tap="onClean">清除缓存</van-button>
       </view>
     </van-collapse-item>
   </van-collapse>

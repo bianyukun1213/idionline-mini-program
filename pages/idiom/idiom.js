@@ -16,10 +16,14 @@ Page({
     updateTime: null,
     tTSText: null, //对应释义的文本。
     tTSCurrent: null,
-    tTSSrc: {}
+    tTSSrc: {},
+    shareFlag: false
   },
   onLoad(option) {
-    call.get('idiom/' + option.id, this.fillData)
+    call.get({
+      url: 'idiom/' + option.id,
+      doSuccess: this.fillData
+    })
     inf.getLaunchInf(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.mixWithOther = false
@@ -67,16 +71,17 @@ Page({
         origin: '出自' + data['origin'] + '，'
       })
     }
+    this.data['shareFlag'] = true
     console.log('获取到成语释义：', this.data['defs'])
   },
   //跳转按钮点击事件。
-  onClick(e) {
+  onTap(e) {
     wx.vibrateShort()
     wx.redirectTo({
       url: '/pages/idiom/idiom?id=' + e.currentTarget.id
     })
   },
-  onMarkClick() {
+  onMarkTap() {
     wx.vibrateShort()
     var marked = wx.getStorageSync('markedIdioms') || {}
     marked[this.data['id']] = this.data['name']
@@ -96,11 +101,49 @@ Page({
       }
     })
   },
+  onSolitaireTap() {
+    wx.vibrateShort()
+    call.get({
+      url: 'idiom/solitaire/' + this.data['name'],
+      doSuccess: this.doneSolitaire
+    })
+  },
+  doneSolitaire(data) {
+    wx.showModal({
+      content: data + '（仅供参考）',
+      confirmText: '复制',
+      success(res) {
+        if (res.confirm) {
+          wx.vibrateShort()
+          wx.setClipboardData({
+            data: data,
+            success(res) {
+              console.log('已复制成语接龙返回数据到剪贴板：' + data)
+            }
+          })
+        }
+      }
+    })
+    wx.vibrateShort()
+  },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])
-    return {
-      title: '点击查看“' + this.data['name'] + '”的释义',
-      path: '/pages/idiom/idiom?id=' + this.data['id']
+    if (this.data['shareFlag']) {
+      return {
+        title: '点击查看“' + this.data['name'] + '”的释义',
+        path: '/pages/idiom/idiom?id=' + this.data['id']
+      }
+    } else {
+      wx.showModal({
+        content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            wx.vibrateShort()
+          }
+        }
+      })
+      wx.vibrateShort()
     }
   },
   onTTSTap(e) {
@@ -137,7 +180,10 @@ Page({
         console.log('当前时间戳：' + currentUT)
         console.log('Token时间戳：' + tokenUT)
         if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
-          call.getTTSToken(this.tokenGot)
+          call.get({
+            doSuccess: this.tokenGot,
+            type: 'TTS'
+          })
           console.log('重获取Token')
         } else {
           call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSText'], this.onPlay)
@@ -150,9 +196,9 @@ Page({
       }
     }
   },
-  tokenGot(tok) {
-    wx.setStorageSync('token', tok)
-    call.downloadTTSAudio(tok, guid.checkGuid(), this.data['tTSText'], this.onPlay)
+  tokenGot(data) {
+    wx.setStorageSync('token', data['access_token'])
+    call.downloadTTSAudio(data['access_token'], guid.checkGuid(), this.data['tTSText'], this.onPlay)
   },
   onPlay(src) {
     this.data['tTSSrc'][this.data['tTSCurrent']] = src

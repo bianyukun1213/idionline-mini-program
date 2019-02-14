@@ -26,7 +26,7 @@
             </block>
             <block wx:if="{{item['links']!=null}}">
               <view class="btn" style="margin-top:5px;">
-                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round type="primary">{{item}}</van-button>
+                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:tap="onTap" size="small" plain round type="primary">{{item}}</van-button>
               </view>
             </block>
           </van-col>
@@ -35,7 +35,8 @@
       </view>
     </view>
     <view class="footer" slot="footer">
-      <van-button type="primary" size="small" bind:click="onMarkClick" bind:longpress="onLongPress">加入收藏</van-button>
+      <van-button class="btn_func" type="primary" size="small" bind:tap="onSolitaireTap">接龙</van-button>
+      <van-button class="btn_func" type="primary" size="small" bind:tap="onMarkTap" bind:longpress="onLongPress">加入收藏</van-button>
     </view>
   </van-panel>
 </view>

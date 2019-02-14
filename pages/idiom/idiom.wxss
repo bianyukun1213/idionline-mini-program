@@ -4,7 +4,7 @@
 }
 
 .content {
-  padding-top:5px;
+  padding-top: 5px;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 16px;
@@ -34,6 +34,10 @@
 }
 
 .btn_link {
+  margin-left: 10px;
+}
+
+.btn_func {
   margin-left: 10px;
 }
 

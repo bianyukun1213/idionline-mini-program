@@ -15,7 +15,11 @@ Page({
   onLoad(option) {
     console.log('搜索成语：' + option.name)
     this.data['name'] = option.name
-    call.get_juhe('word=' + option.name + '&key=59a83fe5879d3ca2ce0eef7183db90ad', this.fillData)
+    call.get({
+      url: 'word=' + option.name + '&key=59a83fe5879d3ca2ce0eef7183db90ad',
+      doSuccess: this.fillData,
+      type: 'Juhe'
+    })
   },
   fillData(data) {
     if (data['reason'] != 'success') {

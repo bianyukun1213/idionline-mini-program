@@ -22,7 +22,7 @@ Page({
       console.log('已切换折叠面板到：' + e.detail)
     }
   },
-  onClear() {
+  onClean() {
     wx.showModal({
       title: '警告',
       content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失，您确定要清除缓存吗？',
