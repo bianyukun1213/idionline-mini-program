@@ -1,15 +1,17 @@
 const color = require('../../tools/color.js')
 Page({
   data: {
-    activeName: '1',
+    version: null,
+    platform: null,
     systemInfo: null,
-    platform: null
+    activeName: '1'
   },
   onLoad() {
     color.apl()
     this.setData({
-      systemInfo: wx.getSystemInfoSync(),
-      platform: getApp().globalData['platform']
+      version: getApp().globalData['version'],
+      platform: getApp().globalData['platform'],
+      systemInfo: wx.getSystemInfoSync()
     })
   },
   onChange(e) {

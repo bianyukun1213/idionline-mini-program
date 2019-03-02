@@ -10,7 +10,7 @@ Page({
     pinyin: '',
     defs: null,
     launchInf: null,
-    placeHolder: '请输入您要搜索的成语',
+    placeHolder: '请输入您要查询的成语',
     logoUrl: '../../icons/idionline.svg',
     disableAds: false,
     searchBarValue: null,

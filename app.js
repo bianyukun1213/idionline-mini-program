@@ -1,7 +1,8 @@
 App({
   globalData: {
-    launchInf: null,
-    platform: '微信'
+    version: '1.0.16',
+    platform: '微信',
+    launchInf: null
   },
   onLaunch() {
     var info = wx.getSystemInfoSync()

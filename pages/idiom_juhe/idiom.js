@@ -1,9 +1,9 @@
 const call = require('../../tools/request.js')
 Page({
   data: {
-    name: '正在请求数据，请稍候……',
-    pinyin: '正在请求数据，请稍候……',
-    chengyujs: '正在请求数据，请稍候……',
+    name: '正在查询……',
+    pinyin: '正在查询……',
+    chengyujs: '正在查询……',
     from_: null,
     example: null,
     yufa: null,
