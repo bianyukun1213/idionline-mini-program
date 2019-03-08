@@ -26,7 +26,6 @@ Page({
     })
     inf.getLaunchInf(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
-    innerAudioContext.mixWithOther = false
     innerAudioContext.onError(function callback(errCode) {
       console.log('音频播放错误：' + errCode)
       wx.showToast({
