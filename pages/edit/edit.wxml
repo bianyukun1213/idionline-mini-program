@@ -1,0 +1,6 @@
+<view class="root">
+  <van-cell-group>
+    <van-field id="{{index}}" wx:for="{{updates}}" wx:key="{{index}}" type="textarea" placeholder="释义文本不能为空"value="{{updates[index]}}" autosize required clearable bind:change="onChange" label="释义{{index+1}}" />
+  </van-cell-group>
+  <van-button class="btn" type="primary" bind:tap="onSubmit">提交</van-button>
+</view>

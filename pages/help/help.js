@@ -1,7 +1,9 @@
+const call = require('../../tools/request.js')
 const color = require('../../tools/color.js')
 Page({
   data: {
     version: null,
+    version_api: null,
     platform: null,
     systemInfo: null,
     activeName: '1'
@@ -10,6 +12,7 @@ Page({
     color.apl()
     this.setData({
       version: getApp().globalData['version'],
+      version_api: getApp().globalData['launchInf']['version'],
       platform: getApp().globalData['platform'],
       systemInfo: wx.getSystemInfoSync()
     })
@@ -60,5 +63,30 @@ Page({
         console.log('已复制博客链接到剪贴板')
       }
     })
+  },
+  onLogin() {
+    wx.vibrateShort()
+    var that = this
+    wx.login({
+      success(res) {
+        console.log(res)
+        if (res.code) {
+          call.get({
+            url: 'editor/login/' + res.code,
+            doSuccess: that.callback
+          })
+        }
+      }
+    })
+  },
+  callback(data) {
+    if (data['openid'] != null) {
+      wx.showToast({
+        title: '已获取登录信息！',
+        icon: 'none'
+      })
+      console.log('已获取登录信息：' + data['openid'])
+      wx.setStorageSync('openId', data['openid'])
+    }
   }
 })

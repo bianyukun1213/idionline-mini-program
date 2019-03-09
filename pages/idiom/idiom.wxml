@@ -35,7 +35,7 @@
       </view>
     </view>
     <view class="footer" slot="footer">
-      <van-button class="btn_func" type="primary" size="small" bind:tap="onSolitaireTap">接龙</van-button>
+      <van-button class="btn_func" type="primary" size="small" bind:tap="onSolitaireTap" bind:longpress="onEdit">接龙</van-button>
       <van-button class="btn_func" type="primary" size="small" bind:tap="onMarkTap" bind:longpress="onLongPress">加入收藏</van-button>
     </view>
   </van-panel>

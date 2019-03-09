@@ -10,8 +10,6 @@ function get(args) {
     urlBase = 'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=BfYDfQxbqmKPazSVr1He4Lap&client_secret=z9PXBM0P1bUFDEYgfiSnSax5mHZEHD18'
   } else if (type == 'Juhe') {
     urlBase = 'https://v.juhe.cn/chengyu/query?'
-  } else if (type == 'Turing') {
-    //
   } else {
     urlBase = 'https://idionline.picp.io/api/'
   }
@@ -74,6 +72,67 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
   })
 }
 
+function registerEditor(openId, nickName, doSuccess) {
+  wx.showLoading({
+    title: '请稍候~',
+    mask: true
+  })
+  var url = 'https://idionline.picp.io/api/editor/register'
+  console.log('注册为编辑者：' + url)
+  wx.request({
+    url: url,
+    method: 'POST',
+    data: {
+      'openId': openId,
+      'nickName': nickName
+    },
+    success(res) {
+      wx.hideLoading()
+      if (res.statusCode == 200 && typeof doSuccess == 'function') {
+        console.log('查询到数据：', res.data)
+        doSuccess(res.data)
+      } else if (res.statusCode == 404) {
+        notFound()
+      } else {
+        fail(res.statusCode)
+      }
+    },
+    fail(err) {
+      wx.hideLoading()
+      fail(err.errMsg)
+    }
+  })
+}
+
+function updateIdiom(id, dt, doSuccess) {
+  wx.showLoading({
+    title: '请稍候~',
+    mask: true
+  })
+  var url = 'https://idionline.picp.io/api/idiom/' + id
+  console.log('更新成语：' + url)
+  wx.request({
+    url: url,
+    method: 'PUT',
+    data: dt,
+    success(res) {
+      wx.hideLoading()
+      if (res.statusCode == 200 && typeof doSuccess == 'function') {
+        console.log('查询到数据：', res.data)
+        doSuccess(res.data)
+      } else if (res.statusCode == 404) {
+        notFound()
+      } else {
+        fail(res.statusCode)
+      }
+    },
+    fail(err) {
+      wx.hideLoading()
+      fail(err.errMsg)
+    }
+  })
+}
+
 function fail(code, exHandler) {
   console.log('错误：' + code)
   if (typeof exHandler == 'function') {
@@ -101,3 +160,5 @@ function notFound(exHandler) {
 }
 module.exports.get = get
 module.exports.downloadTTSAudio = downloadTTSAudio
+module.exports.registerEditor = registerEditor
+module.exports.updateIdiom = updateIdiom

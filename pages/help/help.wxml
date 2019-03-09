@@ -27,10 +27,11 @@
     </van-collapse-item>
     <van-collapse-item title="设备信息与支持" name="8">
       <text style="font-size:12px;color:red;">注意：成语在线小程序现支持微信、QQ及QQ浏览器。在某些平台上，由于接口的差异，您的体验可能会有所不同！\n以下信息在不同平台可能会有不同的显示效果！\n</text>
-      <text style="font-size:12px;color:green;">小程序平台：{{platform}}\n小程序版本：{{version}}\n</text>
-      <text>设备品牌：{{systemInfo['brand']}}\n设备型号：{{systemInfo['model']}}\n设备像素比：{{systemInfo['pixelRatio']}}\n屏幕宽度：{{systemInfo['screenWidth']}}\n屏幕高度：{{systemInfo['screenHeight']}}\n可使用窗口宽度：{{systemInfo['windowWidth']}}\n可使用窗口高度：{{systemInfo['windowHeight']}}\n状态栏高度：{{systemInfo['statusBarHeight']}}\n微信语言：{{systemInfo['language']}}\n微信版本号：{{systemInfo['version']}}\n操作系统版本：{{systemInfo['system']}}\n客户端平台：{{systemInfo['platform']}}\n用户字体大小：{{systemInfo['fontSizeSetting']}}\n客户端基础库版本：{{systemInfo['SDKVersion']}}\n您可在导航栏右上角按钮-关于成语在线OL-投诉与反馈中向我反馈意见。</text>
+      <text style="font-size:12px;color:green;">小程序平台：{{platform}}\n小程序版本：{{version}}\nWeb API版本：{{version_api}}\n</text>
+      <text>设备品牌：{{systemInfo['brand']}}\n设备型号：{{systemInfo['model']}}\n设备像素比：{{systemInfo['pixelRatio']}}\n屏幕宽度：{{systemInfo['screenWidth']}}\n屏幕高度：{{systemInfo['screenHeight']}}\n可使用窗口宽度：{{systemInfo['windowWidth']}}\n可使用窗口高度：{{systemInfo['windowHeight']}}\n状态栏高度：{{systemInfo['statusBarHeight']}}\n微信语言：{{systemInfo['language']}}\n微信版本：{{systemInfo['version']}}\n操作系统版本：{{systemInfo['system']}}\n客户端平台：{{systemInfo['platform']}}\n用户字体大小：{{systemInfo['fontSizeSetting']}}\n客户端基础库版本：{{systemInfo['SDKVersion']}}\n您可在导航栏右上角按钮-关于成语在线OL-投诉与反馈中向我反馈意见。</text>
       <view class="function">
-        <van-button type="danger" bind:tap="onClean">清除缓存</van-button>
+        <van-button class="btn" type="primary" bind:tap="onLogin">获取登录信息</van-button>
+        <van-button class="btn" type="danger" bind:tap="onClean">清除缓存</van-button>
       </view>
     </van-collapse-item>
   </van-collapse>

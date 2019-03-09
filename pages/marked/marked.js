@@ -28,11 +28,6 @@ Page({
       })
     }
   },
-  //下拉刷新。
-  onPullDownRefresh() {
-    this.loadData()
-    wx.stopPullDownRefresh()
-  },
   onDelete(e) {
     //获取控件的id，也就是被移除成语的index。
     wx.vibrateShort()

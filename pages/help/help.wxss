@@ -5,7 +5,6 @@
 
 .text {
   color: dodgerblue;
-  align-self: center;
   text-align: center;
 }
 
@@ -28,4 +27,5 @@
 
 .btn {
   align-self: center;
+  margin: 5px;
 }

@@ -125,6 +125,30 @@ Page({
     })
     wx.vibrateShort()
   },
+  onEdit() {
+    wx.vibrateShort()
+    var openId = wx.getStorageSync('openId')
+    if (openId != null && openId != "") {
+      var json = {
+        'id': this.data['id']
+      }
+      var texts = []
+      for (var k in this.data['defs']) {
+        texts.push(this.data['defs'][k]['text'])
+      }
+      json['updates'] = texts
+      var str = JSON.stringify(json)
+      wx.redirectTo({
+        url: '/pages/edit/edit?str=' + str
+      })
+    } else {
+      wx.showToast({
+        title: '缺少登录信息！',
+        icon: 'none'
+      })
+      wx.vibrateLong()
+    }
+  },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])
     if (this.data['shareFlag']) {
