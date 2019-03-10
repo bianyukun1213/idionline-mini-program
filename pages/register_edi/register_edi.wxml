@@ -4,5 +4,5 @@
   </van-cell-group>
   <text class="text">注册为编辑者后，您将可以修改成语释义文本。</text>
   <van-button class="btn" type="primary" bind:tap="onLogin">1、获取登录信息</van-button>
-  <van-button class="btn" type="primary" bind:tap="onRegister">2、注册为编辑者</van-button>
+  <van-button class="btn" wx:if="{{show}}" type="primary" bind:tap="onRegister">2、注册为编辑者</van-button>
 </view>

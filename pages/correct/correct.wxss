@@ -3,10 +3,11 @@
   flex-direction: column;
 }
 
-.function {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.text {
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  color: gray;
 }
 
 .btn {

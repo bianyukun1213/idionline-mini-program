@@ -12,6 +12,7 @@ function get(args) {
     urlBase = 'https://v.juhe.cn/chengyu/query?'
   } else {
     urlBase = 'https://idionline.picp.io/api/'
+    //urlBase = 'http://localhost:12601/api/'
   }
   if (url == undefined) {
     url = ''
@@ -78,6 +79,7 @@ function registerEditor(openId, nickName, doSuccess) {
     mask: true
   })
   var url = 'https://idionline.picp.io/api/editor/register'
+  //var url = 'http://localhost:12601/api/editor/register'
   console.log('注册为编辑者：' + url)
   wx.request({
     url: url,
@@ -110,11 +112,42 @@ function updateIdiom(id, dt, doSuccess) {
     mask: true
   })
   var url = 'https://idionline.picp.io/api/idiom/' + id
+  //var url = 'http://localhost:12601/api/idiom/' + id
   console.log('更新成语：' + url)
   wx.request({
     url: url,
     method: 'PUT',
     data: dt,
+    success(res) {
+      wx.hideLoading()
+      if (res.statusCode == 200 && typeof doSuccess == 'function') {
+        console.log('查询到数据：', res.data)
+        doSuccess(res.data)
+      } else if (res.statusCode == 404) {
+        notFound()
+      } else {
+        fail(res.statusCode)
+      }
+    },
+    fail(err) {
+      wx.hideLoading()
+      fail(err.errMsg)
+    }
+  })
+}
+
+function deleteIdiom(id, openId, doSuccess) {
+  wx.showLoading({
+    title: '请稍候~',
+    mask: true
+  })
+  var url = 'https://idionline.picp.io/api/idiom/' + id
+  //var url = 'http://localhost:12601/api/idiom/' + id
+  console.log('删除成语：' + url)
+  wx.request({
+    url: url,
+    method: 'DELETE',
+    data: '"' + openId + '"',
     success(res) {
       wx.hideLoading()
       if (res.statusCode == 200 && typeof doSuccess == 'function') {
@@ -162,3 +195,4 @@ module.exports.get = get
 module.exports.downloadTTSAudio = downloadTTSAudio
 module.exports.registerEditor = registerEditor
 module.exports.updateIdiom = updateIdiom
+module.exports.deleteIdiom = deleteIdiom

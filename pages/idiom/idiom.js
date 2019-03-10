@@ -90,6 +90,17 @@ Page({
     })
     console.log('已添加成语至收藏：' + this.data['name'])
   },
+  onCorrectTap() {
+    wx.vibrateShort()
+    var json = {
+      'id': this.data['id'],
+      'name': this.data['name']
+    }
+    var str = JSON.stringify(json)
+    wx.navigateTo({
+      url: '/pages/correct/correct?str=' + str
+    })
+  },
   onLongPress() {
     wx.vibrateShort()
     var that = this
@@ -130,13 +141,18 @@ Page({
     var openId = wx.getStorageSync('openId')
     if (openId != null && openId != "") {
       var json = {
-        'id': this.data['id']
+        'id': this.data['id'],
+        'name':this.data['name'],
+        'openId': openId
       }
-      var texts = []
+      var updates = []
       for (var k in this.data['defs']) {
-        texts.push(this.data['defs'][k]['text'])
+        updates.push({
+          "source": this.data['defs'][k]['source'],
+          "text": this.data['defs'][k]['text']
+        })
       }
-      json['updates'] = texts
+      json['updates'] = updates
       var str = JSON.stringify(json)
       wx.redirectTo({
         url: '/pages/edit/edit?str=' + str

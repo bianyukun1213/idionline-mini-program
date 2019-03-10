@@ -1,7 +1,8 @@
 const call = require('../../tools/request.js')
 Page({
   data: {
-    nickName: null
+    nickName: null,
+    show: false
   },
   onLogin() {
     wx.vibrateShort()
@@ -19,6 +20,15 @@ Page({
     })
   },
   onChange(event) {
+    if (event.detail == null || event.detail == '') {
+      this.setData({
+        show: false
+      })
+    } else {
+      this.setData({
+        show: true
+      })
+    }
     this.data['nickName'] = event.detail
   },
   callback(data) {
@@ -34,7 +44,7 @@ Page({
   onRegister() {
     wx.vibrateShort()
     var openId = wx.getStorageSync('openId')
-    if (openId != null && openId != "" && this.data['nickName'] != null && this.data['nickName'] != '') {
+    if (openId != null && openId != "") {
       call.registerEditor(openId, this.data['nickName'], this.done)
     } else {
       wx.showToast({
