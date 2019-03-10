@@ -4,5 +4,5 @@
   </van-cell-group>
     <text class="text">开发者大多数时间在学校，不能及时看到您的消息，请您谅解！</text>
   <van-button class="btn" type="primary" wx:if="{{show}}" bind:tap="onCopy">1、复制内容</van-button>
-  <van-button class="btn" type="primary" wx:if="{{show}}" bind:tap="onContact" open-type="contact">2、打开客服对话</van-button>
+  <van-button class="btn" type="primary" wx:if="{{show}}" bind:tap="onContact" open-type="contact">2、打开客服会话</van-button>
 </view>
