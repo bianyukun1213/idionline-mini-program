@@ -40,10 +40,6 @@
   "window": {
     "navigationBarBackgroundColor": "#008080",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "成语在线",
-    "qbDebugKey": [
-      "c11b8a441f40db8a9837b49ebc887b31",
-      "6f1b964861497b2042d566d6bc887b31"
-    ]
+    "navigationBarTitleText": "成语在线"
   }
 }
