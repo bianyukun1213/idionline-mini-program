@@ -57,6 +57,7 @@ Page({
       }
     } else {
       wx.showModal({
+        title:'警告',
         content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
         showCancel: false,
         success(res) {

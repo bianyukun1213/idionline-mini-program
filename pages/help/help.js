@@ -30,7 +30,7 @@ Page({
   onClean() {
     wx.showModal({
       title: '警告',
-      content: '您的一些设置与收藏数据也保存在缓存中，清除缓存将导致这些信息丢失，您确定要清除缓存吗？',
+      content: '您的登录信息与收藏数据都保存在缓存中，清除缓存将导致这些数据丢失。您确定要清除缓存吗？',
       confirmText: '清除',
       confirmColor: '#FF0000',
       success(res) {
@@ -38,7 +38,7 @@ Page({
           wx.vibrateShort()
           wx.clearStorageSync()
           wx.showToast({
-            title: '缓存已清除'
+            title: '完成！'
           })
           console.log('已清除缓存')
         }
@@ -82,8 +82,7 @@ Page({
   callback(data) {
     if (data['openid'] != null) {
       wx.showToast({
-        title: '已获取登录信息！',
-        icon: 'none'
+        title: '完成！'
       })
       console.log('已获取登录信息：' + data['openid'])
       wx.setStorageSync('openId', data['openid'])

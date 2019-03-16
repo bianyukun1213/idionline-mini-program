@@ -105,6 +105,7 @@ Page({
   onDelete() {
     var that = this
     wx.showModal({
+      title:'警告',
       content: '您确定要删除这条成语吗？',
       confirmText: '删除',
       confirmColor: '#FF0000',

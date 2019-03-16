@@ -172,6 +172,7 @@ Page({
       }
     } else {
       wx.showModal({
+        title: '警告',
         content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
         showCancel: false,
         success(res) {
@@ -204,7 +205,7 @@ Page({
       if (openId == null || openId == '') {
         wx.showModal({
           title: '缺少登录信息',
-          content: '需要使用您的登录信息作为用户唯一标识，请去帮助页面获取登录信息！',
+          content: '需要使用您的登录信息作为用户唯一标识！请去“帮助”页面获取登录信息。',
           showCancel: false,
           success(res) {
             if (res.confirm) {

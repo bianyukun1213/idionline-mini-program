@@ -84,13 +84,9 @@ Page({
         exHandler: this.exHandler
       })
     }
-    // else if (reg2.test(e.detail)) {
-    //   this.data['searchBarValue'] = e.detail //同上。
-    //   call.get('idiom/index/' + e.detail, this.nav)
-    // } 
     else {
       wx.showToast({
-        title: '请您输入一个以上的汉字！',
+        title: '格式错误！',
         icon: 'none'
       })
       wx.vibrateLong()
@@ -102,7 +98,7 @@ Page({
     console.log('查询无结果：' + dt)
     wx.showModal({
       title: '查询无结果',
-      content: '无法找到您要查询的成语“' + dt + '”。您仍可使用“聚合数据”接口继续查询。但请注意，“聚合数据”接口每天只能调用100次，您应确保输入的信息真实有效以免浪费调用次数。是否继续查询？',
+      content: '未找到您要查询的成语“' + dt + '”。您仍可使用“聚合数据”接口继续查询。但请注意，“聚合数据”接口每天只能调用100次，您应确保输入的信息真实有效，以免浪费调用次数。您要继续查询吗？',
       confirmText: '继续查询',
       success(res) {
         if (res.confirm) {
