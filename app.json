@@ -8,6 +8,7 @@
     "pages/help/help",
     "pages/register_edi/register_edi",
     "pages/edit/edit",
+    "pages/edit_bson/edit_bson",
     "pages/correct/correct"
   ],
   "tabBar": {

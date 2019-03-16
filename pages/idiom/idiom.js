@@ -2,7 +2,6 @@ const call = require('../../tools/request.js')
 const format = require('../../tools/format.js')
 const color = require('../../tools/color.js')
 const inf = require('../../tools/inf.js')
-const guid = require('../../tools/guid.js')
 var innerAudioContext
 Page({
   data: {
@@ -139,17 +138,16 @@ Page({
   onEdit() {
     wx.vibrateShort()
     var openId = wx.getStorageSync('openId')
-    if (openId != null && openId != "") {
+    if (openId != null && openId != '') {
       var json = {
         'id': this.data['id'],
-        'name':this.data['name'],
         'openId': openId
       }
       var updates = []
       for (var k in this.data['defs']) {
         updates.push({
-          "source": this.data['defs'][k]['source'],
-          "text": this.data['defs'][k]['text']
+          'source': this.data['defs'][k]['source'],
+          'text': this.data['defs'][k]['text']
         })
       }
       json['updates'] = updates
@@ -188,11 +186,25 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      if (getApp().globalData['platform'] == 'QQ浏览器') {
-        console.log('由于QQ浏览器上接口的差异，暂时还不能使用朗读功能')
+      // if (getApp().globalData['platform'] == 'QQ浏览器') {
+      //   console.log('由于QQ浏览器上接口的差异，暂时还不能使用朗读功能')
+      //   wx.showModal({
+      //     title: '暂不支持朗读',
+      //     content: '在QQ浏览器上，由于文件下载接口的差异，暂时还不能使用朗读功能！',
+      //     showCancel: false,
+      //     success(res) {
+      //       if (res.confirm) {
+      //         wx.vibrateShort()
+      //       }
+      //     }
+      //   })
+      //   return
+      // }
+      var openId = wx.getStorageSync('openId')
+      if (openId == null || openId == '') {
         wx.showModal({
-          title: '暂不支持朗读',
-          content: '在QQ浏览器上，由于文件下载接口的差异，暂时还不能使用朗读功能！',
+          title: '缺少登录信息',
+          content: '需要使用您的登录信息作为用户唯一标识，请去帮助页面获取登录信息！',
           showCancel: false,
           success(res) {
             if (res.confirm) {
@@ -225,7 +237,7 @@ Page({
           })
           console.log('重获取Token')
         } else {
-          call.downloadTTSAudio(token, guid.checkGuid(), this.data['tTSText'], this.onPlay)
+          call.downloadTTSAudio(token, openId, this.data['tTSText'], this.onPlay)
           console.log('使用缓存Token')
         }
       } else {
@@ -237,7 +249,7 @@ Page({
   },
   tokenGot(data) {
     wx.setStorageSync('token', data['access_token'])
-    call.downloadTTSAudio(data['access_token'], guid.checkGuid(), this.data['tTSText'], this.onPlay)
+    call.downloadTTSAudio(data['access_token'], wx.getStorageSync('openId'), this.data['tTSText'], this.onPlay)
   },
   onPlay(src) {
     this.data['tTSSrc'][this.data['tTSCurrent']] = src

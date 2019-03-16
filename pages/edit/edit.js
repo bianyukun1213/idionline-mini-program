@@ -11,13 +11,10 @@ Page({
     color.apl()
     var json = JSON.parse(option.str)
     //更新页面。
+    this.data['id'] = json['id']
+    this.data['openId'] = json['openId']
     this.setData({
-      id: json['id'],
-      openId: json['openId'],
       updates: json['updates']
-    })
-    wx.setNavigationBarTitle({
-      title: json['name']
     })
     for (var k in json['updates']) {
       this.data['canBeRemoved'][k] = false
@@ -47,6 +44,18 @@ Page({
       canBeRemoved: tmpRm
     })
     console.log(this.data['updates'])
+  },
+  onBsonEdit(){
+    wx.vibrateShort()
+    console.log(this.data['id'])
+    var json = {
+      'id': this.data['id'],
+      'openId': this.data['openId']
+    }
+    var str = JSON.stringify(json)
+    wx.redirectTo({
+      url: '/pages/edit_bson/edit_bson?str=' + str
+    })
   },
   onDeleteItem(event) {
     wx.vibrateShort()
@@ -81,9 +90,11 @@ Page({
     }
     var dt = {
       'openId': this.data['openId'],
+      'bsonMode': false,
+      'bsonStr': null,
       'updates': tmp
     }
-    call.updateIdiom(this.data['id'], dt, this.done)
+    call.uniFunc('idiom/' + this.data['id'], 'PUT', dt, this.done)
   },
   done(data) {
     wx.showToast({
@@ -100,7 +111,7 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.vibrateShort()
-          call.deleteIdiom(that.data['id'], that.data['openId'], that.deleteDone)
+          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\'' + that.data['openId'] + '\'', that.deleteDone)
         }
       }
     })

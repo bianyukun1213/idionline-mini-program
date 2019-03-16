@@ -1,4 +1,5 @@
 const call = require('../../tools/request.js')
+const color = require('../../tools/color.js')
 Page({
   data: {
     name: '正在查询……',
@@ -13,6 +14,7 @@ Page({
     shareFlag: false
   },
   onLoad(option) {
+    color.apl()
     console.log('搜索成语：' + option.name)
     this.data['name'] = option.name
     call.get({

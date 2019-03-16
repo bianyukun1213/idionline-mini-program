@@ -1,4 +1,3 @@
-//网上抄的
 function get(args) {
   var url = args['url']
   var doSuccess = args['doSuccess']
@@ -73,81 +72,17 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
   })
 }
 
-function registerEditor(openId, nickName, doSuccess) {
+function uniFunc(url, method, dt, doSuccess) {
   wx.showLoading({
     title: '请稍候~',
     mask: true
   })
-  var url = 'https://idionline.picp.io/api/editor/register'
-  //var url = 'http://localhost:12601/api/editor/register'
-  console.log('注册为编辑者：' + url)
+  var urlNew = 'https://idionline.picp.io/api/' + url
+  console.log('进行操作：' + method + ' ' + url)
   wx.request({
-    url: url,
-    method: 'POST',
-    data: {
-      'openId': openId,
-      'nickName': nickName
-    },
-    success(res) {
-      wx.hideLoading()
-      if (res.statusCode == 200 && typeof doSuccess == 'function') {
-        console.log('查询到数据：', res.data)
-        doSuccess(res.data)
-      } else if (res.statusCode == 404) {
-        notFound()
-      } else {
-        fail(res.statusCode)
-      }
-    },
-    fail(err) {
-      wx.hideLoading()
-      fail(err.errMsg)
-    }
-  })
-}
-
-function updateIdiom(id, dt, doSuccess) {
-  wx.showLoading({
-    title: '请稍候~',
-    mask: true
-  })
-  var url = 'https://idionline.picp.io/api/idiom/' + id
-  //var url = 'http://localhost:12601/api/idiom/' + id
-  console.log('更新成语：' + url)
-  wx.request({
-    url: url,
-    method: 'PUT',
+    url: urlNew,
+    method: method,
     data: dt,
-    success(res) {
-      wx.hideLoading()
-      if (res.statusCode == 200 && typeof doSuccess == 'function') {
-        console.log('查询到数据：', res.data)
-        doSuccess(res.data)
-      } else if (res.statusCode == 404) {
-        notFound()
-      } else {
-        fail(res.statusCode)
-      }
-    },
-    fail(err) {
-      wx.hideLoading()
-      fail(err.errMsg)
-    }
-  })
-}
-
-function deleteIdiom(id, openId, doSuccess) {
-  wx.showLoading({
-    title: '请稍候~',
-    mask: true
-  })
-  var url = 'https://idionline.picp.io/api/idiom/' + id
-  //var url = 'http://localhost:12601/api/idiom/' + id
-  console.log('删除成语：' + url)
-  wx.request({
-    url: url,
-    method: 'DELETE',
-    data: '"' + openId + '"',
     success(res) {
       wx.hideLoading()
       if (res.statusCode == 200 && typeof doSuccess == 'function') {
@@ -193,6 +128,4 @@ function notFound(exHandler) {
 }
 module.exports.get = get
 module.exports.downloadTTSAudio = downloadTTSAudio
-module.exports.registerEditor = registerEditor
-module.exports.updateIdiom = updateIdiom
-module.exports.deleteIdiom = deleteIdiom
+module.exports.uniFunc = uniFunc

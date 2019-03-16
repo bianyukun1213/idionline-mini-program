@@ -1,11 +1,11 @@
 <view class="root">
   <van-cell-group wx:for="{{updates}}" wx:key="{{index}}">
-    <van-field id="{{index}}" wx:if="{{updates[index]!=undefined}}" type="textarea" placeholder="来源不能为空" value="{{updates[index]['source']}}" required clearable bind:change="onChangeSource" label="来源{{index+1}}" />
+    <van-field id="{{index}}" wx:if="{{updates[index]!=undefined}}" placeholder="来源不能为空" value="{{updates[index]['source']}}" required clearable bind:change="onChangeSource" label="来源{{index+1}}" />
     <van-field id="{{index}}" wx:if="{{updates[index]!=undefined}}" type="textarea" placeholder="释义文本不能为空" value="{{updates[index]['text']}}" autosize required clearable bind:change="onChangeText" label="释义{{index+1}}" />
     <van-button class="btn" id="{{index}}" wx:if="{{canBeRemoved[index]&&updates[index]!=undefined}}" type="danger" size="large" bind:tap="onDeleteItem">移除</van-button>
   </van-cell-group>
   <view class="function">
-    <van-button class="btn" type="primary" bind:tap="onAdd">新建</van-button>
+    <van-button class="btn" type="primary" bind:tap="onAdd" bind:longpress="onBsonEdit">新建</van-button>
     <van-button class="btn" type="primary" bind:tap="onSubmit">提交</van-button>
     <van-button class="btn" type="danger" bind:tap="onDelete">删除</van-button>
   </view>

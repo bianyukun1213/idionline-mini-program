@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+  color: red;
+}
+
+.btn {
+  align-self: center;
+  margin-top: 5px;
+}
