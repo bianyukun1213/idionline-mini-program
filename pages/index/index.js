@@ -78,6 +78,7 @@ Page({
       this.setData({
         showPopup:true
       })
+      wx.vibrateShort()
     }
   },
   //搜索事件。
