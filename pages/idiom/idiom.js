@@ -20,7 +20,7 @@ Page({
   },
   onLoad(option) {
     call.get({
-      url: 'idiom/' + option.id,
+      url: 'idiom/' + option['id'],
       doSuccess: this.fillData
     })
     inf.getLaunchInf(this.callback)
@@ -168,6 +168,7 @@ Page({
     if (this.data['shareFlag']) {
       return {
         title: '点击查看“' + this.data['name'] + '”的释义',
+        imageUrl: '/icons/share.png',
         path: '/pages/idiom/idiom?id=' + this.data['id']
       }
     } else {
@@ -182,6 +183,9 @@ Page({
         }
       })
       wx.vibrateShort()
+    }
+    return {
+      imageUrl: '/icons/share.png'
     }
   },
   onTTSTap(e) {

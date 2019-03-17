@@ -15,8 +15,8 @@ Page({
   },
   onLoad(option) {
     color.apl()
-    console.log('搜索成语：' + option.name)
-    this.data['name'] = option.name
+    console.log('搜索成语：' + option['name'])
+    this.data['name'] = option['name']
     call.get({
       url: 'word=' + option.name + '&key=59a83fe5879d3ca2ce0eef7183db90ad',
       doSuccess: this.fillData,
@@ -53,6 +53,7 @@ Page({
     if (this.data['shareFlag']) {
       return {
         title: '点击查看“' + this.data['name'] + '”的释义，内容来自聚合数据',
+        imageUrl: '/icons/share.png',
         path: '/pages/idiom_juhe/idiom?name=' + this.data['name']
       }
     } else {
@@ -67,6 +68,9 @@ Page({
         }
       })
       wx.vibrateShort()
+    }
+    return {
+      imageUrl: '/icons/share.png'
     }
   },
 })

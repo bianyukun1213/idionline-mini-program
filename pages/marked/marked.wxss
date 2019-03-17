@@ -4,9 +4,9 @@
 }
 
 .text {
+  font-size: 16px;
   display: flex;
   color: gray;
-  font-size: 16px;
   align-self: center;
   text-align: center;
 }
@@ -14,7 +14,7 @@
 .van-swipe-cell__right {
   display: inline-block;
   width: 65px;
-  height:44px;
+  height: 44px;
   font-size: 16px;
   line-height: 44px;
   color: white;

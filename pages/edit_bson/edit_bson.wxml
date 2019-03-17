@@ -2,6 +2,6 @@
   <van-cell-group>
     <van-field value="{{value}}" type="textarea" autosize required clearable bind:change="onChange" label="BSON文本" placeholder="BSON文本不能为空" />
   </van-cell-group>
-    <text class="text">如果您不了解BSON/JSON，请不要提交，以免造成严重后果！</text>
+  <text class="text">如果您不了解BSON/JSON，请不要提交修改，以免造成严重后果！</text>
   <van-button class="btn" type="primary" wx:if="{{show}}" bind:tap="onSubmit">提交</van-button>
 </view>

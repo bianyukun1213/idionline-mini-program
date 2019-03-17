@@ -8,7 +8,7 @@ Page({
   },
   onLoad(option) {
     color.apl()
-    var json = JSON.parse(option.str)
+    var json = JSON.parse(option['str'])
     this.data['id'] = json['id']
     this.data['name'] = json['name']
   },

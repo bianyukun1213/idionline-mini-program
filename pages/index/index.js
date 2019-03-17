@@ -1,4 +1,5 @@
 const call = require('../../tools/request.js')
+const format = require('../../tools/format.js')
 const color = require('../../tools/color.js')
 const inf = require('../../tools/inf.js')
 Page({
@@ -17,11 +18,15 @@ Page({
     showPopup: false,
     startY: null,
     currentY: null,
-    onTouch: false
+    onTouch: false,
+    show:false
   },
   //启动
   onLoad(query) {
     this.data['scene'] = decodeURIComponent(query.scene)
+    if(query['show']){
+      this.data['show']=true
+    }
     console.log('场景：' + this.data['scene'])
     inf.getLaunchInf(this.callback)
   },
@@ -69,6 +74,11 @@ Page({
         wx.vibrateShort()
       }
     }
+    if(this.data['show']){
+      this.setData({
+        showPopup:true
+      })
+    }
   },
   //搜索事件。
   onSearch(e) {
@@ -83,8 +93,7 @@ Page({
         doSuccess: this.nav,
         exHandler: this.exHandler
       })
-    }
-    else {
+    } else {
       wx.showToast({
         title: '格式错误！',
         icon: 'none'
@@ -174,4 +183,17 @@ Page({
   onTouchCancel(e) {
     this.data['onTouch'] = false
   },
+  onShareAppMessage() {
+    if (this.data['idiName']!=null){
+      var date = format.formatDate(getApp().globalData['launchInf']['dateUT'])
+      return {
+        title: date + '——'+this.data['idiName'],
+        imageUrl:'/icons/share.png',
+        path: '/pages/index/index?show=true'
+      }
+    }
+    return {
+      imageUrl: '/icons/share.png'
+    }
+  }
 })
