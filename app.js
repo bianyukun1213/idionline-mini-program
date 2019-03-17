@@ -1,6 +1,6 @@
 App({
   globalData: {
-    version: '1.0.22',
+    version: '1.0.22b',
     platform: '微信',
     launchInf: null
   },
