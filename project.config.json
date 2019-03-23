@@ -14,7 +14,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
+	"libVersion": "2.6.4",
 	"appid": "wx70c0fb94c40e2986",
 	"projectname": "Idionline",
 	"debugOptions": {

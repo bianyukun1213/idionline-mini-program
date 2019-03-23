@@ -46,7 +46,21 @@ Page({
       wx.setNavigationBarTitle({
         title: this.data['name']
       })
+      var dt = {
+        'openId': 'Idionline',
+        'name': this.data['name'],
+        'pinyin': this.data['pinyin'],
+        'source': '聚合数据',
+        'defText': this.data['chengyujs']
+      }
+      call.uniFunc('idiom/create/from_juhe', 'POST', dt, this.done)
     }
+  },
+  done(data) {
+    wx.showToast({
+      title: data,
+      icon: 'none'
+    })
   },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])
@@ -58,7 +72,7 @@ Page({
       }
     } else {
       wx.showModal({
-        title:'警告',
+        title: '警告',
         content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
         showCancel: false,
         success(res) {

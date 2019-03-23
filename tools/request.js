@@ -78,6 +78,7 @@ function uniFunc(url, method, dt, doSuccess) {
     mask: true
   })
   var urlNew = 'https://idionline.picp.io/api/' + url
+  //var urlNew = 'http://localhost:12601/api/' + url
   console.log('进行操作：' + method + ' ' + url)
   wx.request({
     url: urlNew,
