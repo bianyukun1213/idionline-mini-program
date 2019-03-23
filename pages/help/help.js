@@ -2,20 +2,26 @@ const call = require('../../tools/request.js')
 const color = require('../../tools/color.js')
 Page({
   data: {
-    version: null,
-    version_api: null,
-    platform: null,
+    version: '-',
+    version_api: '-',
+    platform: '-',
     systemInfo: null,
     activeName: '1'
   },
   onLoad() {
     color.apl()
+  },
+  onShow() {
     this.setData({
       version: getApp().globalData['version'],
-      version_api: getApp().globalData['launchInf']['version'],
       platform: getApp().globalData['platform'],
       systemInfo: wx.getSystemInfoSync()
     })
+    if (getApp().globalData['launchInf'] != null) {
+      this.setData({
+        version_api: getApp().globalData['launchInf']['version']
+      })
+    }
   },
   onChange(e) {
     this.setData({
@@ -86,6 +92,12 @@ Page({
       })
       console.log('已获取登录信息：' + data['openid'])
       wx.setStorageSync('openId', data['openid'])
+    } else {
+      wx.showToast({
+        title: '获取失败！',
+        icon: 'none'
+      })
+      console.log('登录信息获取失败')
     }
   }
 })
