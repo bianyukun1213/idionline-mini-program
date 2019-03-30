@@ -36,7 +36,7 @@ Page({
   onClean() {
     wx.showModal({
       title: '警告',
-      content: '您的登录信息与收藏数据都保存在缓存中，清除缓存将导致这些数据丢失。您确定要清除缓存吗？',
+      content: '您的收藏数据与OpenID等都保存在缓存中，清除缓存将导致这些数据丢失。您确定要清除缓存吗？',
       confirmText: '清除',
       confirmColor: '#FF0000',
       success(res) {
@@ -73,13 +73,23 @@ Page({
   onLogin() {
     wx.vibrateShort()
     var that = this
-    wx.login({
+    wx.showModal({
+      title: 'OpenID',
+      content: 'OpenID由数字与英文字母组成，仅用来识别您的身份，不包含您的隐私信息，您可放心使用！',
+      confirmText: '获取',
       success(res) {
-        console.log(res)
-        if (res.code) {
-          call.get({
-            url: 'editor/login/' + res.code,
-            doSuccess: that.callback
+        if (res.confirm) {
+          wx.vibrateShort()
+          wx.login({
+            success(res) {
+              console.log(res)
+              if (res.code) {
+                call.get({
+                  url: 'editor/login/' + res.code,
+                  doSuccess: that.callback
+                })
+              }
+            }
           })
         }
       }
@@ -90,14 +100,14 @@ Page({
       wx.showToast({
         title: '完成！'
       })
-      console.log('已获取登录信息：' + data['openid'])
+      console.log('已获取OpenID：' + data['openid'])
       wx.setStorageSync('openId', data['openid'])
     } else {
       wx.showToast({
         title: '获取失败！',
         icon: 'none'
       })
-      console.log('登录信息获取失败')
+      console.log('OpenID获取失败')
     }
   }
 })

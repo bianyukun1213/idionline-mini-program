@@ -157,7 +157,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '缺少登录信息！',
+        title: '缺少OpenID！',
         icon: 'none'
       })
       wx.vibrateLong()
@@ -208,8 +208,8 @@ Page({
       var openId = wx.getStorageSync('openId')
       if (openId == null || openId == '') {
         wx.showModal({
-          title: '缺少登录信息',
-          content: '需要使用您的登录信息作为用户唯一标识！请去“帮助”页面获取登录信息。',
+          title: '缺少OpenID',
+          content: '需要使用您的OpenID作为用户唯一标识！请去“帮助”页面获取OpenID。',
           showCancel: false,
           success(res) {
             if (res.confirm) {
