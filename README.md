@@ -1,5 +1,7 @@
 # idionline_miniprog
-idionline的微信小程序
+成语在线微信小程序
+
+![成语在线](http://67.209.185.96/Idionline.jpg)
 
 使用到的技术&资源：
 
