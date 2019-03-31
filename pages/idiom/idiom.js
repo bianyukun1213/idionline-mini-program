@@ -209,7 +209,7 @@ Page({
       if (openId == null || openId == '') {
         wx.showModal({
           title: '缺少OpenID',
-          content: '需要使用您的OpenID作为用户唯一标识！请去“帮助”页面获取OpenID。',
+          content: '您需要提供OpenID才能使用朗读功能，请去“帮助”页面获取OpenID。',
           showCancel: false,
           success(res) {
             if (res.confirm) {
