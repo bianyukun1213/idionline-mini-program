@@ -6,9 +6,10 @@
     wx:for="{{ list }}"
     wx:key="index"
     class="van-rate__item"
+    custom-class="icon-class"
     size="{{ size }}px"
     data-index="{{ index }}"
-    name="{{ item ? 'star' : 'star-o' }}"
+    name="{{ item ? icon : voidIcon }}"
     color="{{ disabled ? disabledColor : item ? color : voidColor }}"
     bind:click="onSelect"
   />

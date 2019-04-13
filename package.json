@@ -1,0 +1,15 @@
+{
+  "name": "idionline",
+  "version": "1.0.27b",
+  "description": "成语在线微信小程序",
+  "main": "app.js",
+  "dependencies": {
+    "vant-weapp": "^0.5.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bianyukun1213",
+  "license": "ISC"
+}
