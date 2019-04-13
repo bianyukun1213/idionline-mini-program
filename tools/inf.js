@@ -7,7 +7,7 @@ function getLaunchInf(callback) {
     callb = callback
     console.log('开始请求启动信息')
     call.get({
-      url: 'launchinf/' + format.getUnixTimestamp(true),
+      url: 'launchinf/' + format.getUnixTimestamp(),
       doSuccess: applyData
     })
   } else {

@@ -232,7 +232,7 @@ Page({
         this.data['tTSText'] = tTSText
         var token = wx.getStorageSync('token')
         var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
-        var currentUT = format.getUnixTimestamp(false)
+        var currentUT = format.getUnixTimestamp()
         console.log('当前时间戳：' + currentUT)
         console.log('Token时间戳：' + tokenUT)
         if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
