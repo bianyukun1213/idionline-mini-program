@@ -36,7 +36,7 @@ Page({
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
-        if (reg.test(res.data) && res.data.length > 1 && res.data.length <= 12) {
+        if (reg.test(res.data) && res.data.length > 1 && res.data.length <= 12 && res.data != that.data['searchBarValue']) {
           that.setData({
             value: res.data
           })
