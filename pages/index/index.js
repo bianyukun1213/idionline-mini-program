@@ -13,6 +13,7 @@ Page({
     launchInf: null,
     placeHolder: '请输入您要查询的成语',
     value: null,
+    historyValue: [],
     logoUrl: '../../icons/idionline.svg',
     disableAds: false,
     searchBarValue: null,
@@ -32,11 +33,12 @@ Page({
     inf.getLaunchInf(this.callback)
   },
   onShow() {
-    var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
+    var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
-        if (reg.test(res.data) && res.data.length > 1 && res.data.length <= 12 && res.data != that.data['searchBarValue']) {
+        if (reg.test(res.data) && that.data['historyValue'].indexOf(res.data) == -1) {
+          //搜索历史里有的成语不再填充。
           that.setData({
             value: res.data
           })
@@ -106,6 +108,10 @@ Page({
     //var reg2 = new RegExp('^[A-Za-z]$')
     if (reg.test(e.detail) && e.detail.length > 1 && e.detail.length <= 12) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
+      if (this.data['historyValue'].indexOf(e.detail) == -1) { //搜索历史里没有该项则添加。
+        this.data['historyValue'].push(e.detail)
+      }
+      console.log('搜索历史：', this.data['historyValue'])
       call.get({
         url: 'idiom/search/' + e.detail,
         doSuccess: this.nav,
