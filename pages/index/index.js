@@ -36,9 +36,9 @@ Page({
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
-        if (reg.test(res.data) && res.data.length > 1) {
+        if (reg.test(res.data) && res.data.length > 1 && res.data.length <= 12) {
           that.setData({
-            value: res.data.substring(0, 12) //取前12个字。
+            value: res.data
           })
           wx.showToast({
             title: '已自动填充！'
@@ -104,7 +104,7 @@ Page({
     //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
     //var reg2 = new RegExp('^[A-Za-z]$')
-    if (reg.test(e.detail) && e.detail.length > 1) {
+    if (reg.test(e.detail) && e.detail.length > 1 && res.data.length <= 12) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get({
         url: 'idiom/search/' + e.detail,
