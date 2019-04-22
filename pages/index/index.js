@@ -12,6 +12,7 @@ Page({
     defs: null,
     launchInf: null,
     placeHolder: '请输入您要查询的成语',
+    value: null,
     logoUrl: '../../icons/idionline.svg',
     disableAds: false,
     searchBarValue: null,
@@ -19,16 +20,32 @@ Page({
     startY: null,
     currentY: null,
     onTouch: false,
-    show:false
+    show: false
   },
   //启动
   onLoad(query) {
     this.data['scene'] = decodeURIComponent(query.scene)
-    if(query['show']){
-      this.data['show']=true
+    if (query['show']) {
+      this.data['show'] = true
     }
     console.log('场景：' + this.data['scene'])
     inf.getLaunchInf(this.callback)
+  },
+  onShow() {
+    var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
+    var that = this
+    wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
+      success(res) {
+        if (reg.test(res.data) && res.data.length > 1) {
+          that.setData({
+            value: res.data.substring(0, 12) //取前12个字。
+          })
+          wx.showToast({
+            title: '已自动填充！'
+          })
+        }
+      }
+    })
   },
   //获取启动信息的回调函数。
   callback() {
@@ -74,9 +91,9 @@ Page({
         wx.vibrateShort()
       }
     }
-    if(this.data['show']){
+    if (this.data['show']) {
       this.setData({
-        showPopup:true
+        showPopup: true
       })
       wx.vibrateShort()
     }
@@ -185,11 +202,11 @@ Page({
     this.data['onTouch'] = false
   },
   onShareAppMessage() {
-    if (this.data['idiName']!=null){
+    if (this.data['idiName'] != null) {
       var date = format.formatDate(getApp().globalData['launchInf']['dateUT'])
       return {
-        title: date + '——'+this.data['idiName'],
-        imageUrl:'/icons/share.png',
+        title: date + '——' + this.data['idiName'],
+        imageUrl: '/icons/share.png',
         path: '/pages/index/index?show=true'
       }
     }
