@@ -15,7 +15,7 @@ Page({
     this.setData({
       version: getApp().globalData['version'],
       platform: getApp().globalData['platform'],
-      systemInfo: wx.getSystemInfoSync()
+      systemInfo: JSON.stringify(wx.getSystemInfoSync(),null,'\t')
     })
     if (getApp().globalData['launchInf'] != null) {
       this.setData({
@@ -73,7 +73,7 @@ Page({
   onCopyInfo() {
     wx.vibrateShort()
     wx.setClipboardData({
-      data: '小程序平台：' + this.data['platform'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['version_api'] + '\n设备参数：' + JSON.stringify(this.data['systemInfo']),
+      data: '小程序平台：' + this.data['platform'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['version_api'] + '\n设备参数：\n' + this.data['systemInfo'],
       success(res) {
         console.log('已复制设备参数到剪贴板')
       }
