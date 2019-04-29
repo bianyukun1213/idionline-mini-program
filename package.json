@@ -1,6 +1,6 @@
 {
   "name": "idionline",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "成语在线微信小程序",
   "main": "app.js",
   "dependencies": {

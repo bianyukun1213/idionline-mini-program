@@ -61,12 +61,21 @@ Page({
       }
     })
   },
-  onCopy_blog() {
+  onCopyBlog() {
     wx.vibrateShort()
     wx.setClipboardData({
       data: 'https://bianyukun1213.github.io',
       success(res) {
         console.log('已复制博客链接到剪贴板')
+      }
+    })
+  },
+  onCopyInfo() {
+    wx.vibrateShort()
+    wx.setClipboardData({
+      data: '小程序平台：' + this.data['platform'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['version_api'] + '\n设备参数：' + JSON.stringify(this.data['systemInfo']),
+      success(res) {
+        console.log('已复制设备参数到剪贴板')
       }
     })
   },

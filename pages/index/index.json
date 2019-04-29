@@ -5,7 +5,6 @@
     "van-panel": "/miniprogram_npm/vant-weapp/panel/index",
     "van-tag": "/miniprogram_npm/vant-weapp/tag/index",
     "van-popup": "/miniprogram_npm/vant-weapp/popup/index",
-    "van-button": "/miniprogram_npm/vant-weapp/button/index",
     "van-row": "/miniprogram_npm/vant-weapp/row/index",
     "van-col": "/miniprogram_npm/vant-weapp/col/index"
   },

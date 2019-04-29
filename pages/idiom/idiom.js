@@ -119,6 +119,7 @@ Page({
   },
   doneSolitaire(data) {
     wx.showModal({
+      title: '成语接龙',
       content: data + '（仅供参考）',
       confirmText: '复制',
       success(res) {
