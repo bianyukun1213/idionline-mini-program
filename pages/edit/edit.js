@@ -45,7 +45,7 @@ Page({
     })
     console.log(this.data['updates'])
   },
-  onBsonEdit(){
+  onBsonEdit() {
     wx.vibrateShort()
     console.log(this.data['id'])
     var json = {
@@ -89,7 +89,7 @@ Page({
       }
     }
     var dt = {
-      'openId': this.data['openId'],
+      'openId': getApp().globalData['platStr'] + '_' + this.data['openId'],
       'bsonMode': false,
       'bsonStr': null,
       'updates': tmp
@@ -105,7 +105,7 @@ Page({
   onDelete() {
     var that = this
     wx.showModal({
-      title:'警告',
+      title: '警告',
       content: '您确定要删除这条成语吗？',
       confirmText: '删除',
       confirmColor: '#FF0000',

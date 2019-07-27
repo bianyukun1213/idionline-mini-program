@@ -26,7 +26,9 @@
       现在还没有广告。ヾ(•ω•`)o
     </van-collapse-item>
     <van-collapse-item title="参数与功能" name="8">
-      <text style="color:green;">小程序平台：{{platform}}\n小程序版本：{{version}}\nWeb API版本：{{version_api}}\n</text>
+      <text style="color:green;" wx:if="{{platStr=='WeChat'}}">小程序平台：微信\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
+      <text style="color:dodgerblue;" wx:elif="{{platStr=='QQ'}}">小程序平台：QQ\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
+      <text style="color:dodgerblue;" wx:else>小程序平台：QQ浏览器\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
       <text>设备参数：\n{{systemInfo}}</text>
       <view class="function">
         <van-button class="btn" size="large" type="primary" bind:tap="onCopyInfo">复制参数</van-button>

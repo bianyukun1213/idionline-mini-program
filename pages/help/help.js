@@ -3,8 +3,8 @@ const color = require('../../tools/color.js')
 Page({
   data: {
     version: '-',
-    version_api: '-',
-    platform: '-',
+    apiVer: '-',
+    platStr: '-',
     systemInfo: null,
     activeName: '1'
   },
@@ -14,12 +14,12 @@ Page({
   onShow() {
     this.setData({
       version: getApp().globalData['version'],
-      platform: getApp().globalData['platform'],
-      systemInfo: JSON.stringify(wx.getSystemInfoSync(),null,'\t')
+      platStr: getApp().globalData['platStr'],
+      systemInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t')
     })
     if (getApp().globalData['launchInf'] != null) {
       this.setData({
-        version_api: getApp().globalData['launchInf']['version']
+        apiVer: getApp().globalData['launchInf']['version']
       })
     }
   },
@@ -94,7 +94,7 @@ Page({
               console.log(res)
               if (res.code) {
                 call.get({
-                  url: 'editor/login/' + res.code,
+                  url: 'editor/login/' + getApp().globalData['platStr'] + '/' + res.code,
                   doSuccess: that.callback
                 })
               }

@@ -5,7 +5,7 @@ Page({
     nickName: null,
     show: false
   },
-  onLoad(){
+  onLoad() {
     color.apl()
   },
   onRegister() {
@@ -17,6 +17,7 @@ Page({
         if (res.code) {
           call.uniFunc('editor/register', 'POST', {
             'code': res.code,
+            'platStr': getApp().globalData['platStr'],
             'nickName': that.data['nickName']
           }, that.callback)
         }

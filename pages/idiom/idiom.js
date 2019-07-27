@@ -26,11 +26,12 @@ Page({
     inf.getLaunchInf(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onError(function callback(errCode) {
-      console.log('音频播放错误：' + errCode)
+      console.log('音频播放错误：', errCode)
       wx.showToast({
         title: '音频播放出错！',
         icon: 'none'
       })
+      innerAudioContext.stop()
     })
   },
   onUnload(e) {
@@ -192,20 +193,20 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      // if (getApp().globalData['platform'] == 'QQ浏览器') {
-      //   console.log('由于QQ浏览器上接口的差异，暂时还不能使用朗读功能')
-      //   wx.showModal({
-      //     title: '暂不支持朗读',
-      //     content: '在QQ浏览器上，由于文件下载接口的差异，暂时还不能使用朗读功能！',
-      //     showCancel: false,
-      //     success(res) {
-      //       if (res.confirm) {
-      //         wx.vibrateShort()
-      //       }
-      //     }
-      //   })
-      //   return
-      // }
+      if (getApp().globalData['platStr'] != 'WeChat') {
+        console.log('由于接口的差异，暂时还不能使用朗读功能')
+        wx.showModal({
+          title: '暂不支持朗读',
+          content: '在微信以外的平台上，由于文件下载接口的差异，暂时还不能使用朗读功能，请等待官方完善接口。',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              wx.vibrateShort()
+            }
+          }
+        })
+        return
+      }
       var openId = wx.getStorageSync('openId')
       if (openId == null || openId == '') {
         wx.showModal({

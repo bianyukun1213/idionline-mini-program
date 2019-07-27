@@ -54,11 +54,8 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
       wx.hideLoading()
       if (res.statusCode === 200 && typeof doSuccess == 'function') {
         console.log('下载文件：' + res.tempFilePath)
-        if (res.tempFilePath.slice(-3) == 'mp3') {
-          doSuccess(res.tempFilePath)
-        } else {
-          fail('文件格式错误')
-        }
+        //这里不必校验文件格式，播放时会自动校验。
+        doSuccess(res.tempFilePath)
       } else if (res.statusCode == 404) {
         notFound()
       } else {

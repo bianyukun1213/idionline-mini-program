@@ -1,17 +1,17 @@
 App({
   globalData: {
-    version: '1.0.31',
-    platform: '微信',
+    version: '1.0.32',
+    platStr: 'WeChat',
     launchInf: null
   },
   onLaunch() {
     var info = wx.getSystemInfoSync()
     console.log('已启动', info)
     if (info['isQB']) {
-      this.globalData['platform'] = 'QQ浏览器'
+      this.globalData['platStr'] = 'QB'
     } else if (info['AppPlatform'] == 'qq') {
-      this.globalData['platform'] = 'QQ'
+      this.globalData['platStr'] = 'QQ'
     }
-    console.log('平台：' + this.globalData['platform'])
+    console.log('平台：' + this.globalData['platStr'])
   }
 })
