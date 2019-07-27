@@ -1,5 +1,5 @@
 # idionline_miniprog
-成语在线微信小程序
+成语在线微信/QQ小程序
 
 ![成语在线](http://67.209.185.96/Idionline.jpg)
 
