@@ -72,8 +72,16 @@ Page({
   },
   onCopyInfo() {
     wx.vibrateShort()
+    var tmpStr = this.data['platStr']
+    if (this.data['platStr'] == 'WeChat') {
+      tmpStr = '微信'
+    } else if (this.data['platStr'] == 'QQ') {
+      tmpStr = 'QQ'
+    } else if (this.data['platStr'] == 'QB') {
+      tmpStr = 'QQ浏览器'
+    }
     wx.setClipboardData({
-      data: '小程序平台：' + this.data['platform'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['version_api'] + '\n设备参数：\n' + this.data['systemInfo'],
+      data: '小程序平台：' + tmpStr + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['apiVer'] + '\n设备参数：\n' + this.data['systemInfo'],
       success(res) {
         console.log('已复制设备参数到剪贴板')
       }

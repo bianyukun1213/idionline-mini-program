@@ -1,6 +1,6 @@
 App({
   globalData: {
-    version: '1.0.32',
+    version: '1.0.32b',
     platStr: 'WeChat',
     launchInf: null
   },
