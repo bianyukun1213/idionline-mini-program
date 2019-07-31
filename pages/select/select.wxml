@@ -1,5 +1,12 @@
 <view class="root">
-  <van-cell-group wx:for="{{idioms}}" wx:key="{{index}}">
-  <van-cell title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" link-type="redirectTo"/>
+  <van-cell-group wx:for="{{idioms2Disp}}" wx:key="{{index}}">
+    <van-cell-group wx:for="{{idioms2Disp[index]}}" wx:key="{{index}}">
+      <van-cell title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" link-type="redirectTo" />
+    </van-cell-group>
   </van-cell-group>
+  <view class="con">
+    <van-button wx:if="{{showPrev}}" class="btn" type="primary" bind:tap="onPrev">上一页</van-button>
+    <Text class="text">{{page+1}}/{{tmp.length}}</Text>
+    <van-button wx:if="{{showNext}}" class="btn" type="primary" bind:tap="onNext">下一页</van-button>
+  </view>
 </view>

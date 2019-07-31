@@ -1,6 +1,6 @@
 App({
   globalData: {
-    version: '1.0.32b',
+    version: '1.0.33',
     platStr: 'WeChat',
     launchInf: null
   },
@@ -13,5 +13,6 @@ App({
       this.globalData['platStr'] = 'QQ'
     }
     console.log('平台：' + this.globalData['platStr'])
+    console.log('版本：' + this.globalData['version'])
   }
 })

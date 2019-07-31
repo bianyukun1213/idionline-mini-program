@@ -112,7 +112,7 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.vibrateShort()
-          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\'' + that.data['openId'] + '\'', that.deleteDone)
+          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\'' + getApp().globalData['platStr'] + '_' + that.data['openId'] + '\'', that.deleteDone)
         }
       }
     })
