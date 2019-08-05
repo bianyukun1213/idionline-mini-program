@@ -1,6 +1,6 @@
 <view class="root">
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
-  <van-search shape="round" input-align="center" value="{{value}}" maxlength="12" placeholder="{{placeHolder}}" bind:search="onSearch" />
+  <van-search shape="round" input-align="center" value="{{value}}" maxlength="24" placeholder="{{placeHolder}}" bind:search="onSearch" />
   <image class="logo" src="{{logoUrl}}" mode="aspectFit" />
   <van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onClose">
     <van-panel class="panel" title="{{idiName}}{{pinyin}}">
@@ -30,7 +30,7 @@
               </block>
             </van-col>
           </van-row>
-          <view class="divLine" style="background:{{tagColor}};" />
+          <view class="divLine" wx:if="{{index<defs.length-1}}" style="background:{{tagColor}};" />
         </view>
       </view>
     </van-panel>

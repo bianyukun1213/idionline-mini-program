@@ -38,7 +38,7 @@ Page({
   onSubmit() {
     wx.vibrateShort()
     var dt = {
-      'openId': getApp().globalData['platStr'] + '_' + this.data['openId'],
+      'openId': getApp().globalData['platform']['tag'] + '_' + this.data['openId'],
       'bsonMode': true,
       'bsonStr': this.data['value'],
       'updates': null

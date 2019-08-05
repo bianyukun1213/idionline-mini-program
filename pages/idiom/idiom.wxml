@@ -31,7 +31,7 @@
             </block>
           </van-col>
         </van-row>
-        <view class="divLine" style="background:{{tagColor}};" />
+        <view class="divLine" wx:if="{{index<defs.length-1}}" style="background:{{tagColor}};" />
       </view>
     </view>
     <view class="footer" slot="footer">

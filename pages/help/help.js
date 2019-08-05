@@ -14,7 +14,7 @@ Page({
   onShow() {
     this.setData({
       version: getApp().globalData['version'],
-      platStr: getApp().globalData['platStr'],
+      platStr: getApp().globalData['platform']['str'],
       systemInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t')
     })
     if (getApp().globalData['launchInf'] != null) {
@@ -72,16 +72,8 @@ Page({
   },
   onCopyInfo() {
     wx.vibrateShort()
-    var tmpStr = this.data['platStr']
-    if (this.data['platStr'] == 'WeChat') {
-      tmpStr = '微信'
-    } else if (this.data['platStr'] == 'QQ') {
-      tmpStr = 'QQ'
-    } else if (this.data['platStr'] == 'QB') {
-      tmpStr = 'QQ浏览器'
-    }
     wx.setClipboardData({
-      data: '小程序平台：' + tmpStr + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['apiVer'] + '\n设备参数：\n' + this.data['systemInfo'],
+      data: '小程序平台：' + this.data['platStr'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['apiVer'] + '\n设备参数：\n' + this.data['systemInfo'],
       success(res) {
         console.log('已复制设备参数到剪贴板')
       }
@@ -102,7 +94,7 @@ Page({
               console.log(res)
               if (res.code) {
                 call.get({
-                  url: 'editor/login/' + getApp().globalData['platStr'] + '/' + res.code,
+                  url: 'editor/login/' + getApp().globalData['platform']['tag'] + '/' + res.code,
                   doSuccess: that.callback
                 })
               }

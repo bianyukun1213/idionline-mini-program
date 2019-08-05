@@ -17,7 +17,7 @@ Page({
         if (res.code) {
           call.uniFunc('editor/register', 'POST', {
             'code': res.code,
-            'platStr': getApp().globalData['platStr'],
+            'platTag': getApp().globalData['platform']['tag'],
             'nickName': that.data['nickName']
           }, that.callback)
         }

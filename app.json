@@ -41,5 +41,6 @@
     "navigationBarBackgroundColor": "#008080",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "成语在线"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

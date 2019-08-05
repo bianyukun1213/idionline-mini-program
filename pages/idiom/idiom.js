@@ -193,7 +193,7 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      if (getApp().globalData['platStr'] != 'WeChat') {
+      if (getApp().globalData['platform']['tag'] != 'WeChat') {
         console.log('由于接口的差异，暂时还不能使用朗读功能')
         wx.showModal({
           title: '暂不支持朗读',

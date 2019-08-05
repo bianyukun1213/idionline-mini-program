@@ -21,7 +21,8 @@ Page({
     startY: null,
     currentY: null,
     onTouch: false,
-    show: false
+    show: false,
+    idMode: false
   },
   //启动
   onLoad(query) {
@@ -105,9 +106,11 @@ Page({
   //搜索事件。
   onSearch(e) {
     wx.vibrateShort()
+    this.data['idMode'] = false
     //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
-    var reg2 = new RegExp('^[A-Za-z]$')
+    var reg2 = new RegExp('^[0-9a-zA-Z]{24}')
+    var reg3 = new RegExp('^[A-Za-z]$')
     if (reg.test(e.detail) && e.detail.length > 1 && e.detail.length <= 12) {
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get({
@@ -116,6 +119,14 @@ Page({
         exHandler: this.exHandler
       })
     } else if (reg2.exec(e.detail)) {
+      this.data['idMode'] = true
+      this.data['searchBarValue'] = e.detail //同上。
+      call.get({
+        url: 'idiom/search/id/' + e.detail,
+        doSuccess: this.nav,
+        exHandler: this.exHandler
+      })
+    } else if (reg3.exec(e.detail)) {
       this.data['searchBarValue'] = e.detail //同上。
       call.get({
         url: 'idiom/index/' + e.detail,
@@ -133,20 +144,28 @@ Page({
   exHandler() {
     var dt = this.data['searchBarValue']
     console.log('查询无结果：' + dt)
-    wx.showModal({
-      title: '查询无结果',
-      content: '未找到您要查询的成语“' + dt + '”。您仍可使用“聚合数据”接口继续查询。但请注意，“聚合数据”接口每天只能调用100次，您应确保输入的成语名称完整无误，以免浪费调用次数。您要继续查询吗？',
-      confirmText: '继续查询',
-      success(res) {
-        if (res.confirm) {
-          wx.vibrateShort()
-          wx.navigateTo({
-            url: '/pages/idiom_juhe/idiom?name=' + dt
-          })
+    if (this.data['idMode']) {
+      wx.showToast({
+        title: '查询无结果！',
+        icon: 'none'
+      })
+      wx.vibrateLong()
+    } else {
+      wx.showModal({
+        title: '查询无结果',
+        content: '未找到您要查询的成语“' + dt + '”。您仍可使用“聚合数据”接口继续查询。但请注意，“聚合数据”接口每天只能调用100次，您应确保输入的成语名称完整无误，以免浪费调用次数。您要继续查询吗？',
+        confirmText: '继续查询',
+        success(res) {
+          if (res.confirm) {
+            wx.vibrateShort()
+            wx.navigateTo({
+              url: '/pages/idiom_juhe/idiom?name=' + dt
+            })
+          }
         }
-      }
-    })
-    wx.vibrateShort()
+      })
+      wx.vibrateShort()
+    }
   },
   nav(data) {
     //获取key，其实就是第一个的key。
@@ -154,7 +173,7 @@ Page({
     for (var key in data) {
       k = key
     }
-    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['searchBarValue'] == '试试手气')) {
+    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['searchBarValue'] == '试试手气' || this.data['idMode'])) {
       wx.navigateTo({
         url: '/pages/idiom/idiom?id=' + k
       })
