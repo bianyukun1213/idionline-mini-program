@@ -1,12 +1,16 @@
 App({
   globalData: {
+    dbgMode: false,
     version: '1.34.0',
-    platform: {'tag':'WeChat','str':'微信'},
+    platform: {
+      'tag': 'WeChat',
+      'str': '微信'
+    },
     launchInf: null
   },
   onLaunch() {
     var info = wx.getSystemInfoSync()
-    console.log('已启动', info)
+    console.log('已启动：', info)
     if (info['isQB']) {
       this.globalData['platform']['tag'] = 'QB'
       this.globalData['platform']['str'] = 'QQ浏览器'

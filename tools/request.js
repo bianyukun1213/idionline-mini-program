@@ -10,8 +10,11 @@ function get(args) {
   } else if (type == 'Juhe') {
     urlBase = 'https://v.juhe.cn/chengyu/query?'
   } else {
-    urlBase = 'https://idionline.picp.io/api/'
-    //urlBase = 'http://localhost:12601/api/'
+    if (getApp().globalData['dbgMode']) {
+      urlBase = 'http://localhost:12601/api/'
+    } else {
+      urlBase = 'https://idionline.picp.io/api/'
+    }
   }
   if (url == undefined) {
     url = ''
@@ -74,8 +77,12 @@ function uniFunc(url, method, dt, doSuccess) {
     title: '请稍候~',
     mask: true
   })
-  var urlNew = 'https://idionline.picp.io/api/' + url
-  //var urlNew = 'http://localhost:12601/api/' + url
+  var urlNew
+  if (getApp().globalData['dbgMode']) {
+    urlNew = 'http://localhost:12601/api/' + url
+  } else {
+    urlNew = 'https://idionline.picp.io/api/' + url
+  }
   console.log('进行操作：' + method + ' ' + url)
   wx.request({
     url: urlNew,
