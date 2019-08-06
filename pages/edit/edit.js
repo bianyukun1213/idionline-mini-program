@@ -89,7 +89,7 @@ Page({
       }
     }
     var dt = {
-      'openId': getApp().globalData['platform']['tag'] + '_' + this.data['openId'],
+      'openId': this.data['openId'],
       'bsonMode': false,
       'bsonStr': null,
       'updates': tmp
@@ -112,7 +112,7 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.vibrateShort()
-          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\'' + getApp().globalData['platform']['tag'] + '_' + that.data['openId'] + '\'', that.deleteDone)
+          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\'' + that.data['openId'] + '\'', that.deleteDone)
         }
       }
     })

@@ -109,8 +109,8 @@ Page({
       wx.showToast({
         title: '完成！'
       })
-      console.log('已获取OpenID：' + data['openid'])
-      wx.setStorageSync('openId', data['openid'])
+      console.log('已获取OpenID：' + getApp().globalData['platform']['tag'] + '_' + data['openid'])
+      wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data['openid'])
     } else {
       wx.showToast({
         title: '获取失败！',

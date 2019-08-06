@@ -13,7 +13,7 @@ Page({
     this.data['id'] = json['id']
     this.data['openId'] = json['openId'],
       call.get({
-        url: 'idiom/' + this.data['id'] + '/bson',
+        url: 'idiom/' + this.data['id'] + '/bson/' + this.data['openId'],
         doSuccess: this.callback
       })
   },
@@ -38,7 +38,7 @@ Page({
   onSubmit() {
     wx.vibrateShort()
     var dt = {
-      'openId': getApp().globalData['platform']['tag'] + '_' + this.data['openId'],
+      'openId': this.data['openId'],
       'bsonMode': true,
       'bsonStr': this.data['value'],
       'updates': null

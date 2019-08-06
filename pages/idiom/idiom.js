@@ -16,11 +16,13 @@ Page({
     tTSText: null, //对应释义的文本。
     tTSCurrent: null,
     tTSSrc: {},
-    shareFlag: false
+    shareFlag: false,
+    openId: null
   },
   onLoad(option) {
+    this.data['openId'] = wx.getStorageSync('openId')
     call.get({
-      url: 'idiom/' + option['id'],
+      url: 'idiom/' + option['id'] + '/' + this.data['openId'],
       doSuccess: this.fillData
     })
     inf.getLaunchInf(this.callback)
@@ -139,11 +141,10 @@ Page({
   },
   onEdit() {
     wx.vibrateShort()
-    var openId = wx.getStorageSync('openId')
-    if (openId != null && openId != '') {
+    if (this.data['openId'] != null && this.data['openId'] != '') {
       var json = {
         'id': this.data['id'],
-        'openId': openId
+        'openId': this.data['openId']
       }
       var updates = []
       for (var k in this.data['defs']) {
@@ -207,8 +208,7 @@ Page({
         })
         return
       }
-      var openId = wx.getStorageSync('openId')
-      if (openId == null || openId == '') {
+      if (this.data['openId'] == null || this.data['openId'] == '') {
         wx.showModal({
           title: '缺少OpenID',
           content: '您需要提供OpenID才能使用朗读功能，请去“帮助”页面获取OpenID。',
@@ -244,7 +244,7 @@ Page({
           })
           console.log('重获取Token')
         } else {
-          call.downloadTTSAudio(token, openId, this.data['tTSText'], this.onPlay)
+          call.downloadTTSAudio(token, this.data['openId'], this.data['tTSText'], this.onPlay)
           console.log('使用缓存Token')
         }
       } else {
@@ -256,7 +256,7 @@ Page({
   },
   tokenGot(data) {
     wx.setStorageSync('token', data['access_token'])
-    call.downloadTTSAudio(data['access_token'], wx.getStorageSync('openId'), this.data['tTSText'], this.onPlay)
+    call.downloadTTSAudio(data['access_token'], this.data['openId'], this.data['tTSText'], this.onPlay)
   },
   onPlay(src) {
     this.data['tTSSrc'][this.data['tTSCurrent']] = src
