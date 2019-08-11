@@ -43,5 +43,6 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "成语在线"
   },
+  "resizable": true,
   "sitemapLocation": "sitemap.json"
 }

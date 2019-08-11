@@ -35,6 +35,7 @@ Page({
   },
   onShow() {
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
+    var regS = new RegExp('【[\u4e00-\u9fa5]{4}】')//小冰成语接龙。
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
@@ -48,8 +49,30 @@ Page({
           wx.showToast({
             title: '已自动填充！'
           })
+        } else if (regS.test(res.data)) {
+          wx.vibrateShort()
+          call.get({
+            url: 'idiom/solitaire/' + regS.exec(res.data)[0].replace('【', '').replace('】', ''),
+            doSuccess: that.doneSolitaire,
+            exHandler: that.exHandlerS
+          })
         }
       }
+    })
+  },
+  doneSolitaire(data) {
+    wx.setClipboardData({
+      data: data,
+      success(res) {
+        console.log('已复制成语接龙返回数据到剪贴板：' + data)
+      }
+    })
+    wx.vibrateShort()
+  },
+  exHandlerS() {
+    wx.showToast({
+      title: '未找到可接龙成语！',
+      icon: 'none'
     })
   },
   //获取启动信息的回调函数。
