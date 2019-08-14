@@ -4,7 +4,7 @@
       <view class="root">
         <image class="img" src="../../icons/idionline&kun.svg" mode="aspectFit" bind:tap="onCopyBlog" />
         <text class="text">成语在线\n小程序与Web API\n由“仿生人会涮电子羊吗”开发</text>
-        <van-button class="btn" type="primary" bind:tap="onCopy">复制GitHub链接</van-button>
+        <van-button class="btn" type="primary" bind:click="onCopy">复制GitHub链接</van-button>
       </view>
     </van-collapse-item>
     <van-collapse-item title="如何查询成语？" name="2">
@@ -32,9 +32,9 @@
       <text style="color:dodgerblue;" wx:else>小程序平台：QQ浏览器\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
       <text>设备参数：\n{{systemInfo}}</text>
       <view class="function">
-        <van-button class="btn" size="large" type="primary" bind:tap="onCopyInfo">复制参数</van-button>
-        <van-button class="btn" size="large" type="primary" bind:tap="onLogin">获取OpenID</van-button>
-        <van-button class="btn" size="large" type="danger" bind:tap="onClean">清除缓存</van-button>
+        <van-button class="btn" size="large" type="primary" bind:click="onCopyInfo">复制参数</van-button>
+        <van-button class="btn" size="large" type="primary" bind:click="onLogin">获取OpenID</van-button>
+        <van-button class="btn" size="large" type="danger" bind:click="onClean">清除缓存</van-button>
       </view>
     </van-collapse-item>
   </van-collapse>

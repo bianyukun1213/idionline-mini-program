@@ -3,5 +3,5 @@
     <van-field value="{{value}}" type="textarea" autosize required clearable bind:change="onChange" label="纠错内容" placeholder="纠错内容不能为空" />
   </van-cell-group>
     <text class="text">开发者大多数时间在学校，不能及时看到您的消息，请您谅解！</text>
-  <van-button class="btn" type="primary" wx:if="{{show}}" bind:tap="onContact" open-type="contact">复制并发起客服会话</van-button>
+  <van-button class="btn" type="primary" wx:if="{{show}}" bind:click="onContact" open-type="contact">复制并发起客服会话</van-button>
 </view>

@@ -76,13 +76,13 @@ Page({
     console.log('获取到成语释义：', this.data['defs'])
   },
   //跳转按钮点击事件。
-  onTap(e) {
+  onClick(e) {
     wx.vibrateShort()
     wx.redirectTo({
       url: '/pages/idiom/idiom?id=' + e.currentTarget.id
     })
   },
-  onMarkTap() {
+  onMark() {
     wx.vibrateShort()
     var marked = wx.getStorageSync('markedIdioms') || {}
     marked[this.data['id']] = this.data['name']
@@ -92,7 +92,7 @@ Page({
     })
     console.log('已添加成语至收藏：' + this.data['name'])
   },
-  onCorrectTap() {
+  onCorrect() {
     wx.vibrateShort()
     var json = {
       'id': this.data['id'],
@@ -113,7 +113,7 @@ Page({
       }
     })
   },
-  onSolitaireTap() {
+  onSolitaire() {
     wx.vibrateShort()
     call.get({
       url: 'idiom/solitaire/' + this.data['name'],

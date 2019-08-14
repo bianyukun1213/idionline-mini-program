@@ -5,8 +5,8 @@
     </van-cell-group>
   </van-cell-group>
   <view class="con">
-    <van-button wx:if="{{showPrev}}" class="btn" type="primary" bind:tap="onPrev">上一页</van-button>
+    <van-button wx:if="{{showPrev}}" class="btn" type="primary" bind:click="onPrev">上一页</van-button>
     <Text class="text">{{page+1}}/{{tmp.length}}</Text>
-    <van-button wx:if="{{showNext}}" class="btn" type="primary" bind:tap="onNext">下一页</van-button>
+    <van-button wx:if="{{showNext}}" class="btn" type="primary" bind:click="onNext">下一页</van-button>
   </view>
 </view>
