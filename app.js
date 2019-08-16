@@ -1,7 +1,7 @@
 App({
   globalData: {
     dbgMode: false,
-    version: '1.35.2',
+    version: '1.35.3',
     platform: {
       'tag': 'WeChat',
       'str': '微信'

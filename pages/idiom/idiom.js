@@ -144,7 +144,8 @@ Page({
     if (this.data['openId'] != null && this.data['openId'] != '') {
       var json = {
         'id': this.data['id'],
-        'openId': this.data['openId']
+        'openId': this.data['openId'],
+        'name': this.data['name']
       }
       var updates = []
       for (var k in this.data['defs']) {

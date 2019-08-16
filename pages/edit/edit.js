@@ -4,6 +4,7 @@ Page({
   data: {
     id: null,
     openId: null,
+    name: null,
     updates: null,
     canBeRemoved: []
   },
@@ -14,6 +15,7 @@ Page({
     this.data['id'] = json['id']
     this.data['openId'] = json['openId']
     this.setData({
+      name: json['name'],
       updates: json['updates']
     })
     for (var k in json['updates']) {
