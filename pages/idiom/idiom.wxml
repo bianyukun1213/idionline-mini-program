@@ -41,3 +41,6 @@
     </view>
   </van-panel>
 </view>
+<view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
+  <ad wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b"></ad>
+</view>

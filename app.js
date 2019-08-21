@@ -1,7 +1,7 @@
 App({
   globalData: {
     dbgMode: false,
-    version: '1.35.3',
+    version: '1.36.0',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
@@ -20,5 +20,10 @@ App({
     }
     console.log('平台：' + this.globalData['platform']['str'])
     console.log('版本：' + this.globalData['version'])
+    if (wx.getStorageSync('settings') == '') {
+      wx.setStorageSync('settings', {
+        'disableAds': false
+      })
+    }
   }
 })

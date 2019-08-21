@@ -10,7 +10,8 @@
     "pages/edit/edit",
     "pages/edit_bson/edit_bson",
     "pages/correct/correct",
-    "pages/dbg/dbg"
+    "pages/dbg/dbg",
+    "pages/disable_ads/disable_ads"
   ],
   "tabBar": {
     "list": [

@@ -46,3 +46,10 @@
   margin-bottom: 5px;
   height: 1px;
 }
+
+.ad {
+  height: 25%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}

@@ -5,6 +5,7 @@ const inf = require('../../tools/inf.js')
 var innerAudioContext
 Page({
   data: {
+    platform: null,
     tagColor: null,
     id: null,
     name: null,
@@ -17,7 +18,9 @@ Page({
     tTSCurrent: null,
     tTSSrc: {},
     shareFlag: false,
-    openId: null
+    openId: null,
+    disableAdsLocal: false,
+    disableAdsRemote: false
   },
   onLoad(option) {
     this.data['openId'] = wx.getStorageSync('openId')
@@ -45,8 +48,10 @@ Page({
     var launchInf = getApp().globalData['launchInf']
     this.setData({
       text: launchInf['text'],
-      tagColor: color.chk()
-      //disableAds: launchInf['disableAds']
+      tagColor: color.chk(),
+      platform: getApp().globalData['platform']['tag'],
+      disableAdsLocal: wx.getStorageSync('settings')['disableAds'],
+      disableAdsRemote: launchInf['disableAds']
     })
     color.apl()
   },

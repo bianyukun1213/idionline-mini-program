@@ -4,6 +4,7 @@ Page({
   data: {
     version: '-',
     apiVer: '-',
+    platTag: '-',
     platStr: '-',
     systemInfo: null,
     activeName: '1'
@@ -14,6 +15,7 @@ Page({
   onShow() {
     this.setData({
       version: getApp().globalData['version'],
+      platTag: getApp().globalData['platform']['tag'],
       platStr: getApp().globalData['platform']['str'],
       systemInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t')
     })
@@ -118,5 +120,11 @@ Page({
       })
       console.log('OpenID获取失败')
     }
+  },
+  onDisableAds() {
+    wx.vibrateShort()
+    wx.navigateTo({
+      url: '/pages/disable_ads/disable_ads'
+    })
   }
 })

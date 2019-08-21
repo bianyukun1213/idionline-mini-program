@@ -23,9 +23,15 @@
       您可在首页的底部上划来查看每日成语。
     </van-collapse-item>
     <van-collapse-item title="如何关闭广告？" name="7">
-      现在还没有广告。ヾ(•ω•`)o
+      <view class="function" wx:if="{{platTag=='QQ'}}">
+        <van-button class="btn" type="primary" bind:click="onDisableAds">关闭广告</van-button>
+      </view>
+      <text wx:else>现在还没有广告。ヾ(•ω•`)o</text>
     </van-collapse-item>
-    <van-collapse-item title="参数与功能" name="8">
+    <van-collapse-item title="其他小功能" name="8">
+      <text>1、您可输入“试试手气”来随机查看一条成语。\n2、您可输入“往日成语”来查看往期每日成语。\n3、当读取到剪贴板内容为四字词语时，搜索栏会自动填充。\n4、当读取到剪贴板内容中存在格式类似“【哀兵必胜】”的文本时，会自动接龙。</text>
+    </van-collapse-item>
+    <van-collapse-item title="参数与功能" name="9">
       <text style="color:red;">“成语在线”小程序现已在微信及QQ平台上线。在不同平台上，您的体验可能会略微不同。\nQQ平台上成语朗读及节日换肤等功能效果不佳，故暂时关闭。\n</text>
       <text style="color:green;" wx:if="{{platStr=='微信'}}">小程序平台：微信\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
       <text style="color:dodgerblue;" wx:elif="{{platStr=='QQ'}}">小程序平台：QQ\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
