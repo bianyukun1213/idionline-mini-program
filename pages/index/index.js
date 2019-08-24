@@ -27,9 +27,8 @@ Page({
   //启动
   onLoad(query) {
     this.data['scene'] = decodeURIComponent(query.scene)
-    if (query['show']) {
+    if (query['show'])
       this.data['show'] = true
-    }
     console.log('场景：' + this.data['scene'])
     inf.getLaunchInf(this.callback)
   },
@@ -89,20 +88,18 @@ Page({
         idiName: launchInf['dailyIdiom']['name'],
         defs: launchInf['dailyIdiom']['definitions']
       })
-      if (launchInf['dailyIdiom']['pinyin'] != null) {
+      if (launchInf['dailyIdiom']['pinyin'] != null)
         this.setData({
           pinyin: '[' + launchInf['dailyIdiom']['pinyin'] + ']'
         })
-      }
     }
     color.apl()
     var reg = new RegExp('https?://.+\.(jpg|gif|png)')
     //匹配Logo地址正则，设置Logo。
-    if (reg.test(launchInf['logoUrl'])) {
+    if (reg.test(launchInf['logoUrl']))
       this.setData({
         logoUrl: launchInf['logoUrl']
       })
-    }
     //显示对应的场景内容。
     for (var key in launchInf['argsDic']) {
       if (key == this.data['scene']) {

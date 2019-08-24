@@ -6,7 +6,7 @@ var innerAudioContext
 Page({
   data: {
     platform: null,
-    tagColor: null,
+    color: null,
     id: null,
     name: null,
     pinyin: '',
@@ -46,11 +46,14 @@ Page({
   //获取启动信息的回调函数。
   callback() {
     var launchInf = getApp().globalData['launchInf']
+    var disableAds = wx.getStorageSync('settings')['disableAds']
+    if (disableAds == undefined)
+      disableAds = false
     this.setData({
       text: launchInf['text'],
-      tagColor: color.chk(),
+      color: color.chk(),
       platform: getApp().globalData['platform']['tag'],
-      disableAdsLocal: wx.getStorageSync('settings')['disableAds'],
+      disableAdsLocal: disableAds,
       disableAdsRemote: launchInf['disableAds']
     })
     color.apl()
@@ -67,16 +70,14 @@ Page({
       lastEditor: data['lastEditor'],
       updateTime: format.formatDate(data['updateTimeUT'])
     })
-    if (data['pinyin'] != null) {
+    if (data['pinyin'] != null)
       this.setData({
         pinyin: '[' + data['pinyin'] + ']'
       })
-    }
-    if (data['origin'] != null) {
+    if (data['origin'] != null)
       this.setData({
         origin: '出自' + data['origin'] + '，'
       })
-    }
     this.data['shareFlag'] = true
     console.log('获取到成语释义：', this.data['defs'])
   },
@@ -156,7 +157,9 @@ Page({
       for (var k in this.data['defs']) {
         updates.push({
           'source': this.data['defs'][k]['source'],
-          'text': this.data['defs'][k]['text']
+          'text': this.data['defs'][k]['text'],
+          'addition': this.data['defs'][k]['addition'],
+          'isBold': this.data['defs'][k]['isBold']
         })
       }
       json['updates'] = updates
@@ -186,9 +189,8 @@ Page({
         content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
         showCancel: false,
         success(res) {
-          if (res.confirm) {
+          if (res.confirm)
             wx.vibrateShort()
-          }
         }
       })
       wx.vibrateShort()
@@ -200,29 +202,28 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      if (getApp().globalData['platform']['tag'] != 'WeChat') {
-        console.log('由于接口的差异，暂时还不能使用朗读功能')
-        wx.showModal({
-          title: '暂不支持朗读',
-          content: '在微信以外的平台上，由于文件下载接口的差异，暂时还不能使用朗读功能，请等待官方完善接口。',
-          showCancel: false,
-          success(res) {
-            if (res.confirm) {
-              wx.vibrateShort()
-            }
-          }
-        })
-        return
-      }
+      // if (getApp().globalData['platform']['tag'] != 'WeChat') {
+      //   console.log('由于接口的差异，暂时还不能使用朗读功能')
+      //   wx.showModal({
+      //     title: '暂不支持朗读',
+      //     content: '在微信以外的平台上，由于文件下载接口的差异，暂时还不能使用朗读功能，请等待官方完善接口。',
+      //     showCancel: false,
+      //     success(res) {
+      //       if (res.confirm) {
+      //         wx.vibrateShort()
+      //       }
+      //     }
+      //   })
+      //   return
+      // }
       if (this.data['openId'] == null || this.data['openId'] == '') {
         wx.showModal({
           title: '缺少OpenID',
           content: '您需要提供OpenID才能使用朗读功能，请去“帮助”页面获取OpenID。',
           showCancel: false,
           success(res) {
-            if (res.confirm) {
+            if (res.confirm)
               wx.vibrateShort()
-            }
           }
         })
         return
@@ -268,5 +269,8 @@ Page({
     this.data['tTSSrc'][this.data['tTSCurrent']] = src
     innerAudioContext.src = src
     innerAudioContext.play()
+  },
+  onAdError(e) {
+    console.log('广告加载错误：', e)
   }
 })

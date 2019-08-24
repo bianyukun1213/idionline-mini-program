@@ -5,7 +5,7 @@ Page({
     this.startCounting()
   },
   startCounting() {
-    setTimeout(this.redirect, 3000)
+    setTimeout(this.redirect, 1000)
   },
   redirect() {
     wx.switchTab({

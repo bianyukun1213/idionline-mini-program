@@ -5,10 +5,14 @@ Page({
     tmp: [],
     page: 0,
     showPrev: false,
-    showNext: false
+    showNext: false,
+    color: null
   },
   onLoad(option) {
     color.apl()
+    this.setData({
+      color: color.chk()
+    })
     var idioms = JSON.parse(option['str'])
     var array = []
     //var k
@@ -23,55 +27,49 @@ Page({
         this.data['tmp'].push(array.slice(idx, i))
         idx = i
       }
-      if ((i + 1) == array.length) {
+      if ((i + 1) == array.length)
         this.data['tmp'].push(array.slice(idx, (i + 1)))
-      }
     }
     //更新页面。
     this.setData({
-      tmp:this.data['tmp'],
+      tmp: this.data['tmp'],
       idioms2Disp: this.data['tmp'][0]
     })
-    if (this.data['idioms2Disp'].length >= 20) {
+    if (this.data['idioms2Disp'].length >= 20)
       this.setData({
         showNext: true
       })
-    }
   },
   onPrev() {
     wx.vibrateShort()
     this.setData({
-      page:this.data['page']-1,
-      idioms2Disp: this.data['tmp'][this.data['page']-1]
+      page: this.data['page'] - 1,
+      idioms2Disp: this.data['tmp'][this.data['page'] - 1]
     })
     console.log('翻到第' + (this.data['page'] + 1) + '页')
-    if (this.data['page'] < this.data['tmp'].length - 1) {
+    if (this.data['page'] < this.data['tmp'].length - 1)
       this.setData({
         showNext: true
       })
-    }
-    if (this.data['page'] == 0) {
+    if (this.data['page'] == 0)
       this.setData({
         showPrev: false
       })
-    }
   },
   onNext() {
     wx.vibrateShort()
     this.setData({
-      page:this.data['page']+1,
-      idioms2Disp: this.data['tmp'][this.data['page']+1]
+      page: this.data['page'] + 1,
+      idioms2Disp: this.data['tmp'][this.data['page'] + 1]
     })
     console.log('翻到第' + (this.data['page'] + 1) + '页')
-    if (this.data['page'] > 0) {
+    if (this.data['page'] > 0)
       this.setData({
         showPrev: true
       })
-    }
-    if (this.data['page'] == this.data['tmp'].length - 1) {
+    if (this.data['page'] == this.data['tmp'].length - 1)
       this.setData({
         showNext: false
       })
-    }
   }
 })

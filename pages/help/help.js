@@ -7,10 +7,14 @@ Page({
     platTag: '-',
     platStr: '-',
     systemInfo: null,
-    activeName: '1'
+    activeName: '1',
+    color: null
   },
   onLoad() {
     color.apl()
+    this.setData({
+      color: color.chk()
+    })
   },
   onShow() {
     this.setData({
@@ -19,11 +23,10 @@ Page({
       platStr: getApp().globalData['platform']['str'],
       systemInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t')
     })
-    if (getApp().globalData['launchInf'] != null) {
+    if (getApp().globalData['launchInf'] != null)
       this.setData({
         apiVer: getApp().globalData['launchInf']['version']
       })
-    }
   },
   onChange(e) {
     this.setData({
@@ -94,12 +97,11 @@ Page({
           wx.login({
             success(res) {
               console.log(res)
-              if (res.code) {
+              if (res.code)
                 call.get({
                   url: 'editor/login/' + getApp().globalData['platform']['tag'] + '/' + res.code,
                   doSuccess: that.callback
                 })
-              }
             }
           })
         }

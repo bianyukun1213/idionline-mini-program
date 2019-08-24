@@ -3,10 +3,14 @@ const color = require('../../tools/color.js')
 Page({
   data: {
     nickName: null,
-    show: false
+    show: false,
+    color:null
   },
   onLoad() {
     color.apl()
+    this.setData({
+      color: color.chk()
+    })
   },
   onRegister() {
     wx.vibrateShort()
@@ -14,13 +18,12 @@ Page({
     wx.login({
       success(res) {
         console.log(res)
-        if (res.code) {
+        if (res.code)
           call.uniFunc('editor/register', 'POST', {
             'code': res.code,
             'platTag': getApp().globalData['platform']['tag'],
             'nickName': that.data['nickName']
           }, that.callback)
-        }
       }
     })
   },

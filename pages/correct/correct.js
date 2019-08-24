@@ -4,13 +4,17 @@ Page({
     value: null,
     id: null,
     name: null,
-    show: false
+    show: false,
+    color: null
   },
   onLoad(option) {
     color.apl()
     var json = JSON.parse(option['str'])
     this.data['id'] = json['id']
     this.data['name'] = json['name']
+    this.setData({
+      color: color.chk()
+    })
   },
   onChange(event) {
     if (event.detail == null || event.detail == '') {

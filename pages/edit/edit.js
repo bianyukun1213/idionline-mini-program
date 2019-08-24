@@ -6,7 +6,8 @@ Page({
     openId: null,
     name: null,
     updates: null,
-    canBeRemoved: []
+    canBeRemoved: [],
+    color: null
   },
   onLoad(option) {
     color.apl()
@@ -16,7 +17,8 @@ Page({
     this.data['openId'] = json['openId']
     this.setData({
       name: json['name'],
-      updates: json['updates']
+      updates: json['updates'],
+      color: color.chk()
     })
     for (var k in json['updates']) {
       this.data['canBeRemoved'][k] = false
@@ -28,6 +30,16 @@ Page({
   onChangeText(event) {
     this.data['updates'][event.currentTarget.id]['text'] = event.detail
   },
+  onChangeAddition(event) {
+    this.data['updates'][event.currentTarget.id]['addition'] = event.detail
+  },
+  check(event) {
+    var tmp = this.data['updates']
+    tmp[event.currentTarget.id]['isBold'] = !tmp[event.currentTarget.id]['isBold']
+    this.setData({
+      updates: tmp
+    })
+  },
   onAdd() {
     wx.vibrateShort()
     var tmp = this.data['updates']
@@ -38,7 +50,9 @@ Page({
     }
     tmp[k] = {
       'source': null,
-      'text': null
+      'text': null,
+      'addition': null,
+      'isBold': false
     }
     tmpRm[k] = true
     this.setData({
@@ -75,6 +89,8 @@ Page({
   onSubmit() {
     wx.vibrateShort()
     for (var k in this.data['updates']) {
+      if (this.data['updates'][k]['addition'] == '')
+        this.data['updates'][k]['addition'] = null
       if (this.data['updates'][k]['source'] == null || this.data['updates'][k]['text'] == null || this.data['updates'][k]['source'] == '' || this.data['updates'][k]['text'] == '') {
         wx.showToast({
           title: '存在空位！',
@@ -86,9 +102,8 @@ Page({
     }
     var tmp = []
     for (var k in this.data['updates']) {
-      if (this.data['updates'][k] != undefined) {
+      if (this.data['updates'][k] != undefined)
         tmp.push(this.data['updates'][k])
-      }
     }
     var dt = {
       'openId': this.data['openId'],

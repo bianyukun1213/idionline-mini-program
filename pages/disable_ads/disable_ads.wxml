@@ -5,18 +5,18 @@
   <van-radio-group value="{{radio}}" bind:change="onChange">
     <van-cell-group>
       <van-cell title="A. 名闻遐迩  闻风而至  杂居" value-class="value-class" clickable data-name="1" bind:click="onClick">
-        <van-radio name="1" />
+        <van-radio name="1" checked-color="{{color}}" />
       </van-cell>
       <van-cell title="B. 名噪一时  闻风而至  栖居" value-class="value-class" clickable data-name="2" bind:click="onClick">
-        <van-radio name="2" />
+        <van-radio name="2" checked-color="{{color}}" />
       </van-cell>
       <van-cell title="C. 名噪一时  纷至沓来  杂居" value-class="value-class" clickable data-name="3" bind:click="onClick">
-        <van-radio name="3" />
+        <van-radio name="3" checked-color="{{color}}" />
       </van-cell>
       <van-cell title="D. 名闻遐迩  纷至沓来  栖居" value-class="value-class" clickable data-name="4" bind:click="onClick">
-        <van-radio name="4" />
+        <van-radio name="4" checked-color="{{color}}" />
       </van-cell>
     </van-cell-group>
   </van-radio-group>
-  <van-button class="btn" type="primary" bind:click="onConfirm">确认</van-button>
+  <van-button class="btn" color="{{color}}" bind:click="onConfirm">确认</van-button>
 </view>

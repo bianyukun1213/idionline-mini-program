@@ -13,3 +13,7 @@
   align-self: center;
   margin-top: 5px;
 }
+
+.value-class {
+  flex: none !important;
+}

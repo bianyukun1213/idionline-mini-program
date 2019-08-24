@@ -5,7 +5,8 @@ Page({
     id: null,
     openId: null,
     value: null,
-    show: false
+    show: false,
+    color
   },
   onLoad(option) {
     color.apl()
@@ -16,6 +17,9 @@ Page({
         url: 'idiom/' + this.data['id'] + '/bson/' + this.data['openId'],
         doSuccess: this.callback
       })
+    this.setData({
+      color: color.chk()
+    })
   },
   onChange(event) {
     if (event.detail == null || event.detail == '') {

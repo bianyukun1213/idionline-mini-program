@@ -4,7 +4,7 @@
       <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
         <van-row style="margin-bottom:5px;">
           <van-col span="6">
-            <van-tag mark size="large" color="{{tagColor}}">来源</van-tag>
+            <van-tag mark size="large" color="{{color}}">来源</van-tag>
           </van-col>
           <van-col span="18">
             <text class="text">{{item['source']}}\n</text>
@@ -12,7 +12,7 @@
         </van-row>
         <van-row>
           <van-col span="6">
-            <van-tag id="{{index}}" mark size="large" color="{{tagColor}}" bind:tap="onTTSTap">释义🔊</van-tag>
+            <van-tag id="{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">释义🔊</van-tag>
           </van-col>
           <van-col span="18">
             <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
@@ -26,21 +26,21 @@
             </block>
             <block wx:if="{{item['links']!=null}}">
               <view class="btn" style="margin-top:5px;">
-                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round type="primary">{{item}}</van-button>
+                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round color="{{color}}" >{{item}}</van-button>
               </view>
             </block>
           </van-col>
         </van-row>
-        <view class="divLine" wx:if="{{index<defs.length-1}}" style="background:{{tagColor}};" />
+        <view class="divLine" wx:if="{{index<defs.length-1}}" style="background:{{color}};" />
       </view>
     </view>
     <view class="footer" slot="footer">
-      <van-button class="btn_func" type="primary" bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
-      <van-button class="btn_func" type="primary" bind:click="onSolitaire">接龙</van-button>
-      <van-button class="btn_func" type="primary" bind:click="onMark" bind:longpress="onLongPress">加入收藏</van-button>
+      <van-button class="btn_func" color="{{color}}"  bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
+      <van-button class="btn_func" color="{{color}}"  bind:click="onSolitaire">接龙</van-button>
+      <van-button class="btn_func" color="{{color}}"  bind:click="onMark" bind:longpress="onLongPress">加入收藏</van-button>
     </view>
   </van-panel>
 </view>
 <view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
-  <ad wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b"></ad>
+  <ad wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" binderror="onAdError"></ad>
 </view>

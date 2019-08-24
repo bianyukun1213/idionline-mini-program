@@ -1,6 +1,14 @@
+const color = require('../../tools/color.js')
 Page({
   data: {
-    radio: '1'
+    radio: '1',
+    color: null
+  },
+  onLoad() {
+    color.apl()
+    this.setData({
+      color: color.chk()
+    })
   },
   onChange(event) {
     this.setData({
