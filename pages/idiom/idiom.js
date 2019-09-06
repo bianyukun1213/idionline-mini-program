@@ -5,6 +5,12 @@ const inf = require('../../tools/inf.js')
 var innerAudioContext
 Page({
   data: {
+    xhtad: {
+      adData: {},
+      ad: {
+        banner: true // banner 广告开关
+      }
+    },
     platform: null,
     color: null,
     id: null,
@@ -202,20 +208,20 @@ Page({
   onTTSTap(e) {
     if (innerAudioContext.paused) {
       wx.vibrateShort()
-      // if (getApp().globalData['platform']['tag'] != 'WeChat') {
-      //   console.log('由于接口的差异，暂时还不能使用朗读功能')
-      //   wx.showModal({
-      //     title: '暂不支持朗读',
-      //     content: '在微信以外的平台上，由于文件下载接口的差异，暂时还不能使用朗读功能，请等待官方完善接口。',
-      //     showCancel: false,
-      //     success(res) {
-      //       if (res.confirm) {
-      //         wx.vibrateShort()
-      //       }
-      //     }
-      //   })
-      //   return
-      // }
+      if (getApp().globalData['platform']['tag'] != 'WeChat') {
+        console.log('由于接口的差异，暂时还不能使用朗读功能')
+        wx.showModal({
+          title: '暂不支持朗读',
+          content: '在微信以外的平台上，由于文件下载接口的差异，暂时还不能使用朗读功能，请等待官方完善接口。',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              wx.vibrateShort()
+            }
+          }
+        })
+        return
+      }
       if (this.data['openId'] == null || this.data['openId'] == '') {
         wx.showModal({
           title: '缺少OpenID',

@@ -15,7 +15,6 @@ Page({
     })
     var idioms = JSON.parse(option['str'])
     var array = []
-    //var k
     for (var key in idioms) {
       var obj = {}
       obj[key] = idioms[key]

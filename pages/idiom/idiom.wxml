@@ -40,5 +40,11 @@
       <van-button class="btn_func" color="{{color}}" bind:click="onMark" bind:longpress="onLongPress">加入收藏</van-button>
     </view>
   </van-panel>
-  <ad type="card" wx:if="{{platform=='QQ'&&disableAdsLocal==false&&disableAdsRemote==false}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" binderror="onAdError"></ad>
+  <view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
+    <ad type="card" wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" binderror="onAdError"></ad>
+    <view class="xht_banner" style="width:100%;" wx:elif="{{platform=='WeChat'}}">
+      <xht-ad data-id="banner" adData="{{xhtad.adData}}" bindadload="xhtadImgLoad" bindclick="xhtappoIntView" bindclose="xhtadClose" class="xht_component">
+      </xht-ad>
+    </view>
+  </view>
 </view>
