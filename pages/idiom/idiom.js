@@ -205,6 +205,11 @@ Page({
   save() {
     wx.saveImageToPhotosAlbum({
       filePath: this.data['filePath'],
+      success(){
+        wx.showToast({
+          title: '已保存！'
+        })
+      },
       fail() {
         wx.showToast({
           title: '保存失败！',
