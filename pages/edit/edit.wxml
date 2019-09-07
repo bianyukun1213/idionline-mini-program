@@ -7,11 +7,11 @@
     <van-cell id="{{index}}" wx:if="{{updates[index]!=undefined}}" title="释义文本使用红色加粗字体显示" value-class="value-class" clickable bind:click="check">
       <van-checkbox id="{{index}}" value="{{updates[index]['isBold']}}" catch:tap="check" />
     </van-cell>
-    <van-button class="btn" id="{{index}}" wx:if="{{canBeRemoved[index]&&updates[index]!=undefined}}" type="danger" size="large" bind:click="onDeleteItem">移除</van-button>
+    <van-button class="btn" aria-role="button" aria-label="移除" id="{{index}}" wx:if="{{canBeRemoved[index]&&updates[index]!=undefined}}" type="danger" size="large" bind:click="onDeleteItem">移除</van-button>
   </van-cell-group>
   <view class="function">
-    <van-button class="btn" color="{{color}}" bind:click="onAdd" bind:longpress="onBsonEdit">新建</van-button>
-    <van-button class="btn" color="{{color}}" bind:click="onSubmit">提交</van-button>
-    <van-button class="btn" type="danger" bind:click="onDelete">删除</van-button>
+    <van-button class="btn" aria-role="button" aria-label="新建" color="{{color}}" bind:click="onAdd" bind:longpress="onBsonEdit">新建</van-button>
+    <van-button class="btn" aria-role="button" aria-label="提交" color="{{color}}" bind:click="onSubmit">提交</van-button>
+    <van-button class="btn" aria-role="button" aria-label="删除" type="danger" bind:click="onDelete">删除</van-button>
   </view>
 </view>

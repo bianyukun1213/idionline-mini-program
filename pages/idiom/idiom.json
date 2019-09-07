@@ -5,6 +5,8 @@
     "van-tag": "/miniprogram_npm/vant-weapp/tag/index",
     "van-row": "/miniprogram_npm/vant-weapp/row/index",
     "van-col": "/miniprogram_npm/vant-weapp/col/index",
-    "xht-ad": "/components/xhtAD/xhtAD"
+    "van-action-sheet": "/miniprogram_npm/vant-weapp/action-sheet/index",
+    "xht-ad": "/components/xhtAD/xhtAD",
+    "canvasdrawer": "/components/canvasdrawer/canvasdrawer"
   }
 }

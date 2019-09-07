@@ -26,7 +26,7 @@
             </block>
             <block wx:if="{{item['links']!=null}}">
               <view class="btn" style="margin-top:5px;">
-                <van-button class="btn_link" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round color="{{color}}">{{item}}</van-button>
+                <van-button class="btn_link" aria-role="button" aria-label="{{item}}" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="{{index}}" bind:click="onClick" size="small" plain round color="{{color}}">{{item}}</van-button>
               </view>
             </block>
           </van-col>
@@ -35,16 +35,19 @@
       </view>
     </view>
     <view class="footer" slot="footer">
-      <van-button class="btn_func" color="{{color}}" bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
-      <van-button class="btn_func" color="{{color}}" bind:click="onSolitaire">接龙</van-button>
-      <van-button class="btn_func" color="{{color}}" bind:click="onMark" bind:longpress="onLongPress">加入收藏</van-button>
+      <van-button class="btn_func" aria-role="button" aria-label="纠错" color="{{color}}" bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
+      <van-button class="btn_func" aria-role="button" aria-label="接龙" color="{{color}}" bind:click="onSolitaire">接龙</van-button>
+      <van-button class="btn_func" aria-role="button" aria-label="收藏" color="{{color}}" bind:click="onMark">收藏</van-button>
+      <van-button class="btn_func" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare" bind:longpress="onLongPress">分享</van-button>
     </view>
   </van-panel>
-  <view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
-    <ad type="card" wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" binderror="onAdError"></ad>
-    <view class="xht_banner" style="width:100%;" wx:elif="{{platform=='WeChat'}}">
-      <xht-ad data-id="banner" adData="{{xhtad.adData}}" bindadload="xhtadImgLoad" bindclick="xhtappoIntView" bindclose="xhtadClose" class="xht_component">
-      </xht-ad>
-    </view>
+  <van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
+</view>
+<view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
+  <ad type="card" wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" bind:error="onAdError"></ad>
+  <view class="xht_banner" style="width:100%;" wx:elif="{{platform=='WeChat'}}">
+    <xht-ad class="xht_component" data-id="banner" adData="{{xhtad.adData}}" bindad:load="xhtadImgLoad" bind:click="xhtappoIntView" bind:close="xhtadClose">
+    </xht-ad>
   </view>
 </view>
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />

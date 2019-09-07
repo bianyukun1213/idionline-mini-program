@@ -4,7 +4,7 @@ const color = require('../../tools/color.js')
 const inf = require('../../tools/inf.js')
 Page({
   data: {
-    tagColor: null,
+    color: null,
     text: null,
     scene: null,
     idiName: null,
@@ -21,20 +21,30 @@ Page({
     startY: null,
     currentY: null,
     onTouch: false,
+    showDailyIdiom: false,
+    idMode: false,
     show: false,
-    idMode: false
+    actions: [{
+        name: '转发',
+        openType: 'share'
+      },
+      {
+        name: '生成海报',
+      }
+    ],
+    filePath: null
   },
   //启动
   onLoad(query) {
     this.data['scene'] = decodeURIComponent(query.scene)
-    if (query['show'])
-      this.data['show'] = true
+    if (query['showDailyIdiom'])
+      this.data['showDailyIdiom'] = true
     console.log('场景：' + this.data['scene'])
     inf.getLaunchInf(this.callback)
   },
   onShow() {
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
-    var regS = new RegExp('【[\u4e00-\u9fa5]{4}】')//小冰成语接龙。
+    var regS = new RegExp('【[\u4e00-\u9fa5]{4}】') //小冰成语接龙。
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
@@ -78,7 +88,7 @@ Page({
   callback() {
     var launchInf = getApp().globalData['launchInf']
     this.setData({
-      tagColor: color.chk(),
+      color: color.chk(),
       text: launchInf['text'],
       placeHolder: '目前已收录' + launchInf['idiomsCount'] + '条成语'
       //disableAds: launchInf['disableAds']
@@ -205,8 +215,9 @@ Page({
     }
   },
   //弹出层关闭
-  onClose() {
+  onPopupClose() {
     this.setData({
+      show: false,
       showPopup: false
     })
     console.log('点击操作，已关闭弹出层')
@@ -238,10 +249,7 @@ Page({
         })
         console.log('上划操作，已启用弹出层')
       } else if (currentY - startY >= 50 && showPopup) {
-        this.setData({
-          showPopup: false
-        })
-        //wx.vibrateShort()
+        this.onPopupClose()
         console.log('下划操作，已关闭弹出层')
       }
     }
@@ -250,13 +258,104 @@ Page({
   onTouchCancel(e) {
     this.data['onTouch'] = false
   },
+  onClose() {
+    this.setData({
+      show: false
+    })
+  },
+  eventGetImage(e) {
+    wx.hideLoading()
+    this.data['filePath'] = e.detail['tempFilePath']
+    this.save()
+  },
+  save() {
+    wx.saveImageToPhotosAlbum({
+      filePath: this.data['filePath'],
+      fail() {
+        wx.showToast({
+          title: '保存失败！',
+          icon: 'none'
+        })
+        wx.vibrateLong()
+      }
+    })
+  },
+  onSelect(event) {
+    wx.vibrateShort()
+    if (event.detail['name'] == '转发') {
+      this.onShareAppMessage()
+    } else if (event.detail['name'] == '生成海报') {
+      if (this.data['filePath'] == null) {
+        wx.showLoading({
+          title: '正在生成~',
+          mask: true
+        })
+        var name = format.formatDate(getApp().globalData['launchInf']['dateUT'], true) + '：' + this.data['idiName']
+        if (this.data['defs'].length > 1)
+          name = name + '（部分）'
+        this.setData({
+          painting: {
+            width: 1080,
+            height: 1440,
+            views: [{
+                type: 'image',
+                url: '/icons/share_pic.png',
+                width: 1080,
+                height: 1440
+              },
+              {
+                type: 'text',
+                top: 100,
+                left: 100,
+                content: name,
+                fontSize: 48,
+                color: '#008080',
+                textAlign: 'left',
+                bolder: true
+              },
+              {
+                type: 'rect',
+                top: 160,
+                left: 100,
+                width: 880,
+                height: 5,
+                background: '#008080'
+              },
+              {
+                type: 'text',
+                top: 220,
+                left: 100,
+                width: 860,
+                lineHeight: 50,
+                MaxLineNumber: 15,
+                content: this.data['defs'][0]['text'],
+                fontSize: 36,
+                color: '#008080',
+                textAlign: 'left',
+                breakWord: true
+              }
+            ]
+          }
+        })
+      } else {
+        this.save()
+      }
+    }
+    this.onClose()
+  },
+  onShare() {
+    wx.vibrateShort()
+    this.setData({
+      show: true
+    })
+  },
   onShareAppMessage() {
     if (this.data['idiName'] != null) {
-      var date = format.formatDate(getApp().globalData['launchInf']['dateUT'])
+      var date = format.formatDate(getApp().globalData['launchInf']['dateUT'], true)
       return {
-        title: date + '——' + this.data['idiName'],
+        title: date + '：' + this.data['idiName'],
         imageUrl: '/icons/share.png',
-        path: '/pages/index/index?show=true'
+        path: '/pages/index/index?showDailyIdiom=true'
       }
     }
     return {

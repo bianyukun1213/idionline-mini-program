@@ -54,3 +54,7 @@
   margin-bottom: 5px;
   height: 1px;
 }
+
+.btn_func {
+  margin-left: 10px;
+}

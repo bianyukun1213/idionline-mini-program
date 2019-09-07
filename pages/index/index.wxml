@@ -2,13 +2,13 @@
   <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
   <van-search shape="round" input-align="center" value="{{value}}" maxlength="24" placeholder="{{placeHolder}}" bind:search="onSearch" />
   <image class="logo" src="{{logoUrl}}" mode="aspectFit" />
-  <van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onClose">
-    <van-panel class="panel" title="{{idiName}}{{pinyin}}">
+  <van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onPopupClose">
+    <van-panel class="panel" title="{{idiName}}{{pinyin}}" use-footer-slot>
       <view class="content">
         <view class="defs" wx:for="{{defs}}" wx:key="{{index}}">
           <van-row style="margin-bottom:5px;">
             <van-col span="6">
-              <van-tag mark size="large" color="{{tagColor}}">来源</van-tag>
+              <van-tag mark size="large" color="{{color}}">来源</van-tag>
             </van-col>
             <van-col span="18">
               <text class="text">{{item['source']}}\n</text>
@@ -16,7 +16,7 @@
           </van-row>
           <van-row>
             <van-col span="6">
-              <van-tag mark size="large" color="{{tagColor}}">释义</van-tag>
+              <van-tag mark size="large" color="{{color}}">释义</van-tag>
             </van-col>
             <van-col span="18">
               <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
@@ -30,12 +30,17 @@
               </block>
             </van-col>
           </van-row>
-          <view class="divLine" wx:if="{{index<defs.length-1}}" style="background:{{tagColor}};" />
+          <view class="divLine" wx:if="{{index<defs.length-1}}" style="background:{{color}};" />
         </view>
       </view>
+      <view class="footer" slot="footer">
+        <van-button class="btn_func" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare">分享</van-button>
+      </view>
     </van-panel>
+    <van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
   </van-popup>
 </view>
 <view class="slide" wx:if="{{idiName!=null}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
   <view class="text_bottom">上划查看每日成语</view>
 </view>
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />

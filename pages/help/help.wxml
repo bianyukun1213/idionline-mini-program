@@ -4,7 +4,7 @@
       <view class="root">
         <image class="img" src="../../icons/idionline&kun.svg" mode="aspectFit" bind:tap="onCopyBlog" />
         <text class="text">成语在线\n小程序与Web API\n由“仿生人会涮电子羊吗”开发</text>
-        <van-button class="btn" color="{{color}}" bind:click="onCopy">复制GitHub链接</van-button>
+        <van-button class="btn" aria-role="button" aria-label="复制GitHub链接" color="{{color}}" bind:click="onCopy">复制GitHub链接</van-button>
       </view>
     </van-collapse-item>
     <van-collapse-item title="如何查询成语？" name="2">
@@ -24,7 +24,7 @@
     </van-collapse-item>
     <van-collapse-item title="如何关闭广告？" name="7">
       <view class="function" wx:if="{{platTag=='QQ'||platTag=='WeChat'}}">
-        <van-button class="btn" color="{{color}}" bind:click="onDisableAds">关闭广告</van-button>
+        <van-button class="btn" aria-role="button" aria-label="关闭广告" color="{{color}}" bind:click="onDisableAds">关闭广告</van-button>
       </view>
       <text wx:else>现在还没有广告。ヾ(•ω•`)o</text>
     </van-collapse-item>
@@ -38,9 +38,9 @@
       <text style="color:dodgerblue;" wx:else>小程序平台：{{platStr}}\n小程序版本：{{version}}\nWeb API版本：{{apiVer}}\n</text>
       <text>设备参数：\n{{systemInfo}}</text>
       <view class="function">
-        <van-button class="btn" size="large" color="{{color}}" bind:click="onCopyInfo">复制参数</van-button>
-        <van-button class="btn" size="large" color="{{color}}" bind:click="onLogin">获取OpenID</van-button>
-        <van-button class="btn" size="large" type="danger" bind:click="onClean">清除缓存</van-button>
+        <van-button class="btn" aria-role="button" aria-label="复制参数" size="large" color="{{color}}" bind:click="onCopyInfo">复制参数</van-button>
+        <van-button class="btn" aria-role="button" aria-label="获取OpenID" size="large" color="{{color}}" bind:click="onLogin">获取OpenID</van-button>
+        <van-button class="btn" aria-role="button" aria-label="清除缓存" size="large" type="danger" bind:click="onClean">清除缓存</van-button>
       </view>
     </van-collapse-item>
   </van-collapse>

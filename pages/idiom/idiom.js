@@ -26,7 +26,18 @@ Page({
     shareFlag: false,
     openId: null,
     disableAdsLocal: false,
-    disableAdsRemote: false
+    disableAdsRemote: false,
+    painting: null,
+    show: false,
+    actions: [{
+        name: '转发',
+        openType: 'share'
+      },
+      {
+        name: '生成海报',
+      }
+    ],
+    filePath: null
   },
   onLoad(option) {
     this.data['openId'] = wx.getStorageSync('openId')
@@ -74,7 +85,7 @@ Page({
       name: data['name'],
       defs: data['definitions'],
       lastEditor: data['lastEditor'],
-      updateTime: format.formatDate(data['updateTimeUT'])
+      updateTime: format.formatDate(data['updateTimeUT'], false)
     })
     if (data['pinyin'] != null)
       this.setData({
@@ -181,6 +192,110 @@ Page({
       wx.vibrateLong()
     }
   },
+  onClose() {
+    this.setData({
+      show: false
+    })
+  },
+  eventGetImage(e) {
+    wx.hideLoading()
+    this.data['filePath'] = e.detail['tempFilePath']
+    this.save()
+  },
+  save() {
+    wx.saveImageToPhotosAlbum({
+      filePath: this.data['filePath'],
+      fail() {
+        wx.showToast({
+          title: '保存失败！',
+          icon: 'none'
+        })
+        wx.vibrateLong()
+      }
+    })
+  },
+  onSelect(event) {
+    wx.vibrateShort()
+    if (event.detail['name'] == '转发') {
+      this.onShareAppMessage()
+    } else if (event.detail['name'] == '生成海报') {
+      if (this.data['filePath'] == null) {
+        wx.showLoading({
+          title: '正在生成~',
+          mask: true
+        })
+        var name = this.data['name']
+        if (this.data['defs'].length > 1)
+          name = name + '（部分）'
+        this.setData({
+          painting: {
+            width: 1080,
+            height: 1440,
+            views: [{
+                type: 'image',
+                url: '/icons/share_pic.png',
+                width: 1080,
+                height: 1440
+              },
+              {
+                type: 'text',
+                top: 100,
+                left: 100,
+                content: name,
+                fontSize: 48,
+                color: '#008080',
+                textAlign: 'left',
+                bolder: true
+              },
+              {
+                type: 'rect',
+                top: 160,
+                left: 100,
+                width: 880,
+                height: 5,
+                background: '#008080'
+              },
+              {
+                type: 'text',
+                top: 220,
+                left: 100,
+                width: 860,
+                lineHeight: 50,
+                MaxLineNumber: 15,
+                content: this.data['defs'][0]['text'],
+                fontSize: 36,
+                color: '#008080',
+                textAlign: 'left',
+                breakWord: true
+              }
+            ]
+          }
+        })
+      } else {
+        this.save()
+      }
+    }
+    this.onClose()
+  },
+  onShare() {
+    if (this.data['shareFlag']) {
+      wx.vibrateShort()
+      this.setData({
+        show: true
+      })
+    } else {
+      wx.showModal({
+        title: '警告',
+        content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
+        showCancel: false,
+        success(res) {
+          if (res.confirm)
+            wx.vibrateShort()
+        }
+      })
+      wx.vibrateLong()
+    }
+  },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])
     if (this.data['shareFlag']) {
@@ -199,7 +314,7 @@ Page({
             wx.vibrateShort()
         }
       })
-      wx.vibrateShort()
+      wx.vibrateLong()
     }
     return {
       imageUrl: '/icons/share.png'

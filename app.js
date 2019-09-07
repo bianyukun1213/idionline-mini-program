@@ -2,7 +2,7 @@ const xhtApp = require('./utils/xhtad_sdk.min.js')
 App({
   globalData: {
     dbgMode: false,
-    version: '1.38.0',
+    version: '1.39.0',
     platform: {
       'tag': 'WeChat',
       'str': '微信'

@@ -18,5 +18,5 @@
       </van-cell>
     </van-cell-group>
   </van-radio-group>
-  <van-button class="btn" color="{{color}}" bind:click="onConfirm">确认</van-button>
+  <van-button class="btn" aria-role="button" aria-label="确认" color="{{color}}" bind:click="onConfirm">确认</van-button>
 </view>
