@@ -46,6 +46,9 @@ Page({
       doSuccess: this.fillData
     })
     info.getLaunchInfo(this.callback)
+    this.setData({
+      color: color.chk()
+    })
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onError(function callback(errCode) {
       console.log('音频播放错误：', errCode)
@@ -68,7 +71,6 @@ Page({
       disableAds = false
     this.setData({
       text: launchInfo['text'],
-      color: color.chk(),
       platform: getApp().globalData['platform']['tag'],
       disableAdsLocal: disableAds,
       disableAdsRemote: launchInfo['disableAds']
