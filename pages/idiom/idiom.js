@@ -40,15 +40,16 @@ Page({
     filePath: null
   },
   onLoad(option) {
+    color.apl()
+    this.setData({
+      color: color.chk()
+    })
     this.data['openId'] = wx.getStorageSync('openId')
     call.get({
       url: 'idiom/' + option['id'] + '/' + this.data['openId'],
       doSuccess: this.fillData
     })
     info.getLaunchInfo(this.callback)
-    this.setData({
-      color: color.chk()
-    })
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onError(function callback(errCode) {
       console.log('音频播放错误：', errCode)
@@ -70,6 +71,7 @@ Page({
     if (disableAds == undefined)
       disableAds = false
     this.setData({
+      color: color.chk(),
       text: launchInfo['text'],
       platform: getApp().globalData['platform']['tag'],
       disableAdsLocal: disableAds,
@@ -207,7 +209,7 @@ Page({
   save() {
     wx.saveImageToPhotosAlbum({
       filePath: this.data['filePath'],
-      success(){
+      success() {
         wx.showToast({
           title: '已保存！'
         })

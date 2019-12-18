@@ -36,6 +36,10 @@ Page({
   },
   //启动
   onLoad(query) {
+    color.apl()
+    this.setData({
+      color: color.chk()
+    })
     this.data['scene'] = decodeURIComponent(query.scene)
     if (query['showDailyIdiom'])
       this.data['showDailyIdiom'] = true
