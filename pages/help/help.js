@@ -23,9 +23,9 @@ Page({
       platStr: getApp().globalData['platform']['str'],
       systemInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t')
     })
-    if (getApp().globalData['launchInf'] != null)
+    if (getApp().globalData['launchInfo'] != null)
       this.setData({
-        apiVer: getApp().globalData['launchInf']['version']
+        apiVer: getApp().globalData['launchInfo']['version']
       })
   },
   onChange(e) {

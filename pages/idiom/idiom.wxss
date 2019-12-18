@@ -40,9 +40,3 @@
 .btn_func {
   margin-left: 10px;
 }
-
-.divLine {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  height: 1px;
-}

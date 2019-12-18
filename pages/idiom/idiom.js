@@ -1,7 +1,7 @@
 const call = require('../../tools/request.js')
 const format = require('../../tools/format.js')
 const color = require('../../tools/color.js')
-const inf = require('../../tools/inf.js')
+const info = require('../../tools/info.js')
 var innerAudioContext
 Page({
   data: {
@@ -45,7 +45,7 @@ Page({
       url: 'idiom/' + option['id'] + '/' + this.data['openId'],
       doSuccess: this.fillData
     })
-    inf.getLaunchInf(this.callback)
+    info.getLaunchInfo(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onError(function callback(errCode) {
       console.log('音频播放错误：', errCode)
@@ -62,16 +62,16 @@ Page({
   },
   //获取启动信息的回调函数。
   callback() {
-    var launchInf = getApp().globalData['launchInf']
+    var launchInfo = getApp().globalData['launchInfo']
     var disableAds = wx.getStorageSync('settings')['disableAds']
     if (disableAds == undefined)
       disableAds = false
     this.setData({
-      text: launchInf['text'],
+      text: launchInfo['text'],
       color: color.chk(),
       platform: getApp().globalData['platform']['tag'],
       disableAdsLocal: disableAds,
-      disableAdsRemote: launchInf['disableAds']
+      disableAdsRemote: launchInfo['disableAds']
     })
     color.apl()
   },

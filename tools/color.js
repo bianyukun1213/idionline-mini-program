@@ -16,8 +16,8 @@ function setBar(color) {
 }
 
 function chk(callb) {
-  if (getApp().globalData['launchInf'] != null) {
-    var color = getApp().globalData['launchInf']['themeColor'] //这句实际上必须写里面，不然获取到的会是设置color之前的null。
+  if (getApp().globalData['launchInfo'] != null) {
+    var color = getApp().globalData['launchInfo']['themeColor'] //这句实际上必须写里面，不然获取到的会是设置color之前的null。
     var reg = new RegExp('^#[0-9a-fA-F]{6}$')
     //目前除微信平台，设置导航栏颜色都有瑕疵。
     if (reg.test(color) && getApp().globalData['platform']['tag'] == 'WeChat') {

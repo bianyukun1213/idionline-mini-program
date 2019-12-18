@@ -1,7 +1,7 @@
 const call = require('../../tools/request.js')
 const format = require('../../tools/format.js')
 const color = require('../../tools/color.js')
-const inf = require('../../tools/inf.js')
+const info = require('../../tools/info.js')
 Page({
   data: {
     color: null,
@@ -10,7 +10,7 @@ Page({
     idiName: null,
     pinyin: '',
     defs: null,
-    launchInf: null,
+    launchInfo: null,
     placeHolder: '请输入您要查询的成语',
     value: null,
     historyValue: [],
@@ -40,7 +40,7 @@ Page({
     if (query['showDailyIdiom'])
       this.data['showDailyIdiom'] = true
     console.log('场景：' + this.data['scene'])
-    inf.getLaunchInf(this.callback)
+    info.getLaunchInfo(this.callback)
   },
   onShow() {
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
@@ -86,36 +86,36 @@ Page({
   },
   //获取启动信息的回调函数。
   callback() {
-    var launchInf = getApp().globalData['launchInf']
+    var launchInfo = getApp().globalData['launchInfo']
     this.setData({
       color: color.chk(),
-      text: launchInf['text'],
-      placeHolder: '目前已收录' + launchInf['idiomsCount'] + '条成语'
-      //disableAds: launchInf['disableAds']
+      text: launchInfo['text'],
+      placeHolder: '目前已收录' + launchInfo['idiomsCount'] + '条成语'
+      //disableAds: launchInfo['disableAds']
     })
-    if (launchInf['dailyIdiom'] != null) {
+    if (launchInfo['dailyIdiom'] != null) {
       this.setData({
-        idiName: launchInf['dailyIdiom']['name'],
-        defs: launchInf['dailyIdiom']['definitions']
+        idiName: launchInfo['dailyIdiom']['name'],
+        defs: launchInfo['dailyIdiom']['definitions']
       })
-      if (launchInf['dailyIdiom']['pinyin'] != null)
+      if (launchInfo['dailyIdiom']['pinyin'] != null)
         this.setData({
-          pinyin: '[' + launchInf['dailyIdiom']['pinyin'] + ']'
+          pinyin: '[' + launchInfo['dailyIdiom']['pinyin'] + ']'
         })
     }
     color.apl()
     var reg = new RegExp('https?://.+\.(jpg|gif|png)')
     //匹配Logo地址正则，设置Logo。
-    if (reg.test(launchInf['logoUrl']))
+    if (reg.test(launchInfo['logoUrl']))
       this.setData({
-        logoUrl: launchInf['logoUrl']
+        logoUrl: launchInfo['logoUrl']
       })
     //显示对应的场景内容。
-    for (var key in launchInf['argsDic']) {
+    for (var key in launchInfo['argsDic']) {
       if (key == this.data['scene']) {
-        console.log('查找到对应的场景内容：' + launchInf['argsDic'][this.data['scene']])
+        console.log('查找到对应的场景内容：' + launchInfo['argsDic'][this.data['scene']])
         wx.showModal({
-          content: launchInf['argsDic'][this.data['scene']],
+          content: launchInfo['argsDic'][this.data['scene']],
           showCancel: false,
           success(res) {
             if (res.confirm) {
@@ -295,7 +295,7 @@ Page({
           title: '正在生成~',
           mask: true
         })
-        var name = format.formatDate(getApp().globalData['launchInf']['dateUT'], true) + '：' + this.data['idiName']
+        var name = format.formatDate(getApp().globalData['launchInfo']['dateUT'], true) + '：' + this.data['idiName']
         if (this.data['defs'].length > 1)
           name = name + '（部分）'
         this.setData({
@@ -356,7 +356,7 @@ Page({
   },
   onShareAppMessage() {
     if (this.data['idiName'] != null) {
-      var date = format.formatDate(getApp().globalData['launchInf']['dateUT'], true)
+      var date = format.formatDate(getApp().globalData['launchInfo']['dateUT'], true)
       return {
         title: date + '：' + this.data['idiName'],
         imageUrl: '/icons/share.png',
