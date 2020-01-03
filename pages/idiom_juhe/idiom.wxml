@@ -8,7 +8,7 @@
     <van-cell wx:if="{{example!=null}}" title="例句" value="{{example}}" />
     <van-cell wx:if="{{yufa!=null}}" title="语法" value="{{yufa}}" />
     <van-cell wx:if="{{yinzhengjs!=null}}" title="引证解释" value="{{yinzhengjs}}" />
-    <van-cell wx:if="{{tongyi!=null}}" wx:for="{{tongyi}}" wx:key="{{index}}" title="同义成语{{[index+1]}}" value="{{tongyi[index]}}" />
-    <van-cell wx:if="{{fanyi!=null}}" wx:for="{{fanyi}}" wx:key="{{index}}" title="反义成语{{[index+1]}}" value="{{fanyi[index]}}" />
+    <van-cell wx:if="{{tongyi!=null}}" wx:for="{{tongyi}}" wx:key="*this" title="同义成语{{[index+1]}}" value="{{tongyi[index]}}" />
+    <van-cell wx:if="{{fanyi!=null}}" wx:for="{{fanyi}}" wx:key="*this" title="反义成语{{[index+1]}}" value="{{fanyi[index]}}" />
   </van-cell-group>
 </view>

@@ -1,5 +1,5 @@
 <view class="root">
-  <van-swipe-cell wx:for="{{items}}" wx:key="{{index}}" right-width="{{65}}">
+  <van-swipe-cell wx:for="{{items}}" wx:key="index" right-width="{{65}}">
     <van-cell-group>
       <van-cell title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" />
     </van-cell-group>
