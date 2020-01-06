@@ -23,6 +23,8 @@ Page({
     onTouch: false,
     showDailyIdiom: false,
     idMode: false,
+    filePath: null,
+    shareUT: null,
     actions: [{
         name: '转发',
         openType: 'share'
@@ -30,8 +32,7 @@ Page({
       {
         name: '生成海报',
       }
-    ],
-    filePath: null
+    ]
   },
   //启动
   onLoad(query) {
@@ -42,6 +43,7 @@ Page({
     this.data['scene'] = decodeURIComponent(query.scene)
     if (query['showDailyIdiom'])
       this.data['showDailyIdiom'] = true
+    this.data['shareUT'] = query['showDailyIdiom']
     console.log('场景：' + this.data['scene'])
     info.getLaunchInfo(this.callback)
   },
@@ -134,6 +136,12 @@ Page({
         showPopup: true
       })
       wx.vibrateShort()
+      if (this.data['shareUT'] != getApp().globalData['launchInfo']['dateUT']) {
+        wx.showToast({
+          title: '每日成语已更换！',
+          icon: 'none'
+        })
+      }
     }
   },
   //搜索事件。
@@ -363,7 +371,7 @@ Page({
       return {
         title: date + '：' + this.data['idiName'],
         imageUrl: '/icons/share.png',
-        path: '/pages/index/index?showDailyIdiom=true'
+        path: '/pages/index/index?showDailyIdiom=true?shareUT=' + getApp().globalData['launchInfo']['dateUT']
       }
     }
     return {
