@@ -370,7 +370,7 @@ Page({
       return {
         title: date + '：' + this.data['idiName'],
         imageUrl: '/icons/share.png',
-        path: '/pages/index/index?showDailyIdiom=true?shareIdiom=' + this.data['idiName']
+        path: '/pages/index/index?showDailyIdiom=true&shareIdiom=' + this.data['idiName']
       }
     }
     return {
