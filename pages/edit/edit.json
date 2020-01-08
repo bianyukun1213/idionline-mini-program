@@ -3,7 +3,8 @@
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
     "van-field": "/miniprogram_npm/@vant/weapp/field/index",
     "van-checkbox": "/miniprogram_npm/@vant/weapp/checkbox/index",
-    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index"
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
   },
   "navigationBarTitleText": "编辑模式"
 }

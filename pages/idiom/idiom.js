@@ -29,6 +29,8 @@ Page({
     disableAdsRemote: false,
     painting: null,
     show: false,
+    filePath: null,
+    overlayOn: false,
     actions: [{
         name: '转发',
         openType: 'share'
@@ -36,8 +38,7 @@ Page({
       {
         name: '生成海报',
       }
-    ],
-    filePath: null
+    ]
   },
   onLoad(option) {
     color.apl()
@@ -63,6 +64,14 @@ Page({
   onUnload(e) {
     console.log('成语页面卸载')
     innerAudioContext.destroy()
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
+    })
   },
   //获取启动信息的回调函数。
   callback() {
@@ -112,12 +121,20 @@ Page({
   onMark() {
     wx.vibrateShort()
     var marked = wx.getStorageSync('markedIdioms') || {}
-    marked[this.data['id']] = this.data['name']
-    wx.setStorageSync('markedIdioms', marked)
-    wx.showToast({
-      title: '完成！'
-    })
-    console.log('已添加成语至收藏：' + this.data['name'])
+    if (Object.getOwnPropertyNames(marked).length < 20) {
+      marked[this.data['id']] = this.data['name']
+      wx.setStorageSync('markedIdioms', marked)
+      wx.showToast({
+        title: '完成！'
+      })
+      console.log('已添加成语至收藏：' + this.data['name'])
+    } else {
+      wx.showToast({
+        title: '收藏成语数量已达上限！',
+        icon: 'none'
+      })
+      wx.vibrateLong()
+    }
   },
   onCorrect() {
     wx.vibrateShort()
@@ -190,7 +207,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '缺少OpenID！',
+        title: '缺少OpenID，请尝试重启小程序！',
         icon: 'none'
       })
       wx.vibrateLong()
@@ -331,43 +348,25 @@ Page({
   },
   onTTSTap(e) {
     if (innerAudioContext.paused) {
-      wx.vibrateShort()
-      // if (getApp().globalData['platform']['tag'] != 'WeChat') {
-      //   console.log('由于接口的差异，暂时还不能使用朗读功能')
-      //   wx.showModal({
-      //     title: '暂不支持朗读',
-      //     content: '在微信以外的平台上，由于文件下载接口的差异，暂时还不能使用朗读功能，请等待官方完善接口。',
-      //     showCancel: false,
-      //     success(res) {
-      //       if (res.confirm) {
-      //         wx.vibrateShort()
-      //       }
-      //     }
-      //   })
-      //   return
-      // }
       if (this.data['openId'] == null || this.data['openId'] == '') {
-        wx.showModal({
-          title: '缺少OpenID',
-          content: '您需要提供OpenID才能使用朗读功能，请去“帮助”页面获取OpenID。',
-          showCancel: false,
-          success(res) {
-            if (res.confirm)
-              wx.vibrateShort()
-          }
+        wx.showToast({
+          title: '缺少OpenID，请尝试重启小程序！',
+          icon: 'none'
         })
+        wx.vibrateLong()
         return
       }
+      wx.vibrateShort()
       this.data['tTSCurrent'] = e.currentTarget.id
       console.log('变量中的音频地址：', this.data['tTSSrc'])
       if (this.data['tTSSrc'][this.data['tTSCurrent']] == undefined) {
         console.log('当前音频地址在变量中不存在')
         var tTSText = this.data['defs'][this.data['tTSCurrent']]['text'] //获取到对应的def。
-        var substr = tTSText.match(/(〈.*?〉|（.*?）)/g) //匹配“〈口〉”这种东西和括号中的内容。
+        var substr = tTSText.match(/(〈.*?〉|\(.*?\)|（.*?）|\[.*?\]|{.*?})/g) //匹配“〈口〉”这种东西和各种括号中的内容，方头括号、六角括号除外。
         for (var idx in substr) {
           tTSText = tTSText.replace(substr[idx], '')
         }
-        tTSText = tTSText.replace(/(~|～)/g, this.data['name']) //将“~”替换为成语名称、
+        tTSText = tTSText.replace(/(~|～)/g, this.data['name']) //将“~”替换为成语名称。
         this.data['tTSText'] = tTSText
         var token = wx.getStorageSync('token')
         var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。

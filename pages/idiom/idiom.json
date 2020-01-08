@@ -7,6 +7,7 @@
     "van-col": "/miniprogram_npm/@vant/weapp/col/index",
     "van-action-sheet": "/miniprogram_npm/@vant/weapp/action-sheet/index",
     "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
     "xht-ad": "/components/xhtAD/xhtAD",
     "canvasdrawer": "/components/canvasdrawer/canvasdrawer"
   }

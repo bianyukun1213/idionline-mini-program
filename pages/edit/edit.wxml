@@ -1,3 +1,4 @@
+<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
   <van-field disabled value="{{name}}" label="名称" />
   <van-cell-group wx:for="{{updates}}" wx:key="index">

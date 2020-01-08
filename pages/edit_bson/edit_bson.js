@@ -6,7 +6,8 @@ Page({
     openId: null,
     value: null,
     show: false,
-    color
+    color: null,
+    overlayOn: false
   },
   onLoad(option) {
     color.apl()
@@ -19,6 +20,14 @@ Page({
       })
     this.setData({
       color: color.chk()
+    })
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
     })
   },
   onChange(event) {

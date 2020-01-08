@@ -11,7 +11,8 @@
     "pages/edit_bson/edit_bson",
     "pages/correct/correct",
     "pages/dbg/dbg",
-    "pages/disable_ads/disable_ads"
+    "pages/disable_ads/disable_ads",
+    "pages/settings/settings"
   ],
   "tabBar": {
     "list": [

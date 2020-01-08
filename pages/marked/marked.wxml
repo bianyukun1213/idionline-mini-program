@@ -1,3 +1,4 @@
+<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
   <van-swipe-cell wx:for="{{items}}" wx:key="index" right-width="{{65}}">
     <van-cell-group>

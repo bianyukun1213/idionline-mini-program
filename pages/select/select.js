@@ -6,7 +6,8 @@ Page({
     page: 0,
     showPrev: false,
     showNext: false,
-    color: null
+    color: null,
+    overlayOn: false
   },
   onLoad(option) {
     color.apl()
@@ -38,6 +39,14 @@ Page({
       this.setData({
         showNext: true
       })
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
+    })
   },
   onPrev() {
     wx.vibrateShort()

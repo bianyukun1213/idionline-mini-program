@@ -4,12 +4,21 @@ Page({
   data: {
     nickName: null,
     show: false,
-    color:null
+    color: null,
+    overlayOn: false
   },
   onLoad() {
     color.apl()
     this.setData({
       color: color.chk()
+    })
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
     })
   },
   onRegister() {

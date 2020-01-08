@@ -1,3 +1,4 @@
+<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
   <van-cell-group title="（2019年江苏）在下面一段话的空缺处依次填入词语，最恰当的一组是">
     <van-cell title="提到桃花源，许多人会联想到瓦尔登湖。真实的瓦尔登湖，早已成为_①_的观光胜地，梭罗的小木屋前也经常聚集着_②_的游客，不复有隐居之地的气息。然而虚构的桃花源一直就在我们的心中，哪怕_③_在人潮汹涌的现代城市，也可以获得心灵的宁静。" />

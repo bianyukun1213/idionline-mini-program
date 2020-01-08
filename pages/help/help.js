@@ -6,9 +6,10 @@ Page({
     apiVer: '-',
     platTag: '-',
     platStr: '-',
-    systemInfo: null,
+    sysInfo: null,
     activeName: '1',
-    color: null
+    color: null,
+    overlayOn: false
   },
   onLoad() {
     color.apl()
@@ -17,11 +18,17 @@ Page({
     })
   },
   onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
+    })
     this.setData({
       version: getApp().globalData['version'],
       platTag: getApp().globalData['platform']['tag'],
       platStr: getApp().globalData['platform']['str'],
-      systemInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t')
+      sysInfo: JSON.stringify(getApp().globalData['sysInfo'], null, '\t')
     })
     if (getApp().globalData['launchInfo'] != null)
       this.setData({
@@ -41,8 +48,8 @@ Page({
   onClean() {
     wx.showModal({
       title: '警告',
-      content: '您的收藏数据与OpenID等都保存在缓存中，清除缓存将导致这些数据丢失。您确定要清除缓存吗？',
-      confirmText: '清除',
+      content: '您的设置、收藏数据等都保存在设备储存中，清理储存将导致这些数据丢失。您确定要继续吗？',
+      confirmText: '继续',
       confirmColor: '#FF0000',
       success(res) {
         if (res.confirm) {
@@ -51,7 +58,7 @@ Page({
           wx.showToast({
             title: '完成！'
           })
-          console.log('已清除缓存')
+          console.log('设备储存已清理')
         }
       }
     })
@@ -66,6 +73,12 @@ Page({
       }
     })
   },
+  nav2Settings() {
+    wx.vibrateShort()
+    wx.navigateTo({
+      url: '/pages/settings/settings'
+    })
+  },
   onCopyBlog() {
     wx.vibrateShort()
     wx.setClipboardData({
@@ -78,55 +91,10 @@ Page({
   onCopyInfo() {
     wx.vibrateShort()
     wx.setClipboardData({
-      data: '小程序平台：' + this.data['platStr'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['apiVer'] + '\n设备参数：\n' + this.data['systemInfo'],
+      data: '小程序平台：' + this.data['platStr'] + '\n小程序版本：' + this.data['version'] + '\nWeb API版本：' + this.data['apiVer'] + '\n设备参数：\n' + this.data['sysInfo'],
       success(res) {
         console.log('已复制设备参数到剪贴板')
       }
-    })
-  },
-  onLogin() {
-    wx.vibrateShort()
-    var that = this
-    wx.showModal({
-      title: 'OpenID',
-      content: 'OpenID由数字与英文字母组成，仅用来识别您的身份，不包含您的隐私信息，您可放心使用！',
-      confirmText: '获取',
-      success(res) {
-        if (res.confirm) {
-          wx.vibrateShort()
-          wx.login({
-            success(res) {
-              console.log(res)
-              if (res.code)
-                call.get({
-                  url: 'editor/login/' + getApp().globalData['platform']['tag'] + '/' + res.code,
-                  doSuccess: that.callback
-                })
-            }
-          })
-        }
-      }
-    })
-  },
-  callback(data) {
-    if (data['openid'] != null) {
-      wx.showToast({
-        title: '完成！'
-      })
-      console.log('已获取OpenID：' + getApp().globalData['platform']['tag'] + '_' + data['openid'])
-      wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data['openid'])
-    } else {
-      wx.showToast({
-        title: '获取失败！',
-        icon: 'none'
-      })
-      console.log('OpenID获取失败')
-    }
-  },
-  onDisableAds() {
-    wx.vibrateShort()
-    wx.navigateTo({
-      url: '/pages/disable_ads/disable_ads'
     })
   }
 })

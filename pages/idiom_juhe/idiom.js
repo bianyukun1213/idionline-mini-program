@@ -10,7 +10,8 @@ Page({
     yufa: null,
     yinzhengjs: null,
     tongyi: null,
-    fanyi: null
+    fanyi: null,
+    overlayOn: false
   },
   onLoad(option) {
     color.apl()
@@ -20,6 +21,14 @@ Page({
       url: 'word=' + option['name'] + '&key=59a83fe5879d3ca2ce0eef7183db90ad',
       doSuccess: this.fillData,
       type: 'Juhe'
+    })
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
     })
   },
   fillData(data) {

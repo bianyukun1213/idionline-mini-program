@@ -2,12 +2,21 @@ const color = require('../../tools/color.js')
 Page({
   data: {
     radio: '1',
-    color: null
+    color: null,
+    overlayOn: false
   },
   onLoad() {
     color.apl()
     this.setData({
       color: color.chk()
+    })
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
     })
   },
   onChange(event) {
@@ -25,9 +34,9 @@ Page({
   },
   onConfirm() {
     if (this.data['radio'] == '4') {
-      wx.setStorageSync('settings', {
-        'disableAds': true
-      })
+      var settings = wx.getStorageSync('settings') || {}
+      settings['disableAds'] = true
+      wx.setStorageSync('settings', settings)
       wx.showToast({
         title: '广告已关闭！'
       })

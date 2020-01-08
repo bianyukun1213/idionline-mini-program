@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
-    "van-button": "/miniprogram_npm/@vant/weapp/button/index"
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index",
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
   },
   "navigationBarTitleText": "选择您要查看的成语"
 }

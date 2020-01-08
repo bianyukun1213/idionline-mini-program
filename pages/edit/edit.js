@@ -7,7 +7,8 @@ Page({
     name: null,
     updates: null,
     canBeRemoved: [],
-    color: null
+    color: null,
+    overlayOn: false
   },
   onLoad(option) {
     color.apl()
@@ -23,6 +24,14 @@ Page({
     for (var k in json['updates']) {
       this.data['canBeRemoved'][k] = false
     }
+  },
+  onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
+    })
   },
   onChangeSource(event) {
     this.data['updates'][event.currentTarget.id]['source'] = event.detail

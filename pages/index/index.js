@@ -25,6 +25,7 @@ Page({
     idMode: false,
     filePath: null,
     shareIdiom: null,
+    overlayOn: false,
     actions: [{
         name: '转发',
         openType: 'share'
@@ -35,19 +36,25 @@ Page({
     ]
   },
   //启动
-  onLoad(query) {
+  onLoad(para) {
     color.apl()
     this.setData({
       color: color.chk()
     })
-    this.data['scene'] = decodeURIComponent(query['scene'])
-    if (query['showDailyIdiom'])
+    this.data['scene'] = decodeURIComponent(para['scene'])
+    if (para['showDailyIdiom'])
       this.data['showDailyIdiom'] = true
-    this.data['shareIdiom'] = query['shareIdiom']
-    console.log('场景：' + this.data['scene'])
+    this.data['shareIdiom'] = para['shareIdiom']
+    console.log('页面参数：', para)
     info.getLaunchInfo(this.callback)
   },
   onShow() {
+    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
+    if (overlayOn == undefined)
+      overlayOn = false
+    this.setData({
+      overlayOn: overlayOn
+    })
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
     var regS = new RegExp('【[\u4e00-\u9fa5]{4}】') //小冰成语接龙。
     var that = this
@@ -96,7 +103,6 @@ Page({
       color: color.chk(),
       text: launchInfo['text'],
       placeHolder: '目前已收录' + launchInfo['idiomsCount'] + '条成语'
-      //disableAds: launchInfo['disableAds']
     })
     if (launchInfo['dailyIdiom'] != null) {
       this.setData({

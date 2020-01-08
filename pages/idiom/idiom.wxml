@@ -1,3 +1,4 @@
+<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
   <van-panel wx:if="{{name!=null}}" title="{{name}}{{pinyin}}" desc="{{origin}}由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot>
     <view class="content">
@@ -49,5 +50,5 @@
     <xht-ad class="xht_component" data-id="banner" adData="{{xhtad.adData}}" bindad:load="xhtadImgLoad" bind:click="xhtappoIntView" bind:close="xhtadClose">
     </xht-ad>
   </view>
+  <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>
-<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
