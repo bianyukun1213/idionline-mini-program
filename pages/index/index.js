@@ -308,7 +308,7 @@ Page({
     } else if (event.detail['name'] == '生成海报') {
       if (this.data['filePath'] == null) {
         wx.showLoading({
-          title: '正在生成~',
+          title: '正在生成',
           mask: true
         })
         var name = format.formatDate(getApp().globalData['launchInfo']['dateUT'], true) + '：' + this.data['idiName']

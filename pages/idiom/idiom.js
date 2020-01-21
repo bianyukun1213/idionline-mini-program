@@ -247,7 +247,7 @@ Page({
     } else if (event.detail['name'] == '生成海报') {
       if (this.data['filePath'] == null) {
         wx.showLoading({
-          title: '正在生成~',
+          title: '正在生成',
           mask: true
         })
         var name = this.data['name']
@@ -366,7 +366,7 @@ Page({
         for (var idx in substr) {
           tTSText = tTSText.replace(substr[idx], '')
         }
-        tTSText = tTSText.replace(/(~|～)/g, this.data['name']) //将“~”替换为成语名称。
+        tTSText = tTSText.replace(/(|～)/g, this.data['name']) //将“”替换为成语名称。
         this.data['tTSText'] = tTSText
         var token = wx.getStorageSync('token')
         var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
