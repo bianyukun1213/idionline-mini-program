@@ -6,5 +6,5 @@
     </van-cell-group>
     <view id="{{index}}" slot="right" bind:tap="onDelete">移除</view>
   </van-swipe-cell>
-  <text class="text" wx:if="{{showText}}">空空如也\n四处看看吧！</text>
+  <text class="text" wx:if="{{showText}}">空空如也——</text>
 </view>
