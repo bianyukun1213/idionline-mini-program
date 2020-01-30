@@ -102,7 +102,7 @@ Page({
     this.setData({
       color: color.chk(),
       text: launchInfo['text'],
-      placeHolder: '目前已收录' + launchInfo['idiomsCount'] + '条成语'
+      placeHolder: '目前已收录 ' + launchInfo['idiomsCount'] + ' 条成语'
     })
     if (launchInfo['dailyIdiom'] != null) {
       this.setData({
@@ -199,7 +199,7 @@ Page({
     } else {
       wx.showModal({
         title: '查询无结果',
-        content: '未找到您要查询的成语“' + dt + '”。您仍可使用“聚合数据”接口继续查询。但请注意，“聚合数据”接口每天只能调用100次，您应确保输入的成语名称完整无误，以免浪费调用次数。您要继续查询吗？',
+        content: '未找到您要查询的成语「' + dt + '」。您仍可使用「聚合数据」接口继续查询。但请注意，「聚合数据」接口每天只能调用 100 次，您应确保输入的成语名称完整无误，以免浪费调用次数。您要继续查询吗？',
         confirmText: '继续查询',
         success(res) {
           if (res.confirm) {

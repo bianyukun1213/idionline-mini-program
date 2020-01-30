@@ -153,7 +153,7 @@ Page({
     wx.setClipboardData({
       data: this.data['id'],
       success(res) {
-        console.log('已复制成语Id到剪贴板：' + that.data['id'])
+        console.log('已复制成语 Id 到剪贴板：' + that.data['id'])
       }
     })
   },
@@ -207,7 +207,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '缺少OpenID，请尝试重启小程序！',
+        title: '缺少 OpenID，请尝试重启小程序！',
         icon: 'none'
       })
       wx.vibrateLong()
@@ -326,7 +326,7 @@ Page({
     console.log('尝试转发：' + this.data['name'])
     if (this.data['shareFlag']) {
       return {
-        title: '点击查看“' + this.data['name'] + '”的释义',
+        title: '点击查看「' + this.data['name'] + '」的释义',
         imageUrl: '/icons/share.png',
         path: '/pages/idiom/idiom?id=' + this.data['id']
       }
@@ -350,7 +350,7 @@ Page({
     if (innerAudioContext.paused) {
       if (this.data['openId'] == null || this.data['openId'] == '') {
         wx.showToast({
-          title: '缺少OpenID，请尝试重启小程序！',
+          title: '缺少 OpenID，请尝试重启小程序！',
           icon: 'none'
         })
         wx.vibrateLong()
@@ -372,16 +372,16 @@ Page({
         var tokenUT = token.split('.')[3] //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
         var currentUT = format.getUnixTimestamp()
         console.log('当前时间戳：' + currentUT)
-        console.log('Token时间戳：' + tokenUT)
+        console.log('Token 时间戳：' + tokenUT)
         if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
           call.get({
             doSuccess: this.tokenGot,
             type: 'TTS'
           })
-          console.log('重获取Token')
+          console.log('重获取 Token')
         } else {
           call.downloadTTSAudio(token, this.data['openId'], this.data['tTSText'], this.onPlay)
-          console.log('使用缓存Token')
+          console.log('使用缓存 Token')
         }
       } else {
         console.log('当前音频地址在变量中存在，将直接播放')

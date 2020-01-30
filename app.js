@@ -3,7 +3,7 @@ const xhtApp = require('./utils/xhtad_sdk.min.js')
 App({
   globalData: {
     dbgMode: false,
-    version: '1.43.1',
+    version: '1.43.2',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
@@ -41,14 +41,14 @@ App({
   },
   callback(data) {
     if (data['openid'] != null) {
-      console.log('已获取OpenID：' + getApp().globalData['platform']['tag'] + '_' + data['openid'])
+      console.log('已获取 OpenID：' + getApp().globalData['platform']['tag'] + '_' + data['openid'])
       wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data['openid'])
     } else {
       wx.showToast({
-        title: 'OpenID获取失败！',
+        title: 'OpenID 获取失败！',
         icon: 'none'
       })
-      console.log('OpenID获取失败')
+      console.log('OpenID 获取失败')
     }
   }
 })

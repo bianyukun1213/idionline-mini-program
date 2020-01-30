@@ -20,7 +20,7 @@ function get(args) {
     url = ''
   }
   wx.showLoading({
-    title: '请稍候~',
+    title: '请稍候',
     mask: true
   })
   console.log('发送请求：' + urlBase + url)
@@ -46,7 +46,7 @@ function get(args) {
 
 function downloadTTSAudio(tok, cuid, tex, doSuccess) {
   wx.showLoading({
-    title: '请稍候~',
+    title: '请稍候',
     mask: true
   })
   var url = 'https://tsn.baidu.com/text2audio?tok=' + tok + '&cuid=' + cuid + '&lan=zh&ctp=1&tex=' + tex
@@ -74,7 +74,7 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
 
 function uniFunc(url, method, dt, doSuccess) {
   wx.showLoading({
-    title: '请稍候~',
+    title: '请稍候',
     mask: true
   })
   var urlNew

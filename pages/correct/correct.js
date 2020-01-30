@@ -39,7 +39,7 @@ Page({
   },
   onContact() {
     wx.vibrateShort()
-    var str = '成语名称：' + this.data['name'] + '\n成语Id：' + this.data['id'] + '\n纠错内容：' + this.data['value']
+    var str = '成语名称：' + this.data['name'] + '\n成语 Id：' + this.data['id'] + '\n纠错内容：' + this.data['value']
     console.log(str)
     wx.setClipboardData({
       data: str

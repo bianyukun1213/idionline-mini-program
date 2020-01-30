@@ -42,7 +42,7 @@ Page({
     var marked = wx.getStorageSync('markedIdioms') || {}
     delete marked[index]
     wx.setStorageSync('markedIdioms', marked)
-    console.log('已移除索引为' + index + '的成语')
+    console.log('已移除索引为 ' + index + ' 的成语')
     //设置Timeout来部分解决动画问题（两个都展开后再移除一个，会出现错误，不过我感觉是vant的锅。）。
     setTimeout(() => {
       this.loadData()

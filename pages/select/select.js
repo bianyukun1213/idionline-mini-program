@@ -54,7 +54,7 @@ Page({
       page: this.data['page'] - 1,
       idioms2Disp: this.data['tmp'][this.data['page'] - 1]
     })
-    console.log('翻到第' + (this.data['page'] + 1) + '页')
+    console.log('翻到第 ' + (this.data['page'] + 1) + ' 页')
     if (this.data['page'] < this.data['tmp'].length - 1)
       this.setData({
         showNext: true
@@ -70,7 +70,7 @@ Page({
       page: this.data['page'] + 1,
       idioms2Disp: this.data['tmp'][this.data['page'] + 1]
     })
-    console.log('翻到第' + (this.data['page'] + 1) + '页')
+    console.log('翻到第 ' + (this.data['page'] + 1) + ' 页')
     if (this.data['page'] > 0)
       this.setData({
         showPrev: true

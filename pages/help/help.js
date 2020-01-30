@@ -69,7 +69,7 @@ Page({
     wx.setClipboardData({
       data: 'https://github.com/bianyukun1213/idionline',
       success(res) {
-        console.log('已复制GitHub链接到剪贴板')
+        console.log('已复制 GitHub 链接到剪贴板')
       }
     })
   },

@@ -7,8 +7,8 @@ function formatDate(inputTime, mDMode) {
   var d = date.getDate()
   d = d < 10 ? (d) : d
   if (mDMode)
-    return m + '月' + d + '日'
-  return y + '年' + m + '月' + d + '日'
+    return ' ' + m + ' 月 ' + d + ' 日'
+  return ' ' + y + ' 年 ' + m + ' 月 ' + d + ' 日'
 }
 
 function getUnixTimestamp() {
