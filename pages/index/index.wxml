@@ -41,7 +41,7 @@
     <van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
   </van-popup>
   <view class="slide" wx:if="{{idiName!=null}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
-    <view class="text_bottom">上划查看每日成语</view>
+    <view class="text_bottom">上划查看「每日成语」</view>
   </view>
   <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>

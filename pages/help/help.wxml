@@ -1,10 +1,10 @@
 <van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
   <van-collapse value="{{activeName}}" accordion bind:change="onChange">
-    <van-collapse-item title="关于成语在线" name="1">
+    <van-collapse-item title="关于「成语在线」" name="1">
       <view class="root">
         <image class="img" src="../../icons/idionline&kun.svg" mode="aspectFit" bind:tap="onCopyBlog" />
-        <text class="text">成语在线\n小程序与 Web API\n由「仿生人会涮电子羊吗」开发</text>
+        <text class="text">「成语在线」\n小程序与 Web API\n由「仿生人会涮电子羊吗」开发</text>
         <van-button class="btn" aria-role="button" aria-label="复制 GitHub 链接" color="{{color}}" bind:click="onCopy">复制 GitHub 链接</van-button>
       </view>
     </van-collapse-item>
@@ -12,21 +12,21 @@
       在首页的搜索栏中直接输入您要查询的成语即可。您可使用成语名称、成语名称连续的一部分（可包含一个逗号）、成语的索引（例如「哀兵必胜」的索引「A」）以及成语的 Id 来查询成语。根据服务器返回数据的情况，您可能需要进一步选择具体的成语。
     </van-collapse-item>
     <van-collapse-item title="如何收藏成语？" name="3">
-      点击成语页面右下角的「收藏」按钮，成语便会被添加到您的收藏列表。收藏成语数量上限为 20。您可在“收藏”页面中管理收藏列表。点击某一条目跳转到对应的释义页面，左划移除这条成语。需要注意的是，您的收藏数据保存在设备储存中，一旦出现设备丢失、储存清空等情况，都将丢失且无法恢复！收藏数据过多时，页面可能变得卡顿甚至无法显示！请您谨慎使用该功能。
+      点击成语页面右下角的「收藏」按钮，成语便会被添加到您的收藏列表。收藏成语数量上限为 20。您可在「收藏」页面中管理收藏列表。点击某一条目跳转到对应的释义页面，左划移除这条成语。需要注意的是，您的收藏数据保存在设备储存中，一旦出现设备丢失、储存清空等情况，都将丢失且无法恢复！收藏数据过多时，页面可能变得卡顿甚至无法显示！请您谨慎使用该功能。
     </van-collapse-item>
     <van-collapse-item title="如何转发成语？" name="4">
-      点击成语页面右上角的「…」按钮，您就能看见转发按钮。
+      点击成语页面右上角的「…」按钮或成语卡片上的「分享」按钮，选择其中的「转发」选项。
     </van-collapse-item>
-    <van-collapse-item title="如何让设备朗读成语？" name="5">
+    <van-collapse-item title="如何使用「成语朗读」功能？" name="5">
       点击成语页面的释义标签，小程序将请求百度语音合成。
     </van-collapse-item>
     <van-collapse-item title="如何查看「每日成语」？" name="6">
-      您可在首页的底部上划来查看每日成语。
+     在首页的底部上划即可。
     </van-collapse-item>
     <van-collapse-item title="其他小功能" name="7">
-      <text>1、您可输入「试试手气」来随机查看一条成语。\n2、您可输入「往日成语」来查看往期每日成语。\n3、当读取到剪贴板内容为四字词语时，搜索栏会自动填充。\n4、当读取到剪贴板内容中存在格式类似「【哀兵必胜】」的文本时，会自动接龙。</text>
+      <text>1、当读取到剪贴板内容为四字词语时，搜索栏会自动填充。\n2、当读取到剪贴板内容中存在格式类似于「【哀兵必胜】」的文本时，小程序会自动接龙。\n3、部分隐藏更深的功能等待您去发掘。</text>
     </van-collapse-item>
-    <van-collapse-item title="参数与功能" name="8">
+    <van-collapse-item title="参数与设置" name="8">
       <text style="color:red;">「成语在线」小程序现已在微信及 QQ 平台上线。在不同平台上，您的体验可能会有所不同。\nQQ 平台上节日换肤功能效果不佳，故暂时关闭。\n</text>
       <text style="color:green;" wx:if="{{platTag=='WeChat'}}">小程序平台：{{platStr}}\n小程序版本：{{version}}\nWeb API 版本：{{apiVer}}\n</text>
       <text style="color:dodgerblue;" wx:elif="{{platTag=='QQ'}}">小程序平台：{{platStr}}\n小程序版本：{{version}}\nWeb API 版本：{{apiVer}}\n</text>
