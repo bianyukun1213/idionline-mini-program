@@ -11,13 +11,8 @@
   text-align: center;
 }
 
-.van-swipe-cell__right {
-  display: inline-block;
-  width: 65px;
-  height: 44px;
-  font-size: 16px;
-  line-height: 44px;
-  color: white;
-  text-align: center;
-  background-color: red;
+.con {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

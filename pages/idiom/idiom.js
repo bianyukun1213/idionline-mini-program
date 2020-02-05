@@ -121,20 +121,12 @@ Page({
   onMark() {
     wx.vibrateShort()
     var marked = wx.getStorageSync('markedIdioms') || {}
-    if (Object.getOwnPropertyNames(marked).length < 20) {
-      marked[this.data['id']] = this.data['name']
-      wx.setStorageSync('markedIdioms', marked)
-      wx.showToast({
-        title: '完成！'
-      })
-      console.log('已添加成语至收藏：' + this.data['name'])
-    } else {
-      wx.showToast({
-        title: '收藏成语数量已达上限！',
-        icon: 'none'
-      })
-      wx.vibrateLong()
-    }
+    marked[this.data['id']] = this.data['name']
+    wx.setStorageSync('markedIdioms', marked)
+    wx.showToast({
+      title: '完成！'
+    })
+    console.log('已添加成语至收藏：' + this.data['name'])
   },
   onCorrect() {
     wx.vibrateShort()

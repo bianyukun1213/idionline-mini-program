@@ -35,7 +35,7 @@ Page({
       tmp: this.data['tmp'],
       idioms2Disp: this.data['tmp'][0]
     })
-    if (this.data['idioms2Disp'].length >= 20)
+    if (this.data['tmp'].length > 1)
       this.setData({
         showNext: true
       })
