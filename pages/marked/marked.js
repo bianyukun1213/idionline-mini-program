@@ -78,7 +78,7 @@ Page({
       this.setData({
         showPrev: true
       })
-    console.log('渲染收藏数据：', marked)
+    console.log('渲染收藏数据：', this.data['items'])
   },
   onDelete(e) {
     //获取控件的id，也就是被移除成语的index。
@@ -93,33 +93,17 @@ Page({
   onPrev() {
     wx.vibrateShort()
     this.setData({
-      page: this.data['page'] - 1,
-      items: this.data['tmp'][this.data['page'] - 1]
+      page: this.data['page'] - 1
     })
+    this.loadData()
     console.log('翻到第 ' + (this.data['page'] + 1) + ' 页')
-    if (this.data['page'] < this.data['tmp'].length - 1)
-      this.setData({
-        showNext: true
-      })
-    if (this.data['page'] == 0)
-      this.setData({
-        showPrev: false
-      })
   },
   onNext() {
     wx.vibrateShort()
     this.setData({
-      page: this.data['page'] + 1,
-      items: this.data['tmp'][this.data['page'] + 1]
+      page: this.data['page'] + 1
     })
+    this.loadData()
     console.log('翻到第 ' + (this.data['page'] + 1) + ' 页')
-    if (this.data['page'] > 0)
-      this.setData({
-        showPrev: true
-      })
-    if (this.data['page'] == this.data['tmp'].length - 1)
-      this.setData({
-        showNext: false
-      })
   }
 })
