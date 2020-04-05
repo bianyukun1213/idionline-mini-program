@@ -8,7 +8,9 @@ var FIT_MODE_MAP = {
     none: 'center',
     fill: 'scaleToFill',
     cover: 'aspectFill',
-    contain: 'aspectFit'
+    contain: 'aspectFit',
+    widthFix: 'widthFix',
+    heightFix: 'heightFix'
 };
 component_1.VantComponent({
     mixins: [button_1.button, open_type_1.openType],
@@ -53,7 +55,8 @@ component_1.VantComponent({
     },
     data: {
         error: false,
-        loading: true
+        loading: true,
+        viewStyle: '',
     },
     mounted: function () {
         this.setMode();
@@ -78,7 +81,7 @@ component_1.VantComponent({
                 style += 'overflow: hidden;';
                 style += "border-radius: " + utils_1.addUnit(radius) + ";";
             }
-            this.setData({ style: style });
+            this.setData({ viewStyle: style });
         },
         onLoad: function (event) {
             this.setData({

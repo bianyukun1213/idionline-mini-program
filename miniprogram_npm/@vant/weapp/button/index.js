@@ -7,7 +7,7 @@ component_1.VantComponent({
     mixins: [button_1.button, open_type_1.openType],
     classes: ['hover-class', 'loading-class'],
     data: {
-        style: ''
+        baseStyle: ''
     },
     props: {
         icon: String,
@@ -54,17 +54,18 @@ component_1.VantComponent({
                         style += "border-color: " + color + ";";
                     }
                 }
-                if (style !== this.data.style) {
-                    this.setData({ style: style });
+                if (style !== this.data.baseStyle) {
+                    this.setData({ baseStyle: style });
                 }
             }
         }
     },
     methods: {
         onClick: function () {
-            if (!this.data.disabled && !this.data.loading) {
+            if (!this.data.loading) {
                 this.$emit('click');
             }
-        }
+        },
+        noop: function () { }
     }
 });

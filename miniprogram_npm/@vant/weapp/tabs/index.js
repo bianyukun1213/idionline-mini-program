@@ -9,14 +9,13 @@ component_1.VantComponent({
     relation: {
         name: 'tab',
         type: 'descendant',
+        current: 'tabs',
         linked: function (target) {
-            target.index = this.children.length;
-            this.children.push(target);
+            target.index = this.children.length - 1;
             this.updateTabs();
         },
-        unlinked: function (target) {
+        unlinked: function () {
             this.children = this.children
-                .filter(function (child) { return child !== target; })
                 .map(function (child, index) {
                 child.index = index;
                 return child;
@@ -33,8 +32,10 @@ component_1.VantComponent({
         animated: {
             type: Boolean,
             observer: function () {
-                this.setTrack();
-                this.children.forEach(function (child) { return child.updateRender(); });
+                var _this = this;
+                this.children.forEach(function (child, index) {
+                    return child.updateRender(index === _this.data.currentIndex, _this);
+                });
             }
         },
         swipeable: Boolean,
@@ -95,7 +96,7 @@ component_1.VantComponent({
         lazyRender: {
             type: Boolean,
             value: true
-        },
+        }
     },
     data: {
         tabs: [],
@@ -106,19 +107,20 @@ component_1.VantComponent({
         currentIndex: null,
         container: null
     },
-    beforeCreate: function () {
-        this.children = [];
-    },
     mounted: function () {
         var _this = this;
-        this.setData({
-            container: function () { return _this.createSelectorQuery().select('.van-tabs'); }
+        wx.nextTick(function () {
+            _this.setLine(true);
+            _this.scrollIntoView();
         });
-        this.setLine(true);
-        this.setTrack();
-        this.scrollIntoView();
     },
     methods: {
+        updateContainer: function () {
+            var _this = this;
+            this.setData({
+                container: function () { return _this.createSelectorQuery().select('.van-tabs'); }
+            });
+        },
         updateTabs: function () {
             var _a = this, _b = _a.children, children = _b === void 0 ? [] : _b, data = _a.data;
             this.setData({
@@ -127,16 +129,16 @@ component_1.VantComponent({
             });
             this.setCurrentIndexByName(this.getCurrentName() || data.active);
         },
-        trigger: function (eventName) {
+        trigger: function (eventName, child) {
             var currentIndex = this.data.currentIndex;
-            var child = this.children[currentIndex];
-            if (!utils_1.isDef(child)) {
+            var currentChild = child || this.children[currentIndex];
+            if (!utils_1.isDef(currentChild)) {
                 return;
             }
             this.$emit(eventName, {
-                index: currentIndex,
-                name: child.getComputedName(),
-                title: child.data.title
+                index: currentChild.index,
+                name: currentChild.getComputedName(),
+                title: currentChild.data.title
             });
         },
         onTap: function (event) {
@@ -144,7 +146,7 @@ component_1.VantComponent({
             var index = event.currentTarget.dataset.index;
             var child = this.children[index];
             if (child.data.disabled) {
-                this.trigger('disabled');
+                this.trigger('disabled', child);
             }
             else {
                 this.setCurrentIndex(index);
@@ -182,8 +184,8 @@ component_1.VantComponent({
             this.setData({ currentIndex: currentIndex });
             wx.nextTick(function () {
                 _this.setLine();
-                _this.setTrack();
                 _this.scrollIntoView();
+                _this.updateContainer();
                 _this.trigger('input');
                 if (shouldEmitChange) {
                     _this.trigger('change');
@@ -222,15 +224,6 @@ component_1.VantComponent({
                 _this.setData({
                     lineStyle: "\n            " + height + "\n            width: " + utils_1.addUnit(width) + ";\n            background-color: " + color + ";\n            -webkit-transform: translateX(" + left + "px);\n            transform: translateX(" + left + "px);\n            " + transition + "\n          "
                 });
-            });
-        },
-        setTrack: function () {
-            var _a = this.data, animated = _a.animated, duration = _a.duration, currentIndex = _a.currentIndex;
-            if (!animated) {
-                return;
-            }
-            this.setData({
-                trackStyle: "\n          transform: translate3d(" + -100 * currentIndex + "%, 0, 0);\n          -webkit-transition-duration: " + duration + "s;\n          transition-duration: " + duration + "s;\n        "
             });
         },
         // scroll active tab into view

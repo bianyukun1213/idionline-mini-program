@@ -199,16 +199,8 @@ Page({
     } else {
       wx.showModal({
         title: '查询无结果',
-        content: '未找到您要查询的成语「' + dt + '」。您仍可使用「聚合数据」接口继续查询。但请注意，「聚合数据」接口每天只能调用 100 次，您应确保输入的成语名称完整无误，以免浪费调用次数。您要继续查询吗？',
-        confirmText: '继续查询',
-        success(res) {
-          if (res.confirm) {
-            wx.vibrateShort()
-            wx.navigateTo({
-              url: '/pages/idiom_juhe/idiom?name=' + dt
-            })
-          }
-        }
+        content: '未找到您要查询的成语「' + dt + '」。服务器已尝试从其他数据源自动收录。您可以稍微等待，然后尝试再次搜索。',
+        showCancel: false
       })
       wx.vibrateShort()
     }

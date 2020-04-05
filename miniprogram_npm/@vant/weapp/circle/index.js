@@ -28,7 +28,6 @@ component_1.VantComponent({
         size: {
             type: Number,
             value: 100,
-            observer: 'setStyle'
         },
         fill: String,
         layerColor: {
@@ -40,6 +39,10 @@ component_1.VantComponent({
             value: color_1.BLUE,
             observer: 'setHoverColor'
         },
+        type: {
+            type: String,
+            value: ''
+        },
         strokeWidth: {
             type: Number,
             value: 4
@@ -50,7 +53,6 @@ component_1.VantComponent({
         }
     },
     data: {
-        style: 'width: 100px; height: 100px;',
         hoverColor: color_1.BLUE
     },
     methods: {
@@ -61,8 +63,8 @@ component_1.VantComponent({
             return this.ctx;
         },
         setHoverColor: function () {
-            var context = this.getContext();
-            var _a = this.data, color = _a.color, size = _a.size;
+            var _a = this.data, color = _a.color, size = _a.size, type = _a.type;
+            var context = type ? this.getContext(type) : this.getContext();
             var hoverColor = color;
             if (utils_1.isObj(color)) {
                 var LinearColor_1 = context.createLinearGradient(size, 0, 0, 0);
@@ -72,11 +74,6 @@ component_1.VantComponent({
                 hoverColor = LinearColor_1;
             }
             this.setData({ hoverColor: hoverColor });
-        },
-        setStyle: function () {
-            var size = this.data.size;
-            var style = "width: " + size + "px; height: " + size + "px;";
-            this.setData({ style: style });
         },
         presetCanvas: function (context, strokeStyle, beginAngle, endAngle, fill) {
             var _a = this.data, strokeWidth = _a.strokeWidth, lineCap = _a.lineCap, clockwise = _a.clockwise, size = _a.size;
@@ -107,8 +104,8 @@ component_1.VantComponent({
             this.presetCanvas(context, hoverColor, BEGIN_ANGLE, endAngle);
         },
         drawCircle: function (currentValue) {
-            var context = this.getContext();
-            var size = this.data.size;
+            var _a = this.data, size = _a.size, type = _a.type;
+            var context = type ? this.getContext(type) : this.getContext();
             context.clearRect(0, 0, size, size);
             this.renderLayerCircle(context);
             var formatValue = format(currentValue);

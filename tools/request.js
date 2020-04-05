@@ -7,8 +7,6 @@ function get(args) {
   console.log('请求参数列表：\nurl：', url, '\ndoSuccess：', doSuccess, '\nexHandler：', exHandler, '\ntype：', type)
   if (type == 'TTS') {
     urlBase = 'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=BfYDfQxbqmKPazSVr1He4Lap&client_secret=z9PXBM0P1bUFDEYgfiSnSax5mHZEHD18'
-  } else if (type == 'Juhe') {
-    urlBase = 'https://v.juhe.cn/chengyu/query?'
   } else {
     if (getApp().globalData['dbgMode']) {
       urlBase = 'http://localhost:12601/api/'

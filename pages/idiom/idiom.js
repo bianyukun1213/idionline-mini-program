@@ -5,12 +5,6 @@ const info = require('../../tools/info.js')
 var innerAudioContext
 Page({
   data: {
-    xhtad: {
-      adData: {},
-      ad: {
-        banner: true // banner 广告开关
-      }
-    },
     platform: null,
     color: null,
     id: null,

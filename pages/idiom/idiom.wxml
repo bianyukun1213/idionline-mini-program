@@ -46,9 +46,5 @@
 </view>
 <view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
   <ad type="card" wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" bind:error="onAdError"></ad>
-  <view class="xht_banner" style="width:100%;" wx:elif="{{platform=='WeChat'}}">
-    <xht-ad class="xht_component" data-id="banner" adData="{{xhtad.adData}}" bindad:load="xhtadImgLoad" bind:click="xhtappoIntView" bind:close="xhtadClose">
-    </xht-ad>
-  </view>
   <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>

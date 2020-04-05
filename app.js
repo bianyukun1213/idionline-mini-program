@@ -1,9 +1,8 @@
 const call = require('tools/request.js')
-const xhtApp = require('./utils/xhtad_sdk.min.js')
 App({
   globalData: {
     dbgMode: false,
-    version: '1.44.2',
+    version: '1.44.3',
     platform: {
       'tag': 'WeChat',
       'str': '微信'

@@ -7,10 +7,9 @@ component_1.VantComponent({
     relation: {
         name: 'grid',
         type: 'ancestor',
-        linked: function (parent) {
-            this.parent = parent;
-        }
+        current: 'grid-item',
     },
+    classes: ['content-class', 'icon-class', 'text-class'],
     mixins: [link_1.link],
     props: {
         icon: String,
@@ -18,6 +17,9 @@ component_1.VantComponent({
         info: null,
         text: String,
         useSlot: Boolean
+    },
+    data: {
+        viewStyle: '',
     },
     mounted: function () {
         this.updateStyle();
@@ -49,7 +51,7 @@ component_1.VantComponent({
                 contentStyle = "\n          right: " + gutterValue + ";\n          bottom: " + gutterValue + ";\n          height: auto;\n        ";
             }
             this.setData({
-                style: styleWrapper.join('; '),
+                viewStyle: styleWrapper.join('; '),
                 contentStyle: contentStyle,
                 center: center,
                 border: border,

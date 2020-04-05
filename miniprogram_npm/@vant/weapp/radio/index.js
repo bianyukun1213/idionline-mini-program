@@ -6,15 +6,11 @@ component_1.VantComponent({
     relation: {
         name: 'radio-group',
         type: 'ancestor',
-        linked: function (target) {
-            this.parent = target;
-        },
-        unlinked: function () {
-            this.parent = null;
-        }
+        current: 'radio',
     },
     classes: ['icon-class', 'label-class'],
     props: {
+        name: null,
         value: null,
         disabled: Boolean,
         useIconSlot: Boolean,
@@ -39,9 +35,10 @@ component_1.VantComponent({
             instance.$emit('input', value);
             instance.$emit('change', value);
         },
-        onChange: function (event) {
-            console.log(event);
-            this.emitChange(this.data.name);
+        onChange: function () {
+            if (!this.data.disabled) {
+                this.emitChange(this.data.name);
+            }
         },
         onClickLabel: function () {
             var _a = this.data, disabled = _a.disabled, labelDisabled = _a.labelDisabled, name = _a.name;
