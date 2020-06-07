@@ -2,7 +2,7 @@ const call = require('tools/request.js')
 App({
   globalData: {
     dbgMode: false,
-    version: '1.45.0',
+    version: '1.45.1',
     platform: {
       'tag': 'WeChat',
       'str': '微信'

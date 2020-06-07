@@ -111,7 +111,7 @@ Page({
       })
       if (launchInfo['dailyIdiom']['pinyin'] != null)
         this.setData({
-          pinyin: '[' + launchInfo['dailyIdiom']['pinyin'] + ']'
+          pinyin: '（' + launchInfo['dailyIdiom']['pinyin'] + '）'
         })
     }
     color.apl()
