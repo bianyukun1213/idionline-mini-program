@@ -7,7 +7,10 @@ function getLaunchInfo(callback) {
     callb = callback
     console.log('开始请求启动信息')
     call.get({
-      url: 'launchinfo/' + format.getUnixTimestamp() + '/' + wx.getStorageSync('openId'),
+      url: 'launchinfo/' + format.getUnixTimestamp(),
+      data: {
+        'openId': wx.getStorageSync('openId')
+      },
       doSuccess: applyData
     })
   } else {

@@ -4,7 +4,7 @@
   "description": "成语在线小程序",
   "main": "app.js",
   "dependencies": {
-    "@vant/weapp": "^1.2.0"
+    "@vant/weapp": "^1.3.2"
   },
   "devDependencies": {},
   "scripts": {

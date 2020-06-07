@@ -1,4 +1,3 @@
-const call = require('../../tools/request.js')
 const color = require('../../tools/color.js')
 Page({
   data: {
@@ -82,7 +81,7 @@ Page({
   onCopyBlog() {
     wx.vibrateShort()
     wx.setClipboardData({
-      data: 'https://bianyukun1213.github.io',
+      data: 'https://his2nd.life',
       success(res) {
         console.log('已复制博客链接到剪贴板')
       }

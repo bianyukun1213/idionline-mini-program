@@ -1,6 +1,6 @@
 <van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
-  <van-panel wx:if="{{name!=null}}" title="{{name}}{{pinyin}}" desc="{{origin}}由{{lastEditor}}最后编辑于{{updateTime}}" use-footer-slot>
+  <van-panel wx:if="{{name!=null}}" title="{{name}}{{pinyin}}" desc="{{origin}}由用户「{{lastEditor}}」最后编辑于{{updateTime}}" use-footer-slot>
     <view class="content">
       <view class="defs" wx:for="{{defs}}" wx:key="index">
         <van-row style="margin-bottom:5px;">
@@ -13,7 +13,7 @@
         </van-row>
         <van-row>
           <van-col span="6">
-            <van-tag id="{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">释义🔊</van-tag>
+            <van-tag id="{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">释义 🔊</van-tag>
           </van-col>
           <van-col span="18">
             <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>

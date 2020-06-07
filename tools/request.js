@@ -1,10 +1,11 @@
 function get(args) {
   var url = args['url']
+  var data = args['data']
   var doSuccess = args['doSuccess']
   var exHandler = args['exHandler']
   var type = args['type']
   var urlBase
-  console.log('请求参数列表：\nurl：', url, '\ndoSuccess：', doSuccess, '\nexHandler：', exHandler, '\ntype：', type)
+  console.log('请求参数列表：\nurl：', url, '\ndata：', data, '\ndoSuccess：', doSuccess, '\nexHandler：', exHandler, '\ntype：', type)
   if (type == 'TTS') {
     urlBase = 'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=BfYDfQxbqmKPazSVr1He4Lap&client_secret=z9PXBM0P1bUFDEYgfiSnSax5mHZEHD18'
   } else {
@@ -24,15 +25,24 @@ function get(args) {
   console.log('发送请求：' + urlBase + url)
   wx.request({
     url: urlBase + url,
+    data: data,
     success(res) {
       wx.hideLoading()
       if (res.statusCode == 200 && typeof doSuccess == 'function') {
-        console.log('查询到数据：', res.data)
-        doSuccess(res.data)
+        if (type == 'TTS') {
+          console.log('查询到数据：', res.data)
+          doSuccess(res.data)
+        } else {
+          if (res.data['code'] == 0) {
+            console.log('查询到数据：', res.data)
+            doSuccess(res.data['result'])
+          } else
+            fail(res.statusCode, res.data['code'], res.data['msg'], exHandler)
+        }
       } else if (res.statusCode == 404) {
         notFound(exHandler)
       } else {
-        fail(res.statusCode, exHandler)
+        fail(res.statusCode, res.data['code'], res.data['msg'], exHandler)
       }
     },
     fail(err) {
@@ -88,13 +98,13 @@ function uniFunc(url, method, dt, doSuccess) {
     data: dt,
     success(res) {
       wx.hideLoading()
-      if (res.statusCode == 200 && typeof doSuccess == 'function') {
+      if (res.statusCode == 200 && res.data['code'] == 0 && typeof doSuccess == 'function') {
         console.log('查询到数据：', res.data)
-        doSuccess(res.data)
+        doSuccess(res.data['result'])
       } else if (res.statusCode == 404) {
         notFound()
       } else {
-        fail(res.statusCode)
+        fail(res.statusCode, res.data['code'], res.data['msg'])
       }
     },
     fail(err) {
@@ -104,16 +114,23 @@ function uniFunc(url, method, dt, doSuccess) {
   })
 }
 
-function fail(code, exHandler) {
-  console.log('错误：' + code)
+function fail(code, codeFromIdionline, state, exHandler) {
+  console.log('错误：' + code + ',' + codeFromIdionline + ',' + state)
   if (typeof exHandler == 'function') {
     console.log('将执行exHandler()')
     exHandler()
   } else {
-    wx.showToast({
-      title: '错误：' + code,
-      icon: 'none'
-    })
+    wx.vibrateLong()
+    if (codeFromIdionline != undefined)
+      wx.showToast({
+        title: '错误：' + state,
+        icon: 'none'
+      })
+    else
+      wx.showToast({
+        title: '错误：' + code,
+        icon: 'none'
+      })
   }
 }
 
@@ -123,6 +140,7 @@ function notFound(exHandler) {
     console.log('将执行exHandler()')
     exHandler()
   } else {
+    wx.vibrateLong()
     wx.showToast({
       title: '很抱歉，未查询到数据！',
       icon: 'none'

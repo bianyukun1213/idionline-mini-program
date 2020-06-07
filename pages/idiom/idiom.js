@@ -41,7 +41,10 @@ Page({
     })
     this.data['openId'] = wx.getStorageSync('openId')
     call.get({
-      url: 'idiom/' + option['id'] + '/' + this.data['openId'],
+      url: 'idiom/' + option['id'],
+      data: {
+        'openId': this.data['openId']
+      },
       doSuccess: this.fillData
     })
     info.getLaunchInfo(this.callback)
@@ -96,7 +99,7 @@ Page({
     })
     if (data['pinyin'] != null)
       this.setData({
-        pinyin: '[' + data['pinyin'] + ']'
+        pinyin: '（' + data['pinyin'] + '）'
       })
     if (data['origin'] != null)
       this.setData({

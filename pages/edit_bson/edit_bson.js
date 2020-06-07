@@ -15,7 +15,11 @@ Page({
     this.data['id'] = json['id']
     this.data['openId'] = json['openId'],
       call.get({
-        url: 'idiom/' + this.data['id'] + '/bson/' + this.data['openId'],
+        url: 'idiom/' + this.data['id'],
+        data: {
+          'bson': 1,
+          'openId': this.data['openId']
+        },
         doSuccess: this.callback
       })
     this.setData({

@@ -2,7 +2,7 @@ const call = require('tools/request.js')
 App({
   globalData: {
     dbgMode: false,
-    version: '1.44.3',
+    version: '1.45.0',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
@@ -31,7 +31,11 @@ App({
           console.log(res)
           if (res.code)
             call.get({
-              url: 'editor/login/' + getApp().globalData['platform']['tag'] + '/' + res.code,
+              url: 'editor/login',
+              data: {
+                'platTag': getApp().globalData['platform']['tag'],
+                'code': res.code
+              },
               doSuccess: that.callback
             })
         }
@@ -39,15 +43,7 @@ App({
     }
   },
   callback(data) {
-    if (data['openid'] != null) {
-      console.log('已获取 OpenID：' + getApp().globalData['platform']['tag'] + '_' + data['openid'])
-      wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data['openid'])
-    } else {
-      wx.showToast({
-        title: 'OpenID 获取失败！',
-        icon: 'none'
-      })
-      console.log('OpenID 获取失败')
-    }
+    console.log('已获取 OpenID：' + getApp().globalData['platform']['tag'] + '_' + data)
+    wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data)
   }
 })

@@ -4,5 +4,5 @@
     "van-field": "/miniprogram_npm/@vant/weapp/field/index",
     "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
   },
-  "navigationBarTitleText": "BSON编辑模式"
+  "navigationBarTitleText": "BSON 编辑模式"
 }

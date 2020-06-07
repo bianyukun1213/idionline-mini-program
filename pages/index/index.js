@@ -168,7 +168,7 @@ Page({
       this.data['idMode'] = true
       this.data['searchBarValue'] = e.detail //同上。
       call.get({
-        url: 'idiom/search/id/' + e.detail,
+        url: 'idiom/search/' + e.detail,
         doSuccess: this.nav,
         exHandler: this.exHandler
       })
@@ -222,7 +222,7 @@ Page({
       })
     }
   },
-  //弹出层关闭
+  //弹出层关闭。
   onPopupClose() {
     this.setData({
       show: false,
