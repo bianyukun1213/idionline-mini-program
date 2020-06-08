@@ -114,16 +114,16 @@ function uniFunc(url, method, dt, doSuccess) {
   })
 }
 
-function fail(code, codeFromIdionline, state, exHandler) {
-  console.log('错误：' + code + ',' + codeFromIdionline + ',' + state)
+function fail(code, codeFromIdionline, msg, exHandler) {
+  console.log('错误：' + code + ',' + codeFromIdionline + ',' + msg)
   if (typeof exHandler == 'function') {
     console.log('将执行exHandler()')
-    exHandler()
+    exHandler(code, codeFromIdionline, msg)
   } else {
     wx.vibrateLong()
     if (codeFromIdionline != undefined)
       wx.showToast({
-        title: '错误：' + state,
+        title: '错误：' + msg,
         icon: 'none'
       })
     else

@@ -187,9 +187,23 @@ Page({
     }
   },
   //成语未收录时：
-  exHandler() {
+  exHandler(code, codeFromIdionline, msg) {
     var dt = this.data['searchBarValue']
     console.log('查询无结果：' + dt)
+    if (codeFromIdionline != 20001) {
+      wx.vibrateLong()
+      if (codeFromIdionline != undefined)
+        wx.showToast({
+          title: '错误：' + msg,
+          icon: 'none'
+        })
+      else
+        wx.showToast({
+          title: '错误：' + code,
+          icon: 'none'
+        })
+      return
+    }
     if (this.data['idMode']) {
       wx.showToast({
         title: '查询无结果！',
@@ -202,7 +216,7 @@ Page({
         content: '未找到您要查询的成语「' + dt + '」。服务器已尝试从其他数据源自动收录。您可以稍微等待，然后尝试再次搜索。',
         showCancel: false
       })
-      wx.vibrateShort()
+      wx.vibrateLong()
     }
   },
   nav(data) {
