@@ -23,6 +23,7 @@ Page({
     onTouch: false,
     showDailyIdiom: false,
     idMode: false,
+    indexMode: false,
     filePath: null,
     shareIdiom: null,
     overlayOn: false,
@@ -153,6 +154,7 @@ Page({
   onSearch(e) {
     wx.vibrateShort()
     this.data['idMode'] = false
+    this.data['indexMode'] = false
     //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
     var reg2 = new RegExp('^[0-9a-zA-Z]{24}')
@@ -173,10 +175,12 @@ Page({
         exHandler: this.exHandler
       })
     } else if (reg3.exec(e.detail)) {
+      this.data['idMode'] = true
       this.data['searchBarValue'] = e.detail //同上。
       call.get({
-        url: 'idiom/index/' + e.detail,
-        doSuccess: this.nav
+        url: 'idiom/search/' + e.detail,
+        doSuccess: this.nav,
+        exHandler: this.exHandler
       })
     } else {
       wx.showToast({
@@ -204,7 +208,7 @@ Page({
         })
       return
     }
-    if (this.data['idMode']) {
+    if (this.data['idMode'] || this.data['indexMode']) {
       wx.showToast({
         title: '查询无结果！',
         icon: 'none'
