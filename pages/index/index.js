@@ -8,6 +8,7 @@ Page({
     text: null,
     scene: null,
     idiName: null,
+    idiId: null,
     pinyin: '',
     defs: null,
     launchInfo: null,
@@ -108,6 +109,7 @@ Page({
     if (launchInfo['dailyIdiom'] != null) {
       this.setData({
         idiName: launchInfo['dailyIdiom']['name'],
+        idiId: launchInfo['dailyIdiom']['id'],
         defs: launchInfo['dailyIdiom']['definitions']
       })
       if (launchInfo['dailyIdiom']['pinyin'] != null)
@@ -138,12 +140,12 @@ Page({
         wx.vibrateShort()
       }
     }
-    if (this.data['showDailyIdiom'] && this.data['idiName'] != null) {
+    if (this.data['showDailyIdiom'] && this.data['idiId'] != null) {
       this.setData({
         showPopup: true
       })
       wx.vibrateShort()
-      if (this.data['shareIdiom'] != this.data['idiName'])
+      if (this.data['shareIdiom'] != this.data['idiId'])
         wx.showToast({
           title: '每日成语已更换！',
           icon: 'none'
@@ -155,7 +157,6 @@ Page({
     wx.vibrateShort()
     this.data['idMode'] = false
     this.data['indexMode'] = false
-    //正则表达式匹配，判断是向index请求还是向search请求。
     var reg = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$') //汉字。
     var reg2 = new RegExp('^[0-9a-zA-Z]{24}')
     var reg3 = new RegExp('^[A-Za-z]$')
@@ -381,16 +382,22 @@ Page({
     })
   },
   onShareAppMessage() {
-    if (this.data['idiName'] != null) {
+    if (this.data['idiId'] != null) {
       var date = format.formatDate(getApp().globalData['launchInfo']['dateUT'], true)
       return {
         title: date + '：' + this.data['idiName'],
         imageUrl: '/icons/share.png',
-        path: '/pages/index/index?showDailyIdiom=true&shareIdiom=' + this.data['idiName']
+        path: '/pages/index/index?showDailyIdiom=true&shareIdiom=' + this.data['idiId']
       }
     }
     return {
       imageUrl: '/icons/share.png'
     }
+  },
+  onNavi(){
+    wx.vibrateShort()
+    wx.navigateTo({
+      url: '/pages/idiom/idiom?id=' + this.data['idiId']
+    })
   }
 })

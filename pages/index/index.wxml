@@ -35,6 +35,7 @@
         </view>
       </view>
       <view class="footer" slot="footer">
+      <van-button class="btn_func" aria-role="button" aria-label="查看" color="{{color}}" bind:click="onNavi">查看</van-button>
         <van-button class="btn_func" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare">分享</van-button>
       </view>
     </van-panel>
