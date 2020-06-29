@@ -394,7 +394,7 @@ Page({
       imageUrl: '/icons/share.png'
     }
   },
-  onNavi(){
+  onNavi() {
     wx.vibrateShort()
     wx.navigateTo({
       url: '/pages/idiom/idiom?id=' + this.data['idiId']

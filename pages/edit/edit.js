@@ -123,10 +123,16 @@ Page({
     call.uniFunc('idiom/' + this.data['id'], 'PUT', dt, this.done)
   },
   done(data) {
+    var that = this
     wx.showToast({
       title: data,
       icon: 'none'
     })
+    setTimeout(function () {
+      wx.redirectTo({
+        url: '/pages/idiom/idiom?id=' + that.data['id']
+      })
+    }, 1500)
   },
   onDelete() {
     var that = this
@@ -149,5 +155,10 @@ Page({
       title: data,
       icon: 'none'
     })
+    setTimeout(function () {
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }, 1500)
   },
 })

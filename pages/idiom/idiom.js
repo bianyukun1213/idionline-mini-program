@@ -45,7 +45,8 @@ Page({
       data: {
         'openId': this.data['openId']
       },
-      doSuccess: this.fillData
+      doSuccess: this.fillData,
+      exHandler: this.exHandler
     })
     info.getLaunchInfo(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
@@ -319,20 +320,10 @@ Page({
         imageUrl: '/icons/share.png',
         path: '/pages/idiom/idiom?id=' + this.data['id']
       }
-    } else {
-      wx.showModal({
-        title: '警告',
-        content: '这个页面是空白的，转发没有任何意义，希望您取消转发。',
-        showCancel: false,
-        success(res) {
-          if (res.confirm)
-            wx.vibrateShort()
-        }
-      })
-      wx.vibrateLong()
     }
     return {
-      imageUrl: '/icons/share.png'
+      imageUrl: '/icons/share.png',
+      path: '/pages/index/index'
     }
   },
   onTTSTap(e) {
@@ -390,5 +381,23 @@ Page({
   },
   onAdError(e) {
     console.log('广告加载错误：', e)
+  },
+  exHandler(code, codeFromIdionline, msg) {
+    wx.vibrateLong()
+    if (codeFromIdionline != undefined)
+      wx.showToast({
+        title: '错误：' + msg,
+        icon: 'none'
+      })
+    else
+      wx.showToast({
+        title: '错误：' + code,
+        icon: 'none'
+      })
+    setTimeout(function () {
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }, 1500)
   }
 })

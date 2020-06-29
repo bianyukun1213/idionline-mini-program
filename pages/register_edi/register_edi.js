@@ -53,6 +53,11 @@ Page({
       title: data,
       icon: 'none'
     })
-    console.log('尝试注册：' + data)
+    console.log('注册成功：' + data)
+    setTimeout(function () {
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }, 1500)
   },
 })
