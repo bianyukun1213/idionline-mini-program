@@ -124,7 +124,7 @@ Page({
   //跳转按钮点击事件。
   onClick(e) {
     wx.vibrateShort()
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/idiom/idiom?id=' + e.currentTarget.id
     })
   },
@@ -305,18 +305,10 @@ Page({
     this.onClose()
   },
   onShare() {
-    if (this.data['shareFlag']) {
-      wx.vibrateShort()
-      this.setData({
-        show: true
-      })
-    } else {
-      wx.showToast({
-        title: '页面无效！',
-        icon: 'none'
-      })
-      wx.vibrateLong()
-    }
+    wx.vibrateShort()
+    this.setData({
+      show: true
+    })
   },
   onShareAppMessage() {
     console.log('尝试转发：' + this.data['name'])

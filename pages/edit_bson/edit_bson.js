@@ -63,18 +63,18 @@ Page({
     call.uniFunc('idiom/' + this.data['id'], 'PUT', dt, this.done)
   },
   done(data) {
-    var that = this
     wx.showToast({
       title: data,
       icon: 'none'
     })
+    var pages = getCurrentPages()
+    var prevPage = pages[pages.length - 2]
+    prevPage.setData({
+      refresh: true
+    })
     setTimeout(function () {
-      var pages = getCurrentPages()
-      var prevPage = pages[pages.length - 2]
-      prevPage.setData({
-        refresh: true
-      })
-      wx.navigateBack()
+      if (getCurrentPages()[getCurrentPages().length - 2] == prevPage)
+        wx.navigateBack()
     }, 1500)
   }
 })
