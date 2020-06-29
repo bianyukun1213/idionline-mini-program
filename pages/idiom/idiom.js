@@ -109,8 +109,8 @@ Page({
       title: data['name']
     })
     //赋一堆值。
-    this.data['id'] = data['id']
     this.setData({
+      id: data['id'],
       name: data['name'],
       defs: data['definitions'],
       lastEditor: data['lastEditor'],
