@@ -117,19 +117,21 @@ function uniFunc(url, method, dt, doSuccess) {
 function fail(code, codeFromIdionline, msg, exHandler) {
   console.log('错误：' + code + ',' + codeFromIdionline + ',' + msg)
   if (typeof exHandler == 'function') {
-    console.log('将执行exHandler()')
+    console.log('将执行 exHandler()')
     exHandler(code, codeFromIdionline, msg)
   } else {
     wx.vibrateLong()
     if (codeFromIdionline != undefined)
       wx.showToast({
         title: '错误：' + msg,
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
     else
       wx.showToast({
         title: '错误：' + code,
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
   }
 }
@@ -137,13 +139,14 @@ function fail(code, codeFromIdionline, msg, exHandler) {
 function notFound(exHandler) {
   console.log('未查询到数据')
   if (typeof exHandler == 'function') {
-    console.log('将执行exHandler()')
+    console.log('将执行 exHandler()')
     exHandler()
   } else {
     wx.vibrateLong()
     wx.showToast({
       title: '很抱歉，未查询到数据！',
-      icon: 'none'
+      icon: 'none',
+      mask: true
     })
   }
 }

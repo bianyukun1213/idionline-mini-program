@@ -56,7 +56,8 @@ Page({
       console.log('音频播放错误：', errCode)
       wx.showToast({
         title: '音频播放出错！',
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
       innerAudioContext.stop()
     })
@@ -139,7 +140,8 @@ Page({
     marked[this.data['id']] = this.data['name']
     wx.setStorageSync('markedIdioms', marked)
     wx.showToast({
-      title: '完成！'
+      title: '完成！',
+      mask: true
     })
     console.log('已添加成语至收藏：' + this.data['name'])
   },
@@ -168,7 +170,8 @@ Page({
     wx.vibrateShort()
     call.get({
       url: 'idiom/solitaire/' + this.data['name'],
-      doSuccess: this.doneSolitaire
+      doSuccess: this.doneSolitaire,
+      exHandler: this.notFound
     })
   },
   doneSolitaire(data) {
@@ -187,6 +190,13 @@ Page({
           })
         }
       }
+    })
+  },
+  notFound() {
+    wx.showToast({
+      title: '未找到可接龙成语！',
+      icon: 'none',
+      mask: true
     })
   },
   onEdit() {
@@ -214,7 +224,8 @@ Page({
     } else {
       wx.showToast({
         title: '缺少 OpenID，请尝试重启小程序！',
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
       wx.vibrateLong()
     }
@@ -234,13 +245,15 @@ Page({
       filePath: this.data['filePath'],
       success() {
         wx.showToast({
-          title: '已保存！'
+          title: '已保存！',
+          mask: true
         })
       },
       fail() {
         wx.showToast({
           title: '保存失败！',
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
         wx.vibrateLong()
       }
@@ -334,7 +347,8 @@ Page({
       if (this.data['openId'] == null || this.data['openId'] == '') {
         wx.showToast({
           title: '缺少 OpenID，请尝试重启小程序！',
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
         wx.vibrateLong()
         return
@@ -390,12 +404,14 @@ Page({
     if (codeFromIdionline != undefined)
       wx.showToast({
         title: '错误：' + msg,
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
     else
       wx.showToast({
         title: '错误：' + code,
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
     var currentPage = getCurrentPages()[getCurrentPages().length - 1]
     setTimeout(function () {

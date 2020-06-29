@@ -38,13 +38,15 @@ Page({
       settings['disableAds'] = true
       wx.setStorageSync('settings', settings)
       wx.showToast({
-        title: '广告已关闭！'
+        title: '广告已关闭！',
+        mask: true
       })
       wx.vibrateShort()
     } else {
       wx.showToast({
-        title: '回答错误！',
-        icon: 'none'
+        title: '答案错误！',
+        icon: 'none',
+        mask: true
       })
       wx.vibrateLong()
     }

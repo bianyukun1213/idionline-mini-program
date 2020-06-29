@@ -55,7 +55,8 @@ Page({
           wx.vibrateShort()
           wx.clearStorageSync()
           wx.showToast({
-            title: '完成！'
+            title: '完成！',
+            mask: true
           })
           console.log('设备储存已清理')
         }

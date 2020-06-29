@@ -70,7 +70,8 @@ Page({
           that.data['historyValue'].push(res.data)
           console.log('填充历史：', that.data['historyValue'])
           wx.showToast({
-            title: '已自动填充！'
+            title: '已自动填充！',
+            mask: true
           })
         } else if (regS.test(res.data)) {
           wx.vibrateShort()
@@ -95,7 +96,8 @@ Page({
   exHandlerS() {
     wx.showToast({
       title: '未找到可接龙成语！',
-      icon: 'none'
+      icon: 'none',
+      mask: true
     })
   },
   //获取启动信息的回调函数。
@@ -148,7 +150,8 @@ Page({
       if (this.data['shareIdiom'] != this.data['idiId'])
         wx.showToast({
           title: '每日成语已更换！',
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
     }
   },
@@ -186,7 +189,8 @@ Page({
     } else {
       wx.showToast({
         title: '格式错误！',
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
       wx.vibrateLong()
     }
@@ -200,19 +204,22 @@ Page({
       if (codeFromIdionline != undefined)
         wx.showToast({
           title: '错误：' + msg,
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
       else
         wx.showToast({
           title: '错误：' + code,
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
       return
     }
     if (this.data['idMode'] || this.data['indexMode']) {
       wx.showToast({
         title: '查询无结果！',
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
       wx.vibrateLong()
     } else {
@@ -300,13 +307,15 @@ Page({
       filePath: this.data['filePath'],
       success() {
         wx.showToast({
-          title: '已保存！'
+          title: '已保存！',
+          mask: true
         })
       },
       fail() {
         wx.showToast({
           title: '保存失败！',
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
         wx.vibrateLong()
       }

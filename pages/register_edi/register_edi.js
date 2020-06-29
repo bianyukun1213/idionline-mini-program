@@ -51,7 +51,8 @@ Page({
   callback(data) {
     wx.showToast({
       title: data,
-      icon: 'none'
+      icon: 'none',
+      mask: true
     })
     console.log('注册成功：' + data)
     setTimeout(function () {

@@ -103,7 +103,8 @@ Page({
       if (this.data['updates'][k]['source'] == null || this.data['updates'][k]['text'] == null || this.data['updates'][k]['source'] == '' || this.data['updates'][k]['text'] == '') {
         wx.showToast({
           title: '存在空位！',
-          icon: 'none'
+          icon: 'none',
+          mask: true
         })
         wx.vibrateLong()
         return
@@ -125,7 +126,8 @@ Page({
   done(data) {
     wx.showToast({
       title: data,
-      icon: 'none'
+      icon: 'none',
+      mask: true
     })
     var pages = getCurrentPages()
     var prevPage = pages[pages.length - 2]
@@ -156,7 +158,8 @@ Page({
   deleteDone(data) {
     wx.showToast({
       title: data,
-      icon: 'none'
+      icon: 'none',
+      mask: true
     })
     var pages = getCurrentPages()
     var prevPage = pages[pages.length - 2]

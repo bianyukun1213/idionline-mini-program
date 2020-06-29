@@ -58,12 +58,14 @@ Page({
     if (codeFromIdionline != undefined)
       wx.showToast({
         title: '错误：' + msg,
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
     else
       wx.showToast({
         title: '错误：' + code,
-        icon: 'none'
+        icon: 'none',
+        mask: true
       })
     var currentPage = getCurrentPages()[getCurrentPages().length - 1]
     var prevPage = getCurrentPages()[getCurrentPages().length - 2]
@@ -87,7 +89,8 @@ Page({
   done(data) {
     wx.showToast({
       title: data,
-      icon: 'none'
+      icon: 'none',
+      mask: true
     })
     var pages = getCurrentPages()
     var prevPage = pages[pages.length - 2]
