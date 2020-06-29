@@ -69,9 +69,12 @@ Page({
       icon: 'none'
     })
     setTimeout(function () {
-      wx.redirectTo({
-        url: '/pages/idiom/idiom?id=' + that.data['id']
+      var pages = getCurrentPages()
+      var prevPage = pages[pages.length - 2]
+      prevPage.setData({
+        refresh: true
       })
+      wx.navigateBack()
     }, 1500)
   }
 })

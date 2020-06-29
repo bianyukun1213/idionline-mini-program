@@ -123,15 +123,17 @@ Page({
     call.uniFunc('idiom/' + this.data['id'], 'PUT', dt, this.done)
   },
   done(data) {
-    var that = this
     wx.showToast({
       title: data,
       icon: 'none'
     })
     setTimeout(function () {
-      wx.redirectTo({
-        url: '/pages/idiom/idiom?id=' + that.data['id']
+      var pages = getCurrentPages()
+      var prevPage = pages[pages.length - 2]
+      prevPage.setData({
+        refresh: true
       })
+      wx.navigateBack()
     }, 1500)
   },
   onDelete() {

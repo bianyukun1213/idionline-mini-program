@@ -5,6 +5,7 @@ const info = require('../../tools/info.js')
 var innerAudioContext
 Page({
   data: {
+    refresh: false,
     platform: null,
     color: null,
     id: null,
@@ -70,6 +71,17 @@ Page({
     this.setData({
       overlayOn: overlayOn
     })
+    if (this.data['refresh']) {
+      call.get({
+        url: 'idiom/' + this.data['id'],
+        data: {
+          'openId': this.data['openId']
+        },
+        doSuccess: this.fillData,
+        exHandler: this.exHandler
+      })
+      this.data['refresh'] = false
+    }
   },
   //获取启动信息的回调函数。
   callback() {
@@ -191,7 +203,7 @@ Page({
       }
       json['updates'] = updates
       var str = JSON.stringify(json)
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/edit/edit?str=' + str
       })
     } else {
