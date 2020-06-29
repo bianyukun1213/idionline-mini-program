@@ -6,6 +6,7 @@ var innerAudioContext
 Page({
   data: {
     refresh: false,
+    deleted: false,
     platform: null,
     color: null,
     id: null,
@@ -71,6 +72,10 @@ Page({
     this.setData({
       overlayOn: overlayOn
     })
+    if (this.data['deleted'])
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
     if (this.data['refresh']) {
       call.get({
         url: 'idiom/' + this.data['id'],
@@ -392,10 +397,12 @@ Page({
         title: '错误：' + code,
         icon: 'none'
       })
+    var currentPage = getCurrentPages()[getCurrentPages().length - 1]
     setTimeout(function () {
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+      if (currentPage == getCurrentPages()[getCurrentPages().length - 1])
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
     }, 1500)
   }
 })

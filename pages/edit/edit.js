@@ -158,10 +158,17 @@ Page({
       title: data,
       icon: 'none'
     })
+    var pages = getCurrentPages()
+    var prevPage = pages[pages.length - 2]
+    var currentPage = pages[pages.length - 1]
+    prevPage.setData({
+      deleted: true
+    })
     setTimeout(function () {
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+      if (currentPage == getCurrentPages()[getCurrentPages().length - 1])
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
     }, 1500)
-  },
+  }
 })

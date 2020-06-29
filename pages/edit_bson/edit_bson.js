@@ -20,7 +20,8 @@ Page({
           'bson': 1,
           'openId': this.data['openId']
         },
-        doSuccess: this.callback
+        doSuccess: this.callback,
+        exHandler: this.exHandler
       })
     this.setData({
       color: color.chk()
@@ -51,6 +52,27 @@ Page({
       value: data,
       show: true
     })
+  },
+  exHandler(code, codeFromIdionline, msg) {
+    wx.vibrateLong()
+    if (codeFromIdionline != undefined)
+      wx.showToast({
+        title: '错误：' + msg,
+        icon: 'none'
+      })
+    else
+      wx.showToast({
+        title: '错误：' + code,
+        icon: 'none'
+      })
+    var currentPage = getCurrentPages()[getCurrentPages().length - 1]
+    var prevPage = getCurrentPages()[getCurrentPages().length - 2]
+    setTimeout(function () {
+      if (currentPage == getCurrentPages()[getCurrentPages().length - 1] || prevPage == getCurrentPages()[getCurrentPages().length - 1])
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+    }, 1500)
   },
   onSubmit() {
     wx.vibrateShort()

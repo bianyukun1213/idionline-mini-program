@@ -47,7 +47,7 @@ function get(args) {
     },
     fail(err) {
       wx.hideLoading()
-      fail(err.errMsg, exHandler)
+      fail(err.errMsg, undefined, undefined, exHandler)
     }
   })
 }
