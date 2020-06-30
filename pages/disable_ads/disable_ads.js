@@ -42,6 +42,12 @@ Page({
         mask: true
       })
       wx.vibrateShort()
+      var pages = getCurrentPages()
+      var currentPage = pages[pages.length - 1]
+      setTimeout(function () {
+        if (currentPage == getCurrentPages()[getCurrentPages().length - 1])
+          wx.navigateBack()
+      }, 1500)
     } else {
       wx.showToast({
         title: '答案错误！',

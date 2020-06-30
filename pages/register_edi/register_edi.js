@@ -55,10 +55,13 @@ Page({
       mask: true
     })
     console.log('注册成功：' + data)
+    var pages = getCurrentPages()
+    var currentPage = pages[pages.length - 1]
     setTimeout(function () {
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+      if (currentPage == getCurrentPages()[getCurrentPages().length - 1])
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
     }, 1500)
   },
 })

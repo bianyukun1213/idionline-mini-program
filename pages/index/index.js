@@ -167,7 +167,7 @@ Page({
       this.data['searchBarValue'] = e.detail //这里由于不用在wxml中渲染，就不调用setdata了。
       call.get({
         url: 'idiom/search/' + e.detail,
-        doSuccess: this.nav,
+        doSuccess: this.navi,
         exHandler: this.exHandler
       })
     } else if (reg2.exec(e.detail)) {
@@ -175,7 +175,7 @@ Page({
       this.data['searchBarValue'] = e.detail //同上。
       call.get({
         url: 'idiom/search/' + e.detail,
-        doSuccess: this.nav,
+        doSuccess: this.navi,
         exHandler: this.exHandler
       })
     } else if (reg3.exec(e.detail)) {
@@ -183,7 +183,7 @@ Page({
       this.data['searchBarValue'] = e.detail //同上。
       call.get({
         url: 'idiom/search/' + e.detail,
-        doSuccess: this.nav,
+        doSuccess: this.navi,
         exHandler: this.exHandler
       })
     } else {
@@ -231,7 +231,7 @@ Page({
       wx.vibrateLong()
     }
   },
-  nav(data) {
+  navi(data) {
     //获取key，其实就是第一个的key。
     var k
     for (var key in data) {
