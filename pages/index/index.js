@@ -59,10 +59,11 @@ Page({
     })
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
     var regS = new RegExp('【[\u4e00-\u9fa5]{4}】') //小冰成语接龙。
+    var regId = new RegExp('^[0-9a-zA-Z]{24}')
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
-        if (reg.test(res.data) && that.data['historyValue'].indexOf(res.data) == -1) {
+        if ((reg.test(res.data)||regId.test(res.data)) && that.data['historyValue'].indexOf(res.data) == -1) {
           //填充历史里有的成语不再填充。
           that.setData({
             value: res.data
