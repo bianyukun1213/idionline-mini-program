@@ -7,7 +7,7 @@
     <van-panel class="panel" title="{{idiName}}{{pinyin}}" use-footer-slot>
       <view class="content">
         <view class="defs" wx:for="{{defs}}" wx:key="index">
-          <van-row style="margin-bottom:15px;">
+          <van-row style="margin-bottom:10px;">
             <van-col span="6">
               <van-tag mark size="large" color="{{color}}">来源</van-tag>
             </van-col>
@@ -20,18 +20,18 @@
               <van-tag mark size="large" color="{{color}}">释义</van-tag>
             </van-col>
             <van-col span="18">
-              <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}\n</text>
-              <text class="text" selectable="true" wx:else>{{item['text']}}\n</text>
+              <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}</text>
+              <text class="text" selectable="true" wx:else>{{item['text']}}</text>
               <!--条件渲染和列表渲染好像他妈不能一起用，不然结果好像是反的，这里先把条件渲染写block吧-->
               <block wx:if="{{item['examples']!=null}}">
-                <text class="text" wx:for="{{item['examples']}}" wx:key="index" style="margin-top:5px;font-size:12px;color:gray;">{{item}}</text>
+                <text class="text" wx:for="{{item['examples']}}" wx:key="index" style="margin-top:10px;font-size:12px;color:{{color}};">例句 {{index+1}}：{{item}}</text>
               </block>
               <block wx:if="{{item['addition']!=null}}">
-                <text class="text" style="margin-top:5px;font-size:12px;color:blue;">{{item['addition']}}</text>
+                <text class="text" style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item['addition']}}</text>
               </block>
             </van-col>
           </van-row>
-          <van-divider wx:if="{{index<defs.length-1}}" />
+				<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};" wx:if="{{index<defs.length-1}}" />
         </view>
       </view>
       <view class="footer" slot="footer">
