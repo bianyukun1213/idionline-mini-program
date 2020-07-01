@@ -3,7 +3,7 @@
 	<van-panel wx:if="{{id!=null}}" title="{{name}}{{pinyin}}" desc="{{origin}}由用户「{{lastEditor}}」最后编辑于{{updateTime}}" use-footer-slot>
 		<view class="content">
 			<view class="defs" wx:for="{{defs}}" wx:key="index">
-				<van-row style="margin-bottom:5px;">
+				<van-row style="margin-bottom:15px;">
 					<van-col span="6">
 						<van-tag mark size="large" color="{{color}}">来源</van-tag>
 					</van-col>
