@@ -131,7 +131,8 @@ Page({
   onClick(e) {
     wx.vibrateShort()
     wx.navigateTo({
-      url: '/pages/idiom/idiom?id=' + e.currentTarget.id
+      url: '/pages/idiom/idiom?id=' + e.currentTarget.id,
+      fail: this.failToNavigate
     })
   },
   onMark() {
@@ -153,7 +154,8 @@ Page({
     }
     var str = JSON.stringify(json)
     wx.navigateTo({
-      url: '/pages/correct/correct?str=' + str
+      url: '/pages/correct/correct?str=' + str,
+      fail: this.failToNavigate
     })
   },
   onLongPress() {
@@ -219,7 +221,8 @@ Page({
       json['updates'] = updates
       var str = JSON.stringify(json)
       wx.navigateTo({
-        url: '/pages/edit/edit?str=' + str
+        url: '/pages/edit/edit?str=' + str,
+        fail: this.failToNavigate
       })
     } else {
       wx.showToast({
@@ -420,5 +423,14 @@ Page({
           url: '/pages/index/index'
         })
     }, 1500)
+  },
+  failToNavigate() {
+    wx.vibrateLong()
+    wx.showToast({
+      title: '跳转失败！',
+      icon: 'none',
+      mask: true
+    })
+    console.log('跳转失败')
   }
 })
