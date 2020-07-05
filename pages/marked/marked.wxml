@@ -3,7 +3,7 @@
   <view class="list" wx:if="{{!showText}}">
     <van-cell-group wx:for="{{items}}" wx:key="index">
       <van-cell-group wx:for="{{items[index]}}" wx:key="index">
-        <van-cell id="{{index}}" title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" link-type="navigateTo" bind:longpress="onDelete" />
+        <van-cell id="{{index}}" title="{{item}}" is-link url="/pages/idiom/idiom?id={{index}}" link-type="navigateTo" bind:longpress="onDelete" clickable="true" bind:click="onClick" />
       </van-cell-group>
     </van-cell-group>
     <view class="con">

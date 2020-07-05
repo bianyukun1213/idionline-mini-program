@@ -43,6 +43,7 @@ Page({
     } else {
       console.log('已切换折叠面板到：' + e.detail)
     }
+    wx.vibrateShort()
   },
   onClean() {
     wx.showModal({

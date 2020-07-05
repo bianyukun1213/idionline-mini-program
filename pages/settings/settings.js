@@ -34,14 +34,18 @@ Page({
     else {
       var settings = wx.getStorageSync('settings') || {}
       settings['disableAds'] = false
+      console.log('广告已开启')
       wx.setStorageSync('settings', settings)
       this.refreshSettings()
+      wx.vibrateShort()
     }
   },
   onChangeOverlay() {
     var settings = wx.getStorageSync('settings') || {}
     settings['enableOverlay'] = !this.data['overlayOn']
     wx.setStorageSync('settings', settings)
+    console.log('启用暗色遮罩层：' + settings['enableOverlay'])
     this.refreshSettings()
+    wx.vibrateShort()
   }
 })

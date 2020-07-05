@@ -255,6 +255,7 @@ Page({
       show: false,
       showPopup: false
     })
+    wx.vibrateShort()
     console.log('点击操作，已关闭弹出层')
   },
   //感应区触摸开始事件，记录开始时触摸点的纵坐标。

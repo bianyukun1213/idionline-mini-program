@@ -48,6 +48,7 @@ Page({
     this.setData({
       updates: tmp
     })
+    wx.vibrateShort()
   },
   onAdd() {
     wx.vibrateShort()

@@ -31,6 +31,7 @@ Page({
     this.setData({
       radio: name
     })
+    wx.vibrateShort()
   },
   onConfirm() {
     if (this.data['radio'] == '4') {
@@ -41,6 +42,7 @@ Page({
         title: '广告已关闭！',
         mask: true
       })
+      console.log('广告已关闭')
       wx.vibrateShort()
       var pages = getCurrentPages()
       var currentPage = pages[pages.length - 1]

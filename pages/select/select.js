@@ -79,5 +79,8 @@ Page({
       this.setData({
         showNext: false
       })
+  },
+  onClick(){
+    wx.vibrateShort()
   }
 })

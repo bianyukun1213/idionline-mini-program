@@ -5,8 +5,12 @@
 
 .logo {
   height: 150px;
-  align-self: center;
-  margin-top: 20%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
 }
 
 .content {

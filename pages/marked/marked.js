@@ -85,8 +85,14 @@ Page({
     wx.vibrateShort()
     var index = e.currentTarget.id
     var marked = wx.getStorageSync('markedIdioms') || {}
+    var name = marked[index]
     delete marked[index]
     wx.setStorageSync('markedIdioms', marked)
+    wx.showToast({
+      title: '「' + name + '」已移除！',
+      icon: 'none',
+      mask: true
+    })
     console.log('已移除索引为 ' + index + ' 的成语')
     this.loadData()
   },
@@ -105,5 +111,8 @@ Page({
     })
     this.loadData()
     console.log('翻到第 ' + (this.data['page'] + 1) + ' 页')
+  },
+  onClick() {
+    wx.vibrateShort()
   }
 })
