@@ -13,7 +13,7 @@
 			<text style="color:dodgerblue;" wx:elif="{{platTag=='QQ'}}">小程序平台：{{platStr}}\n小程序版本：{{version}}\nWeb API 版本：{{apiVer}}\n</text>
 			<text>设备参数：\n{{sysInfo}}</text>
 			<view class="function">
-				<van-button class="btn" aria-role="button" aria-label="复制参数" color="{{color}}" bind:click="onCopyInfo">复制参数</van-button>
+				<van-button class="btn" aria-role="button" aria-label="复制" color="{{color}}" bind:click="onCopyInfo">复制</van-button>
 				<van-button class="btn" aria-role="button" aria-label="设置" color="{{color}}" bind:click="navi2Settings">设置</van-button>
 				<van-button class="btn" aria-role="button" aria-label="帮助文档" color="{{color}}" bind:click="viewDocument">文档</van-button>
 				<van-button class="btn" aria-role="button" aria-label="清理储存" type="danger" bind:click="onClean">清理储存</van-button>
