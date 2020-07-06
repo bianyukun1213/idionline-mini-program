@@ -13,16 +13,16 @@ Page({
     color.apl()
     var json = JSON.parse(option['str'])
     this.data['id'] = json['id']
-    this.data['openId'] = json['openId'],
-      call.get({
-        url: 'idiom/' + this.data['id'],
-        data: {
-          'bson': 1,
-          'openId': this.data['openId']
-        },
-        doSuccess: this.callback,
-        exHandler: this.exHandler
-      })
+    this.data['openId'] = json['openId']
+    call.get({
+      url: 'idiom/' + this.data['id'],
+      data: {
+        'bson': 1,
+        'openId': this.data['openId']
+      },
+      doSuccess: this.callback,
+      exHandler: this.exHandler
+    })
     this.setData({
       color: color.chk()
     })

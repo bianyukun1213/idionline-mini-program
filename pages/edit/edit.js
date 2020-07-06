@@ -148,8 +148,8 @@ Page({
       confirmText: '删除',
       confirmColor: '#FF0000',
       success(res) {
+        wx.vibrateShort()
         if (res.confirm) {
-          wx.vibrateShort()
           call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\"' + that.data['openId'] + '\"', that.deleteDone)
         }
       }

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
+    "towxml": "/towxml/towxml"
+  },
+  "navigationBarTitleText": "帮助文档"
+}

@@ -40,7 +40,7 @@ function get(args) {
             fail(res.statusCode, res.data['code'], res.data['msg'], exHandler)
         }
       } else if (res.statusCode == 404) {
-        notFound(exHandler)
+        notFound('未查询到数据', undefined, undefined, exHandler)
       } else {
         fail(res.statusCode, res.data['code'], res.data['msg'], exHandler)
       }
@@ -68,7 +68,7 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
         //这里不必校验文件格式，播放时会自动校验。
         doSuccess(res.tempFilePath)
       } else if (res.statusCode == 404) {
-        notFound()
+        notFound('未查询到数据', undefined, undefined, exHandler)
       } else {
         fail(res.statusCode)
       }
@@ -136,11 +136,11 @@ function fail(code, codeFromIdionline, msg, exHandler) {
   }
 }
 
-function notFound(exHandler) {
+function notFound(code, codeFromIdionline, msg, exHandler) {
   console.log('未查询到数据')
   if (typeof exHandler == 'function') {
     console.log('将执行 exHandler()')
-    exHandler()
+    exHandler(code, codeFromIdionline, msg)
   } else {
     wx.vibrateLong()
     wx.showToast({

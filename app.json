@@ -4,14 +4,15 @@
     "pages/select/select",
     "pages/idiom/idiom",
     "pages/marked/marked",
-    "pages/help/help",
+    "pages/about/about",
     "pages/register_edi/register_edi",
     "pages/edit/edit",
     "pages/edit_bson/edit_bson",
     "pages/correct/correct",
     "pages/dbg/dbg",
     "pages/disable_ads/disable_ads",
-    "pages/settings/settings"
+    "pages/settings/settings",
+    "pages/document/document"
   ],
   "tabBar": {
     "list": [
@@ -28,10 +29,10 @@
         "selectedIconPath": "icons/marked.png"
       },
       {
-        "pagePath": "pages/help/help",
-        "text": "帮助",
-        "iconPath": "icons/help_gray.png",
-        "selectedIconPath": "icons/help.png"
+        "pagePath": "pages/about/about",
+        "text": "关于",
+        "iconPath": "icons/about_gray.png",
+        "selectedIconPath": "icons/about.png"
       }
     ],
     "backgroundColor": "#008080",

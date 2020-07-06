@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 16px;
+  color: dodgerblue;
+  text-align: center;
+}
+
+.img {
+  height: 100px;
+  align-self: center;
+}
+
+.van-collapse-item__content {
+  font-size: 12px;
+  line-height: 1.5;
+  color: gray;
+}
+
+.function {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.btn {
+  align-self: center;
+  margin-top: 10px;
+}

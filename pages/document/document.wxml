@@ -1,0 +1,7 @@
+<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
+<view class="root">
+	<text class="text" wx:if="{{isLoading}}">读取中……</text>
+	<view class="container" wx:else>
+		<towxml nodes="{{article}}" />
+	</view>
+</view>

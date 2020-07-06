@@ -63,7 +63,7 @@ Page({
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
       success(res) {
-        if ((reg.test(res.data)||regId.test(res.data)) && that.data['historyValue'].indexOf(res.data) == -1) {
+        if ((reg.test(res.data) || regId.test(res.data)) && that.data['historyValue'].indexOf(res.data) == -1) {
           //填充历史里有的成语不再填充。
           that.setData({
             value: res.data
@@ -134,10 +134,8 @@ Page({
         wx.showModal({
           content: launchInfo['argsDic'][this.data['scene']],
           showCancel: false,
-          success(res) {
-            if (res.confirm) {
-              wx.vibrateShort()
-            }
+          success() {
+            wx.vibrateShort()
           }
         })
         wx.vibrateShort()
@@ -227,7 +225,10 @@ Page({
       wx.showModal({
         title: '查询无结果',
         content: '未找到您要查询的成语「' + dt + '」。服务器已尝试从其他数据源自动收录。您可以稍微等待，然后尝试再次搜索。',
-        showCancel: false
+        showCancel: false,
+        success() {
+          wx.vibrateShort()
+        }
       })
       wx.vibrateLong()
     }

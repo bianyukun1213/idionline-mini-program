@@ -1,8 +1,9 @@
 const call = require('tools/request.js')
 App({
+  towxml: require('/towxml/index'),
   globalData: {
     dbgMode: false,
-    version: '1.47.3',
+    version: '1.48.0',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
