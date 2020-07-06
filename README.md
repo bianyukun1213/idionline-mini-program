@@ -1,4 +1,3 @@
-# idionline_miniprog
 # 成语在线小程序
 
 ![](https://s1.ax1x.com/2020/07/06/Uitt2V.jpg)
