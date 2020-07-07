@@ -12,7 +12,7 @@ Page({
     overlayOn: false
   },
   onLoad() {
-    color.apl()
+    color.apl(true)
     this.setData({
       color: color.chk()
     })
@@ -102,5 +102,8 @@ Page({
         console.log('已复制设备参数到剪贴板')
       }
     })
+  },
+  onTabItemTap() {
+    wx.vibrateShort()
   }
 })

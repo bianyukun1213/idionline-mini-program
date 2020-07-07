@@ -10,7 +10,7 @@ Page({
     showNext: false
   },
   onLoad() {
-    color.apl()
+    color.apl(true)
     this.setData({
       color: color.chk()
     })
@@ -113,6 +113,9 @@ Page({
     console.log('翻到第 ' + (this.data['page'] + 1) + ' 页')
   },
   onClick() {
+    wx.vibrateShort()
+  },
+  onTabItemTap() {
     wx.vibrateShort()
   }
 })

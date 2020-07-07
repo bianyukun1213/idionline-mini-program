@@ -39,7 +39,7 @@ Page({
   },
   //启动
   onLoad(para) {
-    color.apl()
+    color.apl(true)
     this.setData({
       color: color.chk()
     })
@@ -120,7 +120,7 @@ Page({
           pinyin: '（' + launchInfo['dailyIdiom']['pinyin'] + '）'
         })
     }
-    color.apl()
+    color.apl(true)
     var reg = new RegExp('https?://.+\.(jpg|gif|png)')
     //匹配Logo地址正则，设置Logo。
     if (reg.test(launchInfo['logoUrl']))
@@ -411,5 +411,8 @@ Page({
     wx.navigateTo({
       url: '/pages/idiom/idiom?id=' + this.data['idiId']
     })
+  },
+  onTabItemTap() {
+    wx.vibrateShort()
   }
 })

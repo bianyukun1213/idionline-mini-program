@@ -1,28 +1,31 @@
-function apl() {
-  chk(setBar)
+function apl(isTabBarPage) {
+  chk(setBar, isTabBarPage)
 }
 
-function setBar(color) {
+function setBar(color, isTabBarPage) {
   console.log('颜色正则匹配')
   wx.setNavigationBarColor({
     frontColor: '#ffffff',
     backgroundColor: color
   })
-  wx.setTabBarStyle({
-    color: '#CCCCCC',
-    selectedColor: '#FFFFFF',
-    backgroundColor: color
-  })
+  if (isTabBarPage)
+    wx.setTabBarStyle({
+      color: '#CCCCCC',
+      selectedColor: '#FFFFFF',
+      backgroundColor: color
+    })
+    else
+    console.log(isTabBarPage)
 }
 
-function chk(callb) {
+function chk(callb, isTabBarPage) {
   if (getApp().globalData['launchInfo'] != null) {
     var color = getApp().globalData['launchInfo']['themeColor'] //这句实际上必须写里面，不然获取到的会是设置color之前的null。
     var reg = new RegExp('^#[0-9a-fA-F]{6}$')
     //目前除微信平台，设置导航栏颜色都有瑕疵。
     if (reg.test(color) && getApp().globalData['platform']['tag'] == 'WeChat') {
       if (typeof callb == 'function') {
-        callb(color)
+        callb(color, isTabBarPage)
       } else {
         return color
       }
