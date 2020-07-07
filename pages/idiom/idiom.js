@@ -183,12 +183,13 @@ Page({
       confirmText: '复制',
       success(res) {
         wx.vibrateShort()
-        wx.setClipboardData({
-          data: data,
-          success(res) {
-            console.log('已复制成语接龙返回数据到剪贴板：' + data)
-          }
-        })
+        if (res.confirm)
+          wx.setClipboardData({
+            data: data,
+            success(res) {
+              console.log('已复制成语接龙返回数据到剪贴板：' + data)
+            }
+          })
       }
     })
   },
