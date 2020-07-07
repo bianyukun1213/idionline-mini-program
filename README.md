@@ -1,18 +1,21 @@
-# idionline_miniprog
-成语在线微信/QQ小程序
+# 成语在线小程序
 
-![成语在线](http://67.209.185.96/Idionline.jpg)
+![](https://s1.ax1x.com/2020/07/06/Uitt2V.jpg)
 
-使用到的技术&资源：
+# 使用到的技术与资源
 
-Vant Weapp
+1. [Vant Weapp](https://github.com/youzan/vant-weapp)
 
-Iconfront
+2. [canvas drawer](https://github.com/kuckboy1994/mp_canvas_drawer)
 
-感谢（排名不分先后）：
+3. [Towxml](https://github.com/sbfkcel/towxml)
 
-PCB-Designer
+4. [Iconfont](https://www.iconfont.cn/)
 
-zhongxiaweiliangye
+# 感谢（排名不分先后）
 
-BSK13074540716
+- PCB-Designer
+
+- zhongxiaweiliangye
+
+- BSK13074540716
