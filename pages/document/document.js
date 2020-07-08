@@ -1,7 +1,9 @@
 const color = require('../../tools/color.js')
 const call = require('../../tools/request.js')
+const info = require('../../tools/info.js')
 Page({
   data: {
+    shareFlag: false,
     color: null,
     overlayOn: false,
     isLoading: true,
@@ -12,11 +14,18 @@ Page({
     this.setData({
       color: color.chk()
     })
+    info.getLaunchInfo(this.infoCallback)
     call.get({
       url: 'document',
       doSuccess: this.callback,
       exHandler: this.exHandler
     })
+  },
+  infoCallback() {
+    this.setData({
+      color: color.chk()
+    })
+    color.apl()
   },
   callback(data) {
     var result = getApp().towxml(data, 'markdown')
@@ -24,6 +33,7 @@ Page({
       article: result,
       isLoading: false
     })
+    this.data['shareFlag'] = true
   },
   exHandler(code, codeFromIdionline, msg) {
     wx.vibrateLong()
@@ -54,5 +64,18 @@ Page({
     this.setData({
       overlayOn: overlayOn
     })
-  }
+  },
+  onShareAppMessage() {
+    console.log('尝试转发帮助文档页面')
+    if (this.data['shareFlag']) {
+      return {
+        title: '点击查看帮助文档',
+        imageUrl: '/icons/share.png',
+      }
+    }
+    return {
+      imageUrl: '/icons/share.png',
+      path: '/pages/index/index'
+    }
+  },
 })

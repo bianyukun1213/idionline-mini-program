@@ -3,7 +3,7 @@ App({
   towxml: require('/towxml/index'),
   globalData: {
     dbgMode: false,
-    version: '1.48.2',
+    version: '1.48.3',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
@@ -24,6 +24,9 @@ App({
     }
     console.log('平台：' + this.globalData['platform']['str'])
     console.log('版本：' + this.globalData['version'])
+    this.getOpenId()
+  },
+  getOpenId(cb) {
     var openId = wx.getStorageSync('openId')
     if (openId == null || openId == '') {
       var that = this
@@ -37,7 +40,7 @@ App({
                 'platTag': getApp().globalData['platform']['tag'],
                 'code': res.code
               },
-              doSuccess: that.callback
+              doSuccess: typeof cb == 'function' ? cb : that.callback
             })
         }
       })

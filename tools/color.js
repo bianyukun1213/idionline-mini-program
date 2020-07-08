@@ -14,8 +14,6 @@ function setBar(color, isTabBarPage) {
       selectedColor: '#FFFFFF',
       backgroundColor: color
     })
-    else
-    console.log(isTabBarPage)
 }
 
 function chk(callb, isTabBarPage) {

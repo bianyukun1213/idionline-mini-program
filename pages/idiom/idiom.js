@@ -6,6 +6,7 @@ var innerAudioContext
 Page({
   data: {
     refresh: false,
+    onOpenIdGotten: false,
     deleted: false,
     platform: null,
     color: null,
@@ -78,16 +79,19 @@ Page({
         url: '/pages/index/index'
       })
     if (this.data['refresh']) {
-      call.get({
-        url: 'idiom/' + this.data['id'],
-        data: {
-          'openId': this.data['openId']
-        },
-        doSuccess: this.fillData,
-        exHandler: this.exHandler
-      })
+      this.refresh()
       this.data['refresh'] = false
     }
+  },
+  refresh() {
+    call.get({
+      url: 'idiom/' + this.data['id'],
+      data: {
+        'openId': this.data['openId']
+      },
+      doSuccess: this.fillData,
+      exHandler: this.exHandler
+    })
   },
   //获取启动信息的回调函数。
   callback() {
@@ -126,6 +130,10 @@ Page({
       })
     this.data['shareFlag'] = true
     console.log('获取到成语释义：', this.data['defs'])
+    if (this.data['onOpenIdGotten']) {
+      this.data['onOpenIdGotten'] = false
+      this.onEdit(true)
+    }
   },
   //跳转按钮点击事件。
   onClick(e) {
@@ -186,7 +194,7 @@ Page({
         if (res.confirm)
           wx.setClipboardData({
             data: data,
-            success(res) {
+            success() {
               console.log('已复制成语接龙返回数据到剪贴板：' + data)
             }
           })
@@ -200,8 +208,9 @@ Page({
       mask: true
     })
   },
-  onEdit() {
-    wx.vibrateShort()
+  onEdit(openIdGotten) {
+    if (openIdGotten != true)
+      wx.vibrateShort()
     if (this.data['openId'] != null && this.data['openId'] != '') {
       var json = {
         'id': this.data['id'],
@@ -224,13 +233,21 @@ Page({
         fail: this.failToNavigate
       })
     } else {
-      wx.showToast({
-        title: '缺少 OpenID，请尝试重启小程序！',
-        icon: 'none',
-        mask: true
-      })
-      wx.vibrateLong()
+      // wx.showToast({
+      //   title: '缺少 OpenID，请尝试重启小程序！',
+      //   icon: 'none',
+      //   mask: true
+      // })
+      // wx.vibrateLong()
+      getApp().getOpenId(this.openIdGotten)
     }
+  },
+  openIdGotten(data) {
+    console.log('已获取 OpenID：' + getApp().globalData['platform']['tag'] + '_' + data)
+    wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data)
+    this.data['openId'] = getApp().globalData['platform']['tag'] + '_' + data
+    this.data['onOpenIdGotten'] = true
+    this.refresh()
   },
   onClose() {
     this.setData({

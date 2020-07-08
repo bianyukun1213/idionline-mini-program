@@ -47,7 +47,7 @@ Page({
   onClean() {
     wx.showModal({
       title: '警告',
-      content: '您的设置、收藏数据等都保存在设备储存中，清理储存将导致这些数据丢失。您确定要继续吗？',
+      content: '您的设置、收藏数据等都保存在设备储存中，清空储存将导致这些数据丢失。您确定要继续吗？',
       confirmText: '继续',
       confirmColor: '#FF0000',
       success(res) {
