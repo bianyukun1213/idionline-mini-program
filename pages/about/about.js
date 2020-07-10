@@ -7,7 +7,7 @@ Page({
     platTag: '-',
     platStr: '-',
     sysInfo: null,
-    activeName: ['1','2'],
+    activeName: ['1', '2'],
     color: null,
     overlayOn: false
   },
@@ -18,6 +18,9 @@ Page({
     })
   },
   onShow() {
+    this.refresh()
+  },
+  refresh() {
     var overlayOn = wx.getStorageSync('settings')['enableOverlay']
     if (overlayOn == undefined)
       overlayOn = false
@@ -45,6 +48,7 @@ Page({
     wx.vibrateShort()
   },
   onClean() {
+    var that = this
     wx.showModal({
       title: '警告',
       content: '您的设置、收藏数据等都保存在设备储存中，清空储存将导致这些数据丢失。您确定要继续吗？',
@@ -58,6 +62,7 @@ Page({
             title: '完成！',
             mask: true
           })
+          that.refresh()
           console.log('设备储存已清理')
         }
       }
