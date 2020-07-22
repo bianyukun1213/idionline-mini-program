@@ -28,6 +28,7 @@ Page({
     filePath: null,
     shareIdiom: null,
     overlayOn: false,
+    singlePage: false,
     actions: [{
         name: '转发',
         openType: 'share'
@@ -40,9 +41,15 @@ Page({
   //启动
   onLoad(para) {
     color.apl(true)
-    this.setData({
-      color: color.chk()
-    })
+    if (wx.getLaunchOptionsSync()['scene'] == 1154)
+      this.setData({
+        color: color.chk(),
+        singlePage: true
+      })
+    else
+      this.setData({
+        color: color.chk()
+      })
     this.data['scene'] = decodeURIComponent(para['scene'])
     if (para['showDailyIdiom'])
       this.data['showDailyIdiom'] = true
@@ -88,7 +95,7 @@ Page({
   doneSolitaire(data) {
     wx.setClipboardData({
       data: data,
-      success(res) {
+      success() {
         console.log('已复制成语接龙返回数据到剪贴板：' + data)
       }
     })
@@ -296,9 +303,13 @@ Page({
     this.data['onTouch'] = false
   },
   onClose() {
+    wx.vibrateShort()
     this.setData({
       show: false
     })
+  },
+  onNoticeBarClose() {
+    wx.vibrateShort()
   },
   eventGetImage(e) {
     wx.hideLoading()
@@ -400,6 +411,19 @@ Page({
         title: date + '：' + this.data['idiName'],
         imageUrl: '/icons/share.png',
         path: '/pages/index/index?showDailyIdiom=true&shareIdiom=' + this.data['idiId']
+      }
+    }
+    return {
+      imageUrl: '/icons/share.png'
+    }
+  },
+  onShareTimeline() {
+    if (this.data['idiId'] != null) {
+      var date = format.formatDate(getApp().globalData['launchInfo']['dateUT'], true)
+      return {
+        title: date + '：' + this.data['idiName'],
+        imageUrl: '/icons/share.png',
+        query: 'showDailyIdiom=true&shareIdiom=' + this.data['idiId']
       }
     }
     return {

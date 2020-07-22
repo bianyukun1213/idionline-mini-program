@@ -6,14 +6,20 @@ Page({
     shareFlag: false,
     color: null,
     overlayOn: false,
-    isLoading: true,
+    singlePage: false,
     article: {}
   },
   onLoad() {
     color.apl()
-    this.setData({
-      color: color.chk()
-    })
+    if (wx.getLaunchOptionsSync()['scene'] == 1154)
+      this.setData({
+        color: color.chk(),
+        singlePage: true
+      })
+    else
+      this.setData({
+        color: color.chk()
+      })
     info.getLaunchInfo(this.infoCallback)
     call.get({
       url: 'document',
@@ -30,8 +36,7 @@ Page({
   callback(data) {
     var result = getApp().towxml(data, 'markdown')
     this.setData({
-      article: result,
-      isLoading: false
+      article: result
     })
     this.data['shareFlag'] = true
   },
@@ -78,4 +83,10 @@ Page({
       path: '/pages/index/index'
     }
   },
+  onShareTimeline() {
+    return {
+      title: '帮助文档',
+      imageUrl: '/icons/share.png'
+    }
+  }
 })

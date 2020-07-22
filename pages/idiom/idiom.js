@@ -6,7 +6,6 @@ var innerAudioContext
 Page({
   data: {
     refresh: false,
-    onOpenIdGotten: false,
     deleted: false,
     platform: null,
     color: null,
@@ -28,6 +27,7 @@ Page({
     show: false,
     filePath: null,
     overlayOn: false,
+    singlePage: false,
     actions: [{
         name: '转发',
         openType: 'share'
@@ -39,18 +39,21 @@ Page({
   },
   onLoad(option) {
     color.apl()
-    this.setData({
-      color: color.chk()
-    })
+    if (wx.getLaunchOptionsSync()['scene'] == 1154)
+      this.setData({
+        color: color.chk(),
+        singlePage: true
+      })
+    else
+      this.setData({
+        color: color.chk()
+      })
+    this.data['id'] = option['id']
     this.data['openId'] = wx.getStorageSync('openId')
-    call.get({
-      url: 'idiom/' + option['id'],
-      data: {
-        'openId': this.data['openId']
-      },
-      doSuccess: this.fillData,
-      exHandler: this.exHandler
-    })
+    if (this.data['singlePage'] || (this.data['openId'] != null && this.data['openId'] != ''))
+      this.refresh()
+    else
+      getApp().getOpenId(this.openIdGotten)
     info.getLaunchInfo(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onError(function callback(errCode) {
@@ -63,7 +66,7 @@ Page({
       innerAudioContext.stop()
     })
   },
-  onUnload(e) {
+  onUnload() {
     console.log('成语页面卸载')
     innerAudioContext.destroy()
   },
@@ -130,10 +133,6 @@ Page({
       })
     this.data['shareFlag'] = true
     console.log('获取到成语释义：', this.data['defs'])
-    if (this.data['onOpenIdGotten']) {
-      this.data['onOpenIdGotten'] = false
-      this.onEdit(true)
-    }
   },
   //跳转按钮点击事件。
   onClick(e) {
@@ -171,7 +170,7 @@ Page({
     var that = this
     wx.setClipboardData({
       data: this.data['id'],
-      success(res) {
+      success() {
         console.log('已复制成语 Id 到剪贴板：' + that.data['id'])
       }
     })
@@ -208,9 +207,8 @@ Page({
       mask: true
     })
   },
-  onEdit(openIdGotten) {
-    if (openIdGotten != true)
-      wx.vibrateShort()
+  onEdit() {
+    wx.vibrateLong()
     if (this.data['openId'] != null && this.data['openId'] != '') {
       var json = {
         'id': this.data['id'],
@@ -233,20 +231,18 @@ Page({
         fail: this.failToNavigate
       })
     } else {
-      // wx.showToast({
-      //   title: '缺少 OpenID，请尝试重启小程序！',
-      //   icon: 'none',
-      //   mask: true
-      // })
-      // wx.vibrateLong()
-      getApp().getOpenId(this.openIdGotten)
+      wx.showToast({
+        title: '缺少 OpenID，请尝试重启小程序！',
+        icon: 'none',
+        mask: true
+      })
+      wx.vibrateLong()
     }
   },
   openIdGotten(data) {
     console.log('已获取 OpenID：' + getApp().globalData['platform']['tag'] + '_' + data)
     wx.setStorageSync('openId', getApp().globalData['platform']['tag'] + '_' + data)
     this.data['openId'] = getApp().globalData['platform']['tag'] + '_' + data
-    this.data['onOpenIdGotten'] = true
     this.refresh()
   },
   onClose() {
@@ -361,8 +357,23 @@ Page({
       path: '/pages/index/index'
     }
   },
+  onShareTimeline() {
+    return {
+      title: this.data['name'],
+      imageUrl: '/icons/share.png'
+    }
+  },
   onTTSTap(e) {
     if (innerAudioContext.paused) {
+      if (wx.getLaunchOptionsSync()['scene'] == 1154) {
+        wx.showToast({
+          title: '更多功能需前往小程序使用！',
+          icon: 'none',
+          mask: true
+        })
+        wx.vibrateLong()
+        return
+      }
       if (this.data['openId'] == null || this.data['openId'] == '') {
         wx.showToast({
           title: '缺少 OpenID，请尝试重启小程序！',

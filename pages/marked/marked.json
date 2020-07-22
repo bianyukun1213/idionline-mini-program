@@ -2,7 +2,8 @@
   "usingComponents": {
     "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
-    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
+    "van-empty": "/miniprogram_npm/@vant/weapp/empty/index"
   },
   "navigationBarTitleText": "收藏"
 }

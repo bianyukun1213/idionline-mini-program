@@ -1,7 +1,7 @@
 <van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
-	<text class="text" wx:if="{{isLoading}}">读取中……</text>
-	<view class="container" wx:else>
+	<van-notice-bar wx:if="{{singlePage}}" text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
+	<view class="container" wx:if="{{article!=null}}">
 		<towxml nodes="{{article}}" />
 	</view>
 </view>

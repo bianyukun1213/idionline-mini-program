@@ -1,48 +1,49 @@
 <van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
-  <van-notice-bar mode="closeable" text="{{text}}" wx:if="{{text!=null}}" />
-  <van-search shape="round" input-align="center" value="{{value}}" maxlength="24" placeholder="{{placeHolder}}" bind:search="onSearch" />
-  <image class="logo" src="{{logoUrl}}" mode="aspectFit" />
-  <van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onPopupClose">
-    <van-panel class="panel" title="{{idiName}}{{pinyin}}" use-footer-slot>
-      <view class="content">
-        <view class="defs" wx:for="{{defs}}" wx:key="index">
-          <van-row style="margin-bottom:10px;">
-            <van-col span="6">
-              <van-tag mark size="large" color="{{color}}">来源</van-tag>
-            </van-col>
-            <van-col span="18">
-              <text class="text">{{item['source']}}\n</text>
-            </van-col>
-          </van-row>
-          <van-row>
-            <van-col span="6">
-              <van-tag mark size="large" color="{{color}}">释义</van-tag>
-            </van-col>
-            <van-col span="18">
-              <text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}</text>
-              <text class="text" selectable="true" wx:else>{{item['text']}}</text>
-              <!--条件渲染和列表渲染好像他妈不能一起用，不然结果好像是反的，这里先把条件渲染写block吧-->
-              <block wx:if="{{item['examples']!=null}}">
-                <text class="text" wx:for="{{item['examples']}}" wx:key="index" style="margin-top:10px;font-size:12px;color:{{color}};">例句 {{index+1}}：{{item}}</text>
-              </block>
-              <block wx:if="{{item['addition']!=null}}">
-                <text class="text" style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item['addition']}}</text>
-              </block>
-            </van-col>
-          </van-row>
-				<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};" wx:if="{{index<defs.length-1}}" />
-        </view>
-      </view>
-      <view class="footer" slot="footer">
-      <van-button class="btn_func" aria-role="button" aria-label="查看" color="{{color}}" bind:click="onNavi">查看</van-button>
-        <van-button class="btn_func" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare">分享</van-button>
-      </view>
-    </van-panel>
-    <van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
-  </van-popup>
-  <view class="slide" wx:if="{{idiName!=null}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
-    <view class="text_bottom">上划查看「每日成语」</view>
-  </view>
-  <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
+	<van-notice-bar wx:if="{{singlePage}}" text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
+	<van-notice-bar wx:if="{{text!=null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
+	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24" placeholder="{{placeHolder}}" bind:search="onSearch" />
+	<image class="logo" src="{{logoUrl}}" mode="aspectFit" />
+	<van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onPopupClose">
+		<van-panel class="panel" title="{{idiName}}{{pinyin}}" use-footer-slot>
+			<view class="content">
+				<view class="defs" wx:for="{{defs}}" wx:key="index">
+					<van-row style="margin-bottom:10px;">
+						<van-col span="6">
+							<van-tag mark size="large" color="{{color}}">来源</van-tag>
+						</van-col>
+						<van-col span="18">
+							<text class="text">{{item['source']}}\n</text>
+						</van-col>
+					</van-row>
+					<van-row>
+						<van-col span="6">
+							<van-tag mark size="large" color="{{color}}">释义</van-tag>
+						</van-col>
+						<van-col span="18">
+							<text class="text" selectable="true" wx:if="{{item['isBold']==true}}" style="font-weight:bold;color:red;">{{item['text']}}</text>
+							<text class="text" selectable="true" wx:else>{{item['text']}}</text>
+							<!--条件渲染和列表渲染好像他妈不能一起用，不然结果好像是反的，这里先把条件渲染写block吧-->
+							<block wx:if="{{item['examples']!=null}}">
+								<text class="text" wx:for="{{item['examples']}}" wx:key="index" style="margin-top:10px;font-size:12px;color:{{color}};">例句 {{index+1}}：{{item}}</text>
+							</block>
+							<block wx:if="{{item['addition']!=null}}">
+								<text class="text" style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item['addition']}}</text>
+							</block>
+						</van-col>
+					</van-row>
+					<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};" wx:if="{{index<defs.length-1}}" />
+				</view>
+			</view>
+			<view class="footer" slot="footer">
+				<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="查看" color="{{color}}" bind:click="onNavi">查看</van-button>
+				<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare">分享</van-button>
+			</view>
+		</van-panel>
+		<van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
+	</van-popup>
+	<view class="slide" wx:if="{{idiName!=null}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
+		<view class="text_bottom">上划查看「每日成语」</view>
+	</view>
+	<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>
