@@ -14,8 +14,14 @@
 
 # 感谢（排名不分先后）
 
-- PCB-Designer
+- 千石まよひ
 
-- zhongxiaweiliangye
+- 凌云鹤.
 
-- BSK13074540716
+- 如常
+
+- 云舒月小夜似晴
+
+- BOB
+
+- 迎益
