@@ -208,7 +208,7 @@ Page({
     })
   },
   onEdit() {
-    wx.vibrateLong()
+    wx.vibrateShort()
     if (this.data['openId'] != null && this.data['openId'] != '') {
       var json = {
         'id': this.data['id'],
