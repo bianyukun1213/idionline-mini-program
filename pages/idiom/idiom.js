@@ -48,12 +48,6 @@ Page({
       this.setData({
         color: color.chk()
       })
-    this.data['id'] = option['id']
-    this.data['openId'] = wx.getStorageSync('openId')
-    if (this.data['singlePage'] || (this.data['openId'] != null && this.data['openId'] != ''))
-      this.refresh()
-    else
-      getApp().getOpenId(this.openIdGotten)
     info.getLaunchInfo(this.callback)
     innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onError(function callback(errCode) {
@@ -65,6 +59,12 @@ Page({
       })
       innerAudioContext.stop()
     })
+    this.data['id'] = option['id']
+    this.data['openId'] = wx.getStorageSync('openId')
+    if (this.data['singlePage'] || (this.data['openId'] != null && this.data['openId'] != ''))
+      this.refresh()
+    else
+      getApp().getOpenId(this.openIdGotten)
   },
   onUnload() {
     console.log('成语页面卸载')
@@ -95,6 +95,10 @@ Page({
       doSuccess: this.fillData,
       exHandler: this.exHandler
     })
+    this.data['tTSText'] = null
+    this.data['tTSCurrent'] = null
+    this.data['tTSSrc'] = {}
+    innerAudioContext.stop()
   },
   //获取启动信息的回调函数。
   callback() {
@@ -137,9 +141,9 @@ Page({
   //跳转按钮点击事件。
   onClick(e) {
     wx.vibrateShort()
-    wx.navigateTo({
-      url: '/pages/idiom/idiom?id=' + e.currentTarget.id,
-      fail: this.failToNavigate
+    innerAudioContext.stop()
+    wx.redirectTo({
+      url: '/pages/idiom/idiom?id=' + e.currentTarget.id
     })
   },
   onMark() {
@@ -155,6 +159,7 @@ Page({
   },
   onCorrect() {
     wx.vibrateShort()
+    innerAudioContext.stop()
     var json = {
       'id': this.data['id'],
       'name': this.data['name']
@@ -168,6 +173,7 @@ Page({
   onLongPress() {
     wx.vibrateShort()
     var that = this
+    innerAudioContext.stop()
     wx.setClipboardData({
       data: this.data['id'],
       success() {
@@ -210,6 +216,7 @@ Page({
   onEdit() {
     wx.vibrateShort()
     if (this.data['openId'] != null && this.data['openId'] != '') {
+      innerAudioContext.stop()
       var json = {
         'id': this.data['id'],
         'openId': this.data['openId'],
@@ -402,7 +409,7 @@ Page({
         console.log('Token 时间戳：' + tokenUT)
         if (token == '' || currentUT > tokenUT - 10) { //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
           call.get({
-            doSuccess: this.tokenGot,
+            doSuccess: this.tokenGotten,
             type: 'TTS'
           })
           console.log('重获取 Token')
@@ -417,7 +424,7 @@ Page({
       }
     }
   },
-  tokenGot(data) {
+  tokenGotten(data) {
     wx.setStorageSync('token', data['access_token'])
     call.downloadTTSAudio(data['access_token'], this.data['openId'], this.data['tTSText'], this.onPlay)
   },
@@ -450,14 +457,5 @@ Page({
           url: '/pages/index/index'
         })
     }, 1500)
-  },
-  failToNavigate() {
-    wx.vibrateLong()
-    wx.showToast({
-      title: '跳转失败！',
-      icon: 'none',
-      mask: true
-    })
-    console.log('跳转失败')
   }
 })
