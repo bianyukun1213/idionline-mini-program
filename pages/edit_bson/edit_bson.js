@@ -97,6 +97,8 @@ Page({
     prevPage.setData({
       refresh: true
     })
+    if (this.data['id'] == getApp().globalData['launchInfo']['dailyIdiom']['id'])
+      getApp().globalData['refreshOnIndex'] = true
     setTimeout(function () {
       if (getCurrentPages()[getCurrentPages().length - 2] == prevPage)
         wx.navigateBack()

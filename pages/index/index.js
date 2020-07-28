@@ -64,6 +64,10 @@ Page({
     this.setData({
       overlayOn: overlayOn
     })
+    if (getApp().globalData['refreshOnIndex'] == true) {
+      info.getLaunchInfo(this.callback, true)
+      getApp().globalData['refreshOnIndex'] = false
+    }
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
     var regS = new RegExp('【[\u4e00-\u9fa5]{4}】') //小冰成语接龙。
     var regId = new RegExp('^[0-9a-zA-Z]{24}')
@@ -109,7 +113,7 @@ Page({
     })
   },
   //获取启动信息的回调函数。
-  callback() {
+  callback(justRefresh) {
     var launchInfo = getApp().globalData['launchInfo']
     this.setData({
       color: color.chk(),
@@ -126,6 +130,14 @@ Page({
         this.setData({
           pinyin: '（' + launchInfo['dailyIdiom']['pinyin'] + '）'
         })
+    } else {
+      this.setData({
+        idiName: null,
+        idiId: null,
+        defs: null,
+        pinyin: '',
+        showPopup: false
+      })
     }
     color.apl(true)
     var reg = new RegExp('https?://.+\.(jpg|gif|png)')
@@ -134,31 +146,33 @@ Page({
       this.setData({
         logoUrl: launchInfo['logoUrl']
       })
-    //显示对应的场景内容。
-    for (var key in launchInfo['argsDic']) {
-      if (key == this.data['scene']) {
-        console.log('查找到对应的场景内容：' + launchInfo['argsDic'][this.data['scene']])
-        wx.showModal({
-          content: launchInfo['argsDic'][this.data['scene']],
-          showCancel: false,
-          success() {
-            wx.vibrateShort()
-          }
+    if (justRefresh != true) {
+      //显示对应的场景内容。
+      for (var key in launchInfo['argsDic']) {
+        if (key == this.data['scene']) {
+          console.log('查找到对应的场景内容：' + launchInfo['argsDic'][this.data['scene']])
+          wx.showModal({
+            content: launchInfo['argsDic'][this.data['scene']],
+            showCancel: false,
+            success() {
+              wx.vibrateShort()
+            }
+          })
+          wx.vibrateShort()
+        }
+      }
+      if (this.data['showDailyIdiom'] && this.data['idiId'] != null) {
+        this.setData({
+          showPopup: true
         })
         wx.vibrateShort()
+        if (this.data['shareIdiom'] != this.data['idiId'])
+          wx.showToast({
+            title: '每日成语已更换！',
+            icon: 'none',
+            mask: true
+          })
       }
-    }
-    if (this.data['showDailyIdiom'] && this.data['idiId'] != null) {
-      this.setData({
-        showPopup: true
-      })
-      wx.vibrateShort()
-      if (this.data['shareIdiom'] != this.data['idiId'])
-        wx.showToast({
-          title: '每日成语已更换！',
-          icon: 'none',
-          mask: true
-        })
     }
   },
   //搜索事件。

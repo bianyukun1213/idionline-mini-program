@@ -135,6 +135,8 @@ Page({
     prevPage.setData({
       refresh: true
     })
+    if (this.data['id'] == getApp().globalData['launchInfo']['dailyIdiom']['id'])
+      getApp().globalData['refreshOnIndex'] = true
     setTimeout(function () {
       if (getCurrentPages()[getCurrentPages().length - 2] == prevPage)
         wx.navigateBack()
@@ -150,13 +152,13 @@ Page({
       success(res) {
         wx.vibrateShort()
         if (res.confirm) {
-          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\"' + that.data['openId'] + '\"', that.deleteDone)
+          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\"' + that.data['openId'] + '\"', that.doneDelete)
         }
       }
     })
     wx.vibrateLong()
   },
-  deleteDone(data) {
+  doneDelete(data) {
     wx.showToast({
       title: data,
       icon: 'none',
@@ -168,6 +170,8 @@ Page({
     prevPage.setData({
       deleted: true
     })
+    if (this.data['id'] == getApp().globalData['launchInfo']['dailyIdiom']['id'])
+      getApp().globalData['refreshOnIndex'] = true
     setTimeout(function () {
       if (currentPage == getCurrentPages()[getCurrentPages().length - 1])
         wx.switchTab({

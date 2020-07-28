@@ -2,8 +2,8 @@ const call = require('../tools/request.js')
 const format = require('../tools/format.js')
 var callb = null
 
-function getLaunchInfo(callback) {
-  if (getApp().globalData['launchInfo'] == null) {
+function getLaunchInfo(callback, justRefresh) {
+  if (getApp().globalData['launchInfo'] == null || justRefresh) {
     callb = callback
     console.log('开始请求启动信息')
     call.get({

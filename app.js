@@ -3,13 +3,14 @@ App({
   towxml: require('/towxml/index'),
   globalData: {
     dbgMode: false,
-    version: '1.49.1',
+    version: '1.50.0',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
     },
     sysInfo: null,
-    launchInf: null
+    launchInf: null,
+    refreshOnIndex: false
   },
   onLaunch() {
     var info = wx.getSystemInfoSync()
