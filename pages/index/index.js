@@ -88,7 +88,7 @@ Page({
         } else if (regS.test(res.data)) {
           wx.vibrateShort()
           call.get({
-            url: 'idiom/solitaire/' + regS.exec(res.data)[0].replace('【', '').replace('】', ''),
+            url: 'idiom/playsolitaire/' + regS.exec(res.data)[0].replace('【', '').replace('】', ''),
             doSuccess: that.doneSolitaire,
             exHandler: that.exHandlerS
           })
@@ -128,9 +128,13 @@ Page({
       })
       if (launchInfo['dailyIdiom']['pinyin'] != null)
         this.setData({
-          pinyin: '（' + launchInfo['dailyIdiom']['pinyin'] + '）'
+          pinyin: '[' + launchInfo['dailyIdiom']['pinyin'] + ']'
         })
-    } else {
+      else
+        this.setData({
+          pinyin: ''
+        })
+    } else
       this.setData({
         idiName: null,
         idiId: null,
@@ -138,7 +142,6 @@ Page({
         pinyin: '',
         showPopup: false
       })
-    }
     color.apl(true)
     var reg = new RegExp('https?://.+\.(jpg|gif|png)')
     //匹配Logo地址正则，设置Logo。
@@ -260,7 +263,7 @@ Page({
     for (var key in data) {
       k = key
     }
-    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['searchBarValue'] == '试试手气' || this.data['idMode'])) {
+    if (Object.getOwnPropertyNames(data).length == 1 /*这一句返回个数，我谷歌了挺久的……*/ && (data[k] == this.data['searchBarValue'] || this.data['idMode'])) {
       wx.navigateTo({
         url: '/pages/idiom/idiom?id=' + k
       })

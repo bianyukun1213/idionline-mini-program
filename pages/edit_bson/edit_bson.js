@@ -80,7 +80,6 @@ Page({
     wx.vibrateShort()
     var dt = {
       'openId': this.data['openId'],
-      'bsonMode': true,
       'bsonStr': this.data['value'],
       'updates': null
     }

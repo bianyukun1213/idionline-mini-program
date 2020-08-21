@@ -11,11 +11,16 @@ Page({
     color: null,
     id: null,
     name: null,
-    pinyin: '',
-    origin: '',
+    index: null,
+    pinyin: null,
+    py: '',
+    origin: null,
+    ori: '',
+    tbc: '',
     defs: null,
     lastEditor: null,
     updateTime: null,
+    toBeCorrected: false,
     tTSText: null, //对应释义的文本。
     tTSCurrent: null,
     tTSSrc: {},
@@ -129,13 +134,40 @@ Page({
     })
     if (data['pinyin'] != null)
       this.setData({
-        pinyin: '（' + data['pinyin'] + '）'
+        pinyin: data['pinyin'],
+        py: '[' + data['pinyin'] + ']'
+      })
+    else
+      this.setData({
+        pinyin: null,
+        py: ''
       })
     if (data['origin'] != null)
       this.setData({
-        origin: '出自' + data['origin'] + '，'
+        origin: data['origin'],
+        ori: '出自' + data['origin'] + '，'
       })
+    else
+      this.setData({
+        origin: null,
+        ori: ''
+      })
+    if (data['toBeCorrected'])
+      this.setData({
+        tbc: '，有待订正'
+      })
+    else
+      this.setData({
+        tbc: ''
+      })
+    this.data['index'] = data['index']
+    this.data['toBeCorrected'] = data['toBeCorrected']
     this.data['shareFlag'] = true
+    var favorites = wx.getStorageSync('favorites') || {}
+    if (favorites[this.data['id']] != undefined) {
+      favorites[this.data['id']] = this.data['name']
+      wx.setStorageSync('favorites', favorites)
+    }
     console.log('获取到成语释义：', this.data['defs'])
   },
   //跳转按钮点击事件。
@@ -146,11 +178,11 @@ Page({
       url: '/pages/idiom/idiom?id=' + e.currentTarget.id
     })
   },
-  onMark() {
+  onCollect() {
     wx.vibrateShort()
-    var marked = wx.getStorageSync('markedIdioms') || {}
-    marked[this.data['id']] = this.data['name']
-    wx.setStorageSync('markedIdioms', marked)
+    var favorites = wx.getStorageSync('favorites') || {}
+    favorites[this.data['id']] = this.data['name']
+    wx.setStorageSync('favorites', favorites)
     wx.showToast({
       title: '完成！',
       mask: true
@@ -184,7 +216,7 @@ Page({
   onSolitaire() {
     wx.vibrateShort()
     call.get({
-      url: 'idiom/solitaire/' + this.data['name'],
+      url: 'idiom/playsolitaire/' + this.data['name'],
       doSuccess: this.doneSolitaire,
       exHandler: this.notFound
     })
@@ -220,18 +252,22 @@ Page({
       var json = {
         'id': this.data['id'],
         'openId': this.data['openId'],
-        'name': this.data['name']
+        'name': this.data['name'],
+        'indexOfIdiom': this.data['index'],
+        'pinyin': this.data['pinyin'],
+        'origin': this.data['origin'],
+        'toBeCorrected': this.data['toBeCorrected']
       }
-      var updates = []
+      var definitionUpdates = []
       for (var k in this.data['defs']) {
-        updates.push({
+        definitionUpdates.push({
           'source': this.data['defs'][k]['source'],
           'text': this.data['defs'][k]['text'],
           'addition': this.data['defs'][k]['addition'],
           'isBold': this.data['defs'][k]['isBold']
         })
       }
-      json['updates'] = updates
+      json['definitionUpdates'] = definitionUpdates
       var str = JSON.stringify(json)
       wx.navigateTo({
         url: '/pages/edit/edit?str=' + str,

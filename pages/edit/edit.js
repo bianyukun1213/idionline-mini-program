@@ -5,7 +5,11 @@ Page({
     id: null,
     openId: null,
     name: null,
-    updates: null,
+    indexOfIdiom: null,
+    pinyin: null,
+    origin: null,
+    toBeCorrected: false,
+    definitionUpdates: null,
     canBeRemoved: [],
     color: null,
     overlayOn: false
@@ -14,14 +18,18 @@ Page({
     color.apl()
     var json = JSON.parse(option['str'])
     //更新页面。
-    this.data['id'] = json['id']
     this.data['openId'] = json['openId']
     this.setData({
+      id: json['id'],
       name: json['name'],
-      updates: json['updates'],
+      indexOfIdiom: json['indexOfIdiom'],
+      pinyin: json['pinyin'],
+      origin: json['origin'],
+      toBeCorrected: json['toBeCorrected'],
+      definitionUpdates: json['definitionUpdates'],
       color: color.chk()
     })
-    for (var k in json['updates']) {
+    for (var k in json['definitionUpdates']) {
       this.data['canBeRemoved'][k] = false
     }
   },
@@ -34,25 +42,43 @@ Page({
     })
   },
   onChangeSource(event) {
-    this.data['updates'][event.currentTarget.id]['source'] = event.detail
+    this.data['definitionUpdates'][event.currentTarget.id]['source'] = event.detail
   },
   onChangeText(event) {
-    this.data['updates'][event.currentTarget.id]['text'] = event.detail
+    this.data['definitionUpdates'][event.currentTarget.id]['text'] = event.detail
   },
   onChangeAddition(event) {
-    this.data['updates'][event.currentTarget.id]['addition'] = event.detail
+    this.data['definitionUpdates'][event.currentTarget.id]['addition'] = event.detail
+  },
+  onChangeName(event) {
+    this.data['name'] = event.detail
+  },
+  onChangeIndex(event) {
+    this.data['indexOfIdiom'] = event.detail
+  },
+  onChangePinyin(event) {
+    this.data['pinyin'] = event.detail
+  },
+  onChangeOrigin(event) {
+    this.data['origin'] = event.detail
   },
   check(event) {
-    var tmp = this.data['updates']
+    var tmp = this.data['definitionUpdates']
     tmp[event.currentTarget.id]['isBold'] = !tmp[event.currentTarget.id]['isBold']
     this.setData({
-      updates: tmp
+      definitionUpdates: tmp
+    })
+    wx.vibrateShort()
+  },
+  correctionCheck() {
+    this.setData({
+      toBeCorrected: !this.data['toBeCorrected']
     })
     wx.vibrateShort()
   },
   onAdd() {
     wx.vibrateShort()
-    var tmp = this.data['updates']
+    var tmp = this.data['definitionUpdates']
     var tmpRm = this.data['canBeRemoved']
     var k
     for (k in tmp) {
@@ -66,10 +92,9 @@ Page({
     }
     tmpRm[k] = true
     this.setData({
-      updates: tmp,
+      definitionUpdates: tmp,
       canBeRemoved: tmpRm
     })
-    console.log(this.data['updates'])
   },
   onBsonEdit() {
     wx.vibrateShort()
@@ -86,24 +111,30 @@ Page({
   onDeleteItem(event) {
     wx.vibrateShort()
     console.log(event.currentTarget.id)
-    var tmp = this.data['updates']
+    var tmp = this.data['definitionUpdates']
     var tmpRm = this.data['canBeRemoved']
     delete tmp[event.currentTarget.id]
     delete tmpRm[event.currentTarget.id]
     this.setData({
-      updates: tmp,
+      definitionUpdates: tmp,
       canBeRemoved: tmpRm
     })
-    console.log(this.data['updates'])
+    console.log(this.data['definitionUpdates'])
   },
   onSubmit() {
     wx.vibrateShort()
-    for (var k in this.data['updates']) {
-      if (this.data['updates'][k]['addition'] == '')
-        this.data['updates'][k]['addition'] = null
-      if (this.data['updates'][k]['source'] == null || this.data['updates'][k]['text'] == null || this.data['updates'][k]['source'] == '' || this.data['updates'][k]['text'] == '') {
+    var reg = new RegExp('^[A-Z]$')
+    var reg2 = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$')
+    if (this.data['pinyin'] == '')
+      this.data['pinyin'] = null
+    if (this.data['origin'] == '')
+      this.data['origin'] = null
+    for (var k in this.data['definitionUpdates']) {
+      if (this.data['definitionUpdates'][k]['addition'] == '')
+        this.data['definitionUpdates'][k]['addition'] = null
+      if (this.data['definitionUpdates'][k]['source'] == null || this.data['definitionUpdates'][k]['text'] == null || this.data['definitionUpdates'][k]['source'] == '' || this.data['definitionUpdates'][k]['text'] == '' || !reg2.test(this.data['name']) || !reg.test(this.data['indexOfIdiom'])) {
         wx.showToast({
-          title: '存在空位！',
+          title: '数据格式不正确！',
           icon: 'none',
           mask: true
         })
@@ -112,15 +143,19 @@ Page({
       }
     }
     var tmp = []
-    for (var k in this.data['updates']) {
-      if (this.data['updates'][k] != undefined)
-        tmp.push(this.data['updates'][k])
+    for (var k in this.data['definitionUpdates']) {
+      if (this.data['definitionUpdates'][k] != undefined)
+        tmp.push(this.data['definitionUpdates'][k])
     }
     var dt = {
       'openId': this.data['openId'],
-      'bsonMode': false,
       'bsonStr': null,
-      'updates': tmp
+      'name': this.data['name'],
+      'index': this.data['indexOfIdiom'],
+      'pinyin': this.data['pinyin'],
+      'origin': this.data['origin'],
+      'toBeCorrected': this.data['toBeCorrected'],
+      'definitionUpdates': tmp
     }
     call.uniFunc('idiom/' + this.data['id'], 'PUT', dt, this.done)
   },

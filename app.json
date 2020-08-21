@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/select/select",
     "pages/idiom/idiom",
-    "pages/marked/marked",
+    "pages/favorites/favorites",
     "pages/about/about",
     "pages/register_edi/register_edi",
     "pages/edit/edit",
@@ -23,10 +23,10 @@
         "selectedIconPath": "icons/index.png"
       },
       {
-        "pagePath": "pages/marked/marked",
+        "pagePath": "pages/favorites/favorites",
         "text": "收藏",
-        "iconPath": "icons/marked_gray.png",
-        "selectedIconPath": "icons/marked.png"
+        "iconPath": "icons/favorites_gray.png",
+        "selectedIconPath": "icons/favorites.png"
       },
       {
         "pagePath": "pages/about/about",

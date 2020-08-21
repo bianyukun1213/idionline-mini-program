@@ -1,7 +1,7 @@
 <van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
-	<van-panel wx:if="{{id!=null}}" title="{{name}}{{pinyin}}" desc="{{origin}}由用户「{{lastEditor}}」最后编辑于{{updateTime}}" use-footer-slot>
+	<van-panel wx:if="{{id!=null}}" title="{{name}}{{py}}" desc="{{ori}}由用户「{{lastEditor}}」最后编辑于{{updateTime}}{{tbc}}" use-footer-slot>
 		<view class="content">
 			<view class="defs" wx:for="{{defs}}" wx:key="index">
 				<van-row style="margin-bottom:10px;">
@@ -39,7 +39,7 @@
 		<view class="footer" slot="footer">
 			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="纠错" color="{{color}}" bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
 			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="接龙" color="{{color}}" bind:click="onSolitaire">接龙</van-button>
-			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="收藏" color="{{color}}" bind:click="onMark">收藏</van-button>
+			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="收藏" color="{{color}}" bind:click="onCollect">收藏</van-button>
 			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare" bind:longpress="onLongPress">分享</van-button>
 		</view>
 	</van-panel>
