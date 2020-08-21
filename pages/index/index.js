@@ -105,12 +105,29 @@ Page({
     })
     wx.vibrateShort()
   },
-  exHandlerS() {
+  exHandlerS(code, codeFromIdionline, msg) {
+    if (codeFromIdionline != 20001) {
+      wx.vibrateLong()
+      if (codeFromIdionline != undefined)
+        wx.showToast({
+          title: '错误：' + msg,
+          icon: 'none',
+          mask: true
+        })
+      else
+        wx.showToast({
+          title: '错误：' + code,
+          icon: 'none',
+          mask: true
+        })
+      return
+    }
     wx.showToast({
       title: '未找到可接龙成语！',
       icon: 'none',
       mask: true
     })
+    wx.vibrateLong()
   },
   //获取启动信息的回调函数。
   callback(justRefresh) {
