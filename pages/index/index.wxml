@@ -5,7 +5,7 @@
 	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24" placeholder="{{placeHolder}}" bind:search="onSearch" />
 	<image class="logo" src="{{logoUrl}}" mode="aspectFit" />
 	<van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onPopupClose">
-		<van-panel class="panel" title="{{idiName}}{{pinyin}}" use-footer-slot>
+		<van-panel class="panel" title="【{{idiName}}】{{pinyin}}" use-footer-slot>
 			<view class="content">
 				<view class="defs" wx:for="{{defs}}" wx:key="index">
 					<van-row style="margin-bottom:10px;">

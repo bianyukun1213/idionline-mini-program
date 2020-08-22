@@ -1,7 +1,7 @@
 <van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
-	<van-panel wx:if="{{id!=null}}" title="{{name}}{{py}}" desc="{{ori}}由 {{lastEditor}} 最后编辑于{{updateTime}}{{tbc}}" use-footer-slot>
+	<van-panel wx:if="{{id!=null}}" title="【{{name}}】{{py}}" desc="{{ori}}由 {{lastEditor}} 最后编辑于{{updateTime}}{{tbc}}" use-footer-slot>
 		<view class="content">
 			<view class="defs" wx:for="{{defs}}" wx:key="index">
 				<van-row style="margin-bottom:10px;">
@@ -28,7 +28,7 @@
 						</block>
 						<block wx:if="{{item['links']!=null}}">
 							<view class="btn">
-								<van-button class="btn_link" aria-role="button" aria-label="{{item}}" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="index" bind:click="onClick" size="small" plain round color="{{color}}">{{item}}</van-button>
+								<van-button class="btn_link" aria-role="button" aria-label="〖{{item}}〗" id="{{index}}" wx:for="{{defs[index]['links']}}" wx:key="index" bind:click="onClick" size="small" plain round color="{{color}}">〖{{item}}〗</van-button>
 							</view>
 						</block>
 					</van-col>

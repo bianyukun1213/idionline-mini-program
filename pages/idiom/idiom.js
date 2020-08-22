@@ -122,7 +122,7 @@ Page({
   },
   fillData(data) {
     wx.setNavigationBarTitle({
-      title: data['name']
+      title: "【" + data['name'] + "】"
     })
     //赋一堆值。
     this.setData({
@@ -135,7 +135,7 @@ Page({
     if (data['pinyin'] != null)
       this.setData({
         pinyin: data['pinyin'],
-        py: '[' + data['pinyin'] + ']'
+        py: data['pinyin']
       })
     else
       this.setData({
@@ -165,7 +165,7 @@ Page({
     this.data['shareFlag'] = true
     var favorites = wx.getStorageSync('favorites') || {}
     if (favorites[this.data['id']] != undefined) {
-      favorites[this.data['id']] = this.data['name']
+      favorites[this.data['id']] = "【" + this.data['name'] + "】"
       wx.setStorageSync('favorites', favorites)
     }
     console.log('获取到成语释义：', this.data['defs'])
@@ -181,7 +181,7 @@ Page({
   onCollect() {
     wx.vibrateShort()
     var favorites = wx.getStorageSync('favorites') || {}
-    favorites[this.data['id']] = this.data['name']
+    favorites[this.data['id']] = "【" + this.data['name'] + "】"
     wx.setStorageSync('favorites', favorites)
     wx.showToast({
       title: '完成！',
@@ -223,8 +223,8 @@ Page({
   },
   doneSolitaire(data) {
     wx.showModal({
-      title: '成语接龙',
-      content: data + '（仅供参考）',
+      title: '成语接龙（仅供参考）',
+      content: "【" + data + '】',
       confirmText: '复制',
       success(res) {
         wx.vibrateShort()

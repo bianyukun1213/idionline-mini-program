@@ -69,7 +69,7 @@ Page({
       getApp().globalData['refreshOnIndex'] = false
     }
     var reg = new RegExp('^[\u4e00-\u9fa5]{4}$') //汉字。
-    var regS = new RegExp('【[\u4e00-\u9fa5]{4}】') //小冰成语接龙。
+    var regS = new RegExp('「[\u4e00-\u9fa5]{4}」') //小冰成语接龙。
     var regId = new RegExp('^[0-9a-zA-Z]{24}')
     var that = this
     wx.getClipboardData({ //向搜索框自动填充剪贴板数据。
@@ -145,7 +145,7 @@ Page({
       })
       if (launchInfo['dailyIdiom']['pinyin'] != null)
         this.setData({
-          pinyin: '[' + launchInfo['dailyIdiom']['pinyin'] + ']'
+          pinyin: launchInfo['dailyIdiom']['pinyin']
         })
       else
         this.setData({
