@@ -88,7 +88,7 @@ Page({
         } else if (regS.test(res.data)) {
           wx.vibrateShort()
           call.get({
-            url: 'idiom/playsolitaire/' + regS.exec(res.data)[0].replace('【', '').replace('】', ''),
+            url: 'idiom/playsolitaire/' + regS.exec(res.data)[0].replace('「', '').replace('」', ''),
             doSuccess: that.doneSolitaire,
             exHandler: that.exHandlerS
           })
