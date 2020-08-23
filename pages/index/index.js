@@ -85,6 +85,7 @@ Page({
             title: '已自动填充！',
             mask: true
           })
+          wx.vibrateShort()
         } else if (regS.test(res.data)) {
           wx.vibrateShort()
           call.get({
