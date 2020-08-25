@@ -8,7 +8,7 @@
 				<van-button class="btn" aria-role="button" aria-label="复制 GitHub 链接" color="{{color}}" bind:click="onCopy">复制 GitHub 链接</van-button>
 			</view>
 		</van-collapse-item>
-		<van-collapse-item title="参数与设置" name="2">
+		<van-collapse-item title="参数、设置与文档" name="2">
 			<text style="color:green;" wx:if="{{platTag=='WeChat'}}">小程序平台：{{platStr}}\n小程序版本：{{version}}\nWeb API 版本：{{apiVer}}\n</text>
 			<text style="color:dodgerblue;" wx:elif="{{platTag=='QQ'}}">小程序平台：{{platStr}}\n小程序版本：{{version}}\nWeb API 版本：{{apiVer}}\n</text>
 			<text>设备参数：\n{{sysInfo}}</text>

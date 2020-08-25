@@ -286,9 +286,16 @@ Page({
         url: '/pages/idiom/idiom?id=' + k
       })
     } else {
+      var linkType = 'navigateTo'
+      for (var key in data) {
+        if (data[key].indexOf(this.data['searchBarValue']) != -1) {
+          linkType = 'redirectTo'
+          break
+        }
+      }
       var str = JSON.stringify(data)
       wx.navigateTo({
-        url: '/pages/select/select?str=' + str
+        url: '/pages/select/select?str=' + str + '&linkType="' + linkType + '"'
       })
     }
   },

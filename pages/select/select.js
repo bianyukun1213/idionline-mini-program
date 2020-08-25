@@ -1,6 +1,7 @@
 const color = require('../../tools/color.js')
 Page({
   data: {
+    linkType: null,
     idioms2Disp: null,
     tmp: [],
     page: 0,
@@ -33,7 +34,8 @@ Page({
     //更新页面。
     this.setData({
       tmp: this.data['tmp'],
-      idioms2Disp: this.data['tmp'][0]
+      idioms2Disp: this.data['tmp'][0],
+      linkType: JSON.parse(option['linkType'])
     })
     if (this.data['tmp'].length > 1)
       this.setData({
