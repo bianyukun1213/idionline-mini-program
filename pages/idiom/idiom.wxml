@@ -45,7 +45,7 @@
 	</van-panel>
 	<van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
 	<view class="ad" wx:if="{{disableAdsLocal==false&&disableAdsRemote==false}}">
-		<ad type="card" wx:if="{{platform=='QQ'}}" unit-id="48004368cf9b494df93f1c3ee7cd349b" bind:error="onAdError"></ad>
+		<ad type="banner" wx:if="{{platform=='QQ'}}" unit-id="45e1bd5b64df9580d3af738ceae80494" bind:error="onAdError"></ad>
 	</view>
 	<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>
