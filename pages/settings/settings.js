@@ -27,11 +27,12 @@ Page({
     })
   },
   onChangeAds() {
-    if (this.data['adsOn'])
+    if (this.data['adsOn']) {
+      wx.vibrateShort()
       wx.navigateTo({
         url: '/pages/disable_ads/disable_ads'
       })
-    else {
+    } else {
       var settings = wx.getStorageSync('settings') || {}
       settings['disableAds'] = false
       console.log('广告已开启')

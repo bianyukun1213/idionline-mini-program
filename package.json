@@ -1,10 +1,10 @@
 {
   "name": "idionline",
-  "version": "1.51.5",
+  "version": "1.51.6",
   "description": "成语在线小程序",
   "main": "app.js",
   "dependencies": {
-    "@vant/weapp": "^1.4.4"
+    "@vant/weapp": "^1.5.0"
   },
   "devDependencies": {},
   "scripts": {
