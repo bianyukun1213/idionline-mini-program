@@ -17,7 +17,7 @@
 		</van-cell>
 		<van-button class="btn" aria-role="button" aria-label="移除" id="{{index}}" wx:if="{{canBeRemoved[index]&&definitionUpdates[index]!=undefined}}" type="danger" size="large" bind:click="onDeleteItem">移除</van-button>
 	</van-cell-group>
-	<text class="text">在提交修改之前，请您仔细阅读帮助文档。</text>
+	<text class="text">在提交修改之前，请您仔细阅读帮助文档！</text>
 	<view class="function">
 		<van-button class="btn" aria-role="button" aria-label="新建" color="{{color}}" bind:click="onAdd" bind:longpress="onBsonEdit">新建</van-button>
 		<van-button class="btn" aria-role="button" aria-label="提交" color="{{color}}" bind:click="onSubmit">提交</van-button>
