@@ -89,7 +89,7 @@ Page({
     delete favorites[index]
     wx.setStorageSync('favorites', favorites)
     wx.showToast({
-      title: '「' + name + '」已移除！',
+      title: '【' + name + '】已移除！',
       icon: 'none',
       mask: true
     })

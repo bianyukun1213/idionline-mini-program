@@ -165,7 +165,7 @@ Page({
     this.data['shareFlag'] = true
     var favorites = wx.getStorageSync('favorites') || {}
     if (favorites[this.data['id']] != undefined) {
-      favorites[this.data['id']] = '【' + this.data['name'] + '】'
+      favorites[this.data['id']] = this.data['name']
       wx.setStorageSync('favorites', favorites)
     }
     console.log('获取到成语释义：', this.data['defs'])
@@ -181,7 +181,7 @@ Page({
   onCollect() {
     wx.vibrateShort()
     var favorites = wx.getStorageSync('favorites') || {}
-    favorites[this.data['id']] = '【' + this.data['name'] + '】'
+    favorites[this.data['id']] = this.data['name']
     wx.setStorageSync('favorites', favorites)
     wx.showToast({
       title: '完成！',
