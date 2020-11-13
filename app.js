@@ -3,7 +3,7 @@ App({
   towxml: require('/towxml/index'),
   globalData: {
     dbgMode: false,
-    version: '1.51.8',
+    version: '1.51.9',
     platform: {
       'tag': 'WeChat',
       'str': '微信'
