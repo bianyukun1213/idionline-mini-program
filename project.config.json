@@ -46,7 +46,7 @@
     "compileType": "miniprogram",
     "libVersion": "2.19.4",
     "appid": "wx70c0fb94c40e2986",
-    "projectname": "Idionline",
+    "projectname": "idionline-mini-program",
     "debugOptions": {
         "hidedInDevtools": []
     },

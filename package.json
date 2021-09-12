@@ -1,5 +1,5 @@
 {
-  "name": "idionline",
+  "name": "idionline-mini-program",
   "version": "1.52.0",
   "description": "成语在线小程序",
   "main": "app.js",
@@ -10,6 +10,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "bianyukun1213",
+  "author": "Hollis",
   "license": "GPL"
 }
