@@ -2,7 +2,7 @@
 	<van-notice-bar wx:if="{{singlePage}}" text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
 	<van-notice-bar wx:if="{{text!==''&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
 	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24" placeholder="{{placeHolder}}" bind:search="onSearch" />
-	<image wx:if="{{dark}}" class="logo" src="../../icons/idionline_dark.png" mode="aspectFit" />
+	<image wx:if="{{dark}}" class="logo" src="../../pics/idionline-dark.png" mode="aspectFit" />
 	<image wx:else class="logo" src="{{logoUrl}}" mode="aspectFit" />
 	<van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:close="onPopupClose">
 		<van-panel class="panel" title="【{{idiName}}】{{pinyin}}" use-footer-slot>

@@ -15,7 +15,7 @@ Page({
     placeHolder: '请输入您要查询的成语',
     value: '',
     historyValue: [],
-    logoUrl: '../../icons/idionline.png',
+    logoUrl: '../../pics/idionline.png',
     searchBarValue: '',
     showPopup: false,
     startY: 0,
@@ -431,7 +431,7 @@ Page({
             views: [
               {
                 type: 'image',
-                url: '/icons/share_pic.png',
+                url: '/pics/sharing-pic.png',
                 width: 1080,
                 height: 1440,
               },
@@ -486,14 +486,14 @@ Page({
       let date = format.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
-        imageUrl: '/icons/share.png',
+        imageUrl: '/pics/sharing.png',
         path:
           '/pages/index/index?showDailyIdiom=true&shareIdiom=' +
           this.data.idiId,
       };
     }
     return {
-      imageUrl: '/icons/share.png',
+      imageUrl: '/pics/sharing.png',
     };
   },
   onShareTimeline() {
@@ -501,12 +501,12 @@ Page({
       let date = format.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
-        imageUrl: '/icons/share.png',
+        imageUrl: '/pics/sharing.png',
         query: 'showDailyIdiom=true&shareIdiom=' + this.data.idiId,
       };
     }
     return {
-      imageUrl: '/icons/share.png',
+      imageUrl: '/pics/sharing.png',
     };
   },
   onNavi() {

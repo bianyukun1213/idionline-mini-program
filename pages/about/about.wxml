@@ -2,9 +2,9 @@
 	<van-collapse value="{{activeName}}" bind:change="onChange">
 		<van-collapse-item title="关于成语在线" name="1">
 			<view class="root">
-				<image wx:if="{{dark}}" class="img" src="../../icons/idionline&kun_dark.png" mode="aspectFit"
+				<image wx:if="{{dark}}" class="img" src="../../pics/idionline-kun-dark.png" mode="aspectFit"
 					bind:tap="onCopyBlog" />
-				<image wx:else class="img" src="../../icons/idionline&kun.png" mode="aspectFit" />
+				<image wx:else class="img" src="../../pics/idionline-kun.png" mode="aspectFit" />
 				<text class="text" style="color:{{color}};">成语在线于 2018 年上线，\n小程序及后端服务由 <text class="text"
 						style="color:dodgerblue;">Hollis</text> 开发。</text>
 				<van-button class="btn" aria-role="button" aria-label="帮助文档" color="{{color}}"

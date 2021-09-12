@@ -310,7 +310,7 @@ Page({
             views: [
               {
                 type: 'image',
-                url: '/icons/share_pic.png',
+                url: '/icons/sharing-pic.png',
                 width: 1080,
                 height: 1440,
               },
@@ -365,19 +365,19 @@ Page({
     if (this.data.shareFlag) {
       return {
         title: '点击查看【' + this.data.name + '】的释义',
-        imageUrl: '/icons/share.png',
+        imageUrl: '/icons/sharing.png',
         path: '/pages/idiom/idiom?id=' + this.data.id,
       };
     }
     return {
-      imageUrl: '/icons/share.png',
+      imageUrl: '/icons/sharing.png',
       path: '/pages/index/index',
     };
   },
   onShareTimeline() {
     return {
       title: '点击查看【' + this.data.name + '】的释义',
-      imageUrl: '/icons/share.png',
+      imageUrl: '/icons/sharing.png',
     };
   },
   onTTSTap(e) {
