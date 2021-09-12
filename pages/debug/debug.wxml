@@ -1,0 +1,21 @@
+<view class="root">
+    <view class="root" wx:if="{{showDebug}}">
+        <!-- <text class="text" wx:if="{{!fromSearch}}">调试模式已开启，\n1 秒后进行跳转！</text> -->
+        <text class="text">选项</text>
+        <van-button class="btn" aria-role="button" aria-label="开启调试模式" bind:click="onDebugClick" color="{{color}}">
+            开启调试模式</van-button>
+        <text class="text">页面</text>
+        <view class="root" wx:for="{{pages}}" wx:key="index">
+            <van-button class="btn" id="{{index}}" aria-role="button" aria-label="{{pages[index].route}}"
+                bind:click="onClick" color="{{color}}">{{pages[index].route}}</van-button>
+        </view>
+    </view>
+    <view class="root" wx:else>
+        <van-cell-group>
+            <van-field value="{{password}}" type="password" required clearable bind:change="onChange" label="调试密码"
+                placeholder="调试密码不能为空" />
+        </van-cell-group>
+        <van-button class="btn" aria-role="button" aria-label="确定" wx:if="{{show}}" bind:click="onOK" color="{{color}}">
+            确定</van-button>
+    </view>
+</view>

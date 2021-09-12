@@ -52,6 +52,7 @@
   bottom: 0;
   text-align: center;
   color: gray;
+  margin-bottom: 10px;
 }
 
 .btn_func {

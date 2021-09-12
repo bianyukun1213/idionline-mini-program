@@ -1,217 +1,216 @@
-const call = require('../../tools/request.js')
-const color = require('../../tools/color.js')
+const call = require('../../tools/request.js');
+const color = require('../../tools/color.js');
 Page({
   data: {
-    id: null,
-    openId: null,
-    name: null,
-    indexOfIdiom: null,
-    pinyin: null,
-    origin: null,
+    id: '',
+    sessionId: '',
+    name: '',
+    indexOfIdiom: '',
+    pinyin: '',
+    origin: '',
     toBeCorrected: false,
-    definitionUpdates: null,
+    definitionUpdates: [],
     canBeRemoved: [],
-    color: null,
-    overlayOn: false
+    color: '',
   },
   onLoad(option) {
-    color.apl()
-    var json = JSON.parse(option['str'])
+    let json = JSON.parse(option.str);
     //更新页面。
-    this.data['openId'] = json['openId']
+    this.data.sessionId = json.sessionId;
     this.setData({
-      id: json['id'],
-      name: json['name'],
-      indexOfIdiom: json['indexOfIdiom'],
-      pinyin: json['pinyin'],
-      origin: json['origin'],
-      toBeCorrected: json['toBeCorrected'],
-      definitionUpdates: json['definitionUpdates'],
-      color: color.chk()
-    })
-    for (var k in json['definitionUpdates']) {
-      this.data['canBeRemoved'][k] = false
+      id: json.id,
+      name: json.name,
+      indexOfIdiom: json.indexOfIdiom,
+      pinyin: json.pinyin,
+      origin: json.origin,
+      toBeCorrected: json.toBeCorrected,
+      definitionUpdates: json.definitionUpdates, //,
+    });
+    for (let k in json.definitionUpdates) {
+      this.data.canBeRemoved[k] = false;
     }
   },
   onShow() {
-    var overlayOn = wx.getStorageSync('settings')['enableOverlay']
-    if (overlayOn == undefined)
-      overlayOn = false
-    this.setData({
-      overlayOn: overlayOn
-    })
+    color.apl();
   },
   onChangeSource(event) {
-    this.data['definitionUpdates'][event.currentTarget.id]['source'] = event.detail
+    this.data.definitionUpdates[event.currentTarget.id].source = event.detail;
   },
   onChangeText(event) {
-    this.data['definitionUpdates'][event.currentTarget.id]['text'] = event.detail
+    this.data.definitionUpdates[event.currentTarget.id].text = event.detail;
   },
   onChangeAddition(event) {
-    this.data['definitionUpdates'][event.currentTarget.id]['addition'] = event.detail
+    this.data.definitionUpdates[event.currentTarget.id].addition = event.detail;
   },
   onChangeName(event) {
-    this.data['name'] = event.detail
+    this.data.name = event.detail;
   },
   onChangeIndex(event) {
-    this.data['indexOfIdiom'] = event.detail
+    this.data.indexOfIdiom = event.detail;
   },
   onChangePinyin(event) {
-    this.data['pinyin'] = event.detail
+    this.data.pinyin = event.detail;
   },
   onChangeOrigin(event) {
-    this.data['origin'] = event.detail
+    this.data.origin = event.detail;
   },
   check(event) {
-    var tmp = this.data['definitionUpdates']
-    tmp[event.currentTarget.id]['isBold'] = !tmp[event.currentTarget.id]['isBold']
+    let tmp = this.data.definitionUpdates;
+    tmp[event.currentTarget.id].isBold = !tmp[event.currentTarget.id].isBold;
     this.setData({
-      definitionUpdates: tmp
-    })
-    wx.vibrateShort()
+      definitionUpdates: tmp,
+    });
+    wx.vibrateShort();
   },
   correctionCheck() {
     this.setData({
-      toBeCorrected: !this.data['toBeCorrected']
-    })
-    wx.vibrateShort()
+      toBeCorrected: !this.data.toBeCorrected,
+    });
+    wx.vibrateShort();
   },
   onAdd() {
-    wx.vibrateShort()
-    var tmp = this.data['definitionUpdates']
-    var tmpRm = this.data['canBeRemoved']
-    var k
+    wx.vibrateShort();
+    let tmp = this.data.definitionUpdates;
+    let tmpRm = this.data.canBeRemoved;
+    let k;
     for (k in tmp) {
-      k++
+      k++;
     }
     tmp[k] = {
-      'source': null,
-      'text': null,
-      'addition': null,
-      'isBold': false
-    }
-    tmpRm[k] = true
+      source: '',
+      text: '',
+      addition: '',
+      isBold: false,
+    };
+    tmpRm[k] = true;
     this.setData({
       definitionUpdates: tmp,
-      canBeRemoved: tmpRm
-    })
+      canBeRemoved: tmpRm,
+    });
   },
   onBsonEdit() {
-    wx.vibrateShort()
-    console.log(this.data['id'])
-    var json = {
-      'id': this.data['id'],
-      'openId': this.data['openId']
-    }
-    var str = JSON.stringify(json)
+    wx.vibrateShort();
+    console.log(this.data.id);
+    let json = {
+      id: this.data.id,
+      sessionId: this.data.sessionId,
+    };
+    let str = JSON.stringify(json);
     wx.redirectTo({
-      url: '/pages/edit_bson/edit_bson?str=' + str
-    })
+      url: '/pages/edit_bson/edit_bson?str=' + str,
+    });
   },
   onDeleteItem(event) {
-    wx.vibrateShort()
-    console.log(event.currentTarget.id)
-    var tmp = this.data['definitionUpdates']
-    var tmpRm = this.data['canBeRemoved']
-    delete tmp[event.currentTarget.id]
-    delete tmpRm[event.currentTarget.id]
+    wx.vibrateShort();
+    console.log(event.currentTarget.id);
+    let tmp = this.data.definitionUpdates;
+    let tmpRm = this.data.canBeRemoved;
+    delete tmp[event.currentTarget.id];
+    delete tmpRm[event.currentTarget.id];
     this.setData({
       definitionUpdates: tmp,
-      canBeRemoved: tmpRm
-    })
-    console.log(this.data['definitionUpdates'])
+      canBeRemoved: tmpRm,
+    });
+    console.log(this.data.definitionUpdates);
   },
   onSubmit() {
-    wx.vibrateShort()
-    var reg = new RegExp('^[A-Z]$')
-    var reg2 = new RegExp('^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$')
-    if (this.data['pinyin'] == '')
-      this.data['pinyin'] = null
-    if (this.data['origin'] == '')
-      this.data['origin'] = null
-    for (var k in this.data['definitionUpdates']) {
-      if (this.data['definitionUpdates'][k]['addition'] == '')
-        this.data['definitionUpdates'][k]['addition'] = null
-      if (this.data['definitionUpdates'][k]['source'] == null || this.data['definitionUpdates'][k]['text'] == null || this.data['definitionUpdates'][k]['source'] == '' || this.data['definitionUpdates'][k]['text'] == '' || !reg2.test(this.data['name']) || !reg.test(this.data['indexOfIdiom'])) {
+    wx.vibrateShort();
+    let reg = new RegExp(/^[A-Z]$/);
+    let reg2 = new RegExp(/^[\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?$/);
+    let pinyin = this.data.pinyin === '' ? null : this.data.pinyin;
+    let origin = this.data.origin === '' ? null : this.data.origin;
+    for (let k in this.data.definitionUpdates) {
+      if (
+        this.data.definitionUpdates[k].source === '' ||
+        this.data.definitionUpdates[k].text === '' ||
+        !reg2.test(this.data.name) ||
+        !reg.test(this.data.indexOfIdiom)
+      ) {
         wx.showToast({
           title: '数据格式不正确！',
           icon: 'none',
-          mask: true
-        })
-        wx.vibrateLong()
-        return
+          mask: true,
+        });
+        wx.vibrateLong();
+        return;
       }
     }
-    var tmp = []
-    for (var k in this.data['definitionUpdates']) {
-      if (this.data['definitionUpdates'][k] != undefined)
-        tmp.push(this.data['definitionUpdates'][k])
+    let tmp = [];
+    for (let k in this.data.definitionUpdates) {
+      if (typeof this.data.definitionUpdates[k] !== 'undefined') {
+        let tmp2 = this.data.definitionUpdates[k];
+        if (tmp2.addition === '') tmp2.addition = null;
+        tmp.push(tmp2);
+      }
     }
-    var dt = {
-      'openId': this.data['openId'],
-      'bsonStr': null,
-      'name': this.data['name'],
-      'index': this.data['indexOfIdiom'],
-      'pinyin': this.data['pinyin'],
-      'origin': this.data['origin'],
-      'toBeCorrected': this.data['toBeCorrected'],
-      'definitionUpdates': tmp
-    }
-    call.uniFunc('idiom/' + this.data['id'], 'PUT', dt, this.done)
+    let dt = {
+      sessionId: this.data.sessionId,
+      bsonStr: null,
+      name: this.data.name,
+      index: this.data.indexOfIdiom,
+      pinyin: pinyin,
+      origin: origin,
+      toBeCorrected: this.data.toBeCorrected,
+      definitionUpdates: tmp,
+    };
+    call.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
   },
   done(data) {
     wx.showToast({
       title: data,
       icon: 'none',
-      mask: true
-    })
-    var pages = getCurrentPages()
-    var prevPage = pages[pages.length - 2]
-    prevPage.setData({
-      refresh: true
-    })
-    if (this.data['id'] == getApp().globalData['launchInfo']['dailyIdiom']['id'])
-      getApp().globalData['refreshOnIndex'] = true
+      mask: true,
+    });
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    prevPage.data.refresh = true;
+    if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
+      getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
-      if (getCurrentPages()[getCurrentPages().length - 2] == prevPage)
-        wx.navigateBack()
-    }, 1500)
+      if (getCurrentPages()[getCurrentPages().length - 2] === prevPage)
+        wx.navigateBack();
+    }, 1500);
   },
   onDelete() {
-    var that = this
+    let that = this;
     wx.showModal({
       title: '警告',
       content: '您确定要删除这条成语吗？',
       confirmText: '删除',
       confirmColor: '#FF0000',
       success(res) {
-        wx.vibrateShort()
+        wx.vibrateShort();
         if (res.confirm) {
-          call.uniFunc('idiom/' + that.data['id'], 'DELETE', '\"' + that.data['openId'] + '\"', that.doneDelete)
+          call.uniFunc(
+            'idiom/' + that.data.id,
+            'DELETE',
+            '"' + that.data.sessionId + '"',
+            that.doneDelete
+          );
         }
-      }
-    })
-    wx.vibrateLong()
+      },
+    });
+    wx.vibrateLong();
   },
   doneDelete(data) {
     wx.showToast({
       title: data,
       icon: 'none',
-      mask: true
-    })
-    var pages = getCurrentPages()
-    var prevPage = pages[pages.length - 2]
-    var currentPage = pages[pages.length - 1]
+      mask: true,
+    });
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    let currentPage = pages[pages.length - 1];
     prevPage.setData({
-      deleted: true
-    })
-    if (this.data['id'] == getApp().globalData['launchInfo']['dailyIdiom']['id'])
-      getApp().globalData['refreshOnIndex'] = true
+      deleted: true,
+    });
+    if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
+      getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
-      if (currentPage == getCurrentPages()[getCurrentPages().length - 1])
+      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
         wx.switchTab({
-          url: '/pages/index/index'
-        })
-    }, 1500)
-  }
-})
+          url: '/pages/index/index',
+        });
+    }, 1500);
+  },
+});

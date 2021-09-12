@@ -1,0 +1,30 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "注册",
+                    "pathName": "pages/registration/registration",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "调试",
+                    "pathName": "pages/debug/debug",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

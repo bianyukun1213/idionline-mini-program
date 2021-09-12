@@ -1,11 +1,10 @@
-<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
   <van-cell-group>
-    <van-cell title="广告">
+    <!-- <van-cell title="广告">
       <van-switch active-color="{{color}}" checked="{{adsOn}}" bind:change="onChangeAds" />
     </van-cell>
     <van-cell title="暗色遮罩层（试验功能，适用于夜间阅读）">
       <van-switch active-color="{{color}}" checked="{{overlayOn}}" bind:change="onChangeOverlay" />
-    </van-cell>
+    </van-cell> -->
   </van-cell-group>
 </view>

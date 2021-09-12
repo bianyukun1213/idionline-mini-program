@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.con {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.text {
+  font-size: 16px;
+  display: flex;
+  color: gray;
+  align-self: center;
+  text-align: center;
+}
+
+.btn {
+  align-self: center;
+  margin-top: 10px;
+}

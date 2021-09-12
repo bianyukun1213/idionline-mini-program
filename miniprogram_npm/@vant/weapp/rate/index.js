@@ -15,6 +15,7 @@ var __assign =
     return __assign.apply(this, arguments);
   };
 Object.defineProperty(exports, '__esModule', { value: true });
+var utils_1 = require('../common/utils');
 var component_1 = require('../common/component');
 var version_1 = require('../common/version');
 component_1.VantComponent({
@@ -41,18 +42,9 @@ component_1.VantComponent({
       type: String,
       value: 'star-o',
     },
-    color: {
-      type: String,
-      value: '#ffd21e',
-    },
-    voidColor: {
-      type: String,
-      value: '#c7c7c7',
-    },
-    disabledColor: {
-      type: String,
-      value: '#bdbdbd',
-    },
+    color: String,
+    voidColor: String,
+    disabledColor: String,
     count: {
       type: Number,
       value: 5,
@@ -91,10 +83,10 @@ component_1.VantComponent({
       var touchable = this.data.touchable;
       if (!touchable) return;
       var clientX = event.touches[0].clientX;
-      this.getRect('.van-rate__icon', true).then(function (list) {
+      utils_1.getAllRect(this, '.van-rate__icon').then(function (list) {
         var target = list
-          .sort(function (item) {
-            return item.right - item.left;
+          .sort(function (cur, next) {
+            return cur.dataset.score - next.dataset.score;
           })
           .find(function (item) {
             return clientX >= item.left && clientX <= item.right;

@@ -6,6 +6,10 @@
     },
     {
       "action": "disallow",
+      "page": "/pages/login/login"
+    },
+    {
+      "action": "disallow",
       "page": "/pages/edit/edit"
     },
     {

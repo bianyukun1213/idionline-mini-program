@@ -1,51 +1,57 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/select/select",
+    "pages/selection/selection",
     "pages/idiom/idiom",
     "pages/favorites/favorites",
     "pages/about/about",
-    "pages/register_edi/register_edi",
+    "pages/registration/registration",
     "pages/edit/edit",
     "pages/edit_bson/edit_bson",
-    "pages/correct/correct",
-    "pages/dbg/dbg",
-    "pages/disable_ads/disable_ads",
+    "pages/correction/correction",
+    "pages/debug/debug",
     "pages/settings/settings",
-    "pages/document/document"
+    "pages/document/document",
+    "pages/login/login"
   ],
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "icons/index_gray.png",
-        "selectedIconPath": "icons/index.png"
+        "iconPath": "@iconPath1",
+        "selectedIconPath": "@selectedIconPath1"
       },
       {
         "pagePath": "pages/favorites/favorites",
         "text": "收藏",
-        "iconPath": "icons/favorites_gray.png",
-        "selectedIconPath": "icons/favorites.png"
+        "iconPath": "@iconPath2",
+        "selectedIconPath": "@selectedIconPath2"
       },
       {
         "pagePath": "pages/about/about",
         "text": "关于",
-        "iconPath": "icons/about_gray.png",
-        "selectedIconPath": "icons/about.png"
+        "iconPath": "@iconPath3",
+        "selectedIconPath": "@selectedIconPath3"
       }
     ],
-    "backgroundColor": "#008080",
-    "color": "#CCCCCC",
-    "selectedColor": "#FFFFFF",
-    "borderStyle": "white"
+    "color": "@tabFontColor",
+    "selectedColor": "@tabSelectedColor",
+    "backgroundColor": "@tabBgColor",
+    "borderStyle": "@tabBorderStyle"
   },
   "window": {
-    "navigationBarBackgroundColor": "#008080",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarTextStyle": "@navTxtStyle",
+    "backgroundColor": "@bgColor",
+    "backgroundTextStyle": "@bgTxtStyle",
+    "backgroundColorTop": "@bgColorTop",
+    "backgroundColorBottom": "@bgColorBottom",
     "navigationBarTitleText": "成语在线",
     "pageOrientation": "auto"
   },
   "resizable": true,
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "darkmode": true,
+  "themeLocation": "theme.json"
 }

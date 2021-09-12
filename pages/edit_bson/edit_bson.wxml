@@ -1,8 +1,7 @@
-<van-overlay style="pointer-events:none;" z-index="101" show="{{overlayOn}}" />
 <view class="root">
-		<van-cell-group wx:if="{{value!=null}}">
+		<van-cell-group wx:if="{{value!==''}}">
 			<van-field value="{{value}}" type="textarea" autosize required clearable bind:change="onChange" label="BSON 文本" placeholder="BSON 文本不能为空" />
 		</van-cell-group>
 		<text class="text">在提交修改之前，请您仔细阅读帮助文档！</text>
-		<van-button class="btn" wx:if="{{value!=null}}" aria-role="button" aria-label="提交" color="{{color}}" wx:if="{{show}}" bind:click="onSubmit">提交</van-button>
+		<van-button class="btn" wx:if="{{value!==''}}" aria-role="button" aria-label="提交" color="{{color}}" wx:if="{{show}}" bind:click="onSubmit">提交</van-button>
 </view>
