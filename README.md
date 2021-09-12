@@ -4,13 +4,13 @@
 
 # 使用到的技术与资源
 
-1. [Vant Weapp](https://github.com/youzan/vant-weapp)
+- [Vant Weapp](https://github.com/youzan/vant-weapp)
 
-2. [canvas drawer](https://github.com/kuckboy1994/mp_canvas_drawer)
+- [canvas drawer](https://github.com/kuckboy1994/mp_canvas_drawer)
 
-3. [Towxml](https://github.com/sbfkcel/towxml)
+- [Towxml](https://github.com/sbfkcel/towxml)
 
-4. [Iconfont](https://www.iconfont.cn/)
+- [Iconfont](https://www.iconfont.cn/)
 
 # 感谢（排名不分先后）
 
