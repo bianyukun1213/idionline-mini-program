@@ -2,7 +2,7 @@ const color = require('tools/color.js');
 App({
   towxml: require('/towxml/index'),
   globalData: {
-    dbgMode: false,
+    debugMode: false,
     version: '1.52.0',
     platform: {
       tag: 'WeChat',

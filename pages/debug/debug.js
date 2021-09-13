@@ -27,7 +27,7 @@ Page({
       this.setData({
         fromSearch: true,
       });
-      if (getApp().globalData.dbgMode) {
+      if (getApp().globalData.debugMode) {
         this.setData({
           showDebug: true,
         });
@@ -66,8 +66,8 @@ Page({
       icon: 'none',
       mask: true,
     });
-    getApp().globalData.dbgMode = true;
-    console.log('调试模式已开启：' + getApp().globalData.dbgMode);
+    getApp().globalData.debugMode = true;
+    console.log('调试模式已开启：' + getApp().globalData.debugMode);
   },
   onDebugClick() {
     wx.vibrateShort();

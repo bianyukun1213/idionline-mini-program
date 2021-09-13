@@ -21,7 +21,7 @@ function get(args) {
     urlBase =
       'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=BfYDfQxbqmKPazSVr1He4Lap&client_secret=z9PXBM0P1bUFDEYgfiSnSax5mHZEHD18';
   } else {
-    if (getApp().globalData.dbgMode) {
+    if (getApp().globalData.debugMode) {
       urlBase = 'http://bianyukun1213.tpddns.cn:12601/api/';
     } else {
       urlBase = 'https://idionline.hollisdevhub.com/api/';
@@ -103,7 +103,7 @@ function uniFunc(url, method, dt, doSuccess) {
     mask: true,
   });
   let urlNew;
-  if (getApp().globalData.dbgMode) {
+  if (getApp().globalData.debugMode) {
     urlNew = 'http://bianyukun1213.tpddns.cn:12601/api/' + url;
   } else {
     urlNew = 'https://idionline.hollisdevhub.com/api/' + url;
