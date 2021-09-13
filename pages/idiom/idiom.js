@@ -109,10 +109,9 @@ Page({
       textsTmp[data.definitions.indexOf(element)] = [];
       let textTmp = element.text;
       for (let k in element.links) {
-        textTmp = textTmp.replace(
-          element.links[k],
-          ' {split}{link:' + k + '}{split} '
-        );
+        textTmp = textTmp
+          .split(element.links[k])
+          .join(' {split}{link:' + k + '}{split} '); // 字符串多次替换。
       }
       let arrayTmp = textTmp.split('{split}');
       arrayTmp.forEach((el) => {
@@ -193,7 +192,7 @@ Page({
     wx.vibrateShort();
     innerAudioContext.stop();
     wx.redirectTo({
-      url: '/pages/idiom/idiom?id=' + e.currentTarget.id,
+      url: '/pages/idiom/idiom?id=' + e.currentTarget.id.split('-')[0],
     });
   },
   onCollect() {

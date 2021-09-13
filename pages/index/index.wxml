@@ -26,8 +26,8 @@
 							<view id="text-{{index}}" style="text-align:right;" bind:longpress="onCopy">
 								<block wx:if="{{item.isBold}}">
 									<block wx:for="{{defTexts[index]}}" wx:key="index">
-										<text class="text" id="{{item.id}}" wx:if="{{item.isLink}}"
-											style="font-weight:bold;color:{{color}};display:inline;"
+										<text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
+											style=text-decoration:underline;font-weight:bold;color:{{color}};display:inline;"
 											bind:tap="onClick">{{item.text}}</text>
 										<text class="text" wx:else
 											style="font-weight:bold;color:red;display:inline;">{{item.text}}</text>
@@ -35,8 +35,8 @@
 								</block>
 								<block wx:else>
 									<block wx:for="{{defTexts[index]}}" wx:key="index">
-										<text class="text" id="{{item.id}}" wx:if="{{item.isLink}}"
-											style="font-weight:bold;color:{{color}};display:inline;"
+										<text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
+											style="text-decoration:underline;color:{{color}};display:inline;"
 											bind:tap="onClick">{{item.text}}</text>
 										<text class="text" wx:else style="display:inline;">{{item.text}}</text>
 									</block>
