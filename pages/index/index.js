@@ -164,14 +164,14 @@ Page({
         for (let k in element.links) {
           textTmp = textTmp
             .split(element.links[k])
-            .join(' {split}{link:' + k + '}{split} '); // 字符串多次替换。
+            .join('{split}{link:' + k + '}{split}'); // 字符串多次替换。
         }
         let arrayTmp = textTmp.split('{split}');
         arrayTmp.forEach((el) => {
           if (el.startsWith('{link:')) {
             let id = el.replace('{link:', '').replace('}', '');
             textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)].push({
-              text: element.links[id],
+              text: '〖' + element.links[id] + '〗',
               isLink: true,
               id: id,
             });

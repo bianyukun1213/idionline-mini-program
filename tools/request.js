@@ -24,7 +24,7 @@ function get(args) {
     if (getApp().globalData.dbgMode) {
       urlBase = 'http://bianyukun1213.tpddns.cn:12601/api/';
     } else {
-      urlBase = 'https://idionline.picp.io/api/';
+      urlBase = 'https://idionline.hollisdevhub.com/api/';
     }
   }
   if (typeof url === 'undefined') {
@@ -106,7 +106,7 @@ function uniFunc(url, method, dt, doSuccess) {
   if (getApp().globalData.dbgMode) {
     urlNew = 'http://bianyukun1213.tpddns.cn:12601/api/' + url;
   } else {
-    urlNew = 'https://idionline.picp.io/api/' + url;
+    urlNew = 'https://idionline.hollisdevhub.com/api/' + url;
   }
   console.log('进行操作：' + method + ' ' + url);
   wx.request({
