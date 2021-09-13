@@ -18,6 +18,7 @@ Page({
     ori: '',
     tbc: '',
     defs: [],
+    defTexts: [],
     lastEditor: '',
     updateTime: '',
     toBeCorrected: false,
@@ -30,6 +31,7 @@ Page({
     show: false,
     filePath: '',
     singlePage: false,
+    longinSucceed: false,
     actions: [
       {
         name: '转发',
@@ -88,6 +90,7 @@ Page({
     this.data.tTSCurrent = '';
     this.data.tTSSrc = {};
     innerAudioContext.stop();
+    if (this.data.loginSucceeded) this.doEdit();
   },
   //获取启动信息的回调函数。
   callback() {
@@ -100,11 +103,40 @@ Page({
     wx.setNavigationBarTitle({
       title: '【' + data.name + '】',
     });
+    this.setData({ defTexts: [] });
+    let textsTmp = [];
+    data.definitions.forEach((element) => {
+      textsTmp[data.definitions.indexOf(element)] = [];
+      let textTmp = element.text;
+      for (let k in element.links) {
+        textTmp = textTmp.replace(
+          element.links[k],
+          ' {split}{link:' + k + '}{split} '
+        );
+      }
+      let arrayTmp = textTmp.split('{split}');
+      arrayTmp.forEach((el) => {
+        if (el.startsWith('{link:')) {
+          let id = el.replace('{link:', '').replace('}', '');
+          textsTmp[data.definitions.indexOf(element)].push({
+            text: element.links[id],
+            isLink: true,
+            id: id,
+          });
+        } else {
+          textsTmp[data.definitions.indexOf(element)].push({
+            text: el,
+            isLink: false,
+          });
+        }
+      });
+    });
     //赋一堆值。
     this.setData({
       id: data.id,
       name: data.name,
       defs: data.definitions,
+      defTexts: textsTmp,
       lastEditor: data.lastEditor,
       updateTime: format.formatDate(data.updateTimeUT, false),
     });
@@ -157,7 +189,6 @@ Page({
     }
     console.log('获取到成语释义：', this.data.defs);
   },
-  //跳转按钮点击事件。
   onClick(e) {
     wx.vibrateShort();
     innerAudioContext.stop();
@@ -174,7 +205,7 @@ Page({
       title: '完成！',
       mask: true,
     });
-    console.log('已添加成语至收藏：【' + this.data.name+'】');
+    console.log('已添加成语至收藏：【' + this.data.name + '】');
   },
   onCorrect() {
     wx.vibrateShort();
@@ -183,7 +214,7 @@ Page({
       id: this.data.id,
       name: this.data.name,
     };
-    let str = JSON.stringify(json);
+    let str = encodeURIComponent(JSON.stringify(json));
     wx.navigateTo({
       url: '/pages/correction/correction?str=' + str,
       fail: this.failToNavigate,
@@ -230,37 +261,41 @@ Page({
     if (
       typeof this.data.sessionId !== 'undefined' &&
       this.data.sessionId !== ''
-    ) {
-      innerAudioContext.stop();
-      let json = {
-        id: this.data.id,
-        sessionId: this.data.sessionId,
-        name: this.data.name,
-        indexOfIdiom: this.data.index,
-        pinyin: this.data.pinyin,
-        origin: this.data.origin,
-        toBeCorrected: this.data.toBeCorrected,
-      };
-      let definitionUpdates = [];
-      for (let k in this.data.defs) {
-        definitionUpdates.push({
-          source: this.data.defs[k].source,
-          text: this.data.defs[k].text,
-          addition: this.data.defs[k].addition,
-          isBold: this.data.defs[k].isBold,
-        });
-      }
-      json.definitionUpdates = definitionUpdates;
-      let str = JSON.stringify(json);
-      wx.navigateTo({
-        url: '/pages/edit/edit?str=' + str,
-        fail: this.failToNavigate,
-      });
-    } else {
+    )
+      this.doEdit();
+    else {
       wx.navigateTo({
         url: '/pages/login/login',
       });
     }
+  },
+  doEdit() {
+    this.data.loginSucceeded = false;
+    innerAudioContext.stop();
+    let json = {
+      id: this.data.id,
+      sessionId: this.data.sessionId,
+      name: this.data.name,
+      indexOfIdiom: this.data.index,
+      pinyin: this.data.pinyin,
+      origin: this.data.origin,
+      toBeCorrected: this.data.toBeCorrected,
+    };
+    let definitionUpdates = [];
+    for (let k in this.data.defs) {
+      definitionUpdates.push({
+        source: this.data.defs[k].source,
+        text: this.data.defs[k].text,
+        addition: this.data.defs[k].addition,
+        isBold: this.data.defs[k].isBold,
+      });
+    }
+    json.definitionUpdates = definitionUpdates;
+    let str = encodeURIComponent(JSON.stringify(json));
+    wx.navigateTo({
+      url: '/pages/edit/edit?str=' + str,
+      fail: this.failToNavigate,
+    });
   },
   onClose() {
     this.setData({
@@ -392,7 +427,7 @@ Page({
         return;
       }
       wx.vibrateShort();
-      this.data.tTSCurrent = e.currentTarget.id;
+      this.data.tTSCurrent = e.currentTarget.id.replace('speaker-', '');
       console.log('变量中的音频地址：', this.data.tTSSrc);
       if (typeof this.data.tTSSrc[this.data.tTSCurrent] === 'undefined') {
         console.log('当前音频地址在变量中不存在');
@@ -490,5 +525,12 @@ Page({
       mask: true,
     });
     wx.vibrateLong();
+  },
+  onCopy(e) {
+    wx.vibrateShort();
+    let index = e.currentTarget.id.replace('text-', '');
+    wx.setClipboardData({
+      data: this.data.defs[index].text,
+    });
   },
 });

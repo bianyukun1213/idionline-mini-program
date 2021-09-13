@@ -1,6 +1,7 @@
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
-	<van-panel wx:if="{{id!==''}}" title="【{{name}}】{{py}}" desc="{{ori}}由 {{lastEditor}} 最后编辑于{{updateTime}}{{tbc}}" use-footer-slot>
+	<van-panel wx:if="{{id!==''}}" title="【{{name}}】{{py}}" desc="{{ori}}由 {{lastEditor}} 最后编辑于{{updateTime}}{{tbc}}"
+		use-footer-slot>
 		<view class="content">
 			<view class="defs" wx:for="{{defs}}" wx:key="index">
 				<van-row style="margin-bottom:10px;">
@@ -13,35 +14,63 @@
 				</van-row>
 				<van-row>
 					<van-col span="6">
-						<van-tag id="{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">释义 🔊</van-tag>
+						<van-tag id="speaker-{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">释义 🔊
+						</van-tag>
 					</van-col>
 					<van-col span="18">
-						<text class="text" user-select="true" wx:if="{{item.isBold}}" style="font-weight:bold;color:red;">{{item.text}}</text>
-						<text class="text" user-select="true" wx:else>{{item.text}}</text>
+						<view id="text-{{index}}" style="text-align:right;" bind:longpress="onCopy">
+							<block wx:if="{{item.isBold}}">
+								<block wx:for="{{defTexts[index]}}" wx:key="index">
+									<text class="text" id="{{item.id}}" wx:if="{{item.isLink}}"
+										style="font-weight:bold;color:{{color}};display:inline;"
+										bind:tap="onClick">{{item.text}}</text>
+									<text class="text" wx:else
+										style="font-weight:bold;color:red;display:inline;">{{item.text}}</text>
+								</block>
+							</block>
+							<block wx:else>
+								<block wx:for="{{defTexts[index]}}" wx:key="index">
+									<text class="text" id="{{item.id}}" wx:if="{{item.isLink}}"
+										style="font-weight:bold;color:{{color}};display:inline;"
+										bind:tap="onClick">{{item.text}}</text>
+									<text class="text" wx:else style="display:inline;">{{item.text}}</text>
+								</block>
+							</block>
+						</view>
 						<!--条件渲染和列表渲染好像他妈不能一起用，不然结果好像是反的，这里先把条件渲染写block吧-->
 						<block wx:if="{{item.examples.length!==0}}">
-							<text class="text" wx:for="{{item.examples}}" wx:key="index" style="margin-top:10px;font-size:12px;color:{{color}};">例句 {{index+1}}：{{item}}</text>
+							<text class="text" wx:for="{{item.examples}}" wx:key="index"
+								style="margin-top:10px;font-size:12px;color:{{color}};">例句 {{index+1}}：{{item}}</text>
 						</block>
 						<block wx:if="{{item.addition!==null}}">
-							<text class="text" style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item.addition}}</text>
+							<text class="text"
+								style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item.addition}}</text>
 						</block>
-						<block wx:if="{{item.links!==''}}">
+						<!-- <block wx:if="{{item.links!==''}}">
 							<view class="btn">
-								<van-button class="btn_link" aria-role="button" aria-label="〖{{item}}〗" id="{{index}}" wx:for="{{defs[index].links}}" wx:key="index" bind:click="onClick" size="small" plain round color="{{color}}">〖{{item}}〗</van-button>
+								<van-button class="btn_link" aria-role="button" aria-label="〖{{item}}〗" id="{{index}}"
+									wx:for="{{defs[index].links}}" wx:key="index" bind:click="onClick" size="small"
+									plain round color="{{color}}">〖{{item}}〗</van-button>
 							</view>
-						</block>
+						</block> -->
 					</van-col>
 				</van-row>
-				<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};" wx:if="{{index<defs.length-1}}" />
+				<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};"
+					wx:if="{{index<defs.length-1}}" />
 			</view>
 		</view>
 		<view class="footer" slot="footer">
-			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="纠错" color="{{color}}" bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
-			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="接龙" color="{{color}}" bind:click="onSolitaire">接龙</van-button>
-			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="收藏" color="{{color}}" bind:click="onCollect">收藏</van-button>
-			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="分享" color="{{color}}" bind:click="onShare" bind:longpress="onLongPress">分享</van-button>
+			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="纠错" color="{{color}}"
+				bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
+			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="接龙" color="{{color}}"
+				bind:click="onSolitaire">接龙</van-button>
+			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="收藏" color="{{color}}"
+				bind:click="onCollect">收藏</van-button>
+			<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="分享" color="{{color}}"
+				bind:click="onShare" bind:longpress="onLongPress">分享</van-button>
 		</view>
 	</van-panel>
-	<van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect" bind:cancel="onClose" cancel-text="取消" />
+	<van-action-sheet show="{{show}}" actions="{{actions}}" bind:close="onClose" bind:select="onSelect"
+		bind:cancel="onClose" cancel-text="取消" />
 	<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>

@@ -7,7 +7,7 @@
     "pages/about/about",
     "pages/registration/registration",
     "pages/edit/edit",
-    "pages/edit_bson/edit_bson",
+    "pages/bson-edit/bson-edit",
     "pages/correction/correction",
     "pages/debug/debug",
     "pages/settings/settings",

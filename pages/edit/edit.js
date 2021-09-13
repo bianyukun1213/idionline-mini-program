@@ -14,7 +14,7 @@ Page({
     color: '',
   },
   onLoad(option) {
-    let json = JSON.parse(option.str);
+    let json = JSON.parse(decodeURIComponent(option.str));
     //更新页面。
     this.data.sessionId = json.sessionId;
     this.setData({
@@ -95,9 +95,9 @@ Page({
       id: this.data.id,
       sessionId: this.data.sessionId,
     };
-    let str = JSON.stringify(json);
+    let str =encodeURIComponent(JSON.stringify(json));
     wx.redirectTo({
-      url: '/pages/edit_bson/edit_bson?str=' + str,
+      url: '/pages/bson-edit/bson-edit?str=' + str,
     });
   },
   onDeleteItem(event) {
@@ -164,7 +164,10 @@ Page({
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     prevPage.data.refresh = true;
-    if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
+    if (
+      getApp().globalData.launchInfo.dailyIdiom !== null &&
+      this.data.id === getApp().globalData.launchInfo.dailyIdiom.id
+    )
       getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (getCurrentPages()[getCurrentPages().length - 2] === prevPage)
@@ -204,8 +207,8 @@ Page({
     prevPage.setData({
       deleted: true,
     });
-    if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
-      getApp().globalData.refreshOnIndex = true;
+    // if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
+    getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
         wx.switchTab({

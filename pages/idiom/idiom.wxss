@@ -16,12 +16,12 @@
   flex-direction: column;
 }
 
-.btn {
+/* .btn {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   margin-top: 10px;
-}
+} */
 
 .footer {
   display: flex;
@@ -35,9 +35,9 @@
   text-align: right;
 }
 
-.btn_link {
+/* .btn_link {
   margin-left: 10px;
-}
+} */
 
 .btn_func {
   margin-left: 10px;

@@ -53,7 +53,10 @@ Page({
     let pages = getCurrentPages();
     let currentPage = pages[pages.length - 1];
     let prevPage = pages[pages.length - 2];
-    if (prevPage.route.split('/')[2] === 'idiom') prevPage.data.refresh = true;
+    if (prevPage.route.split('/')[2] === 'idiom'){
+      prevPage.data.loginSucceeded = true;
+      prevPage.data.refresh = true;
+    }
     getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (currentPage === getCurrentPages()[getCurrentPages().length - 1])

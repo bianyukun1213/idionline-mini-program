@@ -11,6 +11,7 @@ Page({
     idiId: '',
     pinyin: '',
     defs: [],
+    defTexts: [],
     launchInfo: {},
     placeHolder: '请输入您要查询的成语',
     value: '',
@@ -155,10 +156,39 @@ Page({
       placeHolder: '目前已收录 ' + launchInfo.idiomsCount + ' 条成语',
     });
     if (launchInfo.dailyIdiom !== null) {
+      this.setData({ defTexts: [] });
+      let textsTmp = [];
+      launchInfo.dailyIdiom.definitions.forEach((element) => {
+        textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)] = [];
+        let textTmp = element.text;
+        for (let k in element.links) {
+          textTmp = textTmp.replace(
+            element.links[k],
+            ' {split}{link:' + k + '}{split} '
+          );
+        }
+        let arrayTmp = textTmp.split('{split}');
+        arrayTmp.forEach((el) => {
+          if (el.startsWith('{link:')) {
+            let id = el.replace('{link:', '').replace('}', '');
+            textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)].push({
+              text: element.links[id],
+              isLink: true,
+              id: id,
+            });
+          } else {
+            textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)].push({
+              text: el,
+              isLink: false,
+            });
+          }
+        });
+      });
       this.setData({
         idiName: launchInfo.dailyIdiom.name,
         idiId: launchInfo.dailyIdiom.id,
         defs: launchInfo.dailyIdiom.definitions,
+        defTexts: textsTmp,
       });
       if (launchInfo.dailyIdiom.pinyin !== null)
         this.setData({
@@ -173,6 +203,7 @@ Page({
         idiName: '',
         idiId: '',
         defs: '',
+        defTexts: [],
         pinyin: '',
         showPopup: false,
       });
@@ -324,9 +355,14 @@ Page({
           break;
         }
       }
-      let str = JSON.stringify(data);
+      let str = encodeURIComponent(JSON.stringify(data));
       wx.navigateTo({
-        url: '/pages/selection/selection?str=' + str + '&linkType="' + linkType + '"',
+        url:
+          '/pages/selection/selection?str=' +
+          str +
+          '&linkType="' +
+          linkType +
+          '"',
       });
     }
   },
@@ -517,5 +553,18 @@ Page({
   },
   onTabItemTap() {
     wx.vibrateShort();
+  },
+  onCopy(e) {
+    wx.vibrateShort();
+    let index = e.currentTarget.id.replace('text-', '');
+    wx.setClipboardData({
+      data: this.data.defs[index].text,
+    });
+  },
+  onClick(e) {
+    wx.vibrateShort();
+    wx.navigateTo({
+      url: '/pages/idiom/idiom?id=' + e.currentTarget.id,
+    });
   },
 });

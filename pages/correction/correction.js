@@ -8,7 +8,7 @@ Page({
     color: '',
   },
   onLoad(option) {
-    let json = JSON.parse(option.str);
+    let json = JSON.parse(decodeURIComponent(option.str));
     this.data.id = json.id;
     this.data.name = json.name;
   },

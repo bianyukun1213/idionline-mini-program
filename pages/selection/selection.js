@@ -10,7 +10,7 @@ Page({
     color: '',
   },
   onLoad(option) {
-    let idioms = JSON.parse(option.str);
+    let idioms = JSON.parse(decodeURIComponent(option.str));
     let array = [];
     for (let key in idioms) {
       let obj = {};
