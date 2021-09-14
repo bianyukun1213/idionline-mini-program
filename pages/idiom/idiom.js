@@ -32,14 +32,9 @@ Page({
     filePath: '',
     singlePage: false,
     longinSucceed: false,
-    actions: [
-      {
-        name: '转发',
-        openType: 'share',
-      },
-      {
-        name: '生成海报',
-      },
+    options: [
+      { name: '转发', icon: 'wechat', openType: 'share' },
+      { name: '生成海报', icon: 'poster' },
     ],
   },
   onLoad(option) {
@@ -297,6 +292,7 @@ Page({
     });
   },
   onClose() {
+    wx.vibrateShort();
     this.setData({
       show: false,
     });
@@ -344,7 +340,7 @@ Page({
             views: [
               {
                 type: 'image',
-                url: '/icons/sharing-pic.png',
+                url: '/images/sharing-pic.png',
                 width: 1080,
                 height: 1440,
               },
@@ -399,19 +395,19 @@ Page({
     if (this.data.shareFlag) {
       return {
         title: '点击查看【' + this.data.name + '】的释义',
-        imageUrl: '/icons/sharing.png',
+        imageUrl: '/images/sharing.png',
         path: '/pages/idiom/idiom?id=' + this.data.id,
       };
     }
     return {
-      imageUrl: '/icons/sharing.png',
+      imageUrl: '/images/sharing.png',
       path: '/pages/index/index',
     };
   },
   onShareTimeline() {
     return {
       title: '点击查看【' + this.data.name + '】的释义',
-      imageUrl: '/icons/sharing.png',
+      imageUrl: '/images/sharing.png',
     };
   },
   onTTSTap(e) {

@@ -2,13 +2,13 @@
   "usingComponents": {
     "van-search": "/miniprogram_npm/@vant/weapp/search/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index",
-    "van-panel": "/miniprogram_npm/@vant/weapp/panel/index",
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
     "van-tag": "/miniprogram_npm/@vant/weapp/tag/index",
     "van-popup": "/miniprogram_npm/@vant/weapp/popup/index",
     "van-row": "/miniprogram_npm/@vant/weapp/row/index",
     "van-col": "/miniprogram_npm/@vant/weapp/col/index",
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
-    "van-action-sheet": "/miniprogram_npm/@vant/weapp/action-sheet/index",
+    "van-share-sheet": "/miniprogram_npm/@vant/weapp/share-sheet/index",
     "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
     "canvasdrawer": "/canvasdrawer/canvasdrawer"
   },

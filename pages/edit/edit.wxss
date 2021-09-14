@@ -18,11 +18,3 @@
 .value-class {
   flex: none !important;
 }
-
-.text {
-  margin-top: 10px;
-  font-size: 16px;
-  width: 100%;
-  text-align: center;
-  color: red;
-}

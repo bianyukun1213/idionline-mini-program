@@ -22,30 +22,30 @@
     --field-input-text-color: white;
     --field-placeholder-text-color: gray;
   }
-
-  .van-action-sheet__item {
-    --action-sheet-item-background: #191919;
-    --active-color: gray;
-    --action-sheet-item-text-color: white;
+  
+  .van-share-sheet__title {
+    color: white !important;
   }
 
-  .van-action-sheet__cancel {
-    --action-sheet-item-background: #191919;
-    --active-color: gray;
-
-    --action-sheet-cancel-text-color: white;
+  .van-share-sheet__name {
+    color: white !important;
   }
 
-  .van-action-sheet__gap {
-    --action-sheet-cancel-padding-color: #1f1f1f;
-  }
-
-  .sheet-index--van-action-sheet {
+  .van-share-sheet__cancel{
+    color:white !important;
     background-color: #1f1f1f !important;
   }
 
+  .van-share-sheet__cancel:before{
+    background-color: #191919 !important;
+  }
+
+  .van-share-sheet__cancel:active{
+    background-color: gray !important;
+  }
+
   .van-notice-bar {
-    --notice-bar-background-color: #1f1f1f;
+    --notice-bar-background-color: #464f7a;
     --notice-bar-text-color: white;
   }
 

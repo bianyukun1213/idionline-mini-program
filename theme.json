@@ -10,12 +10,12 @@
     "tabSelectedColor": "#ffffff",
     "tabBgColor": "#008080",
     "tabBorderStyle": "white",
-    "iconPath1": "pics/index-gray.png",
-    "selectedIconPath1": "pics/index.png",
-    "iconPath2": "pics/favorites-gray.png",
-    "selectedIconPath2": "pics/favorites.png",
-    "iconPath3": "pics/about-gray.png",
-    "selectedIconPath3": "pics/about.png"
+    "iconPath1": "images/index-gray.png",
+    "selectedIconPath1": "images/index.png",
+    "iconPath2": "images/favorites-gray.png",
+    "selectedIconPath2": "images/favorites.png",
+    "iconPath3": "images/about-gray.png",
+    "selectedIconPath3": "images/about.png"
   },
   "dark": {
     "navBgColor": "#1f1f1f",
@@ -28,11 +28,11 @@
     "tabSelectedColor": "#ffffff",
     "tabBgColor": "#1f1f1f",
     "tabBorderStyle": "white",
-    "iconPath1": "pics/index-gray.png",
-    "selectedIconPath1": "pics/index.png",
-    "iconPath2": "pics/favorites-gray.png",
-    "selectedIconPath2": "pics/favorites.png",
-    "iconPath3": "pics/about-gray.png",
-    "selectedIconPath3": "pics/about.png"
+    "iconPath1": "images/index-gray.png",
+    "selectedIconPath1": "images/index.png",
+    "iconPath2": "images/favorites-gray.png",
+    "selectedIconPath2": "images/favorites.png",
+    "iconPath3": "images/about-gray.png",
+    "selectedIconPath3": "images/about.png"
   }
 }

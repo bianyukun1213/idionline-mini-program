@@ -1,8 +1,8 @@
 <view class="root">
+	<van-notice-bar wrapable text="注册为编辑者后，您将可以修改成语信息。用户名：2 至 16 位，允许包含大小写字母及数字；密码：8 至 20 位，需要包含大小写字母、数字及特殊符号。" />
   <van-cell-group>
     <van-field id="field_username" value="{{username}}" required clearable bind:change="onChange" maxlength="16" label="用户名" placeholder="用户名不能为空" />
     <van-field id="field_password" value="{{password}}" required clearable type="password" bind:change="onChange" maxlength="20" label="密码" placeholder="密码不能为空" />
   </van-cell-group>
-  <text class="text">注册为编辑者后，您将可以修改成语信息。\n用户名：2 至 16 位，允许包含大小写字母及数字\n密码：8 至 20 位，需要包含大小写字母、数字及特殊符号</text>
   <van-button class="btn" aria-role="button" aria-label="注册为编辑者" wx:if="{{show}}" color="{{color}}" bind:click="onRegister">注册为编辑者</van-button>
 </view>

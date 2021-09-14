@@ -24,7 +24,7 @@ Page({
       pinyin: json.pinyin,
       origin: json.origin,
       toBeCorrected: json.toBeCorrected,
-      definitionUpdates: json.definitionUpdates, //,
+      definitionUpdates: json.definitionUpdates,
     });
     for (let k in json.definitionUpdates) {
       this.data.canBeRemoved[k] = false;
@@ -95,7 +95,7 @@ Page({
       id: this.data.id,
       sessionId: this.data.sessionId,
     };
-    let str =encodeURIComponent(JSON.stringify(json));
+    let str = encodeURIComponent(JSON.stringify(json));
     wx.redirectTo({
       url: '/pages/bson-edit/bson-edit?str=' + str,
     });
@@ -207,7 +207,6 @@ Page({
     prevPage.setData({
       deleted: true,
     });
-    // if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
     getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (currentPage === getCurrentPages()[getCurrentPages().length - 1])

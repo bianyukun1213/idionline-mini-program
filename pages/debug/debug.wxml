@@ -1,6 +1,5 @@
 <view class="root">
     <view class="root" wx:if="{{showDebug}}">
-        <!-- <text class="text" wx:if="{{!fromSearch}}">调试模式已开启，\n1 秒后进行跳转！</text> -->
         <text class="text">选项</text>
         <van-button class="btn" aria-role="button" aria-label="开启调试模式" bind:click="onDebugClick" color="{{color}}">
             开启调试模式</van-button>

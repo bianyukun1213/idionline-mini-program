@@ -16,7 +16,7 @@ Page({
     placeHolder: '请输入您要查询的成语',
     value: '',
     historyValue: [],
-    logoUrl: '../../pics/idionline.png',
+    logoUrl: '../../images/idionline.png',
     searchBarValue: '',
     showPopup: false,
     startY: 0,
@@ -29,14 +29,9 @@ Page({
     shareIdiom: '',
     singlePage: false,
     dark: false,
-    actions: [
-      {
-        name: '转发',
-        openType: 'share',
-      },
-      {
-        name: '生成海报',
-      },
+    options: [
+      { name: '转发', icon: 'wechat', openType: 'share' },
+      { name: '生成海报', icon: 'poster' },
     ],
   },
   //启动
@@ -466,7 +461,7 @@ Page({
             views: [
               {
                 type: 'image',
-                url: '/pics/sharing-pic.png',
+                url: '/images/sharing-pic.png',
                 width: 1080,
                 height: 1440,
               },
@@ -521,14 +516,14 @@ Page({
       let date = format.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
-        imageUrl: '/pics/sharing.png',
+        imageUrl: '/images/sharing.png',
         path:
           '/pages/index/index?showDailyIdiom=true&shareIdiom=' +
           this.data.idiId,
       };
     }
     return {
-      imageUrl: '/pics/sharing.png',
+      imageUrl: '/images/sharing.png',
     };
   },
   onShareTimeline() {
@@ -536,12 +531,12 @@ Page({
       let date = format.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
-        imageUrl: '/pics/sharing.png',
+        imageUrl: '/images/sharing.png',
         query: 'showDailyIdiom=true&shareIdiom=' + this.data.idiId,
       };
     }
     return {
-      imageUrl: '/pics/sharing.png',
+      imageUrl: '/images/sharing.png',
     };
   },
   onNavi() {
