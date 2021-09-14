@@ -1,4 +1,5 @@
 <view class="root">
+	<van-notice-bar wrapable text="长按移除对应成语。" />
 	<view class="list" wx:if="{{!showText}}">
 		<van-cell-group wx:for="{{items}}" wx:key="index">
 			<van-cell-group wx:for="{{items[index]}}" wx:key="index">

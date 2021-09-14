@@ -80,8 +80,7 @@ Page({
     delete favorites[index];
     wx.setStorageSync('favorites', favorites);
     wx.showToast({
-      title: '【' + name + '】已移除！',
-      icon: 'none',
+      title: '已移除！',
       mask: true,
     });
     console.log('已移除索引为 ' + index + ' 的成语');
