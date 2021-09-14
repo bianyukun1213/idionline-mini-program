@@ -46,7 +46,6 @@ Page({
     });
     wx.showToast({
       title: '登录成功！',
-      icon: 'none',
       mask: true,
     });
     console.log('登录成功：', data);

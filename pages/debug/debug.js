@@ -63,7 +63,6 @@ Page({
   onDebug() {
     wx.showToast({
       title: '调试模式已开启！',
-      icon: 'none',
       mask: true,
     });
     getApp().globalData.debugMode = true;
