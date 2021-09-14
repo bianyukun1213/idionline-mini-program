@@ -1,73 +1,62 @@
 @media (prefers-color-scheme: dark) {
   .van-popup {
+    --popup-background-color: #1f1f1f;
+  }
+
+  .van-panel {
+    --panel-background-color: #191919;
+    --cell-background-color: #191919;
+    --cell-text-color: white;
+  }
+
+  .van-collapse {
+    --collapse-item-content-background-color: #191919;
+    --cell-background-color: #191919;
+    --cell-text-color: white;
+  }
+
+  .van-search {
+    background-color: #191919 !important;
+    --search-background-color: #1f1f1f;
+    --cell-text-color: white; /* 左侧图标。 */
+    --field-input-text-color: white;
+    --field-placeholder-text-color: gray;
+  }
+
+  .van-action-sheet__item {
+    --action-sheet-item-background: #191919;
+    --active-color: gray;
+    --action-sheet-item-text-color: white;
+  }
+
+  .van-action-sheet__cancel {
+    --action-sheet-item-background: #191919;
+    --active-color: gray;
+
+    --action-sheet-cancel-text-color: white;
+  }
+
+  .van-action-sheet__gap {
+    --action-sheet-cancel-padding-color: #1f1f1f;
+  }
+
+  .sheet-index--van-action-sheet {
     background-color: #1f1f1f !important;
   }
 
   .van-notice-bar {
-    background-color: #191919 !important;
-  }
-
-  .van-notice-bar__content {
-    color: white !important;
-  }
-
-  .van-icon {
-    color: white !important;
-  }
-
-  .van-field__label {
-    color: white !important;
-  }
-
-  .van-field__control {
-    color: white !important;
-  }
-
-  .van-collapse-item__content {
-    background-color: #191919 !important;
-  }
-
-  .sheet-index--van-action-sheet {
-    background-color: #191919 !important;
-  }
-
-  .van-action-sheet__item {
-    background-color: #191919 !important;
-  }
-
-  .van-action-sheet__gap {
-    background-color: #1f1f1f !important;
-  }
-
-  .van-action-sheet__cancel {
-    background-color: #191919 !important;
-  }
-
-  .van-button--plain {
-    background-color: #191919 !important;
+    --notice-bar-background-color: #1f1f1f;
+    --notice-bar-text-color: white;
   }
 
   .van-cell {
-    background-color: #191919 !important;
+    --cell-background-color: #1f1f1f;
+    --cell-text-color: white;
+    --cell-active-color: gray;
+    --field-input-text-color: white;
+    --field-placeholder-text-color: gray;
+    --field-label-color: white;
+    --field-input-disabled-text-color: gray;
+    --field-disabled-text-color: gray;
   }
-
-  .van-panel {
-    background-color: #191919 !important;
-  }
-
-  .van-search {
-    background-color: #1f1f1f !important;
-  }
-
-  .van-search__content {
-    background-color: #191919 !important;
-  }
-
-  .van-cell__title {
-    color: white !important;
-  }
-
-  /* .van-divider{
-    background-color:white !important;
-  } */
 }

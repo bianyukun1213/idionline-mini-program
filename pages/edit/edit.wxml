@@ -1,25 +1,38 @@
 <view class="root">
 	<van-field required disabled value="{{id}}" label="Id" />
 	<van-field required clearable placeholder="名称不能为空" value="{{name}}" label="名称" bind:change="onChangeName" />
-	<van-field required clearable placeholder="索引不能为空" value="{{indexOfIdiom}}" label="索引（大写）" bind:change="onChangeIndex" />
+	<van-field required clearable placeholder="索引不能为空" value="{{indexOfIdiom}}" label="索引（大写）"
+		bind:change="onChangeIndex" />
 	<van-field clearable placeholder="空" value="{{pinyin}}" label="拼音" bind:change="onChangePinyin" />
 	<van-field clearable placeholder="空" value="{{origin}}" label="出处" bind:change="onChangeOrigin" />
 	<van-cell title="本条成语有待订正" value-class="value-class" clickable bind:click="correctionCheck">
-		<van-checkbox value="{{toBeCorrected}}" catch:tap="correctionCheck" />
+		<van-checkbox checked-color="{{color}}" value="{{toBeCorrected}}" catch:tap="correctionCheck" />
 	</van-cell>
 	<van-cell-group wx:for="{{definitionUpdates}}" wx:key="index">
-		<van-field id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" placeholder="来源不能为空" value="{{definitionUpdates[index].source}}" required clearable bind:change="onChangeSource" label="来源 {{index+1}}" />
-		<van-field id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" type="textarea" placeholder="释义文本不能为空" value="{{definitionUpdates[index].text}}" autosize required clearable bind:change="onChangeText" label="释义 {{index+1}}" />
-		<van-field id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" type="textarea" placeholder="空" value="{{definitionUpdates[index].addition}}" autosize clearable bind:change="onChangeAddition" label="附加文本" />
-		<van-cell id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" title="释义文本使用红色加粗字体显示" value-class="value-class" clickable bind:click="check">
-			<van-checkbox id="{{index}}" value="{{definitionUpdates[index].isBold}}" catch:tap="check" />
+		<van-field id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" placeholder="来源不能为空"
+			value="{{definitionUpdates[index].source}}" required clearable bind:change="onChangeSource"
+			label="来源 {{index+1}}" />
+		<van-field id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" type="textarea"
+			placeholder="释义文本不能为空" value="{{definitionUpdates[index].text}}" autosize required clearable
+			bind:change="onChangeText" label="释义 {{index+1}}" />
+		<van-field id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" type="textarea"
+			placeholder="空" value="{{definitionUpdates[index].addition}}" autosize clearable
+			bind:change="onChangeAddition" label="附加文本" />
+		<van-cell id="{{index}}" wx:if="{{typeof(definitionUpdates[index])!=='undefined'}}" title="释义文本使用红色加粗字体显示"
+			value-class="value-class" clickable bind:click="check">
+			<van-checkbox id="{{index}}" checked-color="{{color}}" value="{{definitionUpdates[index].isBold}}"
+				catch:tap="check" />
 		</van-cell>
-		<van-button class="btn" aria-role="button" aria-label="移除" id="{{index}}" wx:if="{{canBeRemoved[index]&&typeof(definitionUpdates[index])!=='undefined'}}" type="danger" size="large" bind:click="onDeleteItem">移除</van-button>
+		<van-button class="btn" aria-role="button" aria-label="移除" id="{{index}}"
+			wx:if="{{canBeRemoved[index]&&typeof(definitionUpdates[index])!=='undefined'}}" type="danger" size="large"
+			bind:click="onDeleteItem">移除</van-button>
 	</van-cell-group>
 	<text class="text">在提交修改之前，请您仔细阅读帮助文档！</text>
 	<view class="function">
-		<van-button class="btn" aria-role="button" aria-label="新建" color="{{color}}" bind:click="onAdd" bind:longpress="onBsonEdit">新建</van-button>
-		<van-button class="btn" aria-role="button" aria-label="提交" color="{{color}}" bind:click="onSubmit">提交</van-button>
+		<van-button class="btn" aria-role="button" aria-label="新建" color="{{color}}" bind:click="onAdd"
+			bind:longpress="onBsonEdit">新建</van-button>
+		<van-button class="btn" aria-role="button" aria-label="提交" color="{{color}}" bind:click="onSubmit">提交
+		</van-button>
 		<van-button class="btn" aria-role="button" aria-label="删除" type="danger" bind:click="onDelete">删除</van-button>
 	</view>
 </view>

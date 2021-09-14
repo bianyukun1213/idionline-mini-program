@@ -18,7 +18,7 @@
     "selectedIconPath3": "pics/about.png"
   },
   "dark": {
-    "navBgColor": "#660066",
+    "navBgColor": "#1f1f1f",
     "navTxtStyle": "white",
     "bgColor": "#1f1f1f",
     "bgTxtStyle": "dark",
@@ -26,7 +26,7 @@
     "bgColorBottom": "#1f1f1f",
     "tabFontColor": "#cccccc",
     "tabSelectedColor": "#ffffff",
-    "tabBgColor": "#660066",
+    "tabBgColor": "#1f1f1f",
     "tabBorderStyle": "white",
     "iconPath1": "pics/index-gray.png",
     "selectedIconPath1": "pics/index.png",

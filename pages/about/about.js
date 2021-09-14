@@ -40,7 +40,7 @@ Page({
   refresh() {
     let tmp = wx.getStorageSync('user').username;
     tmp = typeof tmp === 'undefined' ? '-' : tmp;
-    let version = getApp().globalData.dbgMode
+    let version = getApp().globalData.debugMode
       ? getApp().globalData.version + ' [DEBUG]'
       : getApp().globalData.version;
     this.setData({

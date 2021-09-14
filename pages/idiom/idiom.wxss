@@ -16,13 +16,6 @@
   flex-direction: column;
 }
 
-/* .btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: 10px;
-} */
-
 .footer {
   display: flex;
   flex-direction: row;
@@ -34,10 +27,6 @@
   flex-direction: column;
   text-align: right;
 }
-
-/* .btn_link {
-  margin-left: 10px;
-} */
 
 .btn_func {
   margin-left: 10px;
