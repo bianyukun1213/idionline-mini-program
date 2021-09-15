@@ -106,4 +106,7 @@ Page({
         this.data.sysInfo,
     });
   },
+  onTabItemTap() {
+    wx.vibrateShort();
+  },
 });
