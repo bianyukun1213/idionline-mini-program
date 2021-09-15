@@ -48,7 +48,8 @@
     "backgroundColorTop": "@bgColorTop",
     "backgroundColorBottom": "@bgColorBottom",
     "navigationBarTitleText": "成语在线",
-    "pageOrientation": "auto"
+    "pageOrientation": "auto",
+    "onReachBottomDistance": 1
   },
   "resizable": true,
   "sitemapLocation": "sitemap.json",
