@@ -47,7 +47,7 @@
   bottom: 0;
 }
 
-.text_bottom {
+.icon-bottom {
   font-size: 16px;
   width: 100%;
   position: fixed;
@@ -57,6 +57,6 @@
   margin-bottom: 10px;
 }
 
-.btn_func {
+.btn-func {
   margin-left: 10px;
 }

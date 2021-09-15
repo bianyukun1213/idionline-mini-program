@@ -59,9 +59,9 @@
 				</view>
 			</view>
 			<view class="footer">
-				<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="查看"
+				<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="查看"
 					color="{{color}}" bind:click="onNavi">查看</van-button>
-				<van-button class="btn_func" disabled="{{singlePage}}" aria-role="button" aria-label="分享"
+				<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="分享"
 					color="{{color}}" bind:click="onShare">分享</van-button>
 			</view>
 		</view>
@@ -70,7 +70,7 @@
 	</van-popup>
 	<view class="slide" wx:if="{{idiName!==''}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove"
 		bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
-		<view class="text_bottom">上划查看“每日成语”</view>
+		<van-icon class="icon-bottom" name="arrow-up" />
 	</view>
 	<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>

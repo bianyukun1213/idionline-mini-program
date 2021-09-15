@@ -26,7 +26,7 @@ Page({
     );
   },
   onChange(event) {
-    if (event.target.id === 'field_username') this.data.username = event.detail;
+    if (event.target.id === 'field-username') this.data.username = event.detail;
     else this.data.password = event.detail;
     if (this.data.username === '' || this.data.password === '') {
       this.setData({

@@ -30,6 +30,6 @@
   text-align: right;
 }
 
-.btn_func {
+.btn-func {
   margin-left: 10px;
 }

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-search": "/miniprogram_npm/@vant/weapp/search/index",
+    "van-icon": "/miniprogram_npm/@vant/weapp/icon/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index",
     "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
     "van-tag": "/miniprogram_npm/@vant/weapp/tag/index",

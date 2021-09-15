@@ -7,7 +7,6 @@ Page({
     platTag: '-',
     platStr: '-',
     sysInfo: '-',
-    activeName: ['1', '2'],
     color: '',
     dark: false,
     username: '-',
@@ -54,17 +53,6 @@ Page({
       this.setData({
         apiVer: getApp().globalData.launchInfo.version,
       });
-  },
-  onChange(e) {
-    this.setData({
-      activeName: e.detail,
-    });
-    if (e.detail === '') {
-      console.log('已关闭折叠面板');
-    } else {
-      console.log('已切换折叠面板到：' + e.detail);
-    }
-    wx.vibrateShort();
   },
   onClean() {
     let that = this;
@@ -117,8 +105,5 @@ Page({
         '\n设备参数：\n' +
         this.data.sysInfo,
     });
-  },
-  onTabItemTap() {
-    wx.vibrateShort();
   },
 });

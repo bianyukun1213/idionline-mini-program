@@ -1,30 +1,27 @@
 <view class="root">
-	<van-collapse value="{{activeName}}" bind:change="onChange">
-		<van-collapse-item title="关于成语在线" name="1">
-			<view class="root">
-				<image wx:if="{{dark}}" class="img" src="../../images/idionline-kun-dark.png" mode="aspectFit"
-					bind:tap="onCopyBlog" />
-				<image wx:else class="img" src="../../images/idionline-kun.png" mode="aspectFit" />
-				<text class="text" style="color:{{color}};">成语在线于 2018 年上线，\n小程序及后端服务由 <text class="text"
-						style="color:dodgerblue;">Hollis</text> 开发。</text>
-				<van-button class="btn" aria-role="button" aria-label="帮助文档" color="{{color}}"
-					bind:click="viewDocument">查看文档</van-button>
-			</view>
-		</van-collapse-item>
-		<!-- <van-collapse-item title="参数、设置与文档" name="2"> -->
-		<van-collapse-item title="参数" name="2">
-			<text style="color:green;"
-				wx:if="{{platTag==='WeChat'}}">用户名：{{username}}\n小程序平台：{{platStr}}\n小程序版本：{{version}}\n后端服务版本：{{apiVer}}\n</text>
-			<text style="color:dodgerblue;"
-				wx:elif="{{platTag==='QQ'}}">用户名：{{username}}\n小程序平台：{{platStr}}\n小程序版本：{{version}}\n后端服务版本：{{apiVer}}\n</text>
-			<text>设备参数：\n{{sysInfo}}</text>
-			<view class="function">
-				<van-button class="btn" aria-role="button" aria-label="复制参数" color="{{color}}" bind:click="onCopyInfo">
-					复制参数</van-button>
-				<!-- <van-button class="btn" aria-role="button" aria-label="设置" color="{{color}}" bind:click="navi2Settings">设置</van-button> -->
-				<van-button class="btn" aria-role="button" aria-label="清空储存" type="danger" bind:click="onClean">清空储存
-				</van-button>
-			</view>
-		</van-collapse-item>
-	</van-collapse>
+	<van-cell title="关于成语在线" />
+	<view class="root content">
+		<image wx:if="{{dark}}" class="img" src="../../images/idionline-kun-dark.png" mode="aspectFit"
+			bind:tap="onCopyBlog" />
+		<image wx:else class="img" src="../../images/idionline-kun.png" mode="aspectFit" />
+		<text class="text" style="color:{{color}};">成语在线于 2018 年上线，\n小程序及后端服务由 <text class="text"
+				style="color:dodgerblue;">Hollis</text> 开发。</text>
+		<van-button class="btn" aria-role="button" aria-label="帮助文档" color="{{color}}" bind:click="viewDocument">查看文档
+		</van-button>
+	</view>
+	<van-cell title="参数与功能" />
+	<view class="content">
+		<text class="text" style="color:green;"
+			wx:if="{{platTag==='WeChat'}}">用户名：{{username}}\n小程序平台：{{platStr}}\n小程序版本：{{version}}\n后端服务版本：{{apiVer}}\n</text>
+		<text class="text" style="color:dodgerblue;"
+			wx:elif="{{platTag==='QQ'}}">用户名：{{username}}\n小程序平台：{{platStr}}\n小程序版本：{{version}}\n后端服务版本：{{apiVer}}\n</text>
+		<text class="text" style="color:gray;">设备参数：\n{{sysInfo}}</text>
+		<view class="function">
+			<van-button class="btn" aria-role="button" aria-label="复制参数" color="{{color}}" bind:click="onCopyInfo">
+				复制参数</van-button>
+			<!-- <van-button class="btn" aria-role="button" aria-label="设置" color="{{color}}" bind:click="navi2Settings">设置</van-button> -->
+			<van-button class="btn" aria-role="button" aria-label="清空储存" type="danger" bind:click="onClean">清空储存
+			</van-button>
+		</view>
+	</view>
 </view>
