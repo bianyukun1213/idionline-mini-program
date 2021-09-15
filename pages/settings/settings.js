@@ -43,4 +43,7 @@ Page({
   //   this.refreshSettings()
   //   wx.vibrateShort()
   // }
+  onReachBottom() {
+    wx.vibrateShort();
+  },
 });

@@ -52,7 +52,7 @@ Page({
     let pages = getCurrentPages();
     let currentPage = pages[pages.length - 1];
     let prevPage = pages[pages.length - 2];
-    if (prevPage.route.split('/')[2] === 'idiom'){
+    if (prevPage.route.split('/')[2] === 'idiom') {
       prevPage.data.loginSucceeded = true;
       prevPage.data.refresh = true;
     }
@@ -61,5 +61,8 @@ Page({
       if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
         wx.navigateBack();
     }, 1500);
+  },
+  onClear() {
+    wx.vibrateShort();
   },
 });

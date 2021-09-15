@@ -528,4 +528,7 @@ Page({
       data: this.data.defs[index].text,
     });
   },
+  onReachBottom() {
+    wx.vibrateShort();
+  },
 });

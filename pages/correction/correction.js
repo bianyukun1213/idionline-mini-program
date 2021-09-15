@@ -41,4 +41,10 @@ Page({
       data: str,
     });
   },
+  onReachBottom() {
+    wx.vibrateShort();
+  },
+  onClear() {
+    wx.vibrateShort();
+  },
 });

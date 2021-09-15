@@ -74,4 +74,7 @@ Page({
   onClick() {
     wx.vibrateShort();
   },
+  onReachBottom() {
+    wx.vibrateShort();
+  },
 });

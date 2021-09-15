@@ -93,4 +93,7 @@ Page({
       imageUrl: '/icons/share.png',
     };
   },
+  onReachBottom() {
+    wx.vibrateShort();
+  },
 });

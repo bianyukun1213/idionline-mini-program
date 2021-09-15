@@ -41,10 +41,7 @@ Page({
   onChange(event) {
     if (event.target.id === 'field-username') this.data.username = event.detail;
     else this.data.password = event.detail;
-    if (
-      this.data.username === '' ||
-      this.data.password === ''
-    ) {
+    if (this.data.username === '' || this.data.password === '') {
       this.setData({
         show: false,
       });
@@ -68,5 +65,8 @@ Page({
           url: '/pages/index/index',
         });
     }, 1500);
+  },
+  onClear() {
+    wx.vibrateShort();
   },
 });

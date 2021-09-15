@@ -561,4 +561,7 @@ Page({
       url: '/pages/idiom/idiom?id=' + e.currentTarget.id.split('-')[0],
     });
   },
+  onClear() {
+    wx.vibrateShort();
+  },
 });

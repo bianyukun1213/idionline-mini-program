@@ -8,7 +8,7 @@ App({
       tag: 'WeChat',
       str: '微信（WeChat）',
     },
-    launchInfo:{},
+    launchInfo: {},
     refreshOnIndex: false,
   },
   onLaunch() {

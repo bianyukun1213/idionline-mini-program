@@ -108,4 +108,7 @@ Page({
   onTabItemTap() {
     wx.vibrateShort();
   },
+  onReachBottom() {
+    wx.vibrateShort();
+  },
 });

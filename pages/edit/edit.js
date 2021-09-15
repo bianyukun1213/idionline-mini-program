@@ -215,4 +215,10 @@ Page({
         });
     }, 1500);
   },
+  onReachBottom() {
+    wx.vibrateShort();
+  },
+  onClear() {
+    wx.vibrateShort();
+  },
 });
