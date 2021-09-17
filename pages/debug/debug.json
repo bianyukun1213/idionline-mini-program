@@ -3,6 +3,5 @@
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
     "van-field": "/miniprogram_npm/@vant/weapp/field/index"
   },
-  "navigationBarTitleText": "调试",
   "disableScroll": true
 }

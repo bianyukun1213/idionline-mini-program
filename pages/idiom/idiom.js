@@ -1,10 +1,11 @@
-const call = require('../../tools/request.js');
-const format = require('../../tools/format.js');
-const color = require('../../tools/color.js');
-const info = require('../../tools/info.js');
+const CALL = require('../../tools/request.js');
+const FORMAT = require('../../tools/format.js');
+const COLOR = require('../../tools/color.js');
+const INFO = require('../../tools/info.js');
 let innerAudioContext;
 Page({
   data: {
+    translations: {},
     refresh: false,
     deleted: false,
     platform: '',
@@ -33,21 +34,35 @@ Page({
     singlePage: false,
     longinSucceed: false,
     options: [
-      { name: '转发', icon: 'wechat', openType: 'share' },
-      { name: '生成海报', icon: 'poster' },
+      { name: '', icon: 'wechat', openType: 'share' },
+      { name: '', icon: 'poster' },
     ],
   },
   onLoad(option) {
+    this.setData({ translations: getApp().globalData.translations });
+    this.setData({
+      options: [
+        {
+          name: this.data.translations.idiomSharingOptionName1,
+          icon: 'wechat',
+          openType: 'share',
+        },
+        {
+          name: this.data.translations.idiomSharingOptionsName2,
+          icon: 'poster',
+        },
+      ],
+    });
     if (wx.getLaunchOptionsSync().scene === 1154)
       this.setData({
         singlePage: true,
       });
-    info.getLaunchInfo(this.callback);
+    INFO.getLaunchInfo(this.callback);
     innerAudioContext = wx.createInnerAudioContext();
     innerAudioContext.onError(function callback(errCode) {
       console.log('音频播放错误：', errCode);
       wx.showToast({
-        title: '音频播放出错！',
+        title: this.data.translations.idiomToastTitleAudioError,
         icon: 'none',
         mask: true,
       });
@@ -61,7 +76,7 @@ Page({
     innerAudioContext.destroy();
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
     if (this.data.deleted)
       wx.switchTab({
         url: '/pages/index/index',
@@ -73,7 +88,7 @@ Page({
   },
   refresh() {
     this.data.sessionId = wx.getStorageSync('user').sessionId;
-    call.get({
+    CALL.get({
       url: 'idiom/' + this.data.id,
       data: {
         sessionId: this.data.sessionId,
@@ -92,7 +107,7 @@ Page({
     this.setData({
       text: getApp().globalData.launchInfo.text,
     });
-    color.apl();
+    COLOR.apl();
   },
   fillData(data) {
     wx.setNavigationBarTitle({
@@ -104,9 +119,11 @@ Page({
       textsTmp[data.definitions.indexOf(element)] = [];
       let textTmp = element.text;
       for (let k in element.links) {
-        textTmp = textTmp
-          .split(element.links[k])
-          .join('{split}{link:' + k + '}{split}'); // 字符串多次替换。
+        if (element.links.hasOwnProperty(k)) {
+          textTmp = textTmp
+            .split(element.links[k])
+            .join('{split}{link:' + k + '}{split}'); // 字符串多次替换。
+        }
       }
       let arrayTmp = textTmp.split('{split}');
       arrayTmp.forEach((el) => {
@@ -132,7 +149,7 @@ Page({
       defs: data.definitions,
       defTexts: textsTmp,
       lastEditor: data.lastEditor,
-      updateTime: format.formatDate(data.updateTimeUT, false),
+      updateTime: FORMAT.formatDate(data.updateTimeUT, false),
     });
     if (data.pinyin !== null)
       this.setData({
@@ -148,7 +165,8 @@ Page({
       this.setData({
         origin: data.origin,
         ori:
-          '出自《' +
+          this.data.translations.idiomTextOriginateFrom +
+          '《' +
           data.origin
             .replace('《', '{左单书名号}')
             .replace('》', '{右单书名号}')
@@ -167,7 +185,7 @@ Page({
       });
     if (data.toBeCorrected)
       this.setData({
-        tbc: '，有待订正',
+        tbc: this.data.translations.idiomTextToBeCorrected,
       });
     else
       this.setData({
@@ -196,7 +214,7 @@ Page({
     favorites[this.data.id] = this.data.name;
     wx.setStorageSync('favorites', favorites);
     wx.showToast({
-      title: '完成！',
+      title: this.data.translations.idiomToastTitleCompletion,
       mask: true,
     });
     console.log('已添加成语至收藏：【' + this.data.name + '】');
@@ -227,7 +245,7 @@ Page({
   },
   onSolitaire() {
     wx.vibrateShort();
-    call.get({
+    CALL.get({
       url: 'idiom/playsolitaire/' + this.data.name,
       doSuccess: this.doneSolitaire,
       exHandler: this.exHandlerS,
@@ -235,9 +253,10 @@ Page({
   },
   doneSolitaire(data) {
     wx.showModal({
-      title: '成语接龙（仅供参考）',
+      title: this.data.translations.idiomModalTitleSolitaire,
       content: '〖' + data + '〗',
-      confirmText: '复制',
+      confirmText: this.data.translations.idiomModalConfirmTextCopyResult,
+      cancelText: this.data.idiomModalCancelTextCancel,
       success(res) {
         wx.vibrateShort();
         if (res.confirm)
@@ -269,22 +288,24 @@ Page({
     let json = {
       id: this.data.id,
       sessionId: this.data.sessionId,
-      name: this.data.name,
-      indexOfIdiom: this.data.index,
-      pinyin: this.data.pinyin,
-      origin: this.data.origin,
-      toBeCorrected: this.data.toBeCorrected,
+      // name: this.data.name,
+      // indexOfIdiom: this.data.index,
+      // pinyin: this.data.pinyin,
+      // origin: this.data.origin,
+      // toBeCorrected: this.data.toBeCorrected,
     };
-    let definitionUpdates = [];
-    for (let k in this.data.defs) {
-      definitionUpdates.push({
-        source: this.data.defs[k].source,
-        text: this.data.defs[k].text,
-        addition: this.data.defs[k].addition,
-        isBold: this.data.defs[k].isBold,
-      });
-    }
-    json.definitionUpdates = definitionUpdates;
+    //let definitionUpdates = [];
+    // for (let k in this.data.defs) {
+    //   if (this.data.defs.hasOwnProperty(k)) {
+    //     definitionUpdates.push({
+    //       source: this.data.defs[k].source,
+    //       text: this.data.defs[k].text,
+    //       addition: this.data.defs[k].addition,
+    //       isBold: this.data.defs[k].isBold,
+    //     });
+    //   }
+    // }
+    // json.definitionUpdates = definitionUpdates;
     let str = encodeURIComponent(JSON.stringify(json));
     wx.navigateTo({
       url: '/pages/edit/edit?str=' + str,
@@ -303,17 +324,18 @@ Page({
     this.save();
   },
   save() {
+    let that = this;
     wx.saveImageToPhotosAlbum({
       filePath: this.data.filePath,
       success() {
         wx.showToast({
-          title: '已保存！',
+          title: that.data.translations.idiomToastTitleSaved,
           mask: true,
         });
       },
       fail() {
         wx.showToast({
-          title: '保存失败！',
+          title: that.data.translations.idiomToastTitleSaveFailed,
           icon: 'none',
           mask: true,
         });
@@ -323,16 +345,17 @@ Page({
   },
   onSelect(event) {
     wx.vibrateShort();
-    if (event.detail.name === '转发') {
+    if (event.detail.index === 0) {
       this.onShareAppMessage();
-    } else if (event.detail.name === '生成海报') {
+    } else if (event.detail.index === 1) {
       if (this.data.filePath === '') {
         wx.showLoading({
-          title: '正在生成',
+          title: this.data.translations.idiomLoadingTitleGenerating,
           mask: true,
         });
         let name = '【' + this.data.name + '】';
-        if (this.data.defs.length > 1) name = name + '（部分）';
+        if (this.data.defs.length > 1)
+          name = name + this.data.translations.idiomTextPartial;
         this.setData({
           painting: {
             width: 1080,
@@ -394,7 +417,10 @@ Page({
     console.log('尝试转发【' + this.data.name + '】');
     if (this.data.shareFlag) {
       return {
-        title: '点击查看【' + this.data.name + '】的释义',
+        title:
+          this.data.translations.idiomTextSharing1 +
+          this.data.name +
+          this.data.translations.idiomTextSharing2,
         imageUrl: '/images/sharing.png',
         path: '/pages/idiom/idiom?id=' + this.data.id,
       };
@@ -406,7 +432,10 @@ Page({
   },
   onShareTimeline() {
     return {
-      title: '点击查看【' + this.data.name + '】的释义',
+      title:
+        this.data.translations.idiomTextSharing1 +
+        this.data.name +
+        this.data.translations.idiomTextSharing2,
       imageUrl: '/images/sharing.png',
     };
   },
@@ -414,7 +443,7 @@ Page({
     if (innerAudioContext.paused) {
       if (wx.getLaunchOptionsSync().scene === 1154) {
         wx.showToast({
-          title: '更多功能需前往小程序使用！',
+          title: this.data.translations.idiomToastTitleMoreFeatures,
           icon: 'none',
           mask: true,
         });
@@ -429,24 +458,25 @@ Page({
         let tTSText = this.data.defs[this.data.tTSCurrent].text; //获取到对应的def。
         let substr = tTSText.match(/(\(.*?\)|（.*?）|\[.*?\]|{.*?})/g); //匹配“〈口〉”这种东西和各种括号中的内容，方头括号、六角括号除外。
         for (let idx in substr) {
-          tTSText = tTSText.replace(substr[idx], '');
+          if (substr.hasOwnProperty(idx))
+            tTSText = tTSText.replace(substr[idx], '');
         }
         tTSText = tTSText.replace(/(~|～)/g, this.data.name); //将“~”替换为成语名称。
         this.data.tTSText = tTSText;
         let token = wx.getStorageSync('token');
         let tokenUT = token.split('.')[3]; //token里存的到期时间，虽然我不确定它的角标是不是永远是3。
-        let currentUT = format.getUnixTimestamp();
+        let currentUT = FORMAT.getUnixTimestamp();
         console.log('当前时间戳：' + currentUT);
         console.log('Token 时间戳：' + tokenUT);
         if (token === '' || currentUT > tokenUT - 10) {
           //如果token为''或时间超过token时间（预留了十秒左右），就重新获取token。
-          call.get({
+          CALL.get({
             doSuccess: this.tokenGotten,
             type: 'TTS',
           });
           console.log('重获取 Token');
         } else {
-          call.downloadTTSAudio(
+          CALL.downloadTTSAudio(
             token,
             'Idionline',
             this.data.tTSText,
@@ -463,7 +493,7 @@ Page({
   },
   tokenGotten(data) {
     wx.setStorageSync('token', data.access_token);
-    call.downloadTTSAudio(
+    CALL.downloadTTSAudio(
       data.access_token,
       'Idionline',
       this.data.tTSText,
@@ -479,13 +509,13 @@ Page({
     wx.vibrateLong();
     if (typeof codeFromIdionline !== 'undefined')
       wx.showToast({
-        title: '错误：' + msg,
+        title: this.data.translations.idiomToastTitleError + msg,
         icon: 'none',
         mask: true,
       });
     else
       wx.showToast({
-        title: '错误：' + code,
+        title: this.data.translations.idiomToastTitleError + code,
         icon: 'none',
         mask: true,
       });
@@ -502,20 +532,20 @@ Page({
       wx.vibrateLong();
       if (typeof codeFromIdionline !== 'undefined')
         wx.showToast({
-          title: '错误：' + msg,
+          title: this.data.translations.idiomToastTitleError + msg,
           icon: 'none',
           mask: true,
         });
       else
         wx.showToast({
-          title: '错误：' + code,
+          title: this.data.translations.idiomToastTitleError + code,
           icon: 'none',
           mask: true,
         });
       return;
     }
     wx.showToast({
-      title: '未找到可接龙成语！',
+      title: this.data.translations.idiomToastTitleSolitaireUnavailable,
       icon: 'none',
       mask: true,
     });

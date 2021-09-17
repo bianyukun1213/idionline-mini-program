@@ -1,4 +1,21 @@
 @media (prefers-color-scheme: dark) {
+  .van-picker__mask {
+    background-image: none !important;
+  }
+
+  .van-picker-column__item {
+    color: white !important;
+  }
+
+  .van-picker__title {
+    color: white !important;
+  }
+
+  .van-picker {
+    --picker-background-color: 1f1f1f;
+    --picker-confirm-action-color: white;
+  }
+
   .van-popup {
     --popup-background-color: #1f1f1f;
   }
@@ -22,7 +39,7 @@
     --field-input-text-color: white;
     --field-placeholder-text-color: gray;
   }
-  
+
   .van-share-sheet__title {
     color: white !important;
   }
@@ -31,16 +48,16 @@
     color: white !important;
   }
 
-  .van-share-sheet__cancel{
-    color:white !important;
+  .van-share-sheet__cancel {
+    color: white !important;
     background-color: #1f1f1f !important;
   }
 
-  .van-share-sheet__cancel:before{
+  .van-share-sheet__cancel:before {
     background-color: #191919 !important;
   }
 
-  .van-share-sheet__cancel:active{
+  .van-share-sheet__cancel:active {
     background-color: gray !important;
   }
 

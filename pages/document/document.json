@@ -3,6 +3,5 @@
     "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index",
     "towxml": "/towxml/towxml"
-  },
-  "navigationBarTitleText": "帮助文档"
+  }
 }

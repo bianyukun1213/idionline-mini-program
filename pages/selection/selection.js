@@ -1,6 +1,7 @@
-const color = require('../../tools/color.js');
+const COLOR = require('../../tools/color.js');
 Page({
   data: {
+    translations:{},
     linkType: '',
     idioms2Disp: [],
     tmp: [],
@@ -10,12 +11,16 @@ Page({
     color: '',
   },
   onLoad(option) {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('selectionPageTitle');
     let idioms = JSON.parse(decodeURIComponent(option.str));
     let array = [];
     for (let key in idioms) {
-      let obj = {};
-      obj[key] = idioms[key];
-      array.push(obj);
+      if (idioms.hasOwnProperty(key)) {
+        let obj = {};
+        obj[key] = idioms[key];
+        array.push(obj);
+      }
     }
     let idx = 0;
     for (let i = 0; i < array.length; i++) {
@@ -37,7 +42,7 @@ Page({
       });
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
   },
   onPrev() {
     wx.vibrateShort();

@@ -1,7 +1,8 @@
-const call = require('../../tools/request.js');
-const color = require('../../tools/color.js');
+const CALL = require('../../tools/request.js');
+const COLOR = require('../../tools/color.js');
 Page({
   data: {
+    translations: {},
     id: '',
     sessionId: '',
     value: '',
@@ -9,10 +10,12 @@ Page({
     color: '',
   },
   onLoad(option) {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('bsonEditPageTitle');
     let json = JSON.parse(decodeURIComponent(option.str));
     this.data.id = json.id;
     this.data.sessionId = json.sessionId;
-    call.get({
+    CALL.get({
       url: 'idiom/' + this.data.id,
       data: {
         bson: 1,
@@ -20,10 +23,11 @@ Page({
       },
       doSuccess: this.callback,
       exHandler: this.exHandler,
+      ignoreS2T:true,
     });
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
   },
   onChange(event) {
     if (event.detail === '') {
@@ -47,13 +51,13 @@ Page({
     wx.vibrateLong();
     if (typeof codeFromIdionline !== 'undefined')
       wx.showToast({
-        title: '错误：' + msg,
+        title: this.data.translations.bsonEditToastTitleError + msg,
         icon: 'none',
         mask: true,
       });
     else
       wx.showToast({
-        title: '错误：' + code,
+        title: this.data.translations.bsonEditToastTitleError + code,
         icon: 'none',
         mask: true,
       });
@@ -76,11 +80,11 @@ Page({
       bsonStr: this.data.value,
       updates: [],
     };
-    call.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
+    CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
   },
   done(data) {
     wx.showToast({
-      title: data,
+      title: this.data.translations.bsonToastTitleUpdateSucceeded,
       icon: 'none',
       mask: true,
     });

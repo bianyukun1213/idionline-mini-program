@@ -1,26 +1,31 @@
 <view class="root">
-	<van-cell title="关于成语在线" />
+	<van-cell title="{{translations.aboutTextAboutIdionline}}" />
 	<view class="root content">
 		<image wx:if="{{dark}}" class="img" src="../../images/idionline-kun-dark.png" mode="aspectFit"
 			bind:tap="onCopyBlog" />
 		<image wx:else class="img" src="../../images/idionline-kun.png" mode="aspectFit" />
-		<text class="text" style="color:{{color}};">成语在线于 2018 年上线，\n小程序及后端服务由 <text class="text"
-				style="color:dodgerblue;">Hollis</text> 开发。</text>
-		<van-button class="btn" aria-role="button" aria-label="帮助文档" color="{{color}}" bind:click="viewDocument">查看文档
+		<text class="text" style="color:{{color}};">{{translations.
+			aboutTextIdionlineDescription1}}\n{{translations.aboutTextIdionlineDescription2}} <text class="text"
+				style="color:dodgerblue;">Hollis</text> {{translations.aboutTextIdionlineDescription3}}</text>
+		<van-button class="btn" aria-role="button" aria-label="{{translations.aboutButtonViewDocument}}"
+			color="{{color}}" bind:click="viewDocument">{{translations.aboutButtonViewDocument}}
 		</van-button>
 	</view>
-	<van-cell title="参数与功能" />
+	<van-cell title="{{translations.aboutTextInfoAndFunctions}}" />
 	<view class="content">
 		<text class="text" style="color:green;"
-			wx:if="{{platTag==='WeChat'}}">用户名：{{username}}\n小程序平台：{{platStr}}\n小程序版本：{{version}}\n后端服务版本：{{apiVer}}\n</text>
+			wx:if="{{platTag==='WeChat'}}">{{translations.aboutTextUsername}}{{username}}\n{{translations.aboutTextAppLanguage}}{{language}}\n{{translations.aboutTextAppPlatform}}{{platStr}}\n{{translations.aboutTextAppVersion}}{{version}}\n{{translations.aboutTextServiceVersion}}{{apiVer}}\n</text>
 		<text class="text" style="color:dodgerblue;"
-			wx:elif="{{platTag==='QQ'}}">用户名：{{username}}\n小程序平台：{{platStr}}\n小程序版本：{{version}}\n后端服务版本：{{apiVer}}\n</text>
-		<text class="text" style="color:gray;">设备参数：\n{{sysInfo}}</text>
+			wx:elif="{{platTag==='QQ'}}">{{translations.aboutTextUsername}}{{username}}\n{{translations.aboutTextAppLanguage}}{{language}}\n{{translations.aboutTextAppPlatform}}{{platStr}}\n{{translations.aboutTextAppVersion}}{{version}}\n{{translations.aboutTextServiceVersion}}{{apiVer}}\n</text>
+		<text class="text" style="color:gray;">{{translations.aboutTextSystemInfo}}\n{{sysInfo}}</text>
 		<view class="function">
-			<van-button class="btn" aria-role="button" aria-label="复制参数" color="{{color}}" bind:click="onCopyInfo">
-				复制参数</van-button>
-			<!-- <van-button class="btn" aria-role="button" aria-label="设置" color="{{color}}" bind:click="navi2Settings">设置</van-button> -->
-			<van-button class="btn" aria-role="button" aria-label="清空储存" type="danger" bind:click="onClean">清空储存
+			<van-button class="btn" aria-role="button" aria-label="{{translations.aboutButtonCopyInfo}}"
+				color="{{color}}" bind:click="onCopyInfo">
+				{{translations.aboutButtonCopyInfo}}</van-button>
+			<van-button class="btn" aria-role="button" aria-label="{{translations.aboutButtonSettings}}"
+				color="{{color}}" bind:click="navi2Settings">{{translations.aboutButtonSettings}}</van-button>
+			<van-button class="btn" aria-role="button" aria-label="{{translations.aboutButtonCleanStorage}}"
+				type="danger" bind:click="onClean">{{translations.aboutButtonCleanStorage}}
 			</van-button>
 		</view>
 	</view>

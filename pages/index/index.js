@@ -1,9 +1,10 @@
-const call = require('../../tools/request.js');
-const format = require('../../tools/format.js');
-const color = require('../../tools/color.js');
-const info = require('../../tools/info.js');
+const CALL = require('../../tools/request.js');
+const FORMAT = require('../../tools/format.js');
+const COLOR = require('../../tools/color.js');
+const INFO = require('../../tools/info.js');
 Page({
   data: {
+    translations: {},
     color: '',
     text: '',
     scene: '',
@@ -11,9 +12,10 @@ Page({
     idiId: '',
     pinyin: '',
     defs: [],
+    defsLess: [],
     defTexts: [],
     launchInfo: {},
-    placeHolder: '请输入您要查询的成语',
+    placeHolder: '',
     value: '',
     historyValue: [],
     logoUrl: '../../images/idionline.png',
@@ -30,8 +32,8 @@ Page({
     singlePage: false,
     dark: false,
     options: [
-      { name: '转发', icon: 'wechat', openType: 'share' },
-      { name: '生成海报', icon: 'poster' },
+      { name: '', icon: 'wechat', openType: 'share' },
+      { name: '', icon: 'poster' },
     ],
   },
   //启动
@@ -54,10 +56,26 @@ Page({
     if (para.showDailyIdiom) this.data.showDailyIdiom = true;
     this.data.shareIdiom = para.shareIdiom;
     console.log('页面参数：', para);
-    info.getLaunchInfo(this.callback);
+    INFO.getLaunchInfo(this.callback);
   },
   onShow() {
-    color.apl();
+    this.setData({
+      translations: getApp().globalData.translations,
+    });
+    getApp().setTabBarTranslation();
+    this.setData({
+      placeHolder: this.data.translations.indexPlaceholderSearch,
+      options: [
+        {
+          name: this.data.translations.indexSharingOption1,
+          icon: 'wechat',
+          openType: 'share',
+        },
+        { name: this.data.translations.indexSharingOption2, icon: 'poster' },
+      ],
+    });
+    getApp().setPageTitleTranslation('appPageTitle');
+    COLOR.apl();
     if (wx.getSystemInfoSync().theme === 'dark')
       this.setData({
         dark: true,
@@ -67,7 +85,7 @@ Page({
         dark: false,
       });
     if (getApp().globalData.refreshOnIndex === true) {
-      info.getLaunchInfo(this.callback, true);
+      INFO.getLaunchInfo(this.callback, true);
       getApp().globalData.refreshOnIndex = false;
     }
     let reg = new RegExp(/^[\u4e00-\u9fa5]{4}$/); //汉字。
@@ -88,13 +106,13 @@ Page({
           that.data.historyValue.push(res.data);
           console.log('填充历史：', that.data.historyValue);
           wx.showToast({
-            title: '已自动填充！',
+            title: that.data.translations.indexToastTitleAutoFilled,
             mask: true,
           });
           wx.vibrateShort();
         } else if (regS.test(res.data)) {
           wx.vibrateShort();
-          call.get({
+          CALL.get({
             url:
               'idiom/playsolitaire/' +
               regS
@@ -124,20 +142,20 @@ Page({
       wx.vibrateLong();
       if (typeof codeFromIdionline !== 'undefined')
         wx.showToast({
-          title: '错误：' + msg,
+          title: this.data.translations.indexToastTitleError + msg,
           icon: 'none',
           mask: true,
         });
       else
         wx.showToast({
-          title: '错误：' + code,
+          title: this.data.translations.indexToastTitleError + code,
           icon: 'none',
           mask: true,
         });
       return;
     }
     wx.showToast({
-      title: '未找到可接龙成语！',
+      title: this.data.translations.indexToastTitleSolitaireUnavailable,
       icon: 'none',
       mask: true,
     });
@@ -148,7 +166,12 @@ Page({
     let launchInfo = getApp().globalData.launchInfo;
     this.setData({
       text: launchInfo.text,
-      placeHolder: '目前已收录 ' + launchInfo.idiomsCount + ' 条成语',
+      placeHolder:
+        this.data.translations.indexPlaceholderSearch1 +
+        ' ' +
+        launchInfo.idiomsCount +
+        ' ' +
+        this.data.translations.indexPlaceholderSearch2,
     });
     if (launchInfo.dailyIdiom !== null) {
       this.setData({ defTexts: [] });
@@ -157,9 +180,11 @@ Page({
         textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)] = [];
         let textTmp = element.text;
         for (let k in element.links) {
-          textTmp = textTmp
-            .split(element.links[k])
-            .join('{split}{link:' + k + '}{split}'); // 字符串多次替换。
+        if (element.links.hasOwnProperty(k)) {
+            textTmp = textTmp
+              .split(element.links[k])
+              .join('{split}{link:' + k + '}{split}'); // 字符串多次替换。
+         }
         }
         let arrayTmp = textTmp.split('{split}');
         arrayTmp.forEach((el) => {
@@ -182,6 +207,7 @@ Page({
         idiName: launchInfo.dailyIdiom.name,
         idiId: launchInfo.dailyIdiom.id,
         defs: launchInfo.dailyIdiom.definitions,
+        defsLess: [launchInfo.dailyIdiom.definitions[0]],
         defTexts: textsTmp,
       });
       if (launchInfo.dailyIdiom.pinyin !== null)
@@ -201,7 +227,7 @@ Page({
         pinyin: '',
         showPopup: false,
       });
-    color.apl();
+    COLOR.apl();
     let reg = new RegExp(/https?:\/\/.+\.(jpg|gif|png|webp)/);
     //匹配Logo地址正则，设置Logo。
     if (reg.test(launchInfo.logoUrl))
@@ -211,18 +237,21 @@ Page({
     if (justRefresh !== true) {
       //显示对应的场景内容。
       for (let key in launchInfo.argsDic) {
-        if (key === this.data.scene) {
-          console.log(
-            '查找到对应的场景内容：' + launchInfo.argsDic[this.data.scene]
-          );
-          wx.showModal({
-            content: launchInfo.argsDic[this.data.scene],
-            showCancel: false,
-            success() {
-              wx.vibrateShort();
-            },
-          });
-          wx.vibrateShort();
+       if (launchInfo.argsDic.hasOwnProperty(key)) {
+          if (key === this.data.scene) {
+            console.log(
+              '查找到对应的场景内容：' + launchInfo.argsDic[this.data.scene]
+            );
+            wx.showModal({
+              content: launchInfo.argsDic[this.data.scene],
+              confirmText: this.data.translations.indexModalConfirmTextConfirm,
+              showCancel: false,
+              success() {
+                wx.vibrateShort();
+              },
+            });
+            wx.vibrateShort();
+          }
         }
       }
       if (this.data.showDailyIdiom && this.data.idiId !== '') {
@@ -232,7 +261,7 @@ Page({
         wx.vibrateShort();
         if (this.data.shareIdiom !== this.data.idiId)
           wx.showToast({
-            title: '每日成语已更换！',
+            title: this.data.translations.indexToastTitleDailyIdiomChanged,
             icon: 'none',
             mask: true,
           });
@@ -255,7 +284,7 @@ Page({
     let reg3 = new RegExp(/^[A-Za-z]$/);
     if (reg.test(e.detail) && e.detail.length > 1 && e.detail.length <= 12) {
       this.data.searchBarValue = e.detail; //这里由于不用在wxml中渲染，就不调用setdata了。
-      call.get({
+      CALL.get({
         url: 'idiom/search/' + e.detail,
         doSuccess: this.navi,
         exHandler: this.exHandler,
@@ -263,7 +292,7 @@ Page({
     } else if (reg2.exec(e.detail)) {
       this.data.idMode = true;
       this.data.searchBarValue = e.detail; //同上。
-      call.get({
+      CALL.get({
         url: 'idiom/search/' + e.detail,
         doSuccess: this.navi,
         exHandler: this.exHandler,
@@ -271,14 +300,14 @@ Page({
     } else if (reg3.exec(e.detail)) {
       this.data.idMode = true;
       this.data.searchBarValue = e.detail; //同上。
-      call.get({
+      CALL.get({
         url: 'idiom/search/' + e.detail,
         doSuccess: this.navi,
         exHandler: this.exHandler,
       });
     } else {
       wx.showToast({
-        title: '格式错误！',
+        title: this.data.translations.indexToastTitleWrongDataFormat,
         icon: 'none',
         mask: true,
       });
@@ -293,13 +322,13 @@ Page({
       wx.vibrateLong();
       if (typeof codeFromIdionline !== 'undefined')
         wx.showToast({
-          title: '错误：' + msg,
+          title: this.data.translations.indexToastTitleError + msg,
           icon: 'none',
           mask: true,
         });
       else
         wx.showToast({
-          title: '错误：' + code,
+          title: this.data.translations.indexToastTitleError + code,
           icon: 'none',
           mask: true,
         });
@@ -307,7 +336,7 @@ Page({
     }
     if (this.data.idMode || this.data.indexMode) {
       wx.showToast({
-        title: '查询无结果！',
+        title: this.data.translations.indexToastTitleNoResult,
         icon: 'none',
         mask: true,
       });
@@ -332,7 +361,8 @@ Page({
     //获取key，其实就是第一个的key。
     let k;
     for (let key in data) {
-      k = key;
+      if (data.hasOwnProperty(key))
+       k = key;
     }
     if (
       Object.keys(data).length === 1 &&
@@ -344,20 +374,33 @@ Page({
     } else {
       let linkType = 'navigateTo';
       for (let key in data) {
-        if (data[key].indexOf(this.data.searchBarValue) !== -1) {
-          linkType = 'redirectTo';
-          break;
+        if (data.hasOwnProperty(key)) {
+          if (data[key].indexOf(this.data.searchBarValue) !== -1) {
+            linkType = 'redirectTo';
+            break;
+          }
         }
+        // let str = encodeURIComponent(JSON.stringify(data));
+        // wx.navigateTo({
+        //   url:
+        //     '/pages/selection/selection?str=' +
+        //     str +
+        //     '&linkType="' +
+        //     linkType +
+        //     '"',
+        // });
+
+
       }
       let str = encodeURIComponent(JSON.stringify(data));
-      wx.navigateTo({
-        url:
-          '/pages/selection/selection?str=' +
-          str +
-          '&linkType="' +
-          linkType +
-          '"',
-      });
+        wx.navigateTo({
+          url:
+            '/pages/selection/selection?str=' +
+            str +
+            '&linkType="' +
+            linkType +
+            '"',
+        });
     }
   },
   //弹出层关闭。
@@ -420,17 +463,18 @@ Page({
     this.save();
   },
   save() {
+    let that = this;
     wx.saveImageToPhotosAlbum({
       filePath: this.data.filePath,
       success() {
         wx.showToast({
-          title: '已保存！',
+          title: that.data.translations.indexToastTitleSaved,
           mask: true,
         });
       },
       fail() {
         wx.showToast({
-          title: '保存失败！',
+          title: that.data.translations.indexToastTitleSaveFailed,
           icon: 'none',
           mask: true,
         });
@@ -440,20 +484,21 @@ Page({
   },
   onSelect(event) {
     wx.vibrateShort();
-    if (event.detail.name === '转发') {
+    if (event.detail.index === 0) {
       this.onShareAppMessage();
-    } else if (event.detail.name === '生成海报') {
+    } else if (event.detail.index === 1) {
       if (this.data.filePath === '') {
         wx.showLoading({
-          title: '正在生成',
+          title: this.data.translations.indexLoadingTitleGenerating,
           mask: true,
         });
         let name =
-          format.formatDate(getApp().globalData.launchInfo.dateUT, true) +
+          FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true) +
           '：【' +
           this.data.idiName +
           '】';
-        if (this.data.defs.length > 1) name = name + '（部分）';
+        if (this.data.defs.length > 1)
+          name = name + this.data.translations.indexTextPartial;
         this.setData({
           painting: {
             width: 1080,
@@ -513,7 +558,7 @@ Page({
   },
   onShareAppMessage() {
     if (this.data.idiId !== '') {
-      let date = format.formatDate(getApp().globalData.launchInfo.dateUT, true);
+      let date = FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
         imageUrl: '/images/sharing.png',
@@ -528,7 +573,7 @@ Page({
   },
   onShareTimeline() {
     if (this.data.idiId !== '') {
-      let date = format.formatDate(getApp().globalData.launchInfo.dateUT, true);
+      let date = FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
         imageUrl: '/images/sharing.png',

@@ -1,3 +1,5 @@
+const TRANSLATIONS = getApp().globalData.translations;
+const STTRANSLATION = require('../tools/sTTranslation.js');
 function get(args) {
   let url = args.url;
   let data = args.data;
@@ -5,6 +7,7 @@ function get(args) {
   let exHandler = args.exHandler;
   let type = args.type;
   let urlBase;
+  let ignoreS2T = args.ignoreS2T;
   console.log(
     '请求参数列表：\nurl：',
     url,
@@ -31,13 +34,16 @@ function get(args) {
     url = '';
   }
   wx.showLoading({
-    title: '加载中……',
+    title: TRANSLATIONS.toolsRequestLoadingTitleLoading,
     mask: true,
   });
   console.log('发送请求：' + urlBase + url);
   wx.request({
     url: urlBase + url,
     data: data,
+    header: {
+      'Accept-Language': getApp().getLocale(),
+    },
     success(res) {
       wx.hideLoading();
       if (res.statusCode === 200 && typeof doSuccess === 'function') {
@@ -47,11 +53,28 @@ function get(args) {
         } else {
           if (res.data.code === 0) {
             console.log('查询到数据：', res.data);
-            doSuccess(res.data.result);
+            if (
+              ignoreS2T === true ||
+              (getApp().getLocale() !== 'zh-HK' &&
+                getApp().getLocale() !== 'zh-TW')
+            ) {
+              doSuccess(res.data.result);
+            } else {
+              let tmp = JSON.stringify(res.data.result);
+              tmp = STTRANSLATION.traditionalized(tmp);
+              let json = JSON.parse(tmp);
+              console.log('简繁转换结果：', json);
+              doSuccess(json);
+            }
           } else fail(res.statusCode, res.data.code, res.data.msg, exHandler);
         }
       } else if (res.statusCode === 404) {
-        notFound('未查询到数据', undefined, undefined, exHandler);
+        notFound(
+          TRANSLATIONS.toolsRequestTextDataNotFound,
+          undefined,
+          undefined,
+          exHandler
+        );
       } else {
         fail(res.statusCode, res.data.code, res.data.msg, exHandler);
       }
@@ -65,7 +88,7 @@ function get(args) {
 
 function downloadTTSAudio(tok, cuid, tex, doSuccess) {
   wx.showLoading({
-    title: '加载中……',
+    title: TRANSLATIONS.toolsRequestLoadingTitleLoading,
     mask: true,
   });
   let url =
@@ -85,7 +108,12 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
         //这里不必校验文件格式，播放时会自动校验。
         doSuccess(res.tempFilePath);
       } else if (res.statusCode === 404) {
-        notFound('未查询到数据', undefined, undefined, exHandler);
+        notFound(
+          TRANSLATIONS.toolsRequestTextDataNotFound,
+          undefined,
+          undefined,
+          exHandler
+        );
       } else {
         fail(res.statusCode);
       }
@@ -99,7 +127,7 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
 
 function uniFunc(url, method, dt, doSuccess) {
   wx.showLoading({
-    title: '加载中……',
+    title: TRANSLATIONS.toolsRequestLoadingTitleLoading,
     mask: true,
   });
   let urlNew;
@@ -113,6 +141,9 @@ function uniFunc(url, method, dt, doSuccess) {
     url: urlNew,
     method: method,
     data: dt,
+    header: {
+      'Accept-Language': getApp().getLocale(),
+    },
     success(res) {
       wx.hideLoading();
       if (
@@ -144,13 +175,13 @@ function fail(code, codeFromIdionline, msg, exHandler) {
     wx.vibrateLong();
     if (typeof codeFromIdionline !== 'undefined')
       wx.showToast({
-        title: '错误：' + msg,
+        title: TRANSLATIONS.toolsRequestToastTitleError + msg,
         icon: 'none',
         mask: true,
       });
     else
       wx.showToast({
-        title: '错误：' + code,
+        title: TRANSLATIONS.toolsRequestToastTitleError + code,
         icon: 'none',
         mask: true,
       });
@@ -165,7 +196,7 @@ function notFound(code, codeFromIdionline, msg, exHandler) {
   } else {
     wx.vibrateLong();
     wx.showToast({
-      title: '很抱歉，未查询到数据！',
+      title: TRANSLATIONS.toolsRequestToastTitleDataNotFound,
       icon: 'none',
       mask: true,
     });

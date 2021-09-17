@@ -1,26 +1,35 @@
-const call = require('../../tools/request.js');
-const color = require('../../tools/color.js');
-const md5 = require('../../tools/md5.js');
+const CALL = require('../../tools/request.js');
+const COLOR = require('../../tools/color.js');
+const MD5 = require('../../tools/md5.js');
 Page({
   data: {
+    translations:{},
     username: '',
     password: '',
     show: false,
     color: '',
+    focus: {
+      password: false,
+    },
   },
-  onLoad() {},
+  onLoad() {
+    this.setData({
+      translations: getApp().globalData.translations,
+    });
+    getApp().setPageTitleTranslation('loginPageTitle');
+  },
   onShow() {
-    color.apl();
+    COLOR.apl();
   },
   onLogin() {
     wx.vibrateShort();
     let that = this;
-    call.uniFunc(
+    CALL.uniFunc(
       'editor/login',
       'POST',
       {
         username: that.data.username,
-        password: md5(that.data.password),
+        password: MD5(that.data.password),
       },
       that.callback
     );
@@ -45,7 +54,7 @@ Page({
       sessionId: data.sessionId,
     });
     wx.showToast({
-      title: '登录成功！',
+      title: this.data.translations.loginToastTitleLoginSucceeded,
       mask: true,
     });
     console.log('登录成功：', data);
@@ -64,5 +73,20 @@ Page({
   },
   onClear() {
     wx.vibrateShort();
+  },
+  onConfirm(e) {
+    wx.vibrateShort();
+    if (e.target.id === 'field-username')
+      this.setData({
+        focus: {
+          password: true,
+        },
+      });
+    else
+      this.setData({
+        focus: {
+          password: false,
+        },
+      });
   },
 });

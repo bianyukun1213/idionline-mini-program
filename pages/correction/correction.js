@@ -1,6 +1,7 @@
-const color = require('../../tools/color.js');
+const COLOR = require('../../tools/color.js');
 Page({
   data: {
+    translations:{},
     value: '',
     id: '',
     name: '',
@@ -8,12 +9,14 @@ Page({
     color: '',
   },
   onLoad(option) {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('correctionPageTitle');
     let json = JSON.parse(decodeURIComponent(option.str));
     this.data.id = json.id;
     this.data.name = json.name;
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
   },
   onChange(event) {
     if (event.detail === '') {

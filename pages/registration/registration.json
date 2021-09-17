@@ -4,6 +4,5 @@
     "van-field": "/miniprogram_npm/@vant/weapp/field/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index"
   },
-  "navigationBarTitleText": "注册为编辑者",
   "disableScroll": true
 }

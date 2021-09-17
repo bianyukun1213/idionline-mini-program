@@ -1,19 +1,19 @@
 <view class="root">
-	<van-notice-bar wrapable text="长按移除对应成语。" wx:if="{{!showText}}" />
+	<van-notice-bar wrapable text="{{translations.favoritesNoticeBarTextIdiomRemoval}}" wx:if="{{!showText}}" />
 	<view class="list" wx:if="{{!showText}}">
 		<van-cell-group wx:for="{{items}}" wx:key="index">
 			<van-cell-group wx:for="{{items[index]}}" wx:key="index">
 				<van-cell id="{{index}}" title="【{{item}}】" is-link url="/pages/idiom/idiom?id={{index}}"
-					link-type="navigateTo" bind:longpress="onDelete" clickable="true" bind:click="onClick" />
+					link-type="navigateTo" bind:longpress="onDelete" clickable bind:click="onClick" />
 			</van-cell-group>
 		</van-cell-group>
 		<view class="con" wx:if="{{tmp.length>1}}">
-			<van-button aria-role="button" aria-label="上一页" wx:if="{{showPrev}}" class="btn" color="{{color}}"
-				bind:click="onPrev">上一页</van-button>
+			<van-button aria-role="button" aria-label="{{translations.favoritesButtonPreviousPage}}" wx:if="{{showPrev}}" class="btn" color="{{color}}"
+				bind:click="onPrev">{{translations.favoritesButtonPreviousPage}}</van-button>
 			<Text class="text">{{page+1}}/{{tmp.length}}</Text>
-			<van-button aria-role="button" aria-label="下一页" wx:if="{{showNext}}" class="btn" color="{{color}}"
-				bind:click="onNext">下一页</van-button>
+			<van-button aria-role="button" aria-label="{{translations.favoritesButtonNextPage}}" wx:if="{{showNext}}" class="btn" color="{{color}}"
+				bind:click="onNext">{{translations.favoritesButtonNextPage}}</van-button>
 		</view>
 	</view>
-	<van-empty description="什么都没有……" wx:else />
+	<van-empty description="{{translations.favoritesTextNothingHere}}" wx:else />
 </view>

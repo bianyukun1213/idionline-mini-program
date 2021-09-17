@@ -1,10 +1,13 @@
 <view class="root">
   <van-cell-group>
-    <van-field id="field-username" value="{{username}}" required clearable bind:change="onChange" maxlength="16"
-      label="用户名" placeholder="用户名不能为空" bind:clear="onClear" />
-    <van-field id="field-password" value="{{password}}" required clearable type="password" bind:change="onChange"
-      maxlength="20" label="密码" placeholder="密码不能为空" bind:clear="onClear" />
+    <van-field id="field-username" auto-focus value="{{username}}" required clearable bind:change="onChange"
+      maxlength="16" label="{{translations.loginLabelUsername}}" placeholder="{{translations.loginPlaceholderUsername}}"
+      bind:confirm="onConfirm" bind:clear="onClear" />
+    <van-field id="field-password" value="{{password}}" focus="{{focus.password}}" required clearable type="password"
+      bind:change="onChange" maxlength="20" label="{{translations.loginLabelPwd}}"
+      placeholder="{{translations.loginPlaceholderPwd}}" bind:confirm="onConfirm" bind:clear="onClear" />
   </van-cell-group>
-  <van-button class="btn" aria-role="button" aria-label="登录" wx:if="{{show}}" color="{{color}}" bind:click="onLogin">登录
+  <van-button class="btn" aria-role="button" aria-label="{{translations.loginButtonLogin}}" wx:if="{{show}}"
+    color="{{color}}" bind:click="onLogin">{{translations.loginButtonLogin}}
   </van-button>
 </view>

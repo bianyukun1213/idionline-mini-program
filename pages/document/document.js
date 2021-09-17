@@ -1,8 +1,9 @@
-const color = require('../../tools/color.js');
-const call = require('../../tools/request.js');
-const info = require('../../tools/info.js');
+const COLOR = require('../../tools/color.js');
+const CALL = require('../../tools/request.js');
+const INFO = require('../../tools/info.js');
 Page({
   data: {
+    translations:{},
     overlayOn: false,
     shareFlag: false,
     color: '',
@@ -10,6 +11,8 @@ Page({
     article: {},
   },
   onLoad() {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('documentPageTitle');
     wx.onThemeChange((result) => {
       if (result.theme === 'dark')
         this.setData({
@@ -24,15 +27,15 @@ Page({
       this.setData({
         singlePage: true,
       });
-    info.getLaunchInfo(this.infoCallback);
-    call.get({
+    INFO.getLaunchInfo(this.infoCallback);
+    CALL.get({
       url: 'document',
       doSuccess: this.callback,
       exHandler: this.exHandler,
     });
   },
   infoCallback() {
-    color.apl();
+    COLOR.apl();
   },
   callback(data) {
     let result = getApp().towxml(data, 'markdown');
@@ -45,13 +48,13 @@ Page({
     wx.vibrateLong();
     if (typeof codeFromIdionline !== 'undefined')
       wx.showToast({
-        title: '错误：' + msg,
+        title: this.data.translations.documentToastTitleError + msg,
         icon: 'none',
         mask: true,
       });
     else
       wx.showToast({
-        title: '错误：' + code,
+        title: this.data.translations.documentToastTitleError + code,
         icon: 'none',
         mask: true,
       });
@@ -64,7 +67,7 @@ Page({
     }, 1500);
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
     if (wx.getSystemInfoSync().theme === 'dark')
       this.setData({
         overlayOn: true,
@@ -78,7 +81,7 @@ Page({
     console.log('尝试转发帮助文档页面');
     if (this.data.shareFlag) {
       return {
-        title: '点击查看帮助文档',
+        title: this.data.translations.documentTextSharing,
         imageUrl: '/icons/share.png',
       };
     }
@@ -89,7 +92,7 @@ Page({
   },
   onShareTimeline() {
     return {
-      title: '帮助文档',
+      title: this.data.translations.documentTextSharing,
       imageUrl: '/icons/share.png',
     };
   },

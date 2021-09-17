@@ -1,13 +1,13 @@
-const call = require('../tools/request.js');
-const format = require('../tools/format.js');
+const CALL = require('../tools/request.js');
+const FORMAT = require('../tools/format.js');
 let callb = undefined;
 
 function getLaunchInfo(callback, justRefresh) {
   if (Object.keys(getApp().globalData.launchInfo).length === 0 || justRefresh) {
     callb = callback;
     console.log('开始请求启动信息');
-    call.get({
-      url: 'launchinfo/' + format.getUnixTimestamp(),
+    CALL.get({
+      url: 'launchinfo/' + FORMAT.getUnixTimestamp(),
       data: {
         sessionId: wx.getStorageSync('user').sessionId,
       },

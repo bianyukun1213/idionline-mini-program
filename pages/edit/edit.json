@@ -5,6 +5,5 @@
     "van-checkbox": "/miniprogram_npm/@vant/weapp/checkbox/index",
     "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index"
-  },
-  "navigationBarTitleText": "编辑模式"
+  }
 }

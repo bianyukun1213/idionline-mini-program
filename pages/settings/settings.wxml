@@ -1,5 +1,15 @@
 <view class="root">
+  <van-notice-bar wrapable text="{{translations.settingsNoticeBarTextWarning}}" />
   <van-cell-group>
+    <van-cell title="{{translations.settingsLabelLanguage}}" value="{{languageOptions[pickerValue]}}" is-link
+      bind:click="showPopup" />
+    <van-popup show="{{showPopup}}" position="bottom" bind:close="onClose">
+      <van-picker id="picker" columns="{{languageOptions}}" show-toolbar
+        title="{{translations.settingsPickerTitleLanguage}}"
+        confirm-button-text="{{translations.settingsPickerConfirmTextConfirm}}"
+        cancel-button-text="{{translations.settingsPickerCancelTextCancel}}" bind:cancel="onCancel"
+        bind:confirm="onConfirm" />
+    </van-popup>
     <!-- <van-cell title="广告">
       <van-switch active-color="{{color}}" checked="{{adsOn}}" bind:change="onChangeAds" />
     </van-cell>

@@ -1,12 +1,13 @@
 <view class="root">
-	<van-notice-bar wx:if="{{singlePage}}" wrapable text="当前处于功能受限的单页模式，前往小程序以获得最佳体验。" />
+	<van-notice-bar wx:if="{{singlePage}}" wrapable text="{{translations.idiomNoticeBarTextSinglePage}}}" />
 	<view class="root" wx:if="{{id!==''}}">
-		<van-cell title="【{{name}}】{{py}}" label="{{ori}}由 {{lastEditor}} 最后编辑于{{updateTime}}{{tbc}}" />
+		<van-cell title="【{{name}}】{{py}}"
+			label="{{ori}}{{translations.idiomTextIdiomEditBy1}} {{lastEditor}} {{translations.idiomTextIdiomEditBy2}} {{updateTime}}{{tbc}}" />
 		<view class="content">
 			<view class="defs" wx:for="{{defs}}" wx:key="index">
 				<van-row style="margin-bottom:10px;">
 					<van-col span="6">
-						<van-tag mark size="large" color="{{color}}">来源</van-tag>
+						<van-tag mark size="large" color="{{color}}">{{translations.idiomTextIdiomSource}}</van-tag>
 					</van-col>
 					<van-col span="18">
 						<text class="text">{{item.source}}\n</text>
@@ -14,7 +15,8 @@
 				</van-row>
 				<van-row>
 					<van-col span="6">
-						<van-tag id="speaker-{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">释义 🔊
+						<van-tag id="speaker-{{index}}" mark size="large" color="{{color}}" bind:tap="onTTSTap">
+							{{translations.idiomTextIdiomDefinitionText}} 🔊
 						</van-tag>
 					</van-col>
 					<van-col span="18">
@@ -39,11 +41,12 @@
 						</view>
 						<block wx:if="{{item.examples.length!==0}}">
 							<text class="text" wx:for="{{item.examples}}" wx:key="index"
-								style="margin-top:10px;font-size:12px;color:{{color}};">例句 {{index+1}}：{{item}}</text>
+								style="margin-top:10px;font-size:12px;color:{{color}};">{{translations.idiomTextIdiomDefinitionExample}} {{index+1}}：{{item}}</text>
+							<!--这里不要格式化，不然格式会乱-->
 						</block>
 						<block wx:if="{{item.addition!==null}}">
 							<text class="text"
-								style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item.addition}}</text>
+								style="margin-top:10px;font-size:12px;color:{{color}};">{{translations.idiomTextIdiomDefinitionAdditionText}}{{item.addition}}</text>
 						</block>
 					</van-col>
 				</van-row>
@@ -52,17 +55,21 @@
 			</view>
 		</view>
 		<view class="footer">
-			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="纠错" color="{{color}}"
-				bind:click="onCorrect" bind:longpress="onEdit">纠错</van-button>
-			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="接龙" color="{{color}}"
-				bind:click="onSolitaire">接龙</van-button>
-			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="收藏" color="{{color}}"
-				bind:click="onCollect">收藏</van-button>
-			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="分享" color="{{color}}"
-				bind:click="onShare" bind:longpress="onLongPress">分享</van-button>
+			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button"
+				aria-label="{{translations.idiomButtonCorrectIdiom}}" color="{{color}}" bind:click="onCorrect"
+				bind:longpress="onEdit">{{translations.idiomButtonCorrectIdiom}}</van-button>
+			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button"
+				aria-label="{{translations.idiomButtonPlaySolitaire}}" color="{{color}}" bind:click="onSolitaire">
+				{{translations.idiomButtonPlaySolitaire}}</van-button>
+			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button"
+				aria-label="{{translations.idiomButtonAddToFavorites}}" color="{{color}}" bind:click="onCollect">
+				{{translations.idiomButtonAddToFavorites}}</van-button>
+			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button"
+				aria-label="{{translations.idiomButtonShare}}" color="{{color}}" bind:click="onShare"
+				bind:longpress="onLongPress">{{translations.idiomButtonShare}}</van-button>
 		</view>
 	</view>
-	<van-share-sheet show="{{show}}" title="立即分享给好友" options="{{options}}" bind:select="onSelect"
-		bind:close="onClose" />
+	<van-share-sheet show="{{show}}" title="{{translations.idiomTextSharingTitle}}" options="{{options}}"
+		cancel-text="{{translations.idiomTextSharingCancelText}}" bind:select="onSelect" bind:close="onClose" />
 	<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
 </view>

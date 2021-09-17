@@ -3,6 +3,5 @@
     "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index"
-  },
-  "navigationBarTitleText": "选择您要查看的成语"
+  }
 }

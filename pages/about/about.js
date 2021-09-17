@@ -1,7 +1,10 @@
-const color = require('../../tools/color.js');
-const call = require('../../tools/request.js');
+const COLOR = require('../../tools/color.js');
+//const I18N = require('../../tools/i18n.js');
+// const call = require('../../tools/request.js');
 Page({
   data: {
+    translations: {},
+    language: '-',
     version: '-',
     apiVer: '-',
     platTag: '-',
@@ -25,15 +28,18 @@ Page({
     setInterval(this.refresh, 60000);
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
     if (wx.getSystemInfoSync().theme === 'dark')
       this.setData({
         dark: true,
+        translations: getApp().globalData.translations,
       });
     else
       this.setData({
         dark: false,
+        translations: getApp().globalData.translations,
       });
+    getApp().setPageTitleTranslation('aboutPageTitle');
     this.refresh();
   },
   refresh() {
@@ -42,7 +48,20 @@ Page({
     let version = getApp().globalData.debugMode
       ? getApp().globalData.version + ' [DEBUG]'
       : getApp().globalData.version;
+    let lang = getApp().getLocale();
+    switch (lang) {
+      case 'zh-CN':
+        lang = '简体中文（zh-CN）';
+        break;
+        case 'zh-HK':
+          lang = '港澳繁體（zh-HK）';
+          break;
+          case 'zh-TW':
+            lang = '臺灣正體（zh-TW）';
+            break;
+    }
     this.setData({
+      language: lang,
       version: version,
       platTag: getApp().globalData.platform.tag,
       platStr: getApp().globalData.platform.str,
@@ -57,17 +76,17 @@ Page({
   onClean() {
     let that = this;
     wx.showModal({
-      title: '警告',
-      content:
-        '您的登录信息、收藏数据等都保存在设备储存中，清空储存将导致这些数据丢失。您确定要继续吗？',
-      confirmText: '继续',
+      title: that.data.translations.aboutModalTitleWarning,
+      content: that.data.translations.aboutModalContentCleaning,
+      confirmText: that.data.translations.aboutModalConfirmTextContinue,
       confirmColor: '#FF0000',
+      cancelText: that.data.translations.aboutModalCancelTextCancel,
       success(res) {
         wx.vibrateShort();
         if (res.confirm) {
           wx.clearStorageSync();
           wx.showToast({
-            title: '完成！',
+            title: that.data.translations.aboutToastTitleCompletio,
             mask: true,
           });
           that.refresh();
@@ -84,18 +103,20 @@ Page({
       url: '/pages/document/document',
     });
   },
-  // navi2Settings() {
-  //   wx.vibrateShort()
-  //   wx.navigateTo({
-  //     url: '/pages/settings/settings'
-  //   })
-  // },
+  navi2Settings() {
+    wx.vibrateShort();
+    wx.navigateTo({
+      url: '/pages/settings/settings',
+    });
+  },
   onCopyInfo() {
     wx.vibrateShort();
     wx.setClipboardData({
       data:
         '用户名：' +
         this.data.username +
+        '\n当前语言：' +
+        this.data.language +
         '\n小程序平台：' +
         this.data.platStr +
         '\n小程序版本：' +

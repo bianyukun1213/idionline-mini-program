@@ -1,7 +1,8 @@
-const color = require('../../tools/color.js');
-const md5 = require('../../tools/md5.js');
+const COLOR = require('../../tools/color.js');
+const MD5 = require('../../tools/md5.js');
 Page({
   data: {
+    translations:{},
     color: '',
     fromSearch: false,
     showDebug: false,
@@ -23,6 +24,8 @@ Page({
     ],
   },
   onLoad(options) {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('debugPageTitle');
     if (options.fromSearch) {
       this.setData({
         fromSearch: true,
@@ -38,7 +41,7 @@ Page({
     this.startCounting();
   },
   onShow() {
-    color.apl();
+    COLOR.apl();
   },
   startCounting() {
     setTimeout(this.redirect, 1000);
@@ -50,7 +53,6 @@ Page({
   },
   onClick(e) {
     wx.vibrateShort();
-    console.log(e.target.id);
     if (this.data.pages[e.target.id].isTabPage === true)
       wx.switchTab({
         url: this.data.pages[e.target.id].route,
@@ -62,7 +64,7 @@ Page({
   },
   onDebug() {
     wx.showToast({
-      title: '调试已开启！',
+      title: this.data.translations.debugToastTitleDebugOn,
       mask: true,
     });
     getApp().globalData.debugMode = true;
@@ -86,15 +88,14 @@ Page({
   },
   onOK() {
     wx.vibrateShort();
-    if (md5(this.data.password) === '93d98c9fc6497ab576662a1c95a0b0d4') {
+    if (MD5(this.data.password) === '93d98c9fc6497ab576662a1c95a0b0d4') {
       this.setData({
         showDebug: true,
       });
-      // wx.setStorageSync('canDebug', true);
     } else {
       wx.vibrateLong();
       wx.showToast({
-        title: '调试密码错误！',
+        title: this.data.translations.debugToastTitleWrongPwd,
         icon: 'none',
         mask: true,
       });

@@ -4,6 +4,5 @@
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
     "van-empty": "/miniprogram_npm/@vant/weapp/empty/index",
     "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index"
-  },
-  "navigationBarTitleText": "收藏"
+  }
 }

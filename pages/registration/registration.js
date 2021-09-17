@@ -1,16 +1,23 @@
-const call = require('../../tools/request.js');
-const color = require('../../tools/color.js');
-const md5 = require('../../tools/md5.js');
+const CALL = require('../../tools/request.js');
+const COLOR = require('../../tools/color.js');
+const MD5 = require('../../tools/md5.js');
 Page({
   data: {
+    translations: {},
     username: '',
     password: '',
     show: false,
     color: '',
+    focus: {
+      password: false,
+    },
   },
-  onLoad() {},
+  onLoad() {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('registrationPageTitle');
+  },
   onShow() {
-    color.apl();
+    COLOR.apl();
   },
   onRegister() {
     wx.vibrateShort();
@@ -21,19 +28,19 @@ Page({
     if (!reg1.test(this.data.username) || !reg2.test(this.data.password)) {
       wx.vibrateLong();
       wx.showToast({
-        title: '用户名或密码格式不正确！',
+        title: this.data.translations.registrationToastTitleWrongData,
         icon: 'none',
         mask: true,
       });
       return;
     }
     let that = this;
-    call.uniFunc(
+    CALL.uniFunc(
       'editor/register',
       'POST',
       {
         username: that.data.username,
-        password: md5(that.data.password),
+        password: MD5(that.data.password),
       },
       that.callback
     );
@@ -53,7 +60,7 @@ Page({
   },
   callback(data) {
     wx.showToast({
-      title: '注册成功！',
+      title: this.data.translations.registrationToastTitleRegistrationSucceeded,
       mask: true,
     });
     console.log('注册成功：' + data);
@@ -68,5 +75,20 @@ Page({
   },
   onClear() {
     wx.vibrateShort();
+  },
+  onConfirm(e) {
+    wx.vibrateShort();
+    if (e.target.id === 'field-username')
+      this.setData({
+        focus: {
+          password: true,
+        },
+      });
+    else
+      this.setData({
+        focus: {
+          password: false,
+        },
+      });
   },
 });

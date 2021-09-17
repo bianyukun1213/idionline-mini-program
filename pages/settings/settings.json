@@ -2,7 +2,9 @@
   "usingComponents": {
     "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
     "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
-    "van-switch": "/miniprogram_npm/@vant/weapp/switch/index"
-  },
-  "navigationBarTitleText": "设置"
+    "van-switch": "/miniprogram_npm/@vant/weapp/switch/index",
+    "van-popup": "/miniprogram_npm/@vant/weapp/popup/index",
+    "van-picker": "/miniprogram_npm/@vant/weapp/picker/index",
+    "van-notice-bar": "/miniprogram_npm/@vant/weapp/notice-bar/index"
+  }
 }

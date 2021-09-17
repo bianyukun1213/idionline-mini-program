@@ -1,14 +1,89 @@
-const color = require('../../tools/color.js');
+const COLOR = require('../../tools/color.js');
 Page({
   data: {
+    translations: {},
     color: '',
+    showPopup: false,
+    pickerValue: 0,
+    languageOptions: [],
   },
   onLoad() {},
   onShow() {
-    color.apl();
+    COLOR.apl();
     this.refreshSettings();
   },
+  showPopup() {
+    wx.vibrateShort();
+    this.setData({ showPopup: true });
+    let picker = this.selectComponent('#picker');
+    picker.setColumnIndex(0, this.data.pickerValue);
+  },
+  onConfirm(e) {
+    wx.vibrateShort();
+    let value;
+    let settings = wx.getStorageSync('settings');
+    switch (e.detail.index) {
+      case 0:
+        value = 0;
+        settings.language = 'system';
+        break;
+      case 1:
+        value = 1;
+        settings.language = 'zh-CN';
+        break;
+      case 2:
+        value = 2;
+        settings.language = 'zh-HK';
+        break;
+      case 3:
+        value = 3;
+        settings.language = 'zh-TW';
+        break;
+    }
+    wx.setStorageSync('settings', settings);
+    getApp().setLocale();
+    getApp().globalData.refreshOnIndex = true;
+    this.setData({ pickerValue: value, showPopup: false });
+    this.refreshSettings();
+  },
+  onCancel() {
+    wx.vibrateShort();
+    this.onClose();
+  },
+  onClose() {
+    this.setData({
+      showPopup: false,
+    });
+    wx.vibrateShort();
+  },
   refreshSettings() {
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('settingsPageTitle');
+    let options = [
+      getApp().globalData.translations.appTextLocaleNameSystem,
+      '简体中文（zh-CN）',
+      '港澳繁體（zh-HK）',
+      '臺灣正體（zh-TW）',
+    ];
+    let value;
+    if (wx.getStorageSync('settings').language === 'system') value = 0;
+    else {
+      switch (getApp().getLocale()) {
+        case 'zh-CN':
+          value = 1;
+          break;
+        case 'zh-HK':
+          value = 2;
+          break;
+        case 'zh-TW':
+          value = 3;
+          break;
+      }
+    }
+    this.setData({
+      languageOptions: options,
+      pickerValue: value,
+    });
     // let disableAds = wx.getStorageSync('settings').disableAds
     // let overlayOn = wx.getStorageSync('settings').enableOverlay
     // if (disableAds === undefined)

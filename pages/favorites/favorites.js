@@ -1,6 +1,7 @@
-const color = require('../../tools/color.js');
+const COLOR = require('../../tools/color.js');
 Page({
   data: {
+    translations:{},
     items: [],
     showText: true,
     tmp: [],
@@ -10,7 +11,9 @@ Page({
   },
   onLoad() {},
   onShow() {
-    color.apl();
+    this.setData({ translations: getApp().globalData.translations });
+    getApp().setPageTitleTranslation('favoritesPageTitle');
+    COLOR.apl();
     this.loadData();
   },
   //加载缓存数据
@@ -34,9 +37,10 @@ Page({
       return;
     }
     for (let key in favorites) {
+      if (favorites.hasOwnProperty(key)){
       let obj = {};
       obj[key] = favorites[key];
-      array.push(obj);
+      array.push(obj);}
     }
     let idx = 0;
     for (let i = 0; i < array.length; i++) {
@@ -76,11 +80,10 @@ Page({
     wx.vibrateShort();
     let index = e.currentTarget.id;
     let favorites = wx.getStorageSync('favorites') || {};
-    let name = favorites[index];
     delete favorites[index];
     wx.setStorageSync('favorites', favorites);
     wx.showToast({
-      title: '已移除！',
+      title: this.data.translations.favoritesToastTitleRemoved,
       mask: true,
     });
     console.log('已移除索引为 ' + index + ' 的成语');
