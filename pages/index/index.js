@@ -64,17 +64,35 @@ Page({
       translations: getApp().globalData.translations,
     });
     getApp().setTabBarTranslation();
-    this.setData({
-      placeHolder: this.data.translations.indexPlaceholderSearch,
-      options: [
-        {
-          name: this.data.translations.indexSharingOption1,
-          icon: 'wechat',
-          openType: 'share',
-        },
-        { name: this.data.translations.indexSharingOption2, icon: 'poster' },
-      ],
-    });
+    if (getApp().globalData.launchInfo === null)
+      this.setData({
+        placeHolder: this.data.translations.indexPlaceholderSearch,
+        options: [
+          {
+            name: this.data.translations.indexSharingOption1,
+            icon: 'wechat',
+            openType: 'share',
+          },
+          { name: this.data.translations.indexSharingOption2, icon: 'poster' },
+        ],
+      });
+    else
+      this.setData({
+        placeHolder:
+          this.data.translations.indexPlaceholderSearch1 +
+          ' ' +
+          launchInfo.idiomsCount +
+          ' ' +
+          this.data.translations.indexPlaceholderSearch2,
+        options: [
+          {
+            name: this.data.translations.indexSharingOption1,
+            icon: 'wechat',
+            openType: 'share',
+          },
+          { name: this.data.translations.indexSharingOption2, icon: 'poster' },
+        ],
+      });
     getApp().setPageTitleTranslation('appPageTitle');
     COLOR.apl();
     if (wx.getSystemInfoSync().theme === 'dark')
