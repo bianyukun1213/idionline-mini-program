@@ -46,7 +46,7 @@ function get(args) {
       Cookie:
         typeof getApp().globalData.user.sessionId !== 'undefined' &&
         type !== 'TTS'
-          ? 'SESSIONID:' + getApp().globalData.user.sessionId + ','
+          ? 'SESSIONID=' + getApp().globalData.user.sessionId + ';'
           : '',
     },
     success(res) {
@@ -150,7 +150,7 @@ function uniFunc(url, method, dt, doSuccess) {
       'Accept-Language': getApp().getLocale(),
       Cookie:
         typeof getApp().globalData.user.sessionId !== 'undefined'
-          ? 'SESSIONID:' + getApp().globalData.user.sessionId + ','
+          ? 'SESSIONID=' + getApp().globalData.user.sessionId + ';'
           : '',
     },
     success(res) {
