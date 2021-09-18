@@ -5,7 +5,7 @@ Page({
   data: {
     translations: {},
     id: '',
-    sessionId: '',
+    //sessionId: '',
     name: '',
     indexOfIdiom: '',
     pinyin: '',
@@ -27,14 +27,14 @@ Page({
     getApp().setPageTitleTranslation('editPageTitle');
     let json = JSON.parse(decodeURIComponent(option.str));
     //更新页面。
-    this.data.sessionId = json.sessionId;
+    //this.data.sessionId = json.sessionId;
     this.data.id = json.id;
-    this.data.sessionId = wx.getStorageSync('user').sessionId;
+    //this.data.sessionId = wx.getStorageSync('user').sessionId;
     CALL.get({
       url: 'idiom/' + this.data.id,
-      data: {
-        sessionId: this.data.sessionId,
-      },
+      // data: {
+      //   sessionId: this.data.sessionId,
+      // },
       doSuccess: this.fillData,
       exHandler: this.exHandler,
       ignoreS2T: true,
@@ -144,7 +144,7 @@ Page({
     console.log(this.data.id);
     let json = {
       id: this.data.id,
-      sessionId: this.data.sessionId,
+      //sessionId: this.data.sessionId,
     };
     let str = encodeURIComponent(JSON.stringify(json));
     wx.redirectTo({
@@ -200,7 +200,7 @@ Page({
       }
     }
     let dt = {
-      sessionId: this.data.sessionId,
+      //sessionId: this.data.sessionId,
       bsonStr: null,
       name: this.data.name,
       index: this.data.indexOfIdiom,
@@ -241,7 +241,7 @@ Page({
       title: that.data.translations.editModalTitleWarning,
       content: that.data.translations.editModalContentAreYouSure,
       confirmText: that.data.translations.editModalConfirmTextDelete,
-      confirmColor: '#FF0000',
+      confirmColor: '#ff0000',
       cancelText: that.data.translations.editModalCancelTextCancel,
       success(res) {
         wx.vibrateShort();
@@ -249,7 +249,8 @@ Page({
           CALL.uniFunc(
             'idiom/' + that.data.id,
             'DELETE',
-            '"' + that.data.sessionId + '"',
+            //'"' + that.data.sessionId + '"',
+            undefined,
             that.doneDelete
           );
         }

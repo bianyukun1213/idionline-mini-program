@@ -301,7 +301,7 @@ Page({
         : e.detail;
     this.setData({ value: e.detail });
     if (val === 'debug') {
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/debug/debug?fromSearch=true',
       });
       return;

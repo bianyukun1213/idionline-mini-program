@@ -53,6 +53,11 @@ Page({
       username: data.username,
       sessionId: data.sessionId,
     });
+    getApp().globalData.user = {
+      id: data.id,
+      username: data.username,
+      sessionId: data.sessionId,
+    };
     wx.showToast({
       title: this.data.translations.loginToastTitleLoginSucceeded,
       mask: true,

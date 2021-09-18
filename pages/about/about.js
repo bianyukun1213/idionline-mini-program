@@ -42,7 +42,7 @@ Page({
     this.refresh();
   },
   refresh() {
-    let tmp = wx.getStorageSync('user').username;
+    let tmp = getApp().globalData.user.username;
     tmp = typeof tmp === 'undefined' ? '-' : tmp;
     let version = getApp().globalData.debugMode
       ? getApp().globalData.version + ' [DEBUG]'
@@ -78,17 +78,20 @@ Page({
       title: that.data.translations.aboutModalTitleWarning,
       content: that.data.translations.aboutModalContentCleaning,
       confirmText: that.data.translations.aboutModalConfirmTextContinue,
-      confirmColor: '#FF0000',
+      confirmColor: '#ff0000',
       cancelText: that.data.translations.aboutModalCancelTextCancel,
       success(res) {
         wx.vibrateShort();
         if (res.confirm) {
           wx.clearStorageSync();
           wx.showToast({
-            title: that.data.translations.aboutToastTitleCompletio,
+            title: that.data.translations.aboutToastTitleCompletion,
             mask: true,
           });
           that.refresh();
+          getApp().globalData.user = {};
+          getApp().globalData.settings = {};
+          getApp().globalData.locale = '';
           getApp().globalData.refreshOnIndex = true;
           console.log('设备储存已清理');
         }

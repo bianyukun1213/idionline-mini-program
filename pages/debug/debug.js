@@ -68,6 +68,7 @@ Page({
       mask: true,
     });
     getApp().globalData.debugMode = true;
+    getApp().globalData.refreshOnIndex = true;
     console.log('调试模式已开启：' + getApp().globalData.debugMode);
   },
   onDebugClick() {

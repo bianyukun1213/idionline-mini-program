@@ -28,7 +28,7 @@ Page({
     tTSCurrent: '',
     tTSSrc: {},
     shareFlag: false,
-    sessionId: '',
+    //sessionId: '',
     painting: {},
     show: false,
     filePath: '',
@@ -88,12 +88,12 @@ Page({
     }
   },
   refresh() {
-    this.data.sessionId = wx.getStorageSync('user').sessionId;
+    //this.data.sessionId = wx.getStorageSync('user').sessionId;
     CALL.get({
       url: 'idiom/' + this.data.id,
-      data: {
-        sessionId: this.data.sessionId,
-      },
+      // data: {
+      //   sessionId: this.data.sessionId,
+      // },
       doSuccess: this.fillData,
       exHandler: this.exHandler,
     });
@@ -287,10 +287,7 @@ Page({
   },
   onEdit() {
     wx.vibrateShort();
-    if (
-      typeof this.data.sessionId !== 'undefined' &&
-      this.data.sessionId !== ''
-    )
+    if (typeof getApp().globalData.user.sessionId !== 'undefined')
       this.doEdit();
     else {
       wx.navigateTo({
@@ -303,7 +300,7 @@ Page({
     innerAudioContext.stop();
     let json = {
       id: this.data.id,
-      sessionId: this.data.sessionId,
+      //sessionId: this.data.sessionId,
       // name: this.data.name,
       // indexOfIdiom: this.data.index,
       // pinyin: this.data.pinyin,

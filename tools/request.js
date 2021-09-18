@@ -43,6 +43,11 @@ function get(args) {
     data: data,
     header: {
       'Accept-Language': getApp().getLocale(),
+      Cookie:
+        typeof getApp().globalData.user.sessionId !== 'undefined' &&
+        type !== 'TTS'
+          ? 'SESSIONID:' + getApp().globalData.user.sessionId + ','
+          : '',
     },
     success(res) {
       wx.hideLoading();
@@ -143,6 +148,10 @@ function uniFunc(url, method, dt, doSuccess) {
     data: dt,
     header: {
       'Accept-Language': getApp().getLocale(),
+      Cookie:
+        typeof getApp().globalData.user.sessionId !== 'undefined'
+          ? 'SESSIONID:' + getApp().globalData.user.sessionId + ','
+          : '',
     },
     success(res) {
       wx.hideLoading();

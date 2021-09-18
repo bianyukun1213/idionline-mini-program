@@ -5,7 +5,7 @@ Page({
   data: {
     translations: {},
     id: '',
-    sessionId: '',
+    //sessionId: '',
     value: '',
     show: false,
     color: '',
@@ -15,12 +15,12 @@ Page({
     getApp().setPageTitleTranslation('bsonEditPageTitle');
     let json = JSON.parse(decodeURIComponent(option.str));
     this.data.id = json.id;
-    this.data.sessionId = json.sessionId;
+    //this.data.sessionId = json.sessionId;
     CALL.get({
       url: 'idiom/' + this.data.id,
       data: {
         bson: 1,
-        sessionId: this.data.sessionId,
+        //sessionId: this.data.sessionId,
       },
       doSuccess: this.callback,
       exHandler: this.exHandler,
@@ -81,7 +81,7 @@ Page({
       bStr = STTRANSLATION.simplized(bStr);
     }
     let dt = {
-      sessionId: this.data.sessionId,
+      //sessionId: this.data.sessionId,
       bsonStr: bStr,
       updates: [],
     };

@@ -21,7 +21,7 @@ Page({
   onConfirm(e) {
     wx.vibrateShort();
     let value;
-    let settings = wx.getStorageSync('settings');
+    let settings = wx.getStorageSync('settings') || {};
     switch (e.detail.index) {
       case 0:
         value = 0;
@@ -77,6 +77,9 @@ Page({
           break;
         case 'zh-TW':
           value = 3;
+          break;
+        default:
+          value = 0;
           break;
       }
     }

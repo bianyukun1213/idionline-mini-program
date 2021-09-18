@@ -3,6 +3,7 @@ const I18N = require('tools/i18n.js');
 App({
   towxml: require('/towxml/index'),
   globalData: {
+    user: {},
     settings: {},
     locale: '',
     translations: {},
@@ -16,6 +17,7 @@ App({
     refreshOnIndex: false,
   },
   onLaunch() {
+    this.globalData.user = wx.getStorageSync('user') || {};
     let info = wx.getSystemInfoSync();
     this.setLocale(info);
     console.log('已启动：', info);
