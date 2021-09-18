@@ -1,8 +1,4 @@
 @media (prefers-color-scheme: dark) {
-  .van-picker__mask {
-    background-image: none !important;
-  }
-
   .van-picker-column__item {
     color: white !important;
   }
