@@ -62,7 +62,7 @@ Page({
     let options = [
       getApp().globalData.translations.appTextLocaleNameSystem,
       '简体中文（zh-CN）',
-      '港澳繁體（zh-HK）',
+      '香港繁體（zh-HK）',
       '臺灣正體（zh-TW）',
     ];
     let value;

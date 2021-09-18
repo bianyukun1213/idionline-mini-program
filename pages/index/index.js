@@ -21,7 +21,6 @@ Page({
     compValue: '',
     historyValue: [],
     logoUrl: '../../images/idionline.png',
-    //searchBarValue: '',
     showPopup: false,
     startY: 0,
     currentY: 0,
@@ -97,20 +96,15 @@ Page({
     wx.getClipboardData({
       //向搜索框自动填充剪贴板数据。
       success(res) {
-        // let str = STTRANSLATION.simplized(res.data);
         let str = res.data;
         if (
-          // (reg.test(res.data) || regId.test(res.data)) &&
-          // that.data.historyValue.indexOf(res.data) === -1
           (reg.test(str) || regId.test(str)) &&
           that.data.historyValue.indexOf(str) === -1
         ) {
           //填充历史里有的成语不再填充。
           that.setData({
-            // value: res.data,
             value: str,
           });
-          // that.data.historyValue.push(res.data);
           that.data.historyValue.push(str);
           console.log('填充历史：', that.data.historyValue);
           wx.showToast({
@@ -118,14 +112,12 @@ Page({
             mask: true,
           });
           wx.vibrateShort();
-          // } else if (regS.test(res.data)) {
         } else if (regS.test(str)) {
           wx.vibrateShort();
           CALL.get({
             url:
               'idiom/playsolitaire/' +
               regS
-                // .exec(res.data)[0]
                 .exec(str)[0]
                 .replace('「', '')
                 .replace('」', '')
@@ -289,9 +281,7 @@ Page({
       getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW'
         ? STTRANSLATION.simplized(e.detail)
         : e.detail;
-    //let val = e.detail;
     this.setData({ value: e.detail });
-    // if (e.detail === 'debug') {
     if (val === 'debug') {
       wx.redirectTo({
         url: '/pages/debug/debug?fromSearch=true',
@@ -305,31 +295,22 @@ Page({
     ); //汉字。
     let reg2 = new RegExp(/^[0-9a-zA-Z]{24}/);
     let reg3 = new RegExp(/^[A-Za-z]$/);
-    // if (reg.test(e.detail) && e.detail.length > 1 && e.detail.length <= 12) {
     if (reg.test(val) && val.length > 1 && val.length <= 12) {
-      //this.data.searchBarValue = e.detail; //这里由于不用在wxml中渲染，就不调用setdata了。
       CALL.get({
-        // url: 'idiom/search/' + e.detail,
         url: 'idiom/search/' + val,
         doSuccess: this.navi,
         exHandler: this.exHandler,
       });
-      // } else if (reg2.exec(e.detail)) {
     } else if (reg2.exec(val)) {
       this.data.idMode = true;
-      //this.data.searchBarValue = e.detail; //同上。
       CALL.get({
-        // url: 'idiom/search/' + e.detail,
         url: 'idiom/search/' + val,
         doSuccess: this.navi,
         exHandler: this.exHandler,
       });
-      // } else if (reg3.exec(e.detail)) {
     } else if (reg3.exec(val)) {
       this.data.idMode = true;
-      //this.data.searchBarValue = e.detail; //同上。
       CALL.get({
-        // url: 'idiom/search/' + e.detail,
         url: 'idiom/search/' + val,
         doSuccess: this.navi,
         exHandler: this.exHandler,
@@ -345,7 +326,6 @@ Page({
   },
   //成语未收录时：
   exHandler(code, codeFromIdionline, msg) {
-    // let dt = this.data.searchBarValue;
     let dt = this.data.value;
     console.log('查询无结果：' + dt);
     if (codeFromIdionline !== 20001) {
@@ -364,26 +344,12 @@ Page({
         });
       return;
     }
-    // if (this.data.idMode || this.data.indexMode) {
     wx.showToast({
       title: this.data.translations.indexToastTitleNoResult,
       icon: 'none',
       mask: true,
     });
     wx.vibrateLong();
-    // } else {
-    //   let that = this;
-    //   wx.showModal({
-    //     title: that.data.translations.indexModalTitleNoResult,
-    //     content: that.data.translations.indexModalContentNoResult,
-    //     confirmText: that.data.translations.indexModalConfirmTextConfirm,
-    //     showCancel: false,
-    //     success() {
-    //       wx.vibrateShort();
-    //     },
-    //   });
-    //   wx.vibrateLong();
-    // }
   },
   navi(data) {
     //获取key，其实就是第一个的key。
@@ -393,8 +359,6 @@ Page({
     }
     if (
       Object.keys(data).length === 1 &&
-      // (data[k] === this.data.searchBarValue || this.data.idMode)
-      // (data[k] === this.data.value || this.data.idMode)
       (data[k] === this.data.compValue || this.data.idMode)
     ) {
       wx.navigateTo({
@@ -404,22 +368,11 @@ Page({
       let linkType = 'navigateTo';
       for (let key in data) {
         if (data.hasOwnProperty(key)) {
-          // if (data[key].indexOf(this.data.searchBarValue) !== -1) {
-          // if (data[key].indexOf(this.data.value) !== -1) {
           if (data[key].indexOf(this.data.compValue) !== -1) {
             linkType = 'redirectTo';
             break;
           }
         }
-        // let str = encodeURIComponent(JSON.stringify(data));
-        // wx.navigateTo({
-        //   url:
-        //     '/pages/selection/selection?str=' +
-        //     str +
-        //     '&linkType="' +
-        //     linkType +
-        //     '"',
-        // });
       }
       let str = encodeURIComponent(JSON.stringify(data));
       wx.navigateTo({

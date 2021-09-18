@@ -53,7 +53,7 @@ Page({
         lang = '简体中文（zh-CN）';
         break;
       case 'zh-HK':
-        lang = '港澳繁體（zh-HK）';
+        lang = '香港繁體（zh-HK）';
         break;
       case 'zh-TW':
         lang = '臺灣正體（zh-TW）';
