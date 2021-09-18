@@ -1,7 +1,7 @@
 const COLOR = require('../../tools/color.js');
 Page({
   data: {
-    translations:{},
+    translations: {},
     items: [],
     showText: true,
     tmp: [],
@@ -13,6 +13,7 @@ Page({
   onShow() {
     this.setData({ translations: getApp().globalData.translations });
     getApp().setPageTitleTranslation('favoritesPageTitle');
+    getApp().setTabBarTranslation();
     COLOR.apl();
     this.loadData();
   },
@@ -37,10 +38,11 @@ Page({
       return;
     }
     for (let key in favorites) {
-      if (favorites.hasOwnProperty(key)){
-      let obj = {};
-      obj[key] = favorites[key];
-      array.push(obj);}
+      if (favorites.hasOwnProperty(key)) {
+        let obj = {};
+        obj[key] = favorites[key];
+        array.push(obj);
+      }
     }
     let idx = 0;
     for (let i = 0; i < array.length; i++) {

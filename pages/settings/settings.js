@@ -95,6 +95,9 @@ Page({
     //   overlayOn: overlayOn
     // })
   }, //,
+  onChange() {
+    wx.vibrateShort();
+  },
   // onChangeAds() {
   //   if (this.data.adsOn) {
   //     wx.vibrateShort()

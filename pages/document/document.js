@@ -3,7 +3,7 @@ const CALL = require('../../tools/request.js');
 const INFO = require('../../tools/info.js');
 Page({
   data: {
-    translations:{},
+    translations: {},
     overlayOn: false,
     shareFlag: false,
     color: '',

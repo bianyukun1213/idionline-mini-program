@@ -1,5 +1,6 @@
 const CALL = require('../../tools/request.js');
 const COLOR = require('../../tools/color.js');
+const STTRANSLATION = require('../../tools/sTTranslation.js');
 Page({
   data: {
     translations: {},
@@ -35,7 +36,8 @@ Page({
         sessionId: this.data.sessionId,
       },
       doSuccess: this.fillData,
-      ignoreS2T:true,
+      exHandler: this.exHandler,
+      ignoreS2T: true,
     });
   },
   onShow() {
@@ -207,6 +209,11 @@ Page({
       toBeCorrected: this.data.toBeCorrected,
       definitionUpdates: tmp,
     };
+    if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
+      let str = JSON.stringify(dt);
+      str = STTRANSLATION.simplized(str);
+      dt = JSON.parse(str);
+    }
     CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
   },
   done(data) {
@@ -263,6 +270,28 @@ Page({
       deleted: true,
     });
     getApp().globalData.refreshOnIndex = true;
+    setTimeout(function () {
+      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+        wx.switchTab({
+          url: '/pages/index/index',
+        });
+    }, 1500);
+  },
+  exHandler(code, codeFromIdionline, msg) {
+    wx.vibrateLong();
+    if (typeof codeFromIdionline !== 'undefined')
+      wx.showToast({
+        title: this.data.translations.editToastTitleError + msg,
+        icon: 'none',
+        mask: true,
+      });
+    else
+      wx.showToast({
+        title: this.data.translations.editToastTitleError + code,
+        icon: 'none',
+        mask: true,
+      });
+    let currentPage = getCurrentPages()[getCurrentPages().length - 1];
     setTimeout(function () {
       if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
         wx.switchTab({

@@ -136,7 +136,7 @@ function uniFunc(url, method, dt, doSuccess) {
   } else {
     urlNew = 'https://idionline.hollisdevhub.com/api/' + url;
   }
-  console.log('进行操作：' + method + ' ' + url);
+  console.log('进行操作：' + method + ' ' + url, dt);
   wx.request({
     url: urlNew,
     method: method,

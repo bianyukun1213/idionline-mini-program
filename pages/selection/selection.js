@@ -1,7 +1,7 @@
 const COLOR = require('../../tools/color.js');
 Page({
   data: {
-    translations:{},
+    translations: {},
     linkType: '',
     idioms2Disp: [],
     tmp: [],

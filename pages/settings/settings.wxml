@@ -8,7 +8,7 @@
         title="{{translations.settingsPickerTitleLanguage}}"
         confirm-button-text="{{translations.settingsPickerConfirmTextConfirm}}"
         cancel-button-text="{{translations.settingsPickerCancelTextCancel}}" bind:cancel="onCancel"
-        bind:confirm="onConfirm" />
+        bind:confirm="onConfirm" bind:change="onChange" />
     </van-popup>
     <!-- <van-cell title="广告">
       <van-switch active-color="{{color}}" checked="{{adsOn}}" bind:change="onChangeAds" />

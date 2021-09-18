@@ -8,11 +8,12 @@
 			</van-cell-group>
 		</van-cell-group>
 		<view class="con" wx:if="{{tmp.length>1}}">
-			<van-button aria-role="button" aria-label="{{translations.favoritesButtonPreviousPage}}" wx:if="{{showPrev}}" class="btn" color="{{color}}"
-				bind:click="onPrev">{{translations.favoritesButtonPreviousPage}}</van-button>
+			<van-button aria-role="button" aria-label="{{translations.favoritesButtonPreviousPage}}"
+				wx:if="{{showPrev}}" class="btn" color="{{color}}" bind:click="onPrev">
+				{{translations.favoritesButtonPreviousPage}}</van-button>
 			<Text class="text">{{page+1}}/{{tmp.length}}</Text>
-			<van-button aria-role="button" aria-label="{{translations.favoritesButtonNextPage}}" wx:if="{{showNext}}" class="btn" color="{{color}}"
-				bind:click="onNext">{{translations.favoritesButtonNextPage}}</van-button>
+			<van-button aria-role="button" aria-label="{{translations.favoritesButtonNextPage}}" wx:if="{{showNext}}"
+				class="btn" color="{{color}}" bind:click="onNext">{{translations.favoritesButtonNextPage}}</van-button>
 		</view>
 	</view>
 	<van-empty description="{{translations.favoritesTextNothingHere}}" wx:else />

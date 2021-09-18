@@ -3,7 +3,7 @@ const COLOR = require('../../tools/color.js');
 const MD5 = require('../../tools/md5.js');
 Page({
   data: {
-    translations:{},
+    translations: {},
     username: '',
     password: '',
     show: false,

@@ -1,7 +1,8 @@
 <view class="root">
     <view class="root" wx:if="{{showDebug}}">
         <text class="text">{{translations.debugTextOptions}}</text>
-        <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonEnableDebug}}" bind:click="onDebugClick" color="{{color}}">
+        <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonEnableDebug}}"
+            bind:click="onDebugClick" color="{{color}}">
             {{translations.debugButtonEnableDebug}}</van-button>
         <text class="text">{{translations.debugTextPages}}</text>
         <view class="root" wx:for="{{pages}}" wx:key="index">
@@ -11,10 +12,11 @@
     </view>
     <view class="root" wx:else>
         <van-cell-group>
-            <van-field value="{{password}}" type="password" required clearable bind:change="onChange" label="{{translations.debugLabelPwd}}"
-                placeholder="{{translations.debugPlaceholderPwd}}" />
+            <van-field value="{{password}}" type="password" required clearable bind:change="onChange"
+                label="{{translations.debugLabelPwd}}" placeholder="{{translations.debugPlaceholderPwd}}" />
         </van-cell-group>
-        <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonConfirm}}" wx:if="{{show}}" bind:click="onOK" color="{{color}}">
+        <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonConfirm}}" wx:if="{{show}}"
+            bind:click="onOK" color="{{color}}">
             {{translations.debugButtonConfirm}}</van-button>
     </view>
 </view>

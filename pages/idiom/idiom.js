@@ -17,6 +17,7 @@ Page({
     py: '',
     origin: '',
     ori: '',
+    tags: [],
     tbc: '',
     defs: [],
     defTexts: [],
@@ -161,6 +162,14 @@ Page({
         pinyin: '',
         py: '',
       });
+    if (data.tags !== null)
+      this.setData({
+        tags: data.tags,
+      });
+    else
+      this.setData({
+        tags: [],
+      });
     if (data.origin !== null)
       this.setData({
         origin: data.origin,
@@ -208,6 +217,13 @@ Page({
       url: '/pages/idiom/idiom?id=' + e.currentTarget.id.split('-')[0],
     });
   },
+  onClickTag(e) {
+    wx.vibrateShort();
+    innerAudioContext.stop();
+    // wx.redirectTo({
+    //   url: '/pages/idiom/idiom?id=' + e.currentTarget.id.split('-')[0],
+    // });
+  },
   onCollect() {
     wx.vibrateShort();
     let favorites = wx.getStorageSync('favorites') || {};
@@ -235,7 +251,7 @@ Page({
   onLongPress() {
     wx.vibrateShort();
     let that = this;
-    innerAudioContext.stop();
+    //innerAudioContext.stop();
     wx.setClipboardData({
       data: this.data.id,
       success() {

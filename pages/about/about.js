@@ -1,6 +1,4 @@
 const COLOR = require('../../tools/color.js');
-//const I18N = require('../../tools/i18n.js');
-// const call = require('../../tools/request.js');
 Page({
   data: {
     translations: {},
@@ -40,6 +38,7 @@ Page({
         translations: getApp().globalData.translations,
       });
     getApp().setPageTitleTranslation('aboutPageTitle');
+    getApp().setTabBarTranslation();
     this.refresh();
   },
   refresh() {
@@ -53,12 +52,12 @@ Page({
       case 'zh-CN':
         lang = '简体中文（zh-CN）';
         break;
-        case 'zh-HK':
-          lang = '港澳繁體（zh-HK）';
-          break;
-          case 'zh-TW':
-            lang = '臺灣正體（zh-TW）';
-            break;
+      case 'zh-HK':
+        lang = '港澳繁體（zh-HK）';
+        break;
+      case 'zh-TW':
+        lang = '臺灣正體（zh-TW）';
+        break;
     }
     this.setData({
       language: lang,

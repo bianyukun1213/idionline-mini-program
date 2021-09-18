@@ -1,7 +1,7 @@
 const COLOR = require('../../tools/color.js');
 Page({
   data: {
-    translations:{},
+    translations: {},
     value: '',
     id: '',
     name: '',

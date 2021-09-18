@@ -4,6 +4,15 @@
 		<van-cell title="【{{name}}】{{py}}"
 			label="{{ori}}{{translations.idiomTextIdiomEditBy1}} {{lastEditor}} {{translations.idiomTextIdiomEditBy2}} {{updateTime}}{{tbc}}" />
 		<view class="content">
+			<block wx:if="{{tags!==[]}}">
+				<view class="tags">
+					<van-tag id="tag-{{index}}" class="tag" wx:for="{{tags}}" wx:key="index" plain round
+						color="{{color}}">
+						<!--bind:tap="onClickTag">-->
+						{{item}}
+					</van-tag>
+				</view>
+			</block>
 			<view class="defs" wx:for="{{defs}}" wx:key="index">
 				<van-row style="margin-bottom:10px;">
 					<van-col span="6">
@@ -41,7 +50,8 @@
 						</view>
 						<block wx:if="{{item.examples.length!==0}}">
 							<text class="text" wx:for="{{item.examples}}" wx:key="index"
-								style="margin-top:10px;font-size:12px;color:{{color}};">{{translations.idiomTextIdiomDefinitionExample}} {{index+1}}：{{item}}</text>
+								style="margin-top:10px;font-size:12px;color:{{color}};">{{translations.idiomTextIdiomDefinitionExample}}
+								{{index+1}}：{{item}}</text>
 							<!--这里不要格式化，不然格式会乱-->
 						</block>
 						<block wx:if="{{item.addition!==null}}">

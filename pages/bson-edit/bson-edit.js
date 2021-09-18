@@ -1,5 +1,6 @@
 const CALL = require('../../tools/request.js');
 const COLOR = require('../../tools/color.js');
+const STTRANSLATION = require('../../tools/sTTranslation.js');
 Page({
   data: {
     translations: {},
@@ -23,7 +24,7 @@ Page({
       },
       doSuccess: this.callback,
       exHandler: this.exHandler,
-      ignoreS2T:true,
+      ignoreS2T: true,
     });
   },
   onShow() {
@@ -75,9 +76,13 @@ Page({
   },
   onSubmit() {
     wx.vibrateShort();
+    let bStr = this.data.value;
+    if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
+      bStr = STTRANSLATION.simplized(bStr);
+    }
     let dt = {
       sessionId: this.data.sessionId,
-      bsonStr: this.data.value,
+      bsonStr: bStr,
       updates: [],
     };
     CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
@@ -91,7 +96,10 @@ Page({
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     prevPage.data.refresh = true;
-    if (this.data.id === getApp().globalData.launchInfo.dailyIdiom.id)
+    if (
+      getApp().globalData.launchInfo.dailyIdiom !== null &&
+      this.data.id === getApp().globalData.launchInfo.dailyIdiom.id
+    )
       getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (getCurrentPages()[getCurrentPages().length - 2] === prevPage)

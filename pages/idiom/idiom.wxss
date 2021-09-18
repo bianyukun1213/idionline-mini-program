@@ -33,3 +33,14 @@
 .btn-func {
   margin-left: 10px;
 }
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.tag {
+  margin-right: 10px;
+}
