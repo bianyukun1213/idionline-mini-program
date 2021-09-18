@@ -4,7 +4,7 @@
 		<van-cell title="【{{name}}】{{py}}"
 			label="{{ori}}{{translations.idiomTextIdiomEditBy1}} {{lastEditor}} {{translations.idiomTextIdiomEditBy2}} {{updateTime}}{{tbc}}" />
 		<view class="content">
-			<block wx:if="{{tags!==[]}}">
+			<block wx:if="{{tags.length!==0}}">
 				<view class="tags">
 					<van-tag id="tag-{{index}}" class="tag" wx:for="{{tags}}" wx:key="index" plain round
 						color="{{color}}">

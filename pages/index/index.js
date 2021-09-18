@@ -15,7 +15,6 @@ Page({
     defs: [],
     defsLess: [],
     defTexts: [],
-    launchInfo: {},
     placeHolder: '',
     value: '',
     compValue: '',
@@ -64,7 +63,7 @@ Page({
       translations: getApp().globalData.translations,
     });
     getApp().setTabBarTranslation();
-    if (getApp().globalData.launchInfo === null)
+    if (Object.keys(getApp().globalData.launchInfo).length === 0) {
       this.setData({
         placeHolder: this.data.translations.indexPlaceholderSearch,
         options: [
@@ -76,12 +75,12 @@ Page({
           { name: this.data.translations.indexSharingOption2, icon: 'poster' },
         ],
       });
-    else
+    } else {
       this.setData({
         placeHolder:
           this.data.translations.indexPlaceholderSearch1 +
           ' ' +
-          launchInfo.idiomsCount +
+          getApp().globalData.launchInfo.idiomsCount +
           ' ' +
           this.data.translations.indexPlaceholderSearch2,
         options: [
@@ -93,6 +92,7 @@ Page({
           { name: this.data.translations.indexSharingOption2, icon: 'poster' },
         ],
       });
+    }
     getApp().setPageTitleTranslation('appPageTitle');
     COLOR.apl();
     if (wx.getSystemInfoSync().theme === 'dark')
