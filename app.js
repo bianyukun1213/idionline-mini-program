@@ -11,7 +11,7 @@ App({
     version: '1.52.0',
     platform: {
       tag: '',
-      str: '',
+      //str: '',
     },
     launchInfo: {},
     refreshOnIndex: false,
@@ -20,19 +20,22 @@ App({
     this.globalData.user = wx.getStorageSync('user') || {};
     let info = wx.getSystemInfoSync();
     this.setLocale(info);
+    this.setPlatformStr(info);
     console.log('已启动：', info);
-    if (info.isQB) {
-      this.globalData.platform.tag = 'QB';
-      this.globalData.platform.str = this.globalData.translations.appTextPlatformStringQB;
-    } else if (info.AppPlatform === 'qq') {
-      this.globalData.platform.tag = 'QQ';
-      this.globalData.platform.str = this.globalData.translations.appTextPlatformStringQQ;
-    } else {
-      this.globalData.platform.tag = 'WeChat';
-      this.globalData.platform.str = this.globalData.translations.appTextPlatformStringWechat;
-    }
     console.log('平台：' + this.globalData.platform.str);
     console.log('版本：' + this.globalData.version);
+  },
+  setPlatformStr(info) {
+    if (info.isQB) {
+      this.globalData.platform.tag = 'QB';
+      //this.globalData.platform.str = this.globalData.translations.appTextPlatformStringQB;
+    } else if (info.AppPlatform === 'qq') {
+      this.globalData.platform.tag = 'QQ';
+      //this.globalData.platform.str = this.globalData.translations.appTextPlatformStringQQ;
+    } else {
+      this.globalData.platform.tag = 'WeChat';
+      //this.globalData.platform.str = this.globalData.translations.appTextPlatformStringWechat;
+    }
   },
   onThemeChange() {
     COLOR.apl();

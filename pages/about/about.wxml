@@ -14,9 +14,9 @@
 	<van-cell title="{{translations.aboutTextInfoAndFunctions}}" />
 	<view class="content">
 		<text class="text" style="color:green;"
-			wx:if="{{platTag==='WeChat'}}">{{translations.aboutTextUsername}}{{username}}\n{{translations.aboutTextAppLanguage}}{{language}}\n{{translations.aboutTextAppPlatform}}{{platStr}}\n{{translations.aboutTextAppVersion}}{{version}}\n{{translations.aboutTextServiceVersion}}{{apiVer}}\n</text>
+			wx:if="{{platTag==='WeChat'}}">{{translations.aboutTextUsername}}{{username}}\n{{translations.aboutTextAppLanguage}}{{language}}\n{{translations.aboutTextAppPlatformTag}}{{platTag}}\n{{translations.aboutTextAppVersion}}{{version}}\n{{translations.aboutTextServiceVersion}}{{apiVer}}\n</text>
 		<text class="text" style="color:dodgerblue;"
-			wx:elif="{{platTag==='QQ'}}">{{translations.aboutTextUsername}}{{username}}\n{{translations.aboutTextAppLanguage}}{{language}}\n{{translations.aboutTextAppPlatform}}{{platStr}}\n{{translations.aboutTextAppVersion}}{{version}}\n{{translations.aboutTextServiceVersion}}{{apiVer}}\n</text>
+			wx:elif="{{platTag==='QQ'}}">{{translations.aboutTextUsername}}{{username}}\n{{translations.aboutTextAppLanguage}}{{language}}\n{{translations.aboutTextAppPlatformTag}}{{platTag}}\n{{translations.aboutTextAppVersion}}{{version}}\n{{translations.aboutTextServiceVersion}}{{apiVer}}\n</text>
 		<text class="text" style="color:gray;">{{translations.aboutTextSystemInfo}}\n{{sysInfo}}</text>
 		<view class="function">
 			<van-button class="btn" aria-role="button" aria-label="{{translations.aboutButtonCopyInfo}}"

@@ -6,7 +6,7 @@ Page({
     version: '-',
     apiVer: '-',
     platTag: '-',
-    platStr: '-',
+    //platStr: '-',
     sysInfo: '-',
     color: '',
     dark: false,
@@ -63,7 +63,7 @@ Page({
       language: lang,
       version: version,
       platTag: getApp().globalData.platform.tag,
-      platStr: getApp().globalData.platform.str,
+      //platStr: getApp().globalData.platform.str,
       sysInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t'),
       username: tmp,
     });
@@ -119,8 +119,9 @@ Page({
         this.data.username +
         '\n当前语言：' +
         this.data.language +
-        '\n小程序平台：' +
-        this.data.platStr +
+        '\n小程序平台标签：' +
+        //this.data.platStr +
+        this.data.platTag +
         '\n小程序版本：' +
         this.data.version +
         '\n后端服务版本：' +
