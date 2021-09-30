@@ -15,7 +15,7 @@ Page({
     defs: [],
     defsLess: [],
     defTexts: [],
-    placeHolder: '',
+    //placeHolder: '',
     value: '',
     compValue: '',
     historyValue: [],
@@ -65,7 +65,7 @@ Page({
     getApp().setTabBarTranslation();
     if (Object.keys(getApp().globalData.launchInfo).length === 0) {
       this.setData({
-        placeHolder: this.data.translations.indexPlaceholderSearch,
+        //placeHolder: this.data.translations.indexPlaceholderSearch,
         options: [
           {
             name: this.data.translations.indexSharingOption1,
@@ -77,12 +77,12 @@ Page({
       });
     } else {
       this.setData({
-        placeHolder:
-          this.data.translations.indexPlaceholderSearch1 +
-          ' ' +
-          getApp().globalData.launchInfo.idiomsCount +
-          ' ' +
-          this.data.translations.indexPlaceholderSearch2,
+        // placeHolder:
+        //   this.data.translations.indexPlaceholderSearch1 +
+        //   ' ' +
+        //   getApp().globalData.launchInfo.idiomsCount +
+        //   ' ' +
+        //   this.data.translations.indexPlaceholderSearch2,
         options: [
           {
             name: this.data.translations.indexSharingOption1,
@@ -109,7 +109,7 @@ Page({
     }
     let reg = new RegExp(/^[\u4e00-\u9fa5]{4}$/); //汉字。
     let regS = new RegExp(/(「|【)[\u4e00-\u9fa5]{4}(」|】)/); //小冰成语接龙。
-    let regId = new RegExp(/^[0-9a-zA-Z]{24}/);
+    let regId = new RegExp(/^[0-9a-zA-Z]{24}$/);
     let that = this;
     wx.getClipboardData({
       //向搜索框自动填充剪贴板数据。
@@ -186,12 +186,12 @@ Page({
     let launchInfo = getApp().globalData.launchInfo;
     this.setData({
       text: launchInfo.text,
-      placeHolder:
-        this.data.translations.indexPlaceholderSearch1 +
-        ' ' +
-        launchInfo.idiomsCount +
-        ' ' +
-        this.data.translations.indexPlaceholderSearch2,
+      // placeHolder:
+      //   this.data.translations.indexPlaceholderSearch1 +
+      //   ' ' +
+      //   launchInfo.idiomsCount +
+      //   ' ' +
+      //   this.data.translations.indexPlaceholderSearch2,
     });
     if (launchInfo.dailyIdiom !== null) {
       this.setData({ defTexts: [] });

@@ -1,11 +1,10 @@
 <view class="root">
   <van-cell-group>
     <van-field id="field-username" auto-focus value="{{username}}" required clearable bind:change="onChange"
-      maxlength="16" label="{{translations.loginLabelUsername}}" placeholder="{{translations.loginPlaceholderUsername}}"
-      bind:confirm="onConfirm" bind:clear="onClear" />
+      maxlength="16" label="{{translations.loginLabelUsername}}" bind:confirm="onConfirm" bind:clear="onClear" />
     <van-field id="field-password" value="{{password}}" focus="{{focus.password}}" required clearable type="password"
-      bind:change="onChange" maxlength="20" label="{{translations.loginLabelPwd}}"
-      placeholder="{{translations.loginPlaceholderPwd}}" bind:confirm="onConfirm" bind:clear="onClear" />
+      bind:change="onChange" maxlength="20" label="{{translations.loginLabelPwd}}" bind:confirm="onConfirm"
+      bind:clear="onClear" />
   </van-cell-group>
   <van-button class="btn" aria-role="button" aria-label="{{translations.loginButtonLogin}}" wx:if="{{show}}"
     color="{{color}}" bind:click="onLogin">{{translations.loginButtonLogin}}

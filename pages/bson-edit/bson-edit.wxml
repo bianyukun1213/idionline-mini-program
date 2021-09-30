@@ -2,8 +2,7 @@
 	<van-notice-bar wrapable text="{{translations.bsonEditNoticeBarTextReadDocument}}" />
 	<van-cell-group wx:if="{{value!==''}}">
 		<van-field value="{{value}}" type="textarea" autosize required clearable bind:change="onChange"
-			label="{{translations.bsonEditLabelBsonText}}" placeholder="{{translations.bsonEditPlaceholderBsonText}}"
-			bind:clear="onClear" />
+			label="{{translations.bsonEditLabelBsonText}}" bind:clear="onClear" />
 	</van-cell-group>
 	<van-button class="btn" aria-role="button" aria-label="{{translations.bsonEditButtonSubmit}}" color="{{color}}"
 		wx:if="{{show}}" bind:click="onSubmit">

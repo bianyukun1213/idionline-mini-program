@@ -2,11 +2,10 @@
   <van-notice-bar wrapable text="{{translations.registrationNoticeBarTextRequirements}}" />
   <van-cell-group>
     <van-field id="field-username" auto-focus value="{{username}}" required clearable bind:change="onChange"
-      maxlength="16" label="{{translations.registrationLabelUsername}}"
-      placeholder="{{translations.registrationPlaceholderUsername}}" bind:confirm="onConfirm" bind:clear="onClear" />
+      maxlength="16" label="{{translations.registrationLabelUsername}}" bind:confirm="onConfirm" bind:clear="onClear" />
     <van-field id="field-password" value="{{password}}" focus="{{focus.password}}" required clearable type="password"
-      bind:change="onChange" maxlength="20" label="{{translations.registrationLabelPwd}}"
-      placeholder="{{translations.registrationPlaceholderPwd}}" bind:confirm="onConfirm" bind:clear="onClear" />
+      bind:change="onChange" maxlength="20" label="{{translations.registrationLabelPwd}}" bind:confirm="onConfirm"
+      bind:clear="onClear" />
   </van-cell-group>
   <van-button class="btn" aria-role="button" aria-label="{{translations.registrationButtonRegister}}" wx:if="{{show}}"
     color="{{color}}" bind:click="onRegister">{{translations.registrationButtonRegister}}</van-button>

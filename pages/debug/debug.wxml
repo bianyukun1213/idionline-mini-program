@@ -13,7 +13,7 @@
     <view class="root" wx:else>
         <van-cell-group>
             <van-field value="{{password}}" type="password" required clearable bind:change="onChange"
-                label="{{translations.debugLabelPwd}}" placeholder="{{translations.debugPlaceholderPwd}}" />
+                label="{{translations.debugLabelPwd}}" />
         </van-cell-group>
         <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonConfirm}}" wx:if="{{show}}"
             bind:click="onOK" color="{{color}}">

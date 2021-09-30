@@ -2,7 +2,7 @@
 	<van-notice-bar wx:if="{{singlePage}}" wrapable text="{{translations.idiomNoticeBarTextSinglePage}}}" />
 	<view class="root" wx:if="{{id!==''}}">
 		<van-cell title="【{{name}}】{{py}}"
-			label="{{ori}}{{translations.idiomTextIdiomEditBy1}} {{lastEditor}} {{translations.idiomTextIdiomEditBy2}} {{updateTime}}{{tbc}}" />
+			label="{{ori}}{{translations.idiomTextIdiomEditBy1}} {{lastEditor}} {{translations.idiomTextIdiomEditBy2}} {{updateTime}}{{tbc}}{{translations.idiomTextIdiomDescriptionEnd}}" />
 		<view class="content">
 			<block wx:if="{{tags.length!==0}}">
 				<view class="tags">

@@ -2,8 +2,7 @@
   <van-notice-bar wrapable text="{{translations.correctionNoticeBarTextMayNotReadInTime}}" />
   <van-cell-group>
     <van-field value="{{value}}" type="textarea" autosize required clearable bind:change="onChange"
-      label="{{translations.correctionLabelCorrectionContent}}"
-      placeholder="{{translations.correctionPlaceholderCorrectionContent}}" bind:clear="onClear" />
+      label="{{translations.correctionLabelCorrectionContent}}" bind:clear="onClear" />
   </van-cell-group>
   <van-button class="btn" aria-role="button" aria-label="{{translations.correctionButtonCopyCorrectionContent}}"
     color="{{color}}" wx:if="{{show}}" bind:click="onContact" open-type="contact">
