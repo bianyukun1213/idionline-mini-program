@@ -8,9 +8,6 @@ function getLaunchInfo(callback, justRefresh) {
     console.log('开始请求启动信息');
     CALL.get({
       url: 'launchinfo/' + FORMAT.getUnixTimestamp(),
-      data: {
-        sessionId: wx.getStorageSync('user').sessionId,
-      },
       doSuccess: applyData,
     });
   } else {
