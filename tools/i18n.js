@@ -588,4 +588,5 @@ const TRANSLATIONS = {
       '專案使用多種方案儘可能實現繁體中文的本地化，無法保證質量。在繁體中文設定下，某些功能可能無法正常運作。「跟隨 WeChat」設定檔在某些情況下可能需要手動重新整理或重啟小程式才能生效。請您諒解！',
   },
 };
+
 module.exports.TRANSLATIONS = TRANSLATIONS;

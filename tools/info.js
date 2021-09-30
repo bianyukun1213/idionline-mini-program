@@ -1,6 +1,6 @@
 const CALL = require('../tools/request.js');
 const FORMAT = require('../tools/format.js');
-let callb = undefined;
+let callb;
 
 function getLaunchInfo(callback, justRefresh) {
   if (Object.keys(getApp().globalData.launchInfo).length === 0 || justRefresh) {
@@ -30,4 +30,5 @@ function applyData(data) {
     callb();
   }
 }
+
 module.exports.getLaunchInfo = getLaunchInfo;

@@ -1,6 +1,6 @@
 //还是网上抄的
-const TRANSLATIONS = getApp().globalData.translations;
 function formatDate(inputTime, mDMode) {
+  let TRANSLATIONS = getApp().globalData.translations;
   let date = new Date(inputTime * 1000);
   let y = date.getFullYear();
   let m = date.getMonth() + 1;
@@ -36,5 +36,6 @@ function getUnixTimestamp() {
   let ts = new Date();
   return Date.parse(ts) / 1000;
 }
+
 module.exports.formatDate = formatDate;
 module.exports.getUnixTimestamp = getUnixTimestamp;

@@ -1,6 +1,7 @@
-const TRANSLATIONS = getApp().globalData.translations;
 const STTRANSLATION = require('../tools/sTTranslation.js');
+
 function get(args) {
+  let TRANSLATIONS = getApp().globalData.translations;
   let url = args.url;
   let data = args.data;
   let doSuccess = args.doSuccess;
@@ -92,6 +93,7 @@ function get(args) {
 }
 
 function downloadTTSAudio(tok, cuid, tex, doSuccess) {
+  let TRANSLATIONS = getApp().globalData.translations;
   wx.showLoading({
     title: TRANSLATIONS.toolsRequestLoadingTitleLoading,
     mask: true,
@@ -131,6 +133,7 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
 }
 
 function uniFunc(url, method, dt, doSuccess) {
+  let TRANSLATIONS = getApp().globalData.translations;
   wx.showLoading({
     title: TRANSLATIONS.toolsRequestLoadingTitleLoading,
     mask: true,
@@ -176,6 +179,7 @@ function uniFunc(url, method, dt, doSuccess) {
 }
 
 function fail(code, codeFromIdionline, msg, exHandler) {
+  let TRANSLATIONS = getApp().globalData.translations;
   console.log('错误：' + code + ',' + codeFromIdionline + ',' + msg);
   if (typeof exHandler === 'function') {
     console.log('将执行 exHandler()');
@@ -198,6 +202,7 @@ function fail(code, codeFromIdionline, msg, exHandler) {
 }
 
 function notFound(code, codeFromIdionline, msg, exHandler) {
+  let TRANSLATIONS = getApp().globalData.translations;
   console.log('未查询到数据');
   if (typeof exHandler === 'function') {
     console.log('将执行 exHandler()');
@@ -211,6 +216,7 @@ function notFound(code, codeFromIdionline, msg, exHandler) {
     });
   }
 }
+
 module.exports.get = get;
 module.exports.downloadTTSAudio = downloadTTSAudio;
 module.exports.uniFunc = uniFunc;

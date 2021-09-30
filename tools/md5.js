@@ -2,6 +2,7 @@ function md5(string) {
   function md5_RotateLeft(lValue, iShiftBits) {
     return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
   }
+
   function md5_AddUnsigned(lX, lY) {
     let lX4, lY4, lX8, lY8, lResult;
     lX8 = lX & 0x80000000;
@@ -22,18 +23,23 @@ function md5(string) {
       return lResult ^ lX8 ^ lY8;
     }
   }
+
   function md5_F(x, y, z) {
     return (x & y) | (~x & z);
   }
+
   function md5_G(x, y, z) {
     return (x & z) | (y & ~z);
   }
+
   function md5_H(x, y, z) {
     return x ^ y ^ z;
   }
+
   function md5_I(x, y, z) {
     return y ^ (x | ~z);
   }
+
   function md5_FF(a, b, c, d, x, s, ac) {
     a = md5_AddUnsigned(
       a,
@@ -41,6 +47,7 @@ function md5(string) {
     );
     return md5_AddUnsigned(md5_RotateLeft(a, s), b);
   }
+
   function md5_GG(a, b, c, d, x, s, ac) {
     a = md5_AddUnsigned(
       a,
@@ -48,6 +55,7 @@ function md5(string) {
     );
     return md5_AddUnsigned(md5_RotateLeft(a, s), b);
   }
+
   function md5_HH(a, b, c, d, x, s, ac) {
     a = md5_AddUnsigned(
       a,
@@ -55,6 +63,7 @@ function md5(string) {
     );
     return md5_AddUnsigned(md5_RotateLeft(a, s), b);
   }
+
   function md5_II(a, b, c, d, x, s, ac) {
     a = md5_AddUnsigned(
       a,
@@ -62,6 +71,7 @@ function md5(string) {
     );
     return md5_AddUnsigned(md5_RotateLeft(a, s), b);
   }
+
   function md5_ConvertToWordArray(string) {
     let lWordCount;
     let lMessageLength = string.length;
@@ -87,6 +97,7 @@ function md5(string) {
     lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
     return lWordArray;
   }
+
   function md5_WordToHex(lValue) {
     let WordToHexValue = '',
       WordToHexValue_temp = '',
@@ -101,6 +112,7 @@ function md5(string) {
     }
     return WordToHexValue;
   }
+
   function md5_Utf8Encode(string) {
     string = string.replace(/\r\n/g, '\n');
     let utftext = '';
@@ -224,4 +236,5 @@ function md5(string) {
     md5_WordToHex(d)
   ).toLowerCase();
 }
+
 module.exports = md5;
