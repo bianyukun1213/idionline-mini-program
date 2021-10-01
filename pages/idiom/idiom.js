@@ -272,7 +272,7 @@ Page({
       title: this.data.translations.idiomModalTitleSolitaire,
       content: '〖' + data + '〗',
       confirmText: this.data.translations.idiomModalConfirmTextCopyResult,
-      cancelText: this.data.idiomModalCancelTextCancel,
+      cancelText: this.data.translations.idiomModalCancelTextCancel,
       success(res) {
         wx.vibrateShort();
         if (res.confirm)
