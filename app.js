@@ -22,7 +22,7 @@ App({
     this.setLocale(info);
     this.setPlatformStr(info);
     console.log('已启动：', info);
-    console.log('平台：' + this.globalData.platform.str);
+    console.log('平台：' + this.globalData.platform.tag);
     console.log('版本：' + this.globalData.version);
   },
   setPlatformStr(info) {

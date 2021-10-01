@@ -263,6 +263,7 @@ Page({
               '查找到对应的场景内容：' + launchInfo.argsDic[this.data.scene]
             );
             wx.showModal({
+              title: this.data.translations.indexModalTitleFromCode,
               content: launchInfo.argsDic[this.data.scene],
               confirmText: this.data.translations.indexModalConfirmTextConfirm,
               showCancel: false,

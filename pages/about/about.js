@@ -6,7 +6,7 @@ Page({
     version: '-',
     apiVer: '-',
     platTag: '-',
-    //platStr: '-',
+    platStr: '-',
     sysInfo: '-',
     color: '',
     dark: false,
@@ -30,18 +30,23 @@ Page({
     if (wx.getSystemInfoSync().theme === 'dark')
       this.setData({
         dark: true,
-        translations: getApp().globalData.translations,
       });
     else
       this.setData({
         dark: false,
-        translations: getApp().globalData.translations,
       });
-    getApp().setPageTitleTranslation('aboutPageTitle');
-    getApp().setTabBarTranslation();
     this.refresh();
   },
   refresh() {
+    this.setData({
+      translations: getApp().globalData.translations,
+    });
+    getApp().setPageTitleTranslation('aboutPageTitle');
+    let pages = getCurrentPages();
+    let currentPage = pages[pages.length - 1];
+    if (currentPage.route.split('/')[2] === 'about') {
+      getApp().setTabBarTranslation();
+    }
     let tmp = getApp().globalData.user.username;
     tmp = typeof tmp === 'undefined' ? '-' : tmp;
     let version = getApp().globalData.debugMode
@@ -59,11 +64,23 @@ Page({
         lang = '臺灣正體（zh-TW）';
         break;
     }
+    let str = '-';
+    switch (getApp().globalData.platform.tag) {
+      case 'QB':
+        str = this.data.translations.aboutTextPlatformStringQB;
+        break;
+      case 'QQ':
+        str = this.data.translations.aboutTextPlatformStringQQ;
+        break;
+      case 'WeChat':
+        str = this.data.translations.aboutTextPlatformStringWeChat;
+        break;
+    }
     this.setData({
       language: lang,
       version: version,
       platTag: getApp().globalData.platform.tag,
-      //platStr: getApp().globalData.platform.str,
+      platStr: str,
       sysInfo: JSON.stringify(wx.getSystemInfoSync(), null, '\t'),
       username: tmp,
     });
@@ -92,7 +109,9 @@ Page({
           getApp().globalData.user = {};
           getApp().globalData.settings = {};
           getApp().globalData.locale = '';
+          getApp().setLocale();
           getApp().globalData.refreshOnIndex = true;
+          that.refresh();
           console.log('设备储存已清理');
         }
       },
@@ -119,9 +138,8 @@ Page({
         this.data.username +
         '\n当前语言：' +
         this.data.language +
-        '\n小程序平台标签：' +
-        //this.data.platStr +
-        this.data.platTag +
+        '\n小程序平台：' +
+        this.data.platStr +
         '\n小程序版本：' +
         this.data.version +
         '\n后端服务版本：' +
