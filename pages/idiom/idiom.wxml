@@ -47,16 +47,15 @@
 								</block>
 							</block>
 						</view>
-						<block wx:if="{{item.examples.length!==0}}">
-							<text class="text" wx:for="{{item.examples}}" wx:key="index"
-								style="margin-top:10px;font-size:12px;color:{{color}};">
-								{{translations.idiomTextIdiomDefinitionExample}} {{index+1}}：{{item}}
-							</text>
-							<!--这里不要格式化，不然格式会乱-->
-						</block>
 						<block wx:if="{{item.addition!==null}}">
 							<text class="text"
 								style="margin-top:10px;font-size:12px;color:{{color}};">{{translations.idiomTextIdiomDefinitionAdditionText}}{{item.addition}}</text>
+						</block>
+						<block wx:if="{{item.examples.length!==0}}">
+							<text class="text" wx:for="{{item.examples}}" wx:key="index"
+								style="margin-top:10px;font-size:12px;color:{{color}};">{{translations.idiomTextIdiomDefinitionExample}} {{index+1}}：{{item}}
+							</text>
+							<!--这里不要格式化，不然格式会乱-->
 						</block>
 					</van-col>
 				</van-row>
