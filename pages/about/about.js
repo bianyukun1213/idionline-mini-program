@@ -41,11 +41,11 @@ Page({
     this.setData({
       translations: getApp().globalData.translations,
     });
-    getApp().setPageTitleTranslation('aboutPageTitle');
     if (
       getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
       'about'
     ) {
+      getApp().setPageTitleTranslation('aboutPageTitle');
       getApp().setTabBarTranslation();
     }
     let tmp = getApp().globalData.user.username;
