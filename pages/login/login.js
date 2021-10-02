@@ -64,7 +64,6 @@ Page({
     });
     console.log('登录成功：', data);
     let pages = getCurrentPages();
-    let currentPage = pages[pages.length - 1];
     let prevPage = pages[pages.length - 2];
     if (prevPage.route.split('/')[2] === 'idiom') {
       prevPage.data.loginSucceeded = true;
@@ -72,7 +71,10 @@ Page({
     }
     getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
-      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'login'
+      )
         wx.navigateBack();
     }, 1500);
   },

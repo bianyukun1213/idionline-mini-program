@@ -74,8 +74,8 @@
 				aria-label="{{translations.idiomButtonAddToFavorites}}" color="{{color}}" bind:click="onCollect">
 				{{translations.idiomButtonAddToFavorites}}</van-button>
 			<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button"
-				aria-label="{{translations.idiomButtonShare}}" color="{{color}}" bind:click="onShare"
-				bind:longpress="onLongPress">{{translations.idiomButtonShare}}</van-button>
+				aria-label="{{translations.idiomButtonShare}}" color="{{color}}" bind:click="onShare">
+				{{translations.idiomButtonShare}}</van-button>
 		</view>
 	</view>
 	<van-share-sheet show="{{show}}" title="{{translations.idiomTextSharingTitle}}" options="{{options}}"

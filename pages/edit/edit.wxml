@@ -40,11 +40,14 @@
 	</van-cell-group>
 	<view class="function">
 		<van-button class="btn" aria-role="button" aria-label="{{translations.editButtonNewIdiomDefinition}}"
-			color="{{color}}" bind:click="onAdd" bind:longpress="onBsonEdit">
+			color="{{color}}" bind:click="onAdd">
 			{{translations.editButtonNewIdiomDefinition}}</van-button>
 		<van-button class="btn" aria-role="button" aria-label="{{translations.editButtonSubmit}}" color="{{color}}"
 			bind:click="onSubmit">{{translations.editButtonSubmit}}
 		</van-button>
+		<van-button class="btn" aria-role="button" aria-label="{{translations.editButtonEditBson}}" type="warning"
+			bind:click="onBsonEdit">
+			{{translations.editButtonEditBson}}</van-button>
 		<van-button class="btn" aria-role="button" aria-label="{{translations.editButtonDeleteIdiom}}" type="danger"
 			bind:click="onDelete">{{translations.editButtonDeleteIdiom}}</van-button>
 	</view>

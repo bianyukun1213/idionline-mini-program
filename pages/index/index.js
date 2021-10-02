@@ -34,6 +34,7 @@ Page({
     options: [
       { name: '', icon: 'wechat', openType: 'share' },
       { name: '', icon: 'poster' },
+      { name: '', icon: 'link' },
     ],
   },
   //启动
@@ -73,6 +74,7 @@ Page({
             openType: 'share',
           },
           { name: this.data.translations.indexSharingOption2, icon: 'poster' },
+          { name: this.data.translations.indexSharingOption3, icon: 'link' },
         ],
       });
     } else {
@@ -90,6 +92,7 @@ Page({
             openType: 'share',
           },
           { name: this.data.translations.indexSharingOption2, icon: 'poster' },
+          { name: this.data.translations.indexSharingOption3, icon: 'link' },
         ],
       });
     }
@@ -548,8 +551,21 @@ Page({
       } else {
         this.save();
       }
+    } else if (event.detail.index === 2) {
+      this.copyId();
     }
     this.onClose();
+  },
+  copyId() {
+    wx.vibrateShort();
+    let that = this;
+    //innerAudioContext.stop();
+    wx.setClipboardData({
+      data: this.data.idiId,
+      success() {
+        console.log('已复制成语 Id 到剪贴板：' + that.data.idiId);
+      },
+    });
   },
   onShare() {
     wx.vibrateShort();

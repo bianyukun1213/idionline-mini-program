@@ -63,11 +63,10 @@ Page({
         mask: true,
       });
     let currentPage = getCurrentPages()[getCurrentPages().length - 1];
-    let prevPage = getCurrentPages()[getCurrentPages().length - 2];
     setTimeout(function () {
       if (
-        currentPage === getCurrentPages()[getCurrentPages().length - 1] ||
-        prevPage === getCurrentPages()[getCurrentPages().length - 1]
+        currentPage.route.split('/')[2] === 'bson-edit' ||
+        currentPage.route.split('/')[2] === 'edit'
       )
         wx.switchTab({
           url: '/pages/index/index',
@@ -94,16 +93,27 @@ Page({
       mask: true,
     });
     let pages = getCurrentPages();
-    let prevPage = pages[pages.length - 2];
-    prevPage.data.refresh = true;
+    let prev2Page = pages[pages.length - 3];
+    if (prev2Page.route.split('/')[3] === 'idiom')
+      prev2Page.data.refresh = true;
     if (
       getApp().globalData.launchInfo.dailyIdiom !== null &&
       this.data.id === getApp().globalData.launchInfo.dailyIdiom.id
     )
       getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
-      if (getCurrentPages()[getCurrentPages().length - 2] === prevPage)
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'edit'
+      )
         wx.navigateBack();
+      else if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'bson-edit'
+      )
+        wx.navigateBack({
+          delta: 2,
+        });
     }, 1500);
   },
   onReachBottom() {

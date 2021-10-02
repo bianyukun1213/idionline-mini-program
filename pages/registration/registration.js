@@ -64,10 +64,11 @@ Page({
       mask: true,
     });
     console.log('注册成功：' + data);
-    let pages = getCurrentPages();
-    let currentPage = pages[pages.length - 1];
     setTimeout(function () {
-      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'registration'
+      )
         wx.switchTab({
           url: '/pages/index/index',
         });

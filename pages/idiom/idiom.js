@@ -37,6 +37,7 @@ Page({
     options: [
       { name: '', icon: 'wechat', openType: 'share' },
       { name: '', icon: 'poster' },
+      { name: '', icon: 'link' },
     ],
   },
   onLoad(option) {
@@ -49,8 +50,12 @@ Page({
           openType: 'share',
         },
         {
-          name: this.data.translations.idiomSharingOptionsName2,
+          name: this.data.translations.idiomSharingOptionName2,
           icon: 'poster',
+        },
+        {
+          name: this.data.translations.idiomSharingOptionName3,
+          icon: 'link',
         },
       ],
     });
@@ -248,7 +253,7 @@ Page({
       fail: this.failToNavigate,
     });
   },
-  onLongPress() {
+  copyId() {
     wx.vibrateShort();
     let that = this;
     //innerAudioContext.stop();
@@ -417,6 +422,8 @@ Page({
       } else {
         this.save();
       }
+    } else if (event.detail.index === 2) {
+      this.copyId();
     }
     this.onClose();
   },
@@ -532,9 +539,11 @@ Page({
         icon: 'none',
         mask: true,
       });
-    let currentPage = getCurrentPages()[getCurrentPages().length - 1];
     setTimeout(function () {
-      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'idiom'
+      )
         wx.switchTab({
           url: '/pages/index/index',
         });

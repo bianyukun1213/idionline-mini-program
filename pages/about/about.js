@@ -42,9 +42,10 @@ Page({
       translations: getApp().globalData.translations,
     });
     getApp().setPageTitleTranslation('aboutPageTitle');
-    let pages = getCurrentPages();
-    let currentPage = pages[pages.length - 1];
-    if (currentPage.route.split('/')[2] === 'about') {
+    if (
+      getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+      'about'
+    ) {
       getApp().setTabBarTranslation();
     }
     let tmp = getApp().globalData.user.username;

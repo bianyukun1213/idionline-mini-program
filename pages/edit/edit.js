@@ -147,7 +147,7 @@ Page({
       //sessionId: this.data.sessionId,
     };
     let str = encodeURIComponent(JSON.stringify(json));
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/bson-edit/bson-edit?str=' + str,
     });
   },
@@ -231,7 +231,10 @@ Page({
     )
       getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
-      if (getCurrentPages()[getCurrentPages().length - 2] === prevPage)
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'edit'
+      )
         wx.navigateBack();
     }, 1500);
   },
@@ -264,15 +267,17 @@ Page({
       icon: 'none',
       mask: true,
     });
-    let pages = getCurrentPages();
-    let prevPage = pages[pages.length - 2];
-    let currentPage = pages[pages.length - 1];
     prevPage.setData({
       deleted: true,
     });
     getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
-      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+          'edit' ||
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+          'idiom'
+      )
         wx.switchTab({
           url: '/pages/index/index',
         });
@@ -292,9 +297,11 @@ Page({
         icon: 'none',
         mask: true,
       });
-    let currentPage = getCurrentPages()[getCurrentPages().length - 1];
     setTimeout(function () {
-      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'edit'
+      )
         wx.switchTab({
           url: '/pages/index/index',
         });

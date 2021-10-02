@@ -58,9 +58,11 @@ Page({
         icon: 'none',
         mask: true,
       });
-    let currentPage = getCurrentPages()[getCurrentPages().length - 1];
     setTimeout(function () {
-      if (currentPage === getCurrentPages()[getCurrentPages().length - 1])
+      if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'document'
+      )
         wx.switchTab({
           url: '/pages/about/about',
         });
