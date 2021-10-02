@@ -94,7 +94,7 @@ Page({
     });
     let pages = getCurrentPages();
     let prev2Page = pages[pages.length - 3];
-    if (prev2Page.route.split('/')[3] === 'idiom')
+    if (prev2Page.route.split('/')[2] === 'idiom')
       prev2Page.data.refresh = true;
     if (
       getApp().globalData.launchInfo.dailyIdiom !== null &&
