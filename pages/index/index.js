@@ -31,11 +31,7 @@ Page({
     shareIdiom: '',
     singlePage: false,
     dark: false,
-    options: [
-      { name: '', icon: 'wechat', openType: 'share' },
-      { name: '', icon: 'poster' },
-      { name: '', icon: 'link' },
-    ],
+    options: [],
   },
   //启动
   onLoad(para) {
@@ -70,7 +66,7 @@ Page({
         options: [
           {
             name: this.data.translations.indexSharingOption1,
-            icon: 'wechat',
+            icon: getApp().globalData.platform.tag === 'QQ' ? 'qq' : 'wechat',
             openType: 'share',
           },
           { name: this.data.translations.indexSharingOption2, icon: 'poster' },
@@ -88,7 +84,7 @@ Page({
         options: [
           {
             name: this.data.translations.indexSharingOption1,
-            icon: 'wechat',
+            icon: getApp().globalData.platform.tag === 'QQ' ? 'qq' : 'wechat',
             openType: 'share',
           },
           { name: this.data.translations.indexSharingOption2, icon: 'poster' },

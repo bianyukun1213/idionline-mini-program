@@ -36,6 +36,7 @@ App({
       this.globalData.platform.tag = 'WeChat';
       //this.globalData.platform.str = this.globalData.translations.appTextPlatformStringWechat;
     }
+    //this.globalData.platform.tag = 'QQ'; // 模拟 QQ。
   },
   onThemeChange() {
     COLOR.apl();

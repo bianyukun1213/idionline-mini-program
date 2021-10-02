@@ -13,12 +13,9 @@ function apl() {
   let reg = new RegExp(/^#[0-9a-fA-F]{6}$/);
   //目前除微信平台，设置导航栏颜色都有瑕疵。
   if (getApp().globalData.platform.tag === 'WeChat') {
+    let currentPageName = currentPage.route.split('/')[2];
     if (!reg.test(color)) color = '#008080';
     color = color.toLowerCase();
-    let currentPageName = currentPage.route.split('/')[2];
-    currentPage.setData({
-      color: color,
-    });
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: color,
@@ -33,7 +30,12 @@ function apl() {
         selectedColor: '#ffffff',
         backgroundColor: color,
       });
+  } else {
+    color = '#008080';
   }
+  currentPage.setData({
+    color: color,
+  });
 }
 
 module.exports.apl = apl;

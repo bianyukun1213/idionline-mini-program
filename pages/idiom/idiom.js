@@ -34,11 +34,7 @@ Page({
     filePath: '',
     singlePage: false,
     longinSucceed: false,
-    options: [
-      { name: '', icon: 'wechat', openType: 'share' },
-      { name: '', icon: 'poster' },
-      { name: '', icon: 'link' },
-    ],
+    options: [],
   },
   onLoad(option) {
     this.setData({ translations: getApp().globalData.translations });
@@ -46,7 +42,7 @@ Page({
       options: [
         {
           name: this.data.translations.idiomSharingOptionName1,
-          icon: 'wechat',
+          icon: getApp().globalData.platform.tag === 'QQ' ? 'qq' : 'wechat',
           openType: 'share',
         },
         {
