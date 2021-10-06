@@ -13,16 +13,18 @@ Page({
     username: '-',
   },
   onLoad() {
-    wx.onThemeChange((result) => {
-      if (result.theme === 'dark')
-        this.setData({
-          dark: true,
-        });
-      else
-        this.setData({
-          dark: false,
-        });
-    });
+    if (getApp().globalData.platform.tag === 'WeChat') {
+      wx.onThemeChange((result) => {
+        if (result.theme === 'dark')
+          this.setData({
+            dark: true,
+          });
+        else
+          this.setData({
+            dark: false,
+          });
+      });
+    }
     setInterval(this.refresh, 60000);
   },
   onShow() {

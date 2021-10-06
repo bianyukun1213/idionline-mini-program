@@ -35,16 +35,18 @@ Page({
   },
   //启动
   onLoad(para) {
-    wx.onThemeChange((result) => {
-      if (result.theme === 'dark')
-        this.setData({
-          dark: true,
-        });
-      else
-        this.setData({
-          dark: false,
-        });
-    });
+    if (getApp().globalData.platform.tag === 'WeChat') {
+      wx.onThemeChange((result) => {
+        if (result.theme === 'dark')
+          this.setData({
+            dark: true,
+          });
+        else
+          this.setData({
+            dark: false,
+          });
+      });
+    }
     if (wx.getLaunchOptionsSync().scene === 1154)
       this.setData({
         singlePage: true,

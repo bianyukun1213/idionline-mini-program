@@ -13,16 +13,18 @@ Page({
   onLoad() {
     this.setData({ translations: getApp().globalData.translations });
     getApp().setPageTitleTranslation('documentPageTitle');
-    wx.onThemeChange((result) => {
-      if (result.theme === 'dark')
-        this.setData({
-          overlayOn: true,
-        });
-      else
-        this.setData({
-          overlayOn: false,
-        });
-    });
+    if (getApp().globalData.platform.tag === 'WeChat') {
+      wx.onThemeChange((result) => {
+        if (result.theme === 'dark')
+          this.setData({
+            overlayOn: true,
+          });
+        else
+          this.setData({
+            overlayOn: false,
+          });
+      });
+    }
     if (wx.getLaunchOptionsSync().scene === 1154)
       this.setData({
         singlePage: true,

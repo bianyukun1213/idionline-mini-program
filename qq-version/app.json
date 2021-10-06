@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/selection/selection",
+    "pages/idiom/idiom",
+    "pages/favorites/favorites",
+    "pages/about/about",
+    "pages/registration/registration",
+    "pages/edit/edit",
+    "pages/bson-edit/bson-edit",
+    "pages/correction/correction",
+    "pages/debug/debug",
+    "pages/settings/settings",
+    "pages/document/document",
+    "pages/login/login"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/index-gray.png",
+        "selectedIconPath": "images/index.png"
+      },
+      {
+        "pagePath": "pages/favorites/favorites",
+        "text": "收藏",
+        "iconPath": "images/favorites-gray.png",
+        "selectedIconPath": "images/favorites.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于",
+        "iconPath": "images/about-gray.png",
+        "selectedIconPath": "images/about.png"
+      }
+    ],
+    "color": "#cccccc",
+    "selectedColor": "#ffffff",
+    "backgroundColor": "#008080",
+    "borderStyle": "white"
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#008080",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "light",
+    "backgroundColorTop": "#eeeeee",
+    "backgroundColorBottom": "#efefef",
+    "navigationBarTitleText": "成语在线",
+    "pageOrientation": "auto",
+    "onReachBottomDistance": 1
+  },
+  "resizable": true,
+  "sitemapLocation": "sitemap.json",
+  "darkmode": true,
+  "themeLocation": "theme.json"
+}

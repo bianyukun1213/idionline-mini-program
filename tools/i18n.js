@@ -1,6 +1,6 @@
 const TRANSLATIONS = {
   'zh-CN': {
-    appTextLocaleNameSystem: '跟随微信',
+    appTextLocaleNameSystem: '跟随平台',
     appPageTitle: '成语在线',
     appTabBarText1: '首页',
     appTabBarText2: '收藏',
@@ -13,7 +13,7 @@ const TRANSLATIONS = {
     toolsRequestToastTitleError: '错误：',
     toolsRequestToastTitleDataNotFound: '很抱歉，未查询到数据！',
     aboutTextPlatformStringQB: 'QQ 浏览器',
-    aboutTextPlatformStringQQ: 'QQ',
+    aboutTextPlatformStringQQ: 'QQ/Tim',
     aboutTextPlatformStringWeChat: '微信',
     aboutModalTitleWarning: '警告',
     aboutModalContentCleaning:
@@ -186,7 +186,7 @@ const TRANSLATIONS = {
       '项目使用多种方案尽可能实现繁体中文的本地化，无法保证质量与体验，请您谅解！',
   },
   'zh-HK': {
-    appTextLocaleNameSystem: '跟隨 WeChat',
+    appTextLocaleNameSystem: '跟隨平臺',
     appPageTitle: 'Idionline',
     appTabBarText1: '首頁',
     appTabBarText2: '收藏',
@@ -199,7 +199,7 @@ const TRANSLATIONS = {
     toolsRequestToastTitleError: '錯誤：',
     toolsRequestToastTitleDataNotFound: '很抱歉，未查詢到數據！',
     aboutTextPlatformStringQB: 'QQ 瀏覽器',
-    aboutTextPlatformStringQQ: 'QQ',
+    aboutTextPlatformStringQQ: 'QQ/Tim',
     aboutTextPlatformStringWeChat: 'WeChat',
     aboutModalTitleWarning: '警告',
     aboutModalContentCleaning:
@@ -372,7 +372,7 @@ const TRANSLATIONS = {
       '項目使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
   },
   'zh-TW': {
-    appTextLocaleNameSystem: '跟隨 WeChat',
+    appTextLocaleNameSystem: '跟隨平臺',
     appPageTitle: 'Idionline',
     appTabBarText1: '首頁',
     appTabBarText2: '收藏',
@@ -385,7 +385,7 @@ const TRANSLATIONS = {
     toolsRequestToastTitleError: '錯誤：',
     toolsRequestToastTitleDataNotFound: '很抱歉，未查詢到資料！',
     aboutTextPlatformStringQB: 'QQ 瀏覽器',
-    aboutTextPlatformStringQQ: 'QQ',
+    aboutTextPlatformStringQQ: 'QQ/Tim',
     aboutTextPlatformStringWeChat: 'WeChat',
     aboutModalTitleWarning: '警告',
     aboutModalContentCleaning:

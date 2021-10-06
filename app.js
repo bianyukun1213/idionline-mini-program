@@ -1,7 +1,7 @@
 const COLOR = require('tools/color.js');
 const I18N = require('tools/i18n.js');
 App({
-  towxml: require('/towxml/index'),
+  towxml: require('towxml/index'),
   globalData: {
     user: {},
     settings: {},
@@ -29,7 +29,7 @@ App({
     if (info.isQB) {
       this.globalData.platform.tag = 'QB';
       //this.globalData.platform.str = this.globalData.translations.appTextPlatformStringQB;
-    } else if (info.AppPlatform === 'qq') {
+    } else if (info.AppPlatform === 'qq' || info.AppPlatform === 'tim') {
       this.globalData.platform.tag = 'QQ';
       //this.globalData.platform.str = this.globalData.translations.appTextPlatformStringQQ;
     } else {
@@ -128,16 +128,22 @@ App({
     if (typeof this.globalData.translations.appTabBarText1 !== 'undefined')
       wx.setTabBarItem({
         index: 0,
+        iconPath: 'images/index-gray.png',
+        selectedIconPath: 'images/index.png',
         text: this.globalData.translations.appTabBarText1,
       });
     if (typeof this.globalData.translations.appTabBarText2 !== 'undefined')
       wx.setTabBarItem({
         index: 1,
+        iconPath: 'images/favorites-gray.png',
+        selectedIconPath: 'images/favorites.png',
         text: this.globalData.translations.appTabBarText2,
       });
     if (typeof this.globalData.translations.appTabBarText3 !== 'undefined')
       wx.setTabBarItem({
         index: 2,
+        iconPath: 'images/about-gray.png',
+        selectedIconPath: 'images/about.png',
         text: this.globalData.translations.appTabBarText3,
       });
   },
