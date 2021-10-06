@@ -1,6 +1,6 @@
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" wrapable text="{{translations.indexNoticeBarTextSinglePage}}" />
-	<van-notice-bar wx:if="{{text!==''&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
+	<van-notice-bar wx:if="{{text!==''&&text!==null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
 	<!-- <van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24"
 		placeholder="{{placeHolder}}" bind:search="onSearch" bind:clear="onClear" /> -->
 	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24"
