@@ -1,14 +1,14 @@
-const COLOR = require('tools/color.js');
-const I18N = require('tools/i18n.js');
+const COLOR = require('/tools/color.js');
+const I18N = require('/tools/i18n.js');
 App({
-  towxml: require('towxml/index'),
+  towxml: require('/towxml/index'),
   globalData: {
     user: {},
     settings: {},
     locale: '',
     translations: {},
     debugMode: false,
-    version: '1.52.1',
+    version: '1.52.2',
     platform: {
       tag: '',
       //str: '',

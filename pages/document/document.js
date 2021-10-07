@@ -25,10 +25,19 @@ Page({
           });
       });
     }
-    if (wx.getLaunchOptionsSync().scene === 1154)
-      this.setData({
-        singlePage: true,
+    if (wx.getLaunchOptionsSync().scene === 1154) {
+      let that = this;
+      wx.showNavigationBarLoading({
+        success: function () {
+          wx.hideNavigationBarLoading();
+        },
+        fail: function () {
+          that.setData({
+            singlePage: true,
+          });
+        },
       });
+    }
     INFO.getLaunchInfo(this.infoCallback);
     CALL.get({
       url: 'document',
@@ -86,19 +95,18 @@ Page({
     if (this.data.shareFlag) {
       return {
         title: this.data.translations.documentTextSharing,
-        imageUrl: '/icons/share.png',
       };
     }
-    return {
-      imageUrl: '/icons/share.png',
-      path: '/pages/index/index',
-    };
+    return {};
   },
   onShareTimeline() {
-    return {
-      title: this.data.translations.documentTextSharing,
-      imageUrl: '/icons/share.png',
-    };
+    console.log('尝试转发帮助文档页面');
+    if (this.data.shareFlag) {
+      return {
+        title: this.data.translations.documentTextSharing,
+      };
+    }
+    return {};
   },
   onReachBottom() {
     wx.vibrateShort();

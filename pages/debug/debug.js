@@ -4,10 +4,10 @@ Page({
   data: {
     translations: {},
     color: '',
-    fromSearch: false,
     showDebug: false,
     show: false,
     password: '',
+    debugModeOn: false,
     pages: [
       {
         route: '/pages/registration/registration',
@@ -17,28 +17,23 @@ Page({
         route: '/pages/login/login',
         isTabPage: false,
       },
-      {
-        route: '/pages/settings/settings',
-        isTabPage: false,
-      },
     ],
   },
   onLoad(options) {
-    this.setData({ translations: getApp().globalData.translations });
+    this.setData({
+      translations: getApp().globalData.translations,
+      debugModeOn: getApp().globalData.debugMode,
+    });
     getApp().setPageTitleTranslation('debugPageTitle');
-    if (options.fromSearch) {
+    if (this.data.debugModeOn || options.bypassVerification === 'true') {
       this.setData({
-        fromSearch: true,
+        showDebug: true,
       });
-      if (getApp().globalData.debugMode) {
-        this.setData({
-          showDebug: true,
-        });
-      }
-      return;
     }
-    this.onDebug();
-    this.startCounting();
+    if (options.enableDebug === 'true') {
+      this.onDebug();
+      this.startCounting();
+    }
   },
   onShow() {
     COLOR.apl();
@@ -67,9 +62,21 @@ Page({
       title: this.data.translations.debugToastTitleDebugOn,
       mask: true,
     });
+    this.setData({ debugModeOn: true });
     getApp().globalData.debugMode = true;
     getApp().globalData.refreshOnIndex = true;
     console.log('调试模式已开启：' + getApp().globalData.debugMode);
+  },
+  onDebugTurnOff() {
+    wx.vibrateShort();
+    wx.showToast({
+      title: this.data.translations.debugToastTitleDebugOff,
+      mask: true,
+    });
+    this.setData({ debugModeOn: false });
+    getApp().globalData.debugMode = false;
+    getApp().globalData.refreshOnIndex = true;
+    console.log('调试模式已关闭：' + getApp().globalData.debugMode);
   },
   onDebugClick() {
     wx.vibrateShort();

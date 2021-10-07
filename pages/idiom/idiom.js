@@ -55,10 +55,19 @@ Page({
         },
       ],
     });
-    if (wx.getLaunchOptionsSync().scene === 1154)
-      this.setData({
-        singlePage: true,
+    if (wx.getLaunchOptionsSync().scene === 1154) {
+      let that = this;
+      wx.showNavigationBarLoading({
+        success: function () {
+          wx.hideNavigationBarLoading();
+        },
+        fail: function () {
+          that.setData({
+            singlePage: true,
+          });
+        },
       });
+    }
     INFO.getLaunchInfo(this.callback);
     innerAudioContext = wx.createInnerAudioContext();
     innerAudioContext.onError(function callback(errCode) {
@@ -437,23 +446,21 @@ Page({
           this.data.translations.idiomTextSharing1 +
           this.data.name +
           this.data.translations.idiomTextSharing2,
-        imageUrl: '/images/sharing.png',
-        path: '/pages/idiom/idiom?id=' + this.data.id,
       };
     }
-    return {
-      imageUrl: '/images/sharing.png',
-      path: '/pages/index/index',
-    };
+    return {};
   },
   onShareTimeline() {
-    return {
-      title:
-        this.data.translations.idiomTextSharing1 +
-        this.data.name +
-        this.data.translations.idiomTextSharing2,
-      imageUrl: '/images/sharing.png',
-    };
+    console.log('尝试转发【' + this.data.name + '】');
+    if (this.data.shareFlag) {
+      return {
+        title:
+          this.data.translations.idiomTextSharing1 +
+          this.data.name +
+          this.data.translations.idiomTextSharing2,
+      };
+    }
+    return {};
   },
   onTTSTap(e) {
     if (innerAudioContext.paused) {

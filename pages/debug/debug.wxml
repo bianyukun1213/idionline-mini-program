@@ -1,9 +1,12 @@
 <view class="root">
     <view class="root" wx:if="{{showDebug}}">
         <text class="text">{{translations.debugTextOptions}}</text>
-        <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonEnableDebug}}"
+        <van-button class="btn" wx:if="{{!debugModeOn}}" aria-role="button" aria-label="{{translations.debugButtonEnableDebug}}"
             bind:click="onDebugClick" color="{{color}}">
             {{translations.debugButtonEnableDebug}}</van-button>
+        <van-button class="btn" wx:else aria-role="button" aria-label="{{translations.debugButtonDisableDebug}}"
+            bind:click="onDebugTurnOff" color="{{color}}">
+            {{translations.debugButtonDisableDebug}}</van-button>
         <text class="text">{{translations.debugTextPages}}</text>
         <view class="root" wx:for="{{pages}}" wx:key="index">
             <van-button class="btn" id="{{index}}" aria-role="button" aria-label="{{pages[index].route}}"

@@ -21,8 +21,14 @@
                 {
                     "name": "调试",
                     "pathName": "pages/debug/debug",
-                    "query": "",
+                    "query": "bypassVerification=true&enableDebug=true",
                     "scene": null
+                },
+                {
+                    "name": "单页模式",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "scene": 1154
                 }
             ]
         }

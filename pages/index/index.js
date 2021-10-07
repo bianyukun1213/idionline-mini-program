@@ -28,7 +28,7 @@ Page({
     idMode: false,
     indexMode: false,
     filePath: '',
-    shareIdiom: '',
+    sharedIdiom: '',
     singlePage: false,
     dark: false,
     options: [],
@@ -47,13 +47,22 @@ Page({
           });
       });
     }
-    if (wx.getLaunchOptionsSync().scene === 1154)
-      this.setData({
-        singlePage: true,
+    if (wx.getLaunchOptionsSync().scene === 1154) {
+      let that = this;
+      wx.showNavigationBarLoading({
+        success: function () {
+          wx.hideNavigationBarLoading();
+        },
+        fail: function () {
+          that.setData({
+            singlePage: true,
+          });
+        },
       });
+    }
     this.data.scene = decodeURIComponent(para.scene);
-    if (para.showDailyIdiom) this.data.showDailyIdiom = true;
-    this.data.shareIdiom = para.shareIdiom;
+    if (para.showDailyIdiom === 'true') this.data.showDailyIdiom = true;
+    this.data.sharedIdiom = para.sharedIdiom;
     console.log('页面参数：', para);
     INFO.getLaunchInfo(this.callback);
   },
@@ -62,6 +71,8 @@ Page({
       translations: getApp().globalData.translations,
     });
     getApp().setTabBarTranslation();
+    getApp().setPageTitleTranslation('appPageTitle');
+    COLOR.apl();
     if (Object.keys(getApp().globalData.launchInfo).length === 0) {
       this.setData({
         //placeHolder: this.data.translations.indexPlaceholderSearch,
@@ -94,8 +105,6 @@ Page({
         ],
       });
     }
-    getApp().setPageTitleTranslation('appPageTitle');
-    COLOR.apl();
     if (wx.getSystemInfoSync().theme === 'dark')
       this.setData({
         dark: true,
@@ -281,7 +290,7 @@ Page({
           showPopup: true,
         });
         wx.vibrateShort();
-        if (this.data.shareIdiom !== this.data.idiId)
+        if (this.data.sharedIdiom !== this.data.idiId)
           wx.showToast({
             title: this.data.translations.indexToastTitleDailyIdiomChanged,
             icon: 'none',
@@ -304,7 +313,7 @@ Page({
     this.setData({ value: e.detail });
     if (val === 'debug') {
       wx.navigateTo({
-        url: '/pages/debug/debug?fromSearch=true',
+        url: '/pages/debug/debug',
       });
       return;
     }
@@ -576,28 +585,22 @@ Page({
       let date = FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
-        imageUrl: '/images/sharing.png',
         path:
-          '/pages/index/index?showDailyIdiom=true&shareIdiom=' +
+          '/pages/index/index?showDailyIdiom=true&sharedIdiom=' +
           this.data.idiId,
       };
     }
-    return {
-      imageUrl: '/images/sharing.png',
-    };
+    return {};
   },
   onShareTimeline() {
     if (this.data.idiId !== '') {
       let date = FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
-        imageUrl: '/images/sharing.png',
-        query: 'showDailyIdiom=true&shareIdiom=' + this.data.idiId,
+        query: 'showDailyIdiom=true&sharedIdiom=' + this.data.idiId,
       };
     }
-    return {
-      imageUrl: '/images/sharing.png',
-    };
+    return {};
   },
   onNavi() {
     wx.vibrateShort();
