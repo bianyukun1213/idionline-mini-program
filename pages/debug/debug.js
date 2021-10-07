@@ -110,4 +110,10 @@ Page({
       });
     }
   },
+  onConfirm() {
+    wx.vibrateShort();
+  },
+  onClear() {
+    wx.vibrateShort();
+  },
 });
