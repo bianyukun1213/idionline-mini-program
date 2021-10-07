@@ -2,6 +2,7 @@ const CALL = require('../../tools/request.js');
 const FORMAT = require('../../tools/format.js');
 const COLOR = require('../../tools/color.js');
 const INFO = require('../../tools/info.js');
+const STTRANSLATION = require('../../tools/sTTranslation.js');
 let innerAudioContext;
 Page({
   data: {
@@ -271,8 +272,12 @@ Page({
   },
   onSolitaire() {
     wx.vibrateShort();
+    let str = this.data.name;
+    if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
+      str = STTRANSLATION.simplized(str);
+    }
     CALL.get({
-      url: 'idiom/playsolitaire/' + this.data.name,
+      url: 'idiom/playsolitaire/' + str,
       doSuccess: this.doneSolitaire,
       exHandler: this.exHandlerS,
     });

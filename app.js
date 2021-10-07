@@ -17,7 +17,9 @@ App({
     refreshOnIndex: false,
   },
   onLaunch() {
-    this.globalData.user = wx.getStorageSync('user') || {};
+    this.globalData.user = this.globalData.debugMode
+      ? wx.getStorageSync('userDebug') || {}
+      : wx.getStorageSync('userProduction') || {};
     let info = wx.getSystemInfoSync();
     this.setLocale(info);
     this.setPlatformStr(info);
@@ -147,4 +149,25 @@ App({
         text: this.globalData.translations.appTabBarText3,
       });
   },
+  setDebug(value) {
+    if (value === true) {
+      this.globalData.debugMode = true;
+      this.globalData.user = wx.getStorageSync('userDebug') || {};
+    } else {
+      this.globalData.debugMode = false;
+      this.globalData.user = wx.getStorageSync('userProduction') || {};
+    }
+  },
+  setUserInfo(data) {
+    if (this.globalData.debugMode === true) {
+      wx.setStorageSync('userDebug', data);
+    } else {
+      wx.setStorageSync('userProduction', data);
+    }
+    this.globalData.user = data;
+  },
+  // clearUserInfo() {
+  //   this.globalData.user = {};
+  //   wx.setStorageSync('user', this.globalData.user);
+  // },
 });

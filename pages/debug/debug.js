@@ -63,8 +63,10 @@ Page({
       mask: true,
     });
     this.setData({ debugModeOn: true });
-    getApp().globalData.debugMode = true;
+    getApp().setDebug(true);
+    //getApp().globalData.debugMode = true;
     getApp().globalData.refreshOnIndex = true;
+    //getApp().clearUserInfo();
     console.log('调试模式已开启：' + getApp().globalData.debugMode);
   },
   onDebugTurnOff() {
@@ -74,13 +76,16 @@ Page({
       mask: true,
     });
     this.setData({ debugModeOn: false });
-    getApp().globalData.debugMode = false;
+    getApp().setDebug(false);
+    //getApp().globalData.debugMode = false;
     getApp().globalData.refreshOnIndex = true;
+    //getApp().clearUserInfo();
     console.log('调试模式已关闭：' + getApp().globalData.debugMode);
   },
   onDebugClick() {
+    let that = this;
     wx.vibrateShort();
-    this.onDebug();
+    that.onDebug();
   },
   onChange(event) {
     if (event.detail === '') {
