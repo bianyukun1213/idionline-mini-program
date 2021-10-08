@@ -285,17 +285,20 @@ Page({
           }
         }
       }
-      if (this.data.showDailyIdiom && this.data.idiId !== '') {
-        this.setData({
-          showPopup: true,
-        });
-        wx.vibrateShort();
-        if (this.data.sharedIdiom !== this.data.idiId)
-          wx.showToast({
-            title: this.data.translations.indexToastTitleDailyIdiomChanged,
-            icon: 'none',
-            mask: true,
+      if (this.data.showDailyIdiom) {
+        this.data.showDailyIdiom = false;
+        if (this.data.idiId !== '') {
+          this.setData({
+            showPopup: true,
           });
+          wx.vibrateShort();
+          if (this.data.sharedIdiom !== this.data.idiId)
+            wx.showToast({
+              title: this.data.translations.indexToastTitleDailyIdiomChanged,
+              icon: 'none',
+              mask: true,
+            });
+        }
       }
     }
   },
