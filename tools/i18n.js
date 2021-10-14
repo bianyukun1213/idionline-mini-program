@@ -254,6 +254,7 @@ const TRANSLATIONS = {
     debugButtonConfirm: '確定',
     documentToastTitleError: '錯誤：',
     documentTextSharing: '點擊查看幫助文檔',
+    documentTextInvalidSharing: '無效的分享',
     documentPageTitle: '幫助文檔',
     documentNoticeBarTextSinglePage:
       '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
@@ -306,6 +307,7 @@ const TRANSLATIONS = {
     idiomTextPartial: '（部分）',
     idiomTextSharing1: '點擊查看【',
     idiomTextSharing2: '】的釋義',
+    idiomTextInvalidSharing: '無效的分享',
     idiomToastTitleMoreFeatures: '更多功能需前往小程序使用！',
     idiomToastTitleError: '錯誤：',
     idiomToastTitleSolitaireUnavailable: '未找到可接龍成語！',
@@ -377,7 +379,7 @@ const TRANSLATIONS = {
     settingsNoticeBarTextWarning:
       '項目使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
   },
-  'zh-TW': {
+  'zh-HK': {
     appTextLocaleNameSystem: '跟隨平臺',
     appPageTitle: 'Idionline',
     appTabBarText1: '首頁',
@@ -442,6 +444,7 @@ const TRANSLATIONS = {
     debugButtonConfirm: '確定',
     documentToastTitleError: '錯誤：',
     documentTextSharing: '點選檢視幫助文件',
+    documentTextInvalidSharing: '無效的分享',
     documentPageTitle: '幫助文件',
     documentNoticeBarTextSinglePage:
       '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
@@ -494,6 +497,7 @@ const TRANSLATIONS = {
     idiomTextPartial: '（部分）',
     idiomTextSharing1: '點選檢視【',
     idiomTextSharing2: '】的釋義',
+    idiomTextInvalidSharing: '無效的分享',
     idiomToastTitleMoreFeatures: '更多功能需前往小程式使用！',
     idiomToastTitleError: '錯誤：',
     idiomToastTitleSolitaireUnavailable: '未找到可接龍成語！',
