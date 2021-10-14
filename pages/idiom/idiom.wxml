@@ -33,7 +33,7 @@
 								<block wx:for="{{defTexts[index]}}" wx:key="index">
 									<text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
 										style="text-decoration:underline;font-weight:bold;color:{{color}};display:inline;"
-										bind:tap="onClick">{{item.text}}</text>
+										bind:tap="onClick">〖{{item.text}}〗</text>
 									<text class="text" wx:else
 										style="font-weight:bold;color:red;display:inline;">{{item.text}}</text>
 								</block>
@@ -42,7 +42,7 @@
 								<block wx:for="{{defTexts[index]}}" wx:key="index">
 									<text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
 										style="text-decoration:underline;color:{{color}};display:inline;"
-										bind:tap="onClick">{{item.text}}</text>
+										bind:tap="onClick">〖{{item.text}}〗</text>
 									<text class="text" wx:else style="display:inline;">{{item.text}}</text>
 								</block>
 							</block>

@@ -142,7 +142,7 @@ Page({
         if (el.startsWith('{link:')) {
           let id = el.replace('{link:', '').replace('}', '');
           textsTmp[data.definitions.indexOf(element)].push({
-            text: '〖' + element.links[id] + '〗',
+            text: element.links[id],
             isLink: true,
             id: id,
           });

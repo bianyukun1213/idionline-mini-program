@@ -1,8 +1,7 @@
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" wrapable text="{{translations.indexNoticeBarTextSinglePage}}" />
-	<van-notice-bar wx:if="{{text!==''&&text!==null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
-	<!-- <van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24"
-		placeholder="{{placeHolder}}" bind:search="onSearch" bind:clear="onClear" /> -->
+	<van-notice-bar wx:if="{{text!==''&&text!==null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose"
+		text="{{text}}" />
 	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24"
 		bind:search="onSearch" bind:clear="onClear" />
 	<image wx:if="{{dark}}" class="logo" src="../../images/idionline-dark.png" mode="aspectFit" />
@@ -28,34 +27,16 @@
 						</van-col>
 						<van-col span="18">
 							<view id="text-{{index}}" style="text-align:right;" bind:longpress="onCopy">
-								<!-- <block wx:if="{{item.isBold}}">
-									<block wx:for="{{defTexts[index]}}" wx:key="index">
-										<text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
-											style=text-decoration:underline;font-weight:bold;color:{{color}};display:inline;"
-											bind:tap="onClick">{{item.text}}</text>
-										<text class="text" wx:else
-											style="font-weight:bold;color:red;display:inline;">{{item.text}}</text>
-									</block>
-								</block> -->
-								<!--<block wx:else>-->
 								<block>
 									<block wx:for="{{defTexts[index]}}" wx:key="index">
-										<text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
+										<!-- <text class="text" id="{{item.id}}-{{index}}" wx:if="{{item.isLink}}"
 											style="text-decoration:underline;color:{{color}};display:inline;"
-											bind:tap="onClick">{{item.text}}</text>
-										<text class="text" wx:else style="display:inline;">{{item.text}}</text>
+											bind:tap="onClick">〖{{item.text}}〗</text>
+										<text class="text" wx:else style="display:inline;">{{item.text}}</text> -->
+										<text class="text" style="display:inline;">{{item.text}}</text>
 									</block>
 								</block>
 							</view>
-							<!-- <block wx:if="{{item.examples.length!==0}}">
-								<text class="text" wx:for="{{item.examples}}" wx:key="index"
-									style="margin-top:10px;font-size:12px;color:{{color}};">例句
-									{{index+1}}：{{item}}</text>
-							</block> -->
-							<!-- <block wx:if="{{item.addition!==null}}">
-								<text class="text"
-									style="margin-top:10px;font-size:12px;color:{{color}};">注：{{item.addition}}</text>
-							</block> -->
 						</van-col>
 					</van-row>
 					<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};"

@@ -75,7 +75,6 @@ Page({
     COLOR.apl();
     if (Object.keys(getApp().globalData.launchInfo).length === 0) {
       this.setData({
-        //placeHolder: this.data.translations.indexPlaceholderSearch,
         options: [
           {
             name: this.data.translations.indexSharingOption1,
@@ -88,12 +87,6 @@ Page({
       });
     } else {
       this.setData({
-        // placeHolder:
-        //   this.data.translations.indexPlaceholderSearch1 +
-        //   ' ' +
-        //   getApp().globalData.launchInfo.idiomsCount +
-        //   ' ' +
-        //   this.data.translations.indexPlaceholderSearch2,
         options: [
           {
             name: this.data.translations.indexSharingOption1,
@@ -196,12 +189,6 @@ Page({
     let launchInfo = getApp().globalData.launchInfo;
     this.setData({
       text: launchInfo.text,
-      // placeHolder:
-      //   this.data.translations.indexPlaceholderSearch1 +
-      //   ' ' +
-      //   launchInfo.idiomsCount +
-      //   ' ' +
-      //   this.data.translations.indexPlaceholderSearch2,
     });
     if (launchInfo.dailyIdiom !== null) {
       this.setData({ defTexts: [] });
@@ -221,7 +208,7 @@ Page({
           if (el.startsWith('{link:')) {
             let id = el.replace('{link:', '').replace('}', '');
             textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)].push({
-              text: '〖' + element.links[id] + '〗',
+              text: element.links[id],
               isLink: true,
               id: id,
             });
