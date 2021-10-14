@@ -379,7 +379,7 @@ const TRANSLATIONS = {
     settingsNoticeBarTextWarning:
       '項目使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
   },
-  'zh-HK': {
+  'zh-TW': {
     appTextLocaleNameSystem: '跟隨平臺',
     appPageTitle: 'Idionline',
     appTabBarText1: '首頁',

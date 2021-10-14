@@ -8,7 +8,7 @@ App({
     locale: '',
     translations: {},
     debugMode: false,
-    version: '1.52.5',
+    version: '1.52.6',
     platform: {
       tag: '',
       //str: '',
