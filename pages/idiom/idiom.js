@@ -451,9 +451,13 @@ Page({
           this.data.translations.idiomTextSharing1 +
           this.data.name +
           this.data.translations.idiomTextSharing2,
+        imageUrl: '/images/sharing.png',
       };
     }
-    return {};
+    return {
+      title: this.data.translations.idiomTextInvalidSharing,
+      imageUrl: '/images/sharing.png',
+    };
   },
   onShareTimeline() {
     console.log('尝试转发【' + this.data.name + '】');
@@ -463,9 +467,13 @@ Page({
           this.data.translations.idiomTextSharing1 +
           this.data.name +
           this.data.translations.idiomTextSharing2,
+        imageUrl: '/images/favorites-timeline.png',
       };
     }
-    return {};
+    return {
+      title: this.data.translations.idiomTextInvalidSharing,
+      imageUrl: '/images/favorites-timeline.png',
+    };
   },
   onTTSTap(e) {
     if (innerAudioContext.paused) {
@@ -590,5 +598,10 @@ Page({
   },
   onReachBottom() {
     wx.vibrateShort();
+  },
+  onAddToFavorites() {
+    return {
+      imageUrl: '/images/favorites-timeline.png',
+    };
   },
 });

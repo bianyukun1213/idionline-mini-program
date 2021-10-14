@@ -95,20 +95,33 @@ Page({
     if (this.data.shareFlag) {
       return {
         title: this.data.translations.documentTextSharing,
+        imageUrl: '/images/sharing.png',
       };
     }
-    return {};
+    return {
+      title: this.data.translations.documentTextInvalidSharing,
+      imageUrl: '/images/sharing.png',
+    };
   },
   onShareTimeline() {
     console.log('尝试转发帮助文档页面');
     if (this.data.shareFlag) {
       return {
         title: this.data.translations.documentTextSharing,
+        imageUrl: '/images/favorites-timeline.png',
       };
     }
-    return {};
+    return {
+      title: this.data.translations.documentTextInvalidSharing,
+      imageUrl: '/images/favorites-timeline.png',
+    };
   },
   onReachBottom() {
     wx.vibrateShort();
+  },
+  onAddToFavorites() {
+    return {
+      imageUrl: '/images/favorites-timeline.png',
+    };
   },
 });

@@ -1,6 +1,6 @@
 {
   "name": "idionline-mini-program",
-  "version": "1.52.4",
+  "version": "1.52.5",
   "description": "成语在线小程序",
   "main": "app.js",
   "dependencies": {

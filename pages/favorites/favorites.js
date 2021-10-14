@@ -116,4 +116,9 @@ Page({
   onReachBottom() {
     wx.vibrateShort();
   },
+  onAddToFavorites() {
+    return {
+      imageUrl: '/images/favorites-timeline.png',
+    };
+  },
 });

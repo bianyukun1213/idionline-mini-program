@@ -50,4 +50,9 @@ Page({
   onClear() {
     wx.vibrateShort();
   },
+  onAddToFavorites() {
+    return {
+      imageUrl: '/images/favorites-timeline.png',
+    };
+  },
 });

@@ -64,6 +64,7 @@ const TRANSLATIONS = {
     debugButtonConfirm: '确定',
     documentToastTitleError: '错误：',
     documentTextSharing: '点击查看帮助文档',
+    documentTextInvalidSharing: '无效的分享',
     documentPageTitle: '帮助文档',
     documentNoticeBarTextSinglePage:
       '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
@@ -116,6 +117,7 @@ const TRANSLATIONS = {
     idiomTextPartial: '（部分）',
     idiomTextSharing1: '点击查看【',
     idiomTextSharing2: '】的释义',
+    idiomTextInvalidSharing: '无效的分享',
     idiomToastTitleMoreFeatures: '更多功能需前往小程序使用！',
     idiomToastTitleError: '错误：',
     idiomToastTitleSolitaireUnavailable: '未找到可接龙成语！',

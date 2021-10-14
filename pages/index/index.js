@@ -588,22 +588,30 @@ Page({
       let date = FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
+        imageUrl: '/images/sharing.png',
         path:
           '/pages/index/index?showDailyIdiom=true&sharedIdiom=' +
           this.data.idiId,
       };
     }
-    return {};
+    return {
+      title: this.data.translations.appPageTitle,
+      imageUrl: '/images/sharing.png',
+    };
   },
   onShareTimeline() {
     if (this.data.idiId !== '') {
       let date = FORMAT.formatDate(getApp().globalData.launchInfo.dateUT, true);
       return {
         title: date + '：【' + this.data.idiName + '】',
+        imageUrl: '/images/favorites-timeline.png',
         query: 'showDailyIdiom=true&sharedIdiom=' + this.data.idiId,
       };
     }
-    return {};
+    return {
+      title: this.data.translations.appPageTitle,
+      imageUrl: '/images/favorites-timeline.png',
+    };
   },
   onNavi() {
     wx.vibrateShort();
@@ -629,5 +637,10 @@ Page({
   },
   onClear() {
     wx.vibrateShort();
+  },
+  onAddToFavorites() {
+    return {
+      imageUrl: '/images/favorites-timeline.png',
+    };
   },
 });

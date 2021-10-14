@@ -367,4 +367,9 @@ Page({
         },
       });
   },
+  onAddToFavorites() {
+    return {
+      imageUrl: '/images/favorites-timeline.png',
+    };
+  },
 });
