@@ -231,9 +231,10 @@ Page({
   onClickTag(e) {
     wx.vibrateShort();
     innerAudioContext.stop();
-    // wx.redirectTo({
-    //   url: '/pages/idiom/idiom?id=' + e.currentTarget.id.split('-')[0],
-    // });
+    let value = '标签：' + this.data.tags[e.currentTarget.id.split('-')[1]];
+    wx.setClipboardData({
+      data: value,
+    });
   },
   onCollect() {
     wx.vibrateShort();
