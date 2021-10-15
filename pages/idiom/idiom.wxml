@@ -6,8 +6,9 @@
 		<view class="content">
 			<block wx:if="{{tags.length!==0}}">
 				<view class="tags">
-					<van-tag id="tag-{{index}}" class="tag" wx:for="{{tags}}" wx:key="index" plain color="{{color}}"
-						bind:tap="onClickTag">
+					<!-- <van-tag id="tag-{{index}}" class="tag" wx:for="{{tags}}" wx:key="index" plain color="{{color}}"
+						bind:tap="onClickTag"> -->
+					<van-tag id="tag-{{index}}" class="tag" wx:for="{{tags}}" wx:key="index" plain color="{{color}}">
 						{{item}}
 					</van-tag>
 				</view>

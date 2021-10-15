@@ -110,7 +110,8 @@ Page({
       INFO.getLaunchInfo(this.callback, true);
       getApp().globalData.refreshOnIndex = false;
     }
-    let reg = new RegExp(/^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]{4}))$/); //汉字。
+    // let reg = new RegExp(/^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]{4}))$/); //汉字。
+    let reg = new RegExp(/^([\u4e00-\u9fa5]{4})$/); //汉字。
     let regS = new RegExp(/(「|【)[\u4e00-\u9fa5]{4}(」|】)/); //小冰成语接龙。
     let regId = new RegExp(/^[0-9a-zA-Z]{24}$/);
     let that = this;
@@ -310,7 +311,8 @@ Page({
     this.data.idMode = false;
     this.data.indexMode = false;
     let reg = new RegExp(
-      /^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?))$/
+      // /^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?))$/
+      /^([\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?)$/
     ); //汉字。
     let reg2 = new RegExp(/^[0-9a-zA-Z]{24}/);
     let reg3 = new RegExp(/^[A-Za-z]$/);
