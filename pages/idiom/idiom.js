@@ -8,7 +8,7 @@ Page({
   data: {
     translations: {},
     refresh: false,
-    deleted: false,
+    //deleted: false,
     platform: '',
     color: '',
     id: '',
@@ -89,10 +89,10 @@ Page({
   },
   onShow() {
     COLOR.apl();
-    if (this.data.deleted)
-      wx.switchTab({
-        url: '/pages/index/index',
-      });
+    // if (this.data.deleted)
+    //   wx.switchTab({
+    //     url: '/pages/index/index',
+    //   });
     if (this.data.refresh) {
       this.refresh();
       this.data.refresh = false;

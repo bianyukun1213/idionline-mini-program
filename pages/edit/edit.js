@@ -267,9 +267,9 @@ Page({
       icon: 'none',
       mask: true,
     });
-    prevPage.setData({
-      deleted: true,
-    });
+    // prevPage.setData({
+    //   deleted: true,
+    // });
     getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (
