@@ -1,13 +1,10 @@
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" wrapable text="{{translations.indexNoticeBarTextSinglePage}}" />
-	<van-notice-bar wx:if="{{text!==''&&text!==null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose"
-		text="{{text}}" />
-	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24"
-		bind:search="onSearch" bind:clear="onClear" />
+	<van-notice-bar wx:if="{{text!==''&&text!==null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
+	<van-search wx:if="{{!singlePage}}" shape="round" input-align="center" value="{{value}}" maxlength="24" bind:search="onSearch" bind:clear="onClear" />
 	<image wx:if="{{dark}}" class="logo" src="../../images/idionline-dark.png" mode="aspectFit" />
 	<image wx:else class="logo" src="{{logoUrl}}" mode="aspectFit" />
-	<van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove"
-		bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel" bind:close="onPopupClose">
+	<van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel" bind:close="onPopupClose">
 		<view class="root">
 			<van-cell title="【{{idiName}}】{{pinyin}}" />
 			<view class="content">
@@ -33,33 +30,28 @@
 											style="text-decoration:underline;color:{{color}};display:inline;"
 											bind:tap="onClick">〖{{item.text}}〗</text>
 										<text class="text" wx:else style="display:inline;">{{item.text}}</text> -->
-										<text class="text" style="display:inline;">{{item.text}}</text>
+										<text class="text" wx:if="{{item.isLink}}" style="display:inline;">〖{{item.text}}〗</text>
+										<text class="text" wx:else style="display:inline;">{{item.text}}</text>
 									</block>
 								</block>
 							</view>
 						</van-col>
 					</van-row>
-					<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};"
-						wx:if="{{index<defsLess.length-1}}" />
+					<van-divider customStyle="margin-top:10px;margin-bottom:10px;border-color:{{color}};" wx:if="{{index<defsLess.length-1}}" />
 				</view>
 			</view>
 			<view class="footer">
-				<van-button wx:if="{{defs.length===1}}" class="btn-func" disabled="{{singlePage}}" aria-role="button"
-					aria-label="{{translations.indexButtonViewIdiom}}" color="{{color}}" bind:click="onNavi">
+				<van-button wx:if="{{defs.length===1}}" class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="{{translations.indexButtonViewIdiom}}" color="{{color}}" bind:click="onNavi">
 					{{translations.indexButtonViewIdiom}}</van-button>
-				<van-button wx:else class="btn-func" disabled="{{singlePage}}" aria-role="button"
-					aria-label="{{translations.indexButtonViewIdiomWhole}}" color="{{color}}" bind:click="onNavi">
+				<van-button wx:else class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="{{translations.indexButtonViewIdiomWhole}}" color="{{color}}" bind:click="onNavi">
 					{{translations.indexButtonViewIdiomWhole}}</van-button>
-				<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button"
-					aria-label="{{translations.indexButtonShare}}" color="{{color}}" bind:click="onShare">
+				<van-button class="btn-func" disabled="{{singlePage}}" aria-role="button" aria-label="{{translations.indexButtonShare}}" color="{{color}}" bind:click="onShare">
 					{{translations.indexButtonShare}}</van-button>
 			</view>
 		</view>
-		<van-share-sheet show="{{show}}" title="{{translations.indexTextSharingTitle}}" options="{{options}}"
-			cancel-text="{{translations.indexTextSharingCancelText}}" bind:select="onSelect" bind:close="onClose" />
+		<van-share-sheet show="{{show}}" title="{{translations.indexTextSharingTitle}}" options="{{options}}" cancel-text="{{translations.indexTextSharingCancelText}}" bind:select="onSelect" bind:close="onClose" />
 	</van-popup>
-	<view class="slide" wx:if="{{idiName!==''}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove"
-		bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
+	<view class="slide" wx:if="{{idiName!==''}}" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel">
 		<van-icon class="icon-bottom" name="arrow-up" />
 	</view>
 	<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />
