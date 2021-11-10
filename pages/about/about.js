@@ -51,10 +51,10 @@ Page({
       getApp().setTabBarTranslation();
     }
     let tmp = getApp().globalData.user.username;
-    tmp = typeof tmp === 'undefined' ? '-' : tmp;
-    let version = getApp().globalData.debugMode
-      ? getApp().globalData.version + ' [DEBUG]'
-      : getApp().globalData.version;
+    tmp = typeof tmp === 'undefined' ? '-' : (getApp().globalData.debugMode ? tmp + ' [DEBUG]' : tmp);
+    let version = getApp().globalData.debugMode ?
+      getApp().globalData.version + ' [DEBUG]' :
+      getApp().globalData.version;
     let lang = getApp().getLocale();
     switch (lang) {
       case 'zh-CN':
@@ -89,7 +89,7 @@ Page({
     });
     if (Object.keys(getApp().globalData.launchInfo).length !== 0)
       this.setData({
-        apiVer: getApp().globalData.launchInfo.version,
+        apiVer: getApp().globalData.debugMode ? getApp().globalData.launchInfo.version + ' [DEBUG]' : getApp().globalData.launchInfo.version,
       });
   },
   onClean() {
@@ -136,8 +136,7 @@ Page({
   onCopyInfo() {
     wx.vibrateShort();
     wx.setClipboardData({
-      data:
-        '用户名：' +
+      data: '用户名：' +
         this.data.username +
         '\n当前语言：' +
         this.data.language +

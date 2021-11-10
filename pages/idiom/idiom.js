@@ -38,10 +38,11 @@ Page({
     options: [],
   },
   onLoad(option) {
-    this.setData({ translations: getApp().globalData.translations });
     this.setData({
-      options: [
-        {
+      translations: getApp().globalData.translations
+    });
+    this.setData({
+      options: [{
           name: this.data.translations.idiomSharingOptionName1,
           icon: getApp().globalData.platform.tag === 'QQ' ? 'qq' : 'wechat',
           openType: 'share',
@@ -93,6 +94,10 @@ Page({
     //   wx.switchTab({
     //     url: '/pages/index/index',
     //   });
+    if (this.data.name !== '')
+      wx.setNavigationBarTitle({
+        title: '【' + this.data.name + '】',
+      });
     if (this.data.refresh) {
       this.refresh();
       this.data.refresh = false;
@@ -122,10 +127,16 @@ Page({
     COLOR.apl();
   },
   fillData(data) {
-    wx.setNavigationBarTitle({
-      title: '【' + data.name + '】',
+    if (
+      getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+      'idiom'
+    )
+      wx.setNavigationBarTitle({
+        title: '【' + data.name + '】',
+      });
+    this.setData({
+      defTexts: []
     });
-    this.setData({ defTexts: [] });
     let textsTmp = [];
     data.definitions.forEach((element) => {
       textsTmp[data.definitions.indexOf(element)] = [];
@@ -184,18 +195,17 @@ Page({
     if (data.origin !== null)
       this.setData({
         origin: data.origin,
-        ori:
-          this.data.translations.idiomTextOriginateFrom +
+        ori: this.data.translations.idiomTextOriginateFrom +
           '《' +
           data.origin
-            .replace('《', '{左单书名号}')
-            .replace('》', '{右单书名号}')
-            .replace('〈', '{左双书名号}')
-            .replace('〉', '{右双书名号}')
-            .replace('{左单书名号}', '〈')
-            .replace('{右单书名号}', '〉')
-            .replace('{左双书名号}', '《')
-            .replace('{右双书名号}', '》') +
+          .replace('《', '{左单书名号}')
+          .replace('》', '{右单书名号}')
+          .replace('〈', '{左双书名号}')
+          .replace('〉', '{右双书名号}')
+          .replace('{左单书名号}', '〈')
+          .replace('{右单书名号}', '〉')
+          .replace('{左双书名号}', '《')
+          .replace('{右双书名号}', '》') +
           '》，',
       });
     else
@@ -389,8 +399,7 @@ Page({
           painting: {
             width: 1080,
             height: 1440,
-            views: [
-              {
+            views: [{
                 type: 'image',
                 url: '/images/sharing-pic.png',
                 width: 1080,
@@ -448,8 +457,7 @@ Page({
     console.log('尝试转发【' + this.data.name + '】');
     if (this.data.shareFlag) {
       return {
-        title:
-          this.data.translations.idiomTextSharing1 +
+        title: this.data.translations.idiomTextSharing1 +
           this.data.name +
           this.data.translations.idiomTextSharing2,
         imageUrl: '/images/sharing.png',
@@ -464,8 +472,7 @@ Page({
     console.log('尝试转发【' + this.data.name + '】');
     if (this.data.shareFlag) {
       return {
-        title:
-          this.data.translations.idiomTextSharing1 +
+        title: this.data.translations.idiomTextSharing1 +
           this.data.name +
           this.data.translations.idiomTextSharing2,
         imageUrl: '/images/favorites-timeline.png',

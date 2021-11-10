@@ -15,7 +15,6 @@ Page({
     defs: [],
     defsLess: [],
     defTexts: [],
-    //placeHolder: '',
     value: '',
     compValue: '',
     historyValue: [],
@@ -75,26 +74,36 @@ Page({
     COLOR.apl();
     if (Object.keys(getApp().globalData.launchInfo).length === 0) {
       this.setData({
-        options: [
-          {
+        options: [{
             name: this.data.translations.indexSharingOption1,
             icon: getApp().globalData.platform.tag === 'QQ' ? 'qq' : 'wechat',
             openType: 'share',
           },
-          { name: this.data.translations.indexSharingOption2, icon: 'poster' },
-          { name: this.data.translations.indexSharingOption3, icon: 'link' },
+          {
+            name: this.data.translations.indexSharingOption2,
+            icon: 'poster'
+          },
+          {
+            name: this.data.translations.indexSharingOption3,
+            icon: 'link'
+          },
         ],
       });
     } else {
       this.setData({
-        options: [
-          {
+        options: [{
             name: this.data.translations.indexSharingOption1,
             icon: getApp().globalData.platform.tag === 'QQ' ? 'qq' : 'wechat',
             openType: 'share',
           },
-          { name: this.data.translations.indexSharingOption2, icon: 'poster' },
-          { name: this.data.translations.indexSharingOption3, icon: 'link' },
+          {
+            name: this.data.translations.indexSharingOption2,
+            icon: 'poster'
+          },
+          {
+            name: this.data.translations.indexSharingOption3,
+            icon: 'link'
+          },
         ],
       });
     }
@@ -137,14 +146,13 @@ Page({
         } else if (regS.test(str)) {
           wx.vibrateShort();
           CALL.get({
-            url:
-              'idiom/playsolitaire/' +
+            url: 'idiom/playsolitaire/' +
               regS
-                .exec(str)[0]
-                .replace('「', '')
-                .replace('」', '')
-                .replace('【', '')
-                .replace('】', ''),
+              .exec(str)[0]
+              .replace('「', '')
+              .replace('」', '')
+              .replace('【', '')
+              .replace('】', ''),
             doSuccess: that.doneSolitaire,
             exHandler: that.exHandlerS,
           });
@@ -192,7 +200,9 @@ Page({
       text: launchInfo.text,
     });
     if (launchInfo.dailyIdiom !== null) {
-      this.setData({ defTexts: [] });
+      this.setData({
+        defTexts: []
+      });
       let textsTmp = [];
       launchInfo.dailyIdiom.definitions.forEach((element) => {
         textsTmp[launchInfo.dailyIdiom.definitions.indexOf(element)] = [];
@@ -294,14 +304,16 @@ Page({
   onSearch(e) {
     wx.vibrateShort();
     this.data.compValue =
-      getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW'
-        ? STTRANSLATION.traditionalized(e.detail)
-        : e.detail;
+      getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW' ?
+      STTRANSLATION.traditionalized(e.detail) :
+      e.detail;
     let val =
-      getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW'
-        ? STTRANSLATION.simplized(e.detail)
-        : e.detail;
-    this.setData({ value: e.detail });
+      getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW' ?
+      STTRANSLATION.simplized(e.detail) :
+      e.detail;
+    this.setData({
+      value: e.detail
+    });
     if (val === 'debug') {
       wx.navigateTo({
         url: '/pages/debug/debug',
@@ -397,8 +409,7 @@ Page({
       }
       let str = encodeURIComponent(JSON.stringify(data));
       wx.navigateTo({
-        url:
-          '/pages/selection/selection?str=' +
+        url: '/pages/selection/selection?str=' +
           str +
           '&linkType="' +
           linkType +
@@ -506,8 +517,7 @@ Page({
           painting: {
             width: 1080,
             height: 1440,
-            views: [
-              {
+            views: [{
                 type: 'image',
                 url: '/images/sharing-pic.png',
                 width: 1080,
@@ -578,8 +588,7 @@ Page({
       return {
         title: date + '：【' + this.data.idiName + '】',
         imageUrl: '/images/sharing.png',
-        path:
-          '/pages/index/index?showDailyIdiom=true&sharedIdiom=' +
+        path: '/pages/index/index?showDailyIdiom=true&sharedIdiom=' +
           this.data.idiId,
       };
     }
