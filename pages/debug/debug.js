@@ -64,6 +64,7 @@ Page({
     });
     this.setData({ debugModeOn: true });
     getApp().setDebug(true);
+    //getApp().globalData.launchInfo = {};
     getApp().globalData.refreshOnIndex = true;
     console.log('调试模式已开启：' + getApp().globalData.debugMode);
   },
@@ -75,6 +76,7 @@ Page({
     });
     this.setData({ debugModeOn: false });
     getApp().setDebug(false);
+    //getApp().globalData.launchInfo = {};
     getApp().globalData.refreshOnIndex = true;
     console.log('调试模式已关闭：' + getApp().globalData.debugMode);
   },

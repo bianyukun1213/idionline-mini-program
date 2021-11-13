@@ -11,7 +11,9 @@ Page({
     color: '',
   },
   onLoad(option) {
-    this.setData({ translations: getApp().globalData.translations });
+    this.setData({
+      translations: getApp().globalData.translations
+    });
     getApp().setPageTitleTranslation('bsonEditPageTitle');
     let json = JSON.parse(decodeURIComponent(option.str));
     this.data.id = json.id;
@@ -76,15 +78,15 @@ Page({
   onSubmit() {
     wx.vibrateShort();
     let bStr = this.data.value;
-    if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
-      bStr = STTRANSLATION.simplized(bStr);
-    }
+    // if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
+    //   bStr = STTRANSLATION.simplized(bStr);
+    // }
     let dt = {
       //sessionId: this.data.sessionId,
       bsonStr: bStr,
       updates: [],
     };
-    CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
+    CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done, true);
   },
   done(data) {
     wx.showToast({

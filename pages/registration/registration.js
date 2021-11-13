@@ -13,7 +13,9 @@ Page({
     },
   },
   onLoad() {
-    this.setData({ translations: getApp().globalData.translations });
+    this.setData({
+      translations: getApp().globalData.translations
+    });
     getApp().setPageTitleTranslation('registrationPageTitle');
   },
   onShow() {
@@ -37,8 +39,7 @@ Page({
     let that = this;
     CALL.uniFunc(
       'editor/register',
-      'POST',
-      {
+      'POST', {
         username: that.data.username,
         password: MD5(that.data.password),
       },

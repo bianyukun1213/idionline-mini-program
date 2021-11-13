@@ -16,8 +16,7 @@ const TRANSLATIONS = {
     aboutTextPlatformStringQQ: 'QQ/Tim',
     aboutTextPlatformStringWeChat: '微信',
     aboutModalTitleWarning: '警告',
-    aboutModalContentCleaning:
-      '您的登录信息、收藏数据等都保存在本地缓存中，清空缓存将导致这些数据丢失。您确定要继续吗？',
+    aboutModalContentCleaning: '您的登录信息、收藏数据等都保存在本地缓存中，清空缓存将导致这些数据丢失。您确定要继续吗？',
     aboutModalConfirmTextContinue: '继续',
     aboutModalCancelTextCancel: '取消',
     aboutToastTitleCompletion: '完成！',
@@ -40,16 +39,14 @@ const TRANSLATIONS = {
     bsonEditToastTitleError: '错误：',
     bsonToastTitleUpdateSucceeded: '更新成功！',
     bsonEditPageTitle: 'BSON 编辑模式',
-    bsonEditNoticeBarTextReadDocument:
-      '在 BSON 编辑模式下能够实现更大程度的修改，但无法进行部分有效性检查。在提交修改之前，请您仔细阅读帮助文档！',
+    bsonEditNoticeBarTextReadDocument: '在 BSON 编辑模式下能够实现更大程度的修改，但无法进行部分有效性检查。在提交修改之前，请您仔细阅读帮助文档！',
     bsonEditLabelBsonText: 'BSON 文本',
     bsonEditButtonSubmit: '提交',
     correctionTextIdiomName: '成语名称',
     correctionTextIdiomId: '成语 Id',
     correctionTextCorrectionContent: '纠错内容',
     correctionPageTitle: '纠错',
-    correctionNoticeBarTextMayNotReadInTime:
-      '开发者可能无法及时看到您的消息，请您谅解！',
+    correctionNoticeBarTextMayNotReadInTime: '开发者可能无法及时看到您的消息，请您谅解！',
     correctionLabelCorrectionContent: '纠错内容',
     correctionButtonCopyCorrectionContent: '复制并发起客服会话',
     debugToastTitleDebugOn: '调试已开启！',
@@ -66,8 +63,7 @@ const TRANSLATIONS = {
     documentTextSharing: '点击查看帮助文档',
     documentTextInvalidSharing: '无效的分享',
     documentPageTitle: '帮助文档',
-    documentNoticeBarTextSinglePage:
-      '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
+    documentNoticeBarTextSinglePage: '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
     editToastTitleWrongDataFormat: '数据格式不正确！',
     editToastTitleUpdateSucceeded: '更新成功！',
     editModalTitleWarning: '警告',
@@ -77,8 +73,7 @@ const TRANSLATIONS = {
     editToastTitleDeleteSucceeded: '删除成功！',
     editToastTitleError: '错误：',
     editPageTitle: '编辑模式',
-    editNoticeBarTextReadDocument:
-      '在提交修改之前，请您仔细阅读帮助文档！如需修改更多内容，请使用 BSON 编辑模式。',
+    editNoticeBarTextReadDocument: '在提交修改之前，请您仔细阅读帮助文档！如需修改更多内容，请使用 BSON 编辑模式。',
     editLabelIdiomId: 'Id',
     editLabelIdiomName: '名称',
     editLabelIdiomIndex: '索引（大写）',
@@ -121,8 +116,7 @@ const TRANSLATIONS = {
     idiomToastTitleMoreFeatures: '更多功能需前往小程序使用！',
     idiomToastTitleError: '错误：',
     idiomToastTitleSolitaireUnavailable: '未找到可接龙成语！',
-    idiomNoticeBarTextSinglePage:
-      '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
+    idiomNoticeBarTextSinglePage: '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
     idiomTextIdiomEditBy1: '由',
     idiomTextIdiomEditBy2: '最后编辑于',
     idiomTextIdiomSource: '来源',
@@ -151,8 +145,8 @@ const TRANSLATIONS = {
     indexToastTitleSaveFailed: '保存失败！',
     indexLoadingTitleGenerating: '生成中……',
     indexTextPartial: '（部分）',
-    indexNoticeBarTextSinglePage:
-      '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
+    indexNoticeBarTextSinglePage: '当前处于功能受限的单页模式，前往小程序以获得最佳体验。',
+    indexTextDailyIdiom: '每日成语：',
     indexTextIdiomSource: '来源',
     indexTextIdiomDefinitionText: '释义',
     indexTextIdiomDefinitionExample: '例句',
@@ -170,14 +164,12 @@ const TRANSLATIONS = {
     registrationToastTitleWrongData: '用户名或密码格式不正确！',
     registrationToastTitleRegistrationSucceeded: '注册成功！',
     registrationPageTitle: '注册为编辑者',
-    registrationNoticeBarTextRequirements:
-      '注册为编辑者后，您将可以修改成语信息。用户名：2 至 16 位，允许包含大小写字母及数字；密码：8 至 20 位，需要包含大小写字母、数字及特殊符号。',
+    registrationNoticeBarTextRequirements: '注册为编辑者后，您将可以修改成语信息。用户名：2 至 16 位，允许包含大小写字母及数字；密码：8 至 20 位，需要包含大小写字母、数字及特殊符号。',
     registrationLabelUsername: '用户名',
     registrationLabelPwd: '密码',
     registrationButtonRegister: '注册为编辑者',
     selectionPageTitle: '选择您要查看的成语',
-    selectionNoticeBarTextIdiomNotFound:
-      '没有您查询的成语？服务器可能已尝试从其他数据源自动收录。您可以稍微等待，然后再次搜索。',
+    selectionNoticeBarTextIdiomNotFound: '没有您查询的成语？服务器可能已尝试从其他数据源自动收录。您可以稍微等待，然后再次搜索。',
     selectionButtonPreviousPage: '上一页',
     selectionButtonNextPage: '下一页',
     settingsPageTitle: '设置',
@@ -185,8 +177,7 @@ const TRANSLATIONS = {
     settingsPickerTitleLanguage: '语言',
     settingsPickerConfirmTextConfirm: '确定',
     settingsPickerCancelTextCancel: '取消',
-    settingsNoticeBarTextWarning:
-      '项目使用多种方案尽可能实现繁体中文的本地化，无法保证质量与体验，请您谅解！',
+    settingsNoticeBarTextWarning: '项目使用多种方案尽可能实现繁体中文的本地化，无法保证质量与体验，请您谅解！',
   },
   'zh-HK': {
     appTextLocaleNameSystem: '跟隨平臺',
@@ -205,8 +196,7 @@ const TRANSLATIONS = {
     aboutTextPlatformStringQQ: 'QQ/Tim',
     aboutTextPlatformStringWeChat: 'WeChat',
     aboutModalTitleWarning: '警告',
-    aboutModalContentCleaning:
-      '您的登錄信息、收藏數據等都保存在本地緩存中，清空緩存將導致這些數據丟失。您確定要繼續嗎？',
+    aboutModalContentCleaning: '您的登錄信息、收藏數據等都保存在本地緩存中，清空緩存將導致這些數據丟失。您確定要繼續嗎？',
     aboutModalConfirmTextContinue: '繼續',
     aboutModalCancelTextCancel: '取消',
     aboutToastTitleCompletion: '完成！',
@@ -229,16 +219,14 @@ const TRANSLATIONS = {
     bsonEditToastTitleError: '錯誤：',
     bsonToastTitleUpdateSucceeded: '更新成功！',
     bsonEditPageTitle: 'BSON 編輯模式',
-    bsonEditNoticeBarTextReadDocument:
-      '在 BSON 編輯模式下能夠實現更大程度的修改，但無法進行部分有效性檢查。在提交修改之前，請您仔細閲讀幫助文檔！',
+    bsonEditNoticeBarTextReadDocument: '在 BSON 編輯模式下能夠實現更大程度的修改，但無法進行部分有效性檢查。在提交修改之前，請您仔細閲讀幫助文檔！',
     bsonEditLabelBsonText: 'BSON 文本',
     bsonEditButtonSubmit: '提交',
     correctionTextIdiomName: '成語名稱',
     correctionTextIdiomId: '成語 Id',
     correctionTextCorrectionContent: '糾錯內容',
     correctionPageTitle: '糾錯',
-    correctionNoticeBarTextMayNotReadInTime:
-      '開發者可能無法及時看到您的消息，請您諒解！',
+    correctionNoticeBarTextMayNotReadInTime: '開發者可能無法及時看到您的消息，請您諒解！',
     correctionLabelCorrectionContent: '糾錯內容',
     correctionButtonCopyCorrectionContent: '複製併發起客服會話',
     debugToastTitleDebugOn: '調試已開啟！',
@@ -255,8 +243,7 @@ const TRANSLATIONS = {
     documentTextSharing: '點擊查看幫助文檔',
     documentTextInvalidSharing: '無效的分享',
     documentPageTitle: '幫助文檔',
-    documentNoticeBarTextSinglePage:
-      '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
+    documentNoticeBarTextSinglePage: '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
     editToastTitleWrongDataFormat: '數據格式不正確！',
     editToastTitleUpdateSucceeded: '更新成功！',
     editModalTitleWarning: '警告',
@@ -266,8 +253,7 @@ const TRANSLATIONS = {
     editToastTitleDeleteSucceeded: '刪除成功！',
     editToastTitleError: '錯誤：',
     editPageTitle: '編輯模式',
-    editNoticeBarTextReadDocument:
-      '在提交修改之前，請您仔細閲讀幫助文檔！如需修改更多內容，請使用 BSON 編輯模式。',
+    editNoticeBarTextReadDocument: '在提交修改之前，請您仔細閲讀幫助文檔！如需修改更多內容，請使用 BSON 編輯模式。',
     editLabelIdiomId: 'Id',
     editLabelIdiomName: '名稱',
     editLabelIdiomIndex: '索引（大寫）',
@@ -310,8 +296,7 @@ const TRANSLATIONS = {
     idiomToastTitleMoreFeatures: '更多功能需前往小程序使用！',
     idiomToastTitleError: '錯誤：',
     idiomToastTitleSolitaireUnavailable: '未找到可接龍成語！',
-    idiomNoticeBarTextSinglePage:
-      '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
+    idiomNoticeBarTextSinglePage: '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
     idiomTextIdiomEditBy1: '由',
     idiomTextIdiomEditBy2: '最後編輯於',
     idiomTextIdiomSource: '來源',
@@ -340,8 +325,8 @@ const TRANSLATIONS = {
     indexToastTitleSaveFailed: '保存失敗！',
     indexLoadingTitleGenerating: '生成中……',
     indexTextPartial: '（部分）',
-    indexNoticeBarTextSinglePage:
-      '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
+    indexNoticeBarTextSinglePage: '當前處於功能受限的單頁模式，前往小程序以獲得最佳體驗。',
+    indexTextDailyIdiom: '每日成語：',
     indexTextIdiomSource: '來源',
     indexTextIdiomDefinitionText: '釋義',
     indexTextIdiomDefinitionExample: '例句',
@@ -359,14 +344,12 @@ const TRANSLATIONS = {
     registrationToastTitleWrongData: '用户名或密碼格式不正確！',
     registrationToastTitleRegistrationSucceeded: '註冊成功！',
     registrationPageTitle: '註冊為編輯者',
-    registrationNoticeBarTextRequirements:
-      '註冊為編輯者後，您將可以修改成語信息。用户名：2 至 16 位，允許包含大小寫字母及數字；密碼：8 至 20 位，需要包含大小寫字母、數字及特殊符號。',
+    registrationNoticeBarTextRequirements: '註冊為編輯者後，您將可以修改成語信息。用户名：2 至 16 位，允許包含大小寫字母及數字；密碼：8 至 20 位，需要包含大小寫字母、數字及特殊符號。',
     registrationLabelUsername: '用户名',
     registrationLabelPwd: '密碼',
     registrationButtonRegister: '註冊為編輯者',
     selectionPageTitle: '選擇您要查看的成語',
-    selectionNoticeBarTextIdiomNotFound:
-      '沒有您查詢的成語？服務器可能已嘗試從其他數據源自動收錄。您可以稍微等待，然後再次搜索。',
+    selectionNoticeBarTextIdiomNotFound: '沒有您查詢的成語？服務器可能已嘗試從其他數據源自動收錄。您可以稍微等待，然後再次搜索。',
     selectionButtonPreviousPage: '上一頁',
     selectionButtonNextPage: '下一頁',
     settingsPageTitle: '設置',
@@ -374,8 +357,7 @@ const TRANSLATIONS = {
     settingsPickerTitleLanguage: '語言',
     settingsPickerConfirmTextConfirm: '確定',
     settingsPickerCancelTextCancel: '取消',
-    settingsNoticeBarTextWarning:
-      '項目使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
+    settingsNoticeBarTextWarning: '項目使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
   },
   'zh-TW': {
     appTextLocaleNameSystem: '跟隨平臺',
@@ -394,8 +376,7 @@ const TRANSLATIONS = {
     aboutTextPlatformStringQQ: 'QQ/Tim',
     aboutTextPlatformStringWeChat: 'WeChat',
     aboutModalTitleWarning: '警告',
-    aboutModalContentCleaning:
-      '您的登入資訊、收藏資料等都儲存在本地快取中，清空快取將導致這些資料丟失。您確定要繼續嗎？',
+    aboutModalContentCleaning: '您的登入資訊、收藏資料等都儲存在本地快取中，清空快取將導致這些資料丟失。您確定要繼續嗎？',
     aboutModalConfirmTextContinue: '繼續',
     aboutModalCancelTextCancel: '取消',
     aboutToastTitleCompletion: '完成！',
@@ -418,16 +399,14 @@ const TRANSLATIONS = {
     bsonEditToastTitleError: '錯誤：',
     bsonToastTitleUpdateSucceeded: '更新成功！',
     bsonEditPageTitle: 'BSON 編輯模式',
-    bsonEditNoticeBarTextReadDocument:
-      '在 BSON 編輯模式下能夠實現更大程度的修改，但無法進行部分有效性檢查。在提交修改之前，請您仔細閱讀幫助文件！',
+    bsonEditNoticeBarTextReadDocument: '在 BSON 編輯模式下能夠實現更大程度的修改，但無法進行部分有效性檢查。在提交修改之前，請您仔細閱讀幫助文件！',
     bsonEditLabelBsonText: 'BSON 文字',
     bsonEditButtonSubmit: '提交',
     correctionTextIdiomName: '成語名稱',
     correctionTextIdiomId: '成語 Id',
     correctionTextCorrectionContent: '糾錯內容',
     correctionPageTitle: '糾錯',
-    correctionNoticeBarTextMayNotReadInTime:
-      '開發者可能無法及時看到您的訊息，請您諒解！',
+    correctionNoticeBarTextMayNotReadInTime: '開發者可能無法及時看到您的訊息，請您諒解！',
     correctionLabelCorrectionContent: '糾錯內容',
     correctionButtonCopyCorrectionContent: '複製併發起客服會話',
     debugToastTitleDebugOn: '除錯已開啟！',
@@ -444,8 +423,7 @@ const TRANSLATIONS = {
     documentTextSharing: '點選檢視幫助文件',
     documentTextInvalidSharing: '無效的分享',
     documentPageTitle: '幫助文件',
-    documentNoticeBarTextSinglePage:
-      '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
+    documentNoticeBarTextSinglePage: '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
     editToastTitleWrongDataFormat: '資料格式不正確！',
     editToastTitleUpdateSucceeded: '更新成功！',
     editModalTitleWarning: '警告',
@@ -455,8 +433,7 @@ const TRANSLATIONS = {
     editToastTitleDeleteSucceeded: '刪除成功！',
     editToastTitleError: '錯誤：',
     editPageTitle: '編輯模式',
-    editNoticeBarTextReadDocument:
-      '在提交修改之前，請您仔細閱讀幫助文件！如需修改更多內容，請使用 BSON 編輯模式。',
+    editNoticeBarTextReadDocument: '在提交修改之前，請您仔細閱讀幫助文件！如需修改更多內容，請使用 BSON 編輯模式。',
     editLabelIdiomId: 'Id',
     editLabelIdiomName: '名稱',
     editLabelIdiomIndex: '索引（大寫）',
@@ -499,8 +476,7 @@ const TRANSLATIONS = {
     idiomToastTitleMoreFeatures: '更多功能需前往小程式使用！',
     idiomToastTitleError: '錯誤：',
     idiomToastTitleSolitaireUnavailable: '未找到可接龍成語！',
-    idiomNoticeBarTextSinglePage:
-      '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
+    idiomNoticeBarTextSinglePage: '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
     idiomTextIdiomEditBy1: '由',
     idiomTextIdiomEditBy2: '最後編輯於',
     idiomTextIdiomSource: '來源',
@@ -529,8 +505,8 @@ const TRANSLATIONS = {
     indexToastTitleSaveFailed: '儲存失敗！',
     indexLoadingTitleGenerating: '生成中……',
     indexTextPartial: '（部分）',
-    indexNoticeBarTextSinglePage:
-      '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
+    indexNoticeBarTextSinglePage: '當前處於功能受限的單頁模式，前往小程式以獲得最佳體驗。',
+    indexTextDailyIdiom: '每日成語：',
     indexTextIdiomSource: '來源',
     indexTextIdiomDefinitionText: '釋義',
     indexTextIdiomDefinitionExample: '例句',
@@ -548,14 +524,12 @@ const TRANSLATIONS = {
     registrationToastTitleWrongData: '使用者名稱或密碼格式不正確！',
     registrationToastTitleRegistrationSucceeded: '註冊成功！',
     registrationPageTitle: '註冊為編輯者',
-    registrationNoticeBarTextRequirements:
-      '註冊為編輯者後，您將可以修改成語資訊。使用者名稱：2 至 16 位，允許包含大小寫字母及數字；密碼：8 至 20 位，需要包含大小寫字母、數字及特殊符號。',
+    registrationNoticeBarTextRequirements: '註冊為編輯者後，您將可以修改成語資訊。使用者名稱：2 至 16 位，允許包含大小寫字母及數字；密碼：8 至 20 位，需要包含大小寫字母、數字及特殊符號。',
     registrationLabelUsername: '使用者名稱',
     registrationLabelPwd: '密碼',
     registrationButtonRegister: '註冊為編輯者',
     selectionPageTitle: '選擇您要檢視的成語',
-    selectionNoticeBarTextIdiomNotFound:
-      '沒有您查詢的成語？伺服器可能已嘗試從其他資料來源自動收錄。您可以稍微等待，然後再次搜尋。',
+    selectionNoticeBarTextIdiomNotFound: '沒有您查詢的成語？伺服器可能已嘗試從其他資料來源自動收錄。您可以稍微等待，然後再次搜尋。',
     selectionButtonPreviousPage: '上一頁',
     selectionButtonNextPage: '下一頁',
     settingsPageTitle: '設定',
@@ -563,8 +537,7 @@ const TRANSLATIONS = {
     settingsPickerTitleLanguage: '語言',
     settingsPickerConfirmTextConfirm: '確定',
     settingsPickerCancelTextCancel: '取消',
-    settingsNoticeBarTextWarning:
-      '專案使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
+    settingsNoticeBarTextWarning: '專案使用多種方案儘可能實現繁體中文的本地化，無法保證質量與體驗，請您諒解！',
   },
 };
 

@@ -91,6 +91,10 @@ Page({
       this.setData({
         apiVer: getApp().globalData.debugMode ? getApp().globalData.launchInfo.version + ' [DEBUG]' : getApp().globalData.launchInfo.version,
       });
+    else
+      this.setData({
+        apiVer: '-',
+      });
   },
   onClean() {
     let that = this;

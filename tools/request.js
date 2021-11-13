@@ -44,11 +44,9 @@ function get(args) {
     data: data,
     header: {
       'Accept-Language': getApp().getLocale(),
-      Cookie:
-        typeof getApp().globalData.user.sessionId !== 'undefined' &&
-        type !== 'TTS'
-          ? 'SESSIONID=' + getApp().globalData.user.sessionId + ';'
-          : '',
+      Cookie: typeof getApp().globalData.user.sessionId !== 'undefined' &&
+        type !== 'TTS' ?
+        'SESSIONID=' + getApp().globalData.user.sessionId + ';' : '',
     },
     success(res) {
       wx.hideLoading();
@@ -132,7 +130,7 @@ function downloadTTSAudio(tok, cuid, tex, doSuccess) {
   });
 }
 
-function uniFunc(url, method, dt, doSuccess) {
+function uniFunc(url, method, dt, doSuccess, enableS2T) {
   let TRANSLATIONS = getApp().globalData.translations;
   wx.showLoading({
     title: TRANSLATIONS.toolsRequestLoadingTitleLoading,
@@ -148,13 +146,12 @@ function uniFunc(url, method, dt, doSuccess) {
   wx.request({
     url: urlNew,
     method: method,
-    data: dt,
+    //data: dt,
+    data: enableS2T === true && (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') ? JSON.parse(STTRANSLATION.simplized(JSON.stringify(dt))) : dt,
     header: {
       'Accept-Language': getApp().getLocale(),
-      Cookie:
-        typeof getApp().globalData.user.sessionId !== 'undefined'
-          ? 'SESSIONID=' + getApp().globalData.user.sessionId + ';'
-          : '',
+      Cookie: typeof getApp().globalData.user.sessionId !== 'undefined' ?
+        'SESSIONID=' + getApp().globalData.user.sessionId + ';' : '',
     },
     success(res) {
       wx.hideLoading();
@@ -164,7 +161,18 @@ function uniFunc(url, method, dt, doSuccess) {
         typeof doSuccess === 'function'
       ) {
         console.log('查询到数据：', res.data);
-        doSuccess(res.data.result);
+        if (
+          enableS2T === true && (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW')
+        ) {
+          let tmp = JSON.stringify(res.data.result);
+          tmp = STTRANSLATION.traditionalized(tmp);
+          let json = JSON.parse(tmp);
+          console.log('简繁转换结果：', json);
+          doSuccess(json);
+        } else {
+          doSuccess(res.data.result);
+        }
+        //doSuccess(res.data.result);
       } else if (res.statusCode === 404) {
         notFound();
       } else {

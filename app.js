@@ -8,18 +8,19 @@ App({
     locale: '',
     translations: {},
     debugMode: false,
-    version: '1.53.4',
+    version: '1.54.0',
     platform: {
       tag: '',
       //str: '',
     },
     launchInfo: {},
     refreshOnIndex: false,
+    triggerAdvanceSearch: false,
   },
   onLaunch() {
-    this.globalData.user = this.globalData.debugMode
-      ? wx.getStorageSync('userDebug') || {}
-      : wx.getStorageSync('userProduction') || {};
+    this.globalData.user = this.globalData.debugMode ?
+      wx.getStorageSync('user').debug || {} :
+      wx.getStorageSync('user').production || {};
     let info = wx.getSystemInfoSync();
     this.setLocale(info);
     this.setPlatformStr(info);
@@ -152,18 +153,22 @@ App({
   setDebug(value) {
     if (value === true) {
       this.globalData.debugMode = true;
-      this.globalData.user = wx.getStorageSync('userDebug') || {};
+      this.globalData.user = wx.getStorageSync('user').debug || {};
     } else {
       this.globalData.debugMode = false;
-      this.globalData.user = wx.getStorageSync('userProduction') || {};
+      this.globalData.user = wx.getStorageSync('user').production || {};
     }
   },
   setUserInfo(data) {
+    let tmp = {};
     if (this.globalData.debugMode === true) {
-      wx.setStorageSync('userDebug', data);
+      tmp = wx.getStorageSync('user') || {};
+      tmp.debug = data;
     } else {
-      wx.setStorageSync('userProduction', data);
+      tmp = wx.getStorageSync('user') || {};
+      tmp.production = data;
     }
+    wx.setStorageSync('user', tmp);
     this.globalData.user = data;
   },
   // clearUserInfo() {

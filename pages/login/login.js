@@ -26,8 +26,7 @@ Page({
     let that = this;
     CALL.uniFunc(
       'editor/login',
-      'POST',
-      {
+      'POST', {
         username: that.data.username,
         password: MD5(that.data.password),
       },
@@ -64,6 +63,9 @@ Page({
       prevPage.data.loginSucceeded = true;
       prevPage.data.refresh = true;
     }
+    if (prevPage.route.split('/')[2] === 'index') {
+      getApp().globalData.triggerAdvanceSearch = true;
+    }
     getApp().globalData.refreshOnIndex = true;
     setTimeout(function () {
       if (
@@ -71,6 +73,13 @@ Page({
         'login'
       )
         wx.navigateBack();
+      else if (
+        getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
+        'index'
+      )
+        wx.switchTab({
+          url: '/pages/index/index',
+        });
     }, 1500);
   },
   onClear() {

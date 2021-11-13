@@ -23,7 +23,9 @@ Page({
     },
   },
   onLoad(option) {
-    this.setData({ translations: getApp().globalData.translations });
+    this.setData({
+      translations: getApp().globalData.translations
+    });
     getApp().setPageTitleTranslation('editPageTitle');
     let json = JSON.parse(decodeURIComponent(option.str));
     //更新页面。
@@ -101,12 +103,12 @@ Page({
     let tmp = this.data.definitionUpdates;
     tmp[
       event.currentTarget.id
-        .replace('is-bold-checkbox-', '')
-        .replace('is-bold-', '')
+      .replace('is-bold-checkbox-', '')
+      .replace('is-bold-', '')
     ].isBold = !tmp[
       event.currentTarget.id
-        .replace('is-bold-checkbox-', '')
-        .replace('is-bold-', '')
+      .replace('is-bold-checkbox-', '')
+      .replace('is-bold-', '')
     ].isBold;
     this.setData({
       definitionUpdates: tmp,
@@ -209,12 +211,12 @@ Page({
       toBeCorrected: this.data.toBeCorrected,
       definitionUpdates: tmp,
     };
-    if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
-      let str = JSON.stringify(dt);
-      str = STTRANSLATION.simplized(str);
-      dt = JSON.parse(str);
-    }
-    CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done);
+    // if (getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW') {
+    //   let str = JSON.stringify(dt);
+    //   str = STTRANSLATION.simplized(str);
+    //   dt = JSON.parse(str);
+    // }
+    CALL.uniFunc('idiom/' + this.data.id, 'PUT', dt, this.done, true);
   },
   done(data) {
     wx.showToast({
@@ -274,9 +276,9 @@ Page({
     setTimeout(function () {
       if (
         getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
-          'edit' ||
+        'edit' ||
         getCurrentPages()[getCurrentPages().length - 1].route.split('/')[2] ===
-          'idiom'
+        'idiom'
       )
         wx.switchTab({
           url: '/pages/index/index',

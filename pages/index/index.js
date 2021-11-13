@@ -25,7 +25,7 @@ Page({
     onTouch: false,
     showDailyIdiom: false,
     idMode: false,
-    indexMode: false,
+    //indexMode: false,
     filePath: '',
     sharedIdiom: '',
     singlePage: false,
@@ -116,8 +116,41 @@ Page({
         dark: false,
       });
     if (getApp().globalData.refreshOnIndex === true) {
+      getApp().globalData.launchInfo = {};
+      this.setData({
+        text: '',
+        idiName: '',
+        idiId: '',
+        pinyin: '',
+        logoUrl: '../../images/idionline.png',
+        defs: [],
+        defsLess: [],
+        defTexts: [],
+        showPopup: false
+      });
+      COLOR.apl();
       INFO.getLaunchInfo(this.callback, true);
       getApp().globalData.refreshOnIndex = false;
+    }
+    if (getApp().globalData.triggerAdvanceSearch) {
+      let reg4 = new RegExp(
+        /^高级查询：.+$/
+      );
+      let val =
+        getApp().getLocale() === 'zh-HK' || getApp().getLocale() === 'zh-TW' ?
+        STTRANSLATION.simplized(this.data.value) :
+        this.data.value;
+      if (reg4.exec(val))
+        CALL.uniFunc(
+          'idiom/advance-search',
+          'POST', {
+            lambdaExpression: val.replace('高级查询：', ''),
+          },
+          this.navi,
+          true
+        );
+      getApp().globalData.triggerAdvanceSearch = false;
+      return;
     }
     // let reg = new RegExp(/^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]{4}))$/); //汉字。
     let reg = new RegExp(/^([\u4e00-\u9fa5]{4})$/); //汉字。
@@ -321,13 +354,16 @@ Page({
       return;
     }
     this.data.idMode = false;
-    this.data.indexMode = false;
+    //this.data.indexMode = false;
     let reg = new RegExp(
       // /^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?))$/
       /^([\u4e00-\u9fa5]+(，[\u4e00-\u9fa5]+)?)$/
     ); //汉字。
     let reg2 = new RegExp(/^[0-9a-zA-Z]{24}/);
     let reg3 = new RegExp(/^[A-Za-z]$/);
+    let reg4 = new RegExp(
+      /^高级查询：.+$/
+    );
     if (reg.test(val) && val.length > 1 && val.length <= 12) {
       CALL.get({
         url: 'idiom/search/' + val,
@@ -342,12 +378,27 @@ Page({
         exHandler: this.exHandler,
       });
     } else if (reg3.exec(val)) {
-      this.data.idMode = true;
+      //this.data.indexMode = true;
       CALL.get({
         url: 'idiom/search/' + val,
         doSuccess: this.navi,
         exHandler: this.exHandler,
       });
+    } else if (reg4.exec(val)) {
+      if (typeof getApp().globalData.user.sessionId !== 'undefined')
+        CALL.uniFunc(
+          'idiom/advance-search',
+          'POST', {
+            lambdaExpression: val.replace('高级查询：', ''),
+          },
+          this.navi,
+          true
+        );
+      else {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        });
+      }
     } else {
       wx.showToast({
         title: this.data.translations.indexToastTitleWrongDataFormat,
@@ -424,7 +475,7 @@ Page({
       showPopup: false,
     });
     wx.vibrateShort();
-    console.log('点击操作，已关闭弹出层');
+    console.log('已关闭弹出层');
   },
   //感应区触摸开始事件，记录开始时触摸点的纵坐标。
   onTouchStart(e) {
@@ -454,7 +505,7 @@ Page({
         console.log('上划操作，已启用弹出层');
       } else if (currentY - startY >= 50 && showPopup) {
         this.onPopupClose();
-        console.log('下划操作，已关闭弹出层');
+        console.log('下划操作');
       }
     }
   },
