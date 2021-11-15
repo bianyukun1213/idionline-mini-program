@@ -1,7 +1,7 @@
 <view class="root">
 	<van-notice-bar wx:if="{{singlePage}}" wrapable text="{{translations.indexNoticeBarTextSinglePage}}" />
 	<van-notice-bar wx:if="{{text!==''&&text!==null&&!singlePage}}" mode="closeable" bind:close="onNoticeBarClose" text="{{text}}" />
-	<van-search wx:if="{{!singlePage}}" placeholder="{{translations.indexPlaceholderSearch}}" shape="round" input-align="center" value="{{value}}" bind:search="onSearch" bind:clear="onClear" />
+	<van-search wx:if="{{!singlePage}}" placeholder="{{translations.indexPlaceholderSearch}}" shape="round" input-align="center" value="{{value}}" bind:click-input="onClickInput" bind:search="onSearch" bind:clear="onClear" />
 	<image wx:if="{{dark}}" class="logo" src="../../images/idionline-dark.png" mode="aspectFit" />
 	<image wx:else class="logo" src="{{logoUrl}}" mode="aspectFit" />
 	<van-popup show="{{showPopup}}" position="bottom" bind:touchstart="onTouchStart" bind:touchmove="onTouchMove" bind:touchend="onTouchEnd" bind:touchcancel="onTouchCancel" bind:close="onPopupClose">

@@ -2,15 +2,15 @@
 	<van-notice-bar wrapable text="{{translations.editNoticeBarTextReadDocument}}" />
 	<van-field required disabled value="{{id}}" label="{{translations.editLabelIdiomId}}" />
 	<van-field id="idiomName" required clearable value="{{name}}" label="{{translations.editLabelIdiomName}}"
-		bind:confirm="onConfirm" bind:change="onChangeName" bind:clear="onClear" />
+		bind:confirm="onConfirm" bind:click-input="onClickInput" bind:change="onChangeName" bind:clear="onClear" />
 	<van-field id="idiomIndex" focus="{{focus.idiomIndex}}" required clearable value="{{indexOfIdiom}}"
-		label="{{translations. editLabelIdiomIndex}}" bind:confirm="onConfirm" bind:change="onChangeIndex"
+		label="{{translations. editLabelIdiomIndex}}" bind:click-input="onClickInput" bind:confirm="onConfirm" bind:change="onChangeIndex"
 		bind:clear="onClear" />
 	<van-field id="idiomPinyin" focus="{{focus.idiomPinyin}}" clearable value="{{pinyin}}"
-		label="{{translations.editLabelIdiomPinyin}}" bind:confirm="onConfirm" bind:change="onChangePinyin"
+		label="{{translations.editLabelIdiomPinyin}}" bind:click-input="onClickInput" bind:confirm="onConfirm" bind:change="onChangePinyin"
 		bind:clear="onClear" />
 	<van-field id="idiomOrigin" focus="{{focus.idiomOrigin}}" clearable value="{{origin}}"
-		label="{{translations.editLabelIdiomOrigin}}" bind:confirm="onConfirm" bind:change="onChangeOrigin"
+		label="{{translations.editLabelIdiomOrigin}}" bind:click-input="onClickInput" bind:confirm="onConfirm" bind:change="onChangeOrigin"
 		bind:clear="onClear" />
 	<van-cell title="{{translations.editCheckboxIdiomToBeCorrected}}" value-class="value-class" clickable
 		bind:click="correctionCheck">
@@ -19,15 +19,15 @@
 	<van-cell-group wx:for="{{definitionUpdates}}" wx:key="index">
 		<van-field id="source-{{index}}" focus="{{focus.source===index}}" wx:if="{{definitionUpdates[index]}}"
 			value="{{definitionUpdates[index].source}}" required clearable bind:confirm="onConfirm"
-			bind:change="onChangeSource" label="{{translations.editLabelIdiomSource}} {{index+1}}"
+			bind:change="onChangeSource" bind:click-input="onClickInput" label="{{translations.editLabelIdiomSource}} {{index+1}}"
 			bind:clear="onClear" />
 		<van-field id="definition-text-{{index}}" focus="{{focus.definitionText===index}}"
 			wx:if="{{definitionUpdates[index]}}" type="textarea" value="{{definitionUpdates[index].text}}" autosize
 			required clearable bind:change="onChangeText"
-			label="{{translations.editLabelIdiomDefinitionText}} {{index+1}}" bind:clear="onClear" />
+			label="{{translations.editLabelIdiomDefinitionText}} {{index+1}}" bind:click-input="onClickInput" bind:clear="onClear" />
 		<van-field id="addition-{{index}}" wx:if="{{definitionUpdates[index]}}" type="textarea"
 			value="{{definitionUpdates[index].addition}}" autosize clearable bind:change="onChangeAddition"
-			label="{{translations.editLabelIdiomDefinitionAdditionText}}" bind:clear="onClear" />
+			label="{{translations.editLabelIdiomDefinitionAdditionText}}" bind:click-input="onClickInput" bind:clear="onClear" />
 		<van-cell id="is-bold-{{index}}" wx:if="{{definitionUpdates[index]}}"
 			title="{{translations.editCheckboxIdiomDefinitionIsBold}}" value-class="value-class" clickable
 			bind:click="check">

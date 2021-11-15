@@ -16,7 +16,7 @@
     <view class="root" wx:else>
         <van-cell-group>
             <van-field value="{{password}}" type="password" required clearable bind:change="onChange"
-                bind:confirm="onConfirm" bind:clear="onClear" label="{{translations.debugLabelPwd}}" />
+                bind:confirm="onConfirm" bind:click-input="onClickInput" bind:clear="onClear" label="{{translations.debugLabelPwd}}" />
         </van-cell-group>
         <van-button class="btn" aria-role="button" aria-label="{{translations.debugButtonConfirm}}" wx:if="{{show}}"
             bind:click="onOK" color="{{color}}">

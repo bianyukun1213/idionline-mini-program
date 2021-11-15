@@ -374,4 +374,7 @@ Page({
       imageUrl: '/images/favorites-timeline.png',
     };
   },
+  onClickInput() {
+    wx.vibrateShort();
+  },
 });
