@@ -142,7 +142,7 @@ Page({
         this.data.value;
       if (reg4.exec(val))
         CALL.uniFunc(
-          'idiom/advance-search',
+          'idiom/advanced-search',
           'POST', {
             lambdaExpression: val.replace('高级查询：', ''),
           },
@@ -387,7 +387,7 @@ Page({
     } else if (reg4.exec(val)) {
       if (typeof getApp().globalData.user.sessionId !== 'undefined')
         CALL.uniFunc(
-          'idiom/advance-search',
+          'idiom/advanced-search',
           'POST', {
             lambdaExpression: val.replace('高级查询：', ''),
           },
