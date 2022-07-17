@@ -6,6 +6,7 @@ Page({
     showPopup: false,
     pickerValue: 0,
     languageOptions: [],
+    playSolitaireOn: false
   },
   onLoad() {},
   onShow() {
@@ -14,7 +15,9 @@ Page({
   },
   showPopup() {
     wx.vibrateShort();
-    this.setData({ showPopup: true });
+    this.setData({
+      showPopup: true
+    });
     let picker = this.selectComponent('#picker');
     picker.setColumnIndex(0, this.data.pickerValue);
   },
@@ -43,7 +46,10 @@ Page({
     wx.setStorageSync('settings', settings);
     getApp().setLocale();
     getApp().globalData.refreshOnIndex = true;
-    this.setData({ pickerValue: value, showPopup: false });
+    this.setData({
+      pickerValue: value,
+      showPopup: false
+    });
     this.refreshSettings();
   },
   onCancel() {
@@ -57,7 +63,9 @@ Page({
     wx.vibrateShort();
   },
   refreshSettings() {
-    this.setData({ translations: getApp().globalData.translations });
+    this.setData({
+      translations: getApp().globalData.translations
+    });
     getApp().setPageTitleTranslation('settingsPageTitle');
     let options = [
       getApp().globalData.translations.appTextLocaleNameSystem,
@@ -83,9 +91,11 @@ Page({
           break;
       }
     }
+    let playSolitaire = wx.getStorageSync('settings').playSolitaire ? true : false;
     this.setData({
       languageOptions: options,
       pickerValue: value,
+      playSolitaireOn: playSolitaire
     });
     // let disableAds = wx.getStorageSync('settings').disableAds
     // let overlayOn = wx.getStorageSync('settings').enableOverlay
@@ -100,6 +110,31 @@ Page({
   }, //,
   onChange() {
     wx.vibrateShort();
+  },
+  onChangePlaySolitaire() {
+    wx.vibrateShort();
+    let that = this;
+    let settings = wx.getStorageSync('settings') || {};
+    if (!settings.playSolitaire) {
+      wx.showModal({
+        title: this.data.translations.settingsModalTitleTip,
+        content: this.data.translations.settingsModalContentAskForPermission,
+        confirmText: this.data.translations.settingsModalConfirmTextTurnOn,
+        cancelText: this.data.translations.settingsModalCancelTextCancel,
+        success(res) {
+          if (res.confirm) {
+            wx.vibrateShort();
+            settings.playSolitaire = true;
+            wx.setStorageSync('settings', settings);
+            that.refreshSettings();
+          }
+        },
+      });
+    } else {
+      settings.playSolitaire = false;
+      wx.setStorageSync('settings', settings);
+      this.refreshSettings();
+    }
   },
   // onChangeAds() {
   //   if (this.data.adsOn) {

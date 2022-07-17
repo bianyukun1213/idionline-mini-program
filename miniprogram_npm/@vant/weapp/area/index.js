@@ -17,7 +17,10 @@ var utils_1 = require("../common/utils");
 var EMPTY_CODE = '000000';
 (0, component_1.VantComponent)({
     classes: ['active-class', 'toolbar-class', 'column-class'],
-    props: __assign(__assign({}, shared_1.pickerProps), { value: {
+    props: __assign(__assign({}, shared_1.pickerProps), { showToolbar: {
+            type: Boolean,
+            value: true,
+        }, value: {
             type: String,
             observer: function (value) {
                 this.code = value;
@@ -98,7 +101,7 @@ var EMPTY_CODE = '000000';
         },
         getConfig: function (type) {
             var areaList = this.data.areaList;
-            return (areaList && areaList[type + "_list"]) || {};
+            return (areaList && areaList["".concat(type, "_list")]) || {};
         },
         getList: function (type, code) {
             if (type !== 'province' && !code) {
@@ -125,7 +128,7 @@ var EMPTY_CODE = '000000';
                         ? EMPTY_CODE.slice(2, 4)
                         : EMPTY_CODE.slice(4, 6);
                 result.unshift({
-                    code: "" + code + codeFill,
+                    code: "".concat(code).concat(codeFill),
                     name: typeToColumnsPlaceholder[type],
                 });
             }

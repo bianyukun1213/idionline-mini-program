@@ -1,36 +1,31 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {
+    "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "注册",
+          "pathName": "pages/registration/registration",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "调试",
+          "pathName": "pages/debug/debug",
+          "query": "bypassVerification=true&enableDebug=true",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
-        },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "注册",
-                    "pathName": "pages/registration/registration",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "调试",
-                    "pathName": "pages/debug/debug",
-                    "query": "bypassVerification=true&enableDebug=true",
-                    "scene": null
-                },
-                {
-                    "name": "单页模式",
-                    "pathName": "pages/index/index",
-                    "query": "",
-                    "scene": 1154
-                }
-            ]
+        {
+          "name": "单页模式",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": 1154
         }
+      ]
     }
+  },
+  "projectname": "idionline-mini-program",
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
 }

@@ -484,6 +484,13 @@ Page({
     };
   },
   onTTSTap(e) {
+    wx.vibrateShort();
+    wx.showToast({
+      title: this.data.translations.idiomToastTitleUnavailable,
+      icon: 'none',
+      mask: true,
+    });
+    return;
     if (innerAudioContext.paused) {
       if (wx.getLaunchOptionsSync().scene === 1154) {
         wx.showToast({

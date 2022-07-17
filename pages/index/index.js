@@ -152,46 +152,50 @@ Page({
       getApp().globalData.triggerAdvanceSearch = false;
       return;
     }
-    // let reg = new RegExp(/^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]{4}))$/); //汉字。
-    let reg = new RegExp(/^([\u4e00-\u9fa5]{4})$/); //汉字。
-    let regS = new RegExp(/(「|【)[\u4e00-\u9fa5]{4}(」|】)/); //小冰成语接龙。
-    let regId = new RegExp(/^[0-9a-zA-Z]{24}$/);
-    let that = this;
-    wx.getClipboardData({
-      //向搜索框自动填充剪贴板数据。
-      success(res) {
-        let str = res.data;
-        if (
-          (reg.test(str) || regId.test(str)) &&
-          that.data.historyValue.indexOf(str) === -1
-        ) {
-          //填充历史里有的成语不再填充。
-          that.setData({
-            value: str,
-          });
-          that.data.historyValue.push(str);
-          console.log('填充历史：', that.data.historyValue);
-          wx.showToast({
-            title: that.data.translations.indexToastTitleAutoFilled,
-            mask: true,
-          });
-          wx.vibrateShort();
-        } else if (regS.test(str)) {
-          wx.vibrateShort();
-          CALL.get({
-            url: 'idiom/playsolitaire/' +
-              regS
-              .exec(str)[0]
-              .replace('「', '')
-              .replace('」', '')
-              .replace('【', '')
-              .replace('】', ''),
-            doSuccess: that.doneSolitaire,
-            exHandler: that.exHandlerS,
-          });
-        }
-      },
-    });
+    let settings = wx.getStorageSync('settings') || {};
+    let playSolitaire = settings.playSolitaire || false;
+    if (playSolitaire) {
+      // let reg = new RegExp(/^((标签：[\u4e00-\u9fa5]+)|([\u4e00-\u9fa5]{4}))$/); //汉字。
+      let reg = new RegExp(/^([\u4e00-\u9fa5]{4})$/); //汉字。
+      let regS = new RegExp(/(「|【)[\u4e00-\u9fa5]{4}(」|】)/); //小冰成语接龙。
+      let regId = new RegExp(/^[0-9a-zA-Z]{24}$/);
+      let that = this;
+      wx.getClipboardData({
+        //向搜索框自动填充剪贴板数据。
+        success(res) {
+          let str = res.data;
+          if (
+            (reg.test(str) || regId.test(str)) &&
+            that.data.historyValue.indexOf(str) === -1
+          ) {
+            //填充历史里有的成语不再填充。
+            that.setData({
+              value: str,
+            });
+            that.data.historyValue.push(str);
+            console.log('填充历史：', that.data.historyValue);
+            wx.showToast({
+              title: that.data.translations.indexToastTitleAutoFilled,
+              mask: true,
+            });
+            wx.vibrateShort();
+          } else if (regS.test(str)) {
+            wx.vibrateShort();
+            CALL.get({
+              url: 'idiom/playsolitaire/' +
+                regS
+                .exec(str)[0]
+                .replace('「', '')
+                .replace('」', '')
+                .replace('【', '')
+                .replace('】', ''),
+              doSuccess: that.doneSolitaire,
+              exHandler: that.exHandlerS,
+            });
+          }
+        },
+      });
+    }
   },
   doneSolitaire(data) {
     wx.setClipboardData({
